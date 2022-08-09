@@ -28,5 +28,10 @@ namespace Tools.zhong
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
+        private void ImportForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

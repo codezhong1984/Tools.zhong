@@ -32,6 +32,7 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
             this.btnCommaToBlank = new System.Windows.Forms.Button();
             this.btnBlankToComma = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
@@ -94,6 +95,7 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnCreateModelFromDBScript);
             this.tabPage1.Controls.Add(this.btnCommaToBlank);
             this.tabPage1.Controls.Add(this.btnBlankToComma);
             this.tabPage1.Controls.Add(this.btnImport);
@@ -115,12 +117,26 @@ namespace Tools.zhong
             this.tabPage1.Text = "设置";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnCreateModelFromDBScript
+            // 
+            this.btnCreateModelFromDBScript.AutoEllipsis = true;
+            this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateModelFromDBScript.ForeColor = System.Drawing.Color.Blue;
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(577, 187);
+            this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
+            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(174, 29);
+            this.btnCreateModelFromDBScript.TabIndex = 18;
+            this.btnCreateModelFromDBScript.Text = "建表脚本生成Model";
+            this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
+            this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
+            // 
             // btnCommaToBlank
             // 
             this.btnCommaToBlank.AutoEllipsis = true;
             this.btnCommaToBlank.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCommaToBlank.ForeColor = System.Drawing.Color.Blue;
-            this.btnCommaToBlank.Location = new System.Drawing.Point(689, 113);
+            this.btnCommaToBlank.Location = new System.Drawing.Point(891, 187);
             this.btnCommaToBlank.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCommaToBlank.Name = "btnCommaToBlank";
             this.btnCommaToBlank.Size = new System.Drawing.Size(106, 29);
@@ -134,7 +150,7 @@ namespace Tools.zhong
             this.btnBlankToComma.AutoEllipsis = true;
             this.btnBlankToComma.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnBlankToComma.ForeColor = System.Drawing.Color.Blue;
-            this.btnBlankToComma.Location = new System.Drawing.Point(577, 114);
+            this.btnBlankToComma.Location = new System.Drawing.Point(779, 188);
             this.btnBlankToComma.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnBlankToComma.Name = "btnBlankToComma";
             this.btnBlankToComma.Size = new System.Drawing.Size(106, 29);
@@ -148,7 +164,7 @@ namespace Tools.zhong
             this.btnImport.AutoEllipsis = true;
             this.btnImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(423, 114);
+            this.btnImport.Location = new System.Drawing.Point(422, 188);
             this.btnImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(148, 29);
@@ -162,7 +178,7 @@ namespace Tools.zhong
             this.btnRemoveAll.AutoEllipsis = true;
             this.btnRemoveAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveAll.Location = new System.Drawing.Point(317, 114);
+            this.btnRemoveAll.Location = new System.Drawing.Point(315, 188);
             this.btnRemoveAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(100, 29);
@@ -191,10 +207,10 @@ namespace Tools.zhong
             this.btnRemoveCol.AutoEllipsis = true;
             this.btnRemoveCol.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveCol.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveCol.Location = new System.Drawing.Point(188, 114);
+            this.btnRemoveCol.Location = new System.Drawing.Point(181, 188);
             this.btnRemoveCol.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveCol.Name = "btnRemoveCol";
-            this.btnRemoveCol.Size = new System.Drawing.Size(119, 29);
+            this.btnRemoveCol.Size = new System.Drawing.Size(127, 29);
             this.btnRemoveCol.TabIndex = 12;
             this.btnRemoveCol.Text = "删除最后一列";
             this.btnRemoveCol.UseVisualStyleBackColor = true;
@@ -204,13 +220,16 @@ namespace Tools.zhong
             // 
             this.txtTempl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTempl.Location = new System.Drawing.Point(8, 36);
+            this.txtTempl.Location = new System.Drawing.Point(3, 41);
             this.txtTempl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTempl.Multiline = true;
             this.txtTempl.Name = "txtTempl";
             this.txtTempl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempl.Size = new System.Drawing.Size(1120, 70);
+            this.txtTempl.Size = new System.Drawing.Size(1125, 130);
             this.txtTempl.TabIndex = 7;
+            this.txtTempl.Text = "CREATE TABLE log (\r\n    logid       INTEGER        PRIMARY KEY AUTOINCREMENT,\r\n  " +
+    "  log_message VARCHAR (2000),\r\n    log_date    DATETIME,\r\n    log_type_id INTEGE" +
+    "R\r\n);";
             // 
             // txtTitle
             // 
@@ -230,12 +249,12 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 146);
+            this.dataGridView1.Location = new System.Drawing.Point(7, 227);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(1121, 411);
+            this.dataGridView1.Size = new System.Drawing.Size(1121, 330);
             this.dataGridView1.TabIndex = 11;
             // 
             // btnOutput
@@ -244,7 +263,7 @@ namespace Tools.zhong
             this.btnOutput.AutoEllipsis = true;
             this.btnOutput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOutput.ForeColor = System.Drawing.Color.Blue;
-            this.btnOutput.Location = new System.Drawing.Point(1037, 113);
+            this.btnOutput.Location = new System.Drawing.Point(1037, 187);
             this.btnOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Size = new System.Drawing.Size(75, 29);
@@ -258,10 +277,10 @@ namespace Tools.zhong
             this.btnCustom.AutoEllipsis = true;
             this.btnCustom.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCustom.ForeColor = System.Drawing.Color.Blue;
-            this.btnCustom.Location = new System.Drawing.Point(101, 114);
+            this.btnCustom.Location = new System.Drawing.Point(101, 188);
             this.btnCustom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCustom.Name = "btnCustom";
-            this.btnCustom.Size = new System.Drawing.Size(75, 29);
+            this.btnCustom.Size = new System.Drawing.Size(74, 29);
             this.btnCustom.TabIndex = 9;
             this.btnCustom.Text = "添加列";
             this.btnCustom.UseVisualStyleBackColor = true;
@@ -272,7 +291,7 @@ namespace Tools.zhong
             this.txtCustom.AutoSize = true;
             this.txtCustom.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCustom.ForeColor = System.Drawing.Color.Blue;
-            this.txtCustom.Location = new System.Drawing.Point(11, 120);
+            this.txtCustom.Location = new System.Drawing.Point(11, 194);
             this.txtCustom.Name = "txtCustom";
             this.txtCustom.Size = new System.Drawing.Size(82, 15);
             this.txtCustom.TabIndex = 8;
@@ -433,6 +452,7 @@ namespace Tools.zhong
             this.label5.Size = new System.Drawing.Size(97, 15);
             this.label5.TabIndex = 16;
             this.label5.Text = "数据库类型：";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // txtKey3
             // 
@@ -654,6 +674,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ComboBox txtTableName3;
         private System.Windows.Forms.Button btnCommaToBlank;
         private System.Windows.Forms.Button btnBlankToComma;
+        private System.Windows.Forms.Button btnCreateModelFromDBScript;
     }
 }
 

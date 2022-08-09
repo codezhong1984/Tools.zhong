@@ -85,6 +85,7 @@ namespace Tools.zhong
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "自动从类属性中导入";
+            this.Load += new System.EventHandler(this.ImportForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

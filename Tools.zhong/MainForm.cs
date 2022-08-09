@@ -13,6 +13,8 @@ namespace Tools.zhong
 {
     public partial class MainForm : Form
     {
+        #region 属性变量
+
         private const string SELECT_TEMPLATE = @"SELECT {#COLUMNS} {#LINE_SPLIT}FROM {#TABLE_NAME} {#LINE_SPLIT}WHERE 1=1 ";
 
         private const string INSERT_TEMPLATE = @"INSERT INTO {#TABLE_NAME} {#LINE_SPLIT}({#COLUMNS}){#LINE_SPLIT}VALUES{#LINE_SPLIT}({#IPARAMS})";
@@ -27,13 +29,16 @@ namespace Tools.zhong
         private DataTable dt;
 
         private bool SwitchLoadFormDB = false;
+
+        #endregion
+
         public MainForm()
         {
             InitializeComponent();
         }
 
         #region 代码转换工具
-       
+
         private void btnOutput_Click(object sender, EventArgs e)
         {
             var templ = txtTempl.Text.Trim();
@@ -138,6 +143,16 @@ namespace Tools.zhong
                     }
                 }
 
+            }
+        }
+
+        private void btnCreateModelFromDBScript_Click(object sender, EventArgs e)
+        {
+            DBTaleForm subForm = new DBTaleForm();
+            if (subForm.ShowDialog() == DialogResult.OK)
+            {
+                txtOutput.Text = subForm.CodeText;
+                tabControl1.SelectedIndex = 1;
             }
         }
 
@@ -442,5 +457,12 @@ namespace Tools.zhong
         }
 
         #endregion
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+     
     }
 }
