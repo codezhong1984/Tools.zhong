@@ -46,6 +46,7 @@ namespace Tools.zhong
             this.btnCustom = new System.Windows.Forms.Button();
             this.txtCustom = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnExportToFile2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
@@ -70,6 +71,8 @@ namespace Tools.zhong
             this.btnCreateInsert = new System.Windows.Forms.Button();
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btnOpenPath2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -90,7 +93,7 @@ namespace Tools.zhong
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1144, 590);
+            this.tabControl1.Size = new System.Drawing.Size(1144, 640);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -112,7 +115,7 @@ namespace Tools.zhong
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1136, 561);
+            this.tabPage1.Size = new System.Drawing.Size(1136, 611);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "设置";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -251,7 +254,7 @@ namespace Tools.zhong
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(1121, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(1121, 380);
             this.dataGridView1.TabIndex = 11;
             // 
             // btnOutput
@@ -296,6 +299,8 @@ namespace Tools.zhong
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnOpenPath2);
+            this.tabPage2.Controls.Add(this.btnExportToFile2);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.txtOutput);
@@ -303,16 +308,29 @@ namespace Tools.zhong
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1136, 561);
+            this.tabPage2.Size = new System.Drawing.Size(1136, 611);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "结果输出";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnExportToFile2
+            // 
+            this.btnExportToFile2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExportToFile2.ForeColor = System.Drawing.Color.Blue;
+            this.btnExportToFile2.Location = new System.Drawing.Point(919, 5);
+            this.btnExportToFile2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnExportToFile2.Name = "btnExportToFile2";
+            this.btnExportToFile2.Size = new System.Drawing.Size(103, 26);
+            this.btnExportToFile2.TabIndex = 7;
+            this.btnExportToFile2.Text = "生成文件";
+            this.btnExportToFile2.UseVisualStyleBackColor = true;
+            this.btnExportToFile2.Click += new System.EventHandler(this.btnExportToFile2_Click);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Blue;
-            this.button1.Location = new System.Drawing.Point(1042, 9);
+            this.button1.Location = new System.Drawing.Point(1036, 5);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 26);
@@ -341,7 +359,7 @@ namespace Tools.zhong
             this.txtOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(1123, 517);
+            this.txtOutput.Size = new System.Drawing.Size(1123, 567);
             this.txtOutput.TabIndex = 5;
             // 
             // tabPage3
@@ -369,7 +387,7 @@ namespace Tools.zhong
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage3.Size = new System.Drawing.Size(1136, 561);
+            this.tabPage3.Size = new System.Drawing.Size(1136, 611);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL脚本生成辅助工具";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -449,7 +467,6 @@ namespace Tools.zhong
             this.label5.Size = new System.Drawing.Size(97, 15);
             this.label5.TabIndex = 16;
             this.label5.Text = "数据库类型：";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // txtKey3
             // 
@@ -569,7 +586,7 @@ namespace Tools.zhong
             this.txtOuput3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOuput3.Multiline = true;
             this.txtOuput3.Name = "txtOuput3";
-            this.txtOuput3.Size = new System.Drawing.Size(1128, 298);
+            this.txtOuput3.Size = new System.Drawing.Size(1128, 348);
             this.txtOuput3.TabIndex = 3;
             // 
             // label2
@@ -606,11 +623,29 @@ namespace Tools.zhong
             this.txtInput3.Size = new System.Drawing.Size(1125, 175);
             this.txtInput3.TabIndex = 0;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
+            this.saveFileDialog1.Title = "保存文件";
+            // 
+            // btnOpenPath2
+            // 
+            this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
+            this.btnOpenPath2.Location = new System.Drawing.Point(781, 6);
+            this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOpenPath2.Name = "btnOpenPath2";
+            this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
+            this.btnOpenPath2.TabIndex = 8;
+            this.btnOpenPath2.Text = "打开生成目录";
+            this.btnOpenPath2.UseVisualStyleBackColor = true;
+            this.btnOpenPath2.Click += new System.EventHandler(this.btnOpenPath2_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 598);
+            this.ClientSize = new System.Drawing.Size(1141, 648);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
@@ -644,7 +679,6 @@ namespace Tools.zhong
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnOutput;
         private System.Windows.Forms.Button btnCustom;
-        private System.Windows.Forms.Label txtCustom;
         private System.Windows.Forms.Button btnRemoveAll;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnRemoveCol;
@@ -672,6 +706,10 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnCommaToBlank;
         private System.Windows.Forms.Button btnBlankToComma;
         private System.Windows.Forms.Button btnCreateModelFromDBScript;
+        private System.Windows.Forms.Label txtCustom;
+        private System.Windows.Forms.Button btnExportToFile2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button btnOpenPath2;
     }
 }
 

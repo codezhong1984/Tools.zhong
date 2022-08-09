@@ -18,17 +18,17 @@ namespace Tools.zhong.UtilHelper
             }
             string text = string.Empty;
             string tabBlank = "    ";
-            text = "using System;\n";
+            text = "using System;\r\n";
             if (addDisplayName)
             {
-                text += "using System.ComponentModel;\n";
+                text += "using System.ComponentModel;\r\n";
             }
-            text += "\n";
+            text += "\r\n";
 
-            text += "namespace " + "DbModels" + "\n{\n";
+            text += "namespace " + "DbModels" + "\r\n{\r\n";
 
-            text += tabBlank + tabBlank + "/// <summary>\n" + tabBlank + tabBlank + "/// " + listColumns[0].TableComment + "\n/// </summary>\n";
-            text += tabBlank + "public class " + listColumns[0].TableName + "\n" + tabBlank + "{\n";
+            text += tabBlank + tabBlank + "/// <summary>\r\n" + tabBlank + tabBlank + "/// " + listColumns[0].TableComment + "\r\n/// </summary>\r\n";
+            text += tabBlank + "public class " + listColumns[0].TableName + "\r\n" + tabBlank + "{\r\n";
 
             #region 生成私有变量
 
@@ -40,7 +40,7 @@ namespace Tools.zhong.UtilHelper
             //        string fullValue = oneValue + _item.FieldName.Substring(1);
             //        string dataType = ChangeToCsharpType(_item.DataType);//根据数据库数据类型转换成c#对应数据类型
             //        string dataTypeValue = DefaultForType(dataType);//根据c#数据类型获取初始值
-            //        text += tabBlank + tabBlank + "private " + dataType + " _" + fullValue + " = " + dataTypeValue + ";\n";
+            //        text += tabBlank + tabBlank + "private " + dataType + " _" + fullValue + " = " + dataTypeValue + ";\r\n";
             //    }
             //}
             //foreach (var item in listColumns)
@@ -49,12 +49,12 @@ namespace Tools.zhong.UtilHelper
             //    {
             //        string dataType = string.Empty;
             //        dataType = ChangeToCsharpType(item.DataType);
-            //        text += tabBlank + tabBlank + "/// <summary>\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\n" + tabBlank + tabBlank + "/// </summary>\n";
-            //        text += tabBlank + tabBlank + "\npublic " + dataType + " " + item.FieldName + "\n";
+            //        text += tabBlank + tabBlank + "/// <summary>\r\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\r\n" + tabBlank + tabBlank + "/// </summary>\r\n";
+            //        text += tabBlank + tabBlank + "\r\npublic " + dataType + " " + item.FieldName + "\r\n";
             //        string oneValue = item.FieldName.Substring(0, 1).ToLower();
             //        string fullValue = oneValue + item.FieldName.Substring(1);
-            //        text += tabBlank + tabBlank + "{\n" + tabBlank + tabBlank + tabBlank + "get { return " + " _" + fullValue + "; }\n";
-            //        text += tabBlank + tabBlank + tabBlank + "set { " + " _" + fullValue + " = value; }\n" + tabBlank + tabBlank + "}\n";
+            //        text += tabBlank + tabBlank + "{\r\n" + tabBlank + tabBlank + tabBlank + "get { return " + " _" + fullValue + "; }\r\n";
+            //        text += tabBlank + tabBlank + tabBlank + "set { " + " _" + fullValue + " = value; }\r\n" + tabBlank + tabBlank + "}\r\n";
             //    }
             //}
 
@@ -65,20 +65,20 @@ namespace Tools.zhong.UtilHelper
                 string dataType = string.Empty;
                 dataType = ChangeToCsharpType(item.DataType);
 
-                text += "\n/// <summary>\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\n" + tabBlank + tabBlank + "/// </summary>\n";
+                text += "\r\n/// <summary>\r\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\r\n" + tabBlank + tabBlank + "/// </summary>\r\n";
 
                 if (addDisplayName)
                 {
-                    text += $"\n[DisplayName(\"{item.FieldRemarks}\")]\n";
+                    text += $"\r\n[DisplayName(\"{item.FieldRemarks}\")]\r\n";
                 }
 
                 text += tabBlank + tabBlank + "public " + dataType
                         + (item.IsNullable && !IsNullableType(dataType) ? "?" : "")
                         + " "
                         + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))
-                        + " { get; set; }\n";
+                        + " { get; set; }\r\n";
             }
-            text += tabBlank + "}\n" + "}";
+            text += tabBlank + "}\r\n" + "}";
             return text;
         }
 

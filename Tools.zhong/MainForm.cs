@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Text.RegularExpressions;
+using System.IO;
+
 namespace Tools.zhong
 {
     public partial class MainForm : Form
@@ -77,6 +79,8 @@ namespace Tools.zhong
             {
                 cbDBType.SelectedIndex = 0;
             }
+
+            saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -156,6 +160,25 @@ namespace Tools.zhong
             }
         }
 
+        private void btnExportToFile2_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var filePath = saveFileDialog1.FileName;
+                using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
+                {
+                    sw.WriteLine(txtOutput.Text.Trim());
+                }
+
+            }
+        }
+
+        private void btnOpenPath2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e,/root," + saveFileDialog1.InitialDirectory;
+            System.Diagnostics.Process.Start(psi);
+        }
         #endregion
 
         #region SQL辅助工具
@@ -495,13 +518,9 @@ namespace Tools.zhong
             tabControl1.SelectedIndex = 1;
         }
 
+
         #endregion
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+       
     }
 }
