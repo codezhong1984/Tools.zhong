@@ -37,12 +37,13 @@ namespace Tools.zhong
             this.label2 = new System.Windows.Forms.Label();
             this.cbLineDeal = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbDisplayName = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(233, 219);
+            this.btnOk.Location = new System.Drawing.Point(233, 304);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 27);
             this.btnOk.TabIndex = 2;
@@ -53,7 +54,7 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(99, 219);
+            this.btnCancel.Location = new System.Drawing.Point(99, 304);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 3;
@@ -64,6 +65,7 @@ namespace Tools.zhong
             // cbTableName
             // 
             this.cbTableName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbTableName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTableName.FormattingEnabled = true;
             this.cbTableName.Location = new System.Drawing.Point(130, 84);
             this.cbTableName.Margin = new System.Windows.Forms.Padding(4);
@@ -75,6 +77,7 @@ namespace Tools.zhong
             // cbDBType
             // 
             this.cbDBType.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbDBType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDBType.FormattingEnabled = true;
             this.cbDBType.Items.AddRange(new object[] {
             "请选择",
@@ -110,7 +113,7 @@ namespace Tools.zhong
             // cbLineDeal
             // 
             this.cbLineDeal.AutoSize = true;
-            this.cbLineDeal.Location = new System.Drawing.Point(101, 140);
+            this.cbLineDeal.Location = new System.Drawing.Point(101, 177);
             this.cbLineDeal.Name = "cbLineDeal";
             this.cbLineDeal.Size = new System.Drawing.Size(134, 19);
             this.cbLineDeal.TabIndex = 26;
@@ -121,17 +124,28 @@ namespace Tools.zhong
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(87, 171);
+            this.label1.Location = new System.Drawing.Point(87, 208);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 15);
             this.label1.TabIndex = 27;
             this.label1.Text = "注：首字母大定，下划线后接字母大写";
             // 
+            // cbDisplayName
+            // 
+            this.cbDisplayName.AutoSize = true;
+            this.cbDisplayName.Location = new System.Drawing.Point(101, 240);
+            this.cbDisplayName.Name = "cbDisplayName";
+            this.cbDisplayName.Size = new System.Drawing.Size(177, 19);
+            this.cbDisplayName.TabIndex = 28;
+            this.cbDisplayName.Text = "是否生成DisplayName";
+            this.cbDisplayName.UseVisualStyleBackColor = true;
+            // 
             // DBTaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 293);
+            this.ClientSize = new System.Drawing.Size(413, 378);
+            this.Controls.Add(this.cbDisplayName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbLineDeal);
             this.Controls.Add(this.cbTableName);
@@ -159,5 +173,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cbLineDeal;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbDisplayName;
     }
 }

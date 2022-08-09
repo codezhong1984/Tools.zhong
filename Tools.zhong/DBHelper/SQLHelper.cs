@@ -250,7 +250,30 @@ namespace DBHepler
                 }
             }
         }
-        
+
+        public static DataTable ExecuteDataTable(string cmdText)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandTimeout = 0;
+            using (SqlConnection conn = GetSqlConnection())
+            {
+                PrepareCommand(cmd, conn, null, CommandType.Text, cmdText, null);
+                SqlDataAdapter adt = new SqlDataAdapter();
+                adt.SelectCommand = cmd;
+                SqlCommandBuilder cbd = new SqlCommandBuilder(adt);//???
+                DataSet ds = new DataSet();
+                try
+                {
+                    adt.Fill(ds);
+                    return ds.Tables[0];
+                }
+                finally
+                {
+                    cmd.Parameters.Clear();
+                }
+            }
+        }
+
         /// <summary>
         /// 用执行的数据库连接执行一个返回数据集的sql命令
         /// </summary>

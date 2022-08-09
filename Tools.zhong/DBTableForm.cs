@@ -44,12 +44,25 @@ namespace Tools.zhong
 
                 var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, cbTableName.Text.Trim()));
                 var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-                var code = UtilHelper.ModelFromDBHelper.GenerateCode(list,cbLineDeal.Checked);
+                var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked);
                 this.CodeText = code;
             }
             else if (cbDBType.Text == "SQLSERVER")
             {
+                string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments,
+                                    IIF(c.is_nullable=1,'Y','N') nullable
+                                from sys.tables a 
+                                left join sys.extended_properties b on a.object_id=b.major_id and b.minor_id=0
+                                left join sys.columns c on a.object_id=c.object_id
+                                left join sys.extended_properties d on d.major_id=c.object_id and d.minor_id=c.column_id
+                                left join sys.systypes e on c.system_type_id=e.xtype and e.xtype=e.xusertype
+                                where a.name='{0}'
+                                order by c.column_id ";
 
+                var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, cbTableName.Text.Trim()));
+                var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
+                var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked);
+                this.CodeText = code;
             }
 
             #endregion
@@ -74,9 +87,13 @@ namespace Tools.zhong
                     cbTableName.DisplayMember = "table_name";
                     cbTableName.ValueMember = "table_name";
                 }
-                else if(cbDBType.Text == "SQLSERVER")
+                else if (cbDBType.Text == "SQLSERVER")
                 {
-
+                    string sql = "select name table_name from sys.tables ";
+                    var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                    cbTableName.DataSource = dtData;
+                    cbTableName.DisplayMember = "table_name";
+                    cbTableName.ValueMember = "table_name";
                 }
             }
             catch (Exception ex)

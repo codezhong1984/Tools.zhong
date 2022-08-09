@@ -10,7 +10,7 @@ namespace Tools.zhong.UtilHelper
 {
     public class ModelFromDBHelper
     {
-        public static string GenerateCode(List<TableColumnModel> listColumns, bool replaceUnderLine = false)
+        public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false)
         {
             if (listColumns == null || listColumns.Count == 0)
             {
@@ -18,7 +18,13 @@ namespace Tools.zhong.UtilHelper
             }
             string text = string.Empty;
             string tabBlank = "    ";
-            text = "using System;\n\n";
+            text = "using System;\n";
+            if (addDisplayName)
+            {
+                text += "using System.ComponentModel;\n";
+            }
+            text += "\n";
+
             text += "namespace " + "DbModels" + "\n{\n";
 
             text += tabBlank + tabBlank + "/// <summary>\n" + tabBlank + tabBlank + "/// " + listColumns[0].TableComment + "\n/// </summary>\n";
@@ -61,10 +67,15 @@ namespace Tools.zhong.UtilHelper
 
                 text += "\n/// <summary>\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\n" + tabBlank + tabBlank + "/// </summary>\n";
 
-                text += tabBlank + tabBlank + "public " + dataType 
-                        + (item.IsNullable && !IsNullableType(dataType) ? "?" : "") 
+                if (addDisplayName)
+                {
+                    text += $"\n[DisplayName(\"{item.FieldRemarks}\")]\n";
+                }
+
+                text += tabBlank + tabBlank + "public " + dataType
+                        + (item.IsNullable && !IsNullableType(dataType) ? "?" : "")
                         + " "
-                        + (replaceUnderLine ? ReplaceUnderline(item.FieldName) : item.FieldName)
+                        + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))
                         + " { get; set; }\n";
             }
             text += tabBlank + "}\n" + "}";
@@ -88,7 +99,10 @@ namespace Tools.zhong.UtilHelper
             }
 
             string[] fields = fieldName.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries);
-
+            if (fields.Length == 1)
+            {
+                return ToUperFirstChar(fieldName);
+            }
             StringBuilder sb = new StringBuilder();
             foreach (var item in fields)
             {

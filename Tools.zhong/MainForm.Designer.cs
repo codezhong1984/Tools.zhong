@@ -227,9 +227,6 @@ namespace Tools.zhong
             this.txtTempl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtTempl.Size = new System.Drawing.Size(1125, 130);
             this.txtTempl.TabIndex = 7;
-            this.txtTempl.Text = "CREATE TABLE log (\r\n    logid       INTEGER        PRIMARY KEY AUTOINCREMENT,\r\n  " +
-    "  log_message VARCHAR (2000),\r\n    log_date    DATETIME,\r\n    log_type_id INTEGE" +
-    "R\r\n);";
             // 
             // txtTitle
             // 

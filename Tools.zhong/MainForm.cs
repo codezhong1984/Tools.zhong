@@ -366,7 +366,14 @@ namespace Tools.zhong
                     txtTableName3.DisplayMember = "table_name";
                     txtTableName3.ValueMember = "table_name";
                 }
-
+                else if (cbDBType.Text == "SQLSERVER")
+                {
+                    string sql = "select name table_name from sys.tables ";
+                    var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                    txtTableName3.DataSource = dtData;
+                    txtTableName3.DisplayMember = "table_name";
+                    txtTableName3.ValueMember = "table_name";
+                }
                 SwitchLoadFormDB = true;
                 btnLoadFromDB.ForeColor = Color.Red;
             }
@@ -430,6 +437,38 @@ namespace Tools.zhong
                         txtKey3.Text = sbColumns.ToString();
                     }
                 }
+                if (cbDBType.Text == "SQLSERVER")
+                {
+                    string sql = string.Format(@"select column_name from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{0}'", txtTableName3.Text.Trim());
+                    var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                    if (dtData != null)
+                    {
+                        StringBuilder sbColumns = new StringBuilder();
+                        foreach (DataRow item in dtData.Rows)
+                        {
+                            sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
+                        }
+                        txtInput3.Text = sbColumns.ToString();
+                    }
+
+                    string sqlkey = string.Format(@"SELECT cols.name column_name
+                                    FROM sys.index_columns indexCols
+                                    INNER JOIN sys.columns cols ON indexCols.object_id = cols.object_id AND indexCols.column_id = cols.column_id
+                                    INNER JOIN sys.indexes inds ON indexCols.object_id = inds.object_id AND indexCols.index_id = inds.index_id
+                                    WHERE indexCols.object_id = OBJECT_ID('{0}', 'u') AND inds.is_primary_key = 1",
+                                    txtTableName3.Text.Trim());
+
+                    dtData = DBHepler.SQLHelper.ExecuteDataTable(sqlkey);
+                    if (dtData != null)
+                    {
+                        StringBuilder sbColumns = new StringBuilder();
+                        foreach (DataRow item in dtData.Rows)
+                        {
+                            sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
+                        }
+                        txtKey3.Text = sbColumns.ToString();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -463,6 +502,6 @@ namespace Tools.zhong
 
         }
 
-     
+
     }
 }
