@@ -32,6 +32,8 @@ namespace Tools.zhong
             InitializeComponent();
         }
 
+        #region 代码转换工具
+       
         private void btnOutput_Click(object sender, EventArgs e)
         {
             var templ = txtTempl.Text.Trim();
@@ -138,6 +140,10 @@ namespace Tools.zhong
 
             }
         }
+
+        #endregion
+
+        #region SQL辅助工具
 
         private void btnInput3_Click(object sender, EventArgs e)
         {
@@ -434,5 +440,7 @@ namespace Tools.zhong
             txtOutput.Text = string.Join(System.Environment.NewLine, inputTexts);
             tabControl1.SelectedIndex = 1;
         }
+
+        #endregion
     }
 }

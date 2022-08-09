@@ -401,7 +401,7 @@ namespace Tools.zhong
             // 
             this.btnLoadFromDB.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnLoadFromDB.Font = new System.Drawing.Font("宋体", 9.5F);
-            this.btnLoadFromDB.Location = new System.Drawing.Point(776, 2);
+            this.btnLoadFromDB.Location = new System.Drawing.Point(889, 3);
             this.btnLoadFromDB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoadFromDB.Name = "btnLoadFromDB";
             this.btnLoadFromDB.Size = new System.Drawing.Size(87, 29);
@@ -441,7 +441,7 @@ namespace Tools.zhong
             this.txtKey3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtKey3.Multiline = true;
             this.txtKey3.Name = "txtKey3";
-            this.txtKey3.Size = new System.Drawing.Size(179, 25);
+            this.txtKey3.Size = new System.Drawing.Size(292, 25);
             this.txtKey3.TabIndex = 15;
             // 
             // label4
