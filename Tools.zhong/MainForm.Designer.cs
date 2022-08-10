@@ -32,9 +32,14 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
-            this.btnCommaToBlank = new System.Windows.Forms.Button();
-            this.btnBlankToComma = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -75,6 +80,7 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -99,8 +105,6 @@ namespace Tools.zhong
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.btnCreateModelFromDBScript);
-            this.tabPage1.Controls.Add(this.btnCommaToBlank);
-            this.tabPage1.Controls.Add(this.btnBlankToComma);
             this.tabPage1.Controls.Add(this.btnImport);
             this.tabPage1.Controls.Add(this.btnRemoveAll);
             this.tabPage1.Controls.Add(this.btnClear);
@@ -120,12 +124,67 @@ namespace Tools.zhong
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmKg2Dh,
+            this.tsmDh2Hh,
+            this.tsmAddDyh,
+            this.tsmAddSyh,
+            this.tsmDelDyh,
+            this.tsmDelSyh});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 148);
+            // 
+            // tsmKg2Dh
+            // 
+            this.tsmKg2Dh.Name = "tsmKg2Dh";
+            this.tsmKg2Dh.Size = new System.Drawing.Size(183, 24);
+            this.tsmKg2Dh.Text = "空格替换为逗号";
+            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
+            // 
+            // tsmDh2Hh
+            // 
+            this.tsmDh2Hh.Name = "tsmDh2Hh";
+            this.tsmDh2Hh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDh2Hh.Text = "逗号替换为换行";
+            this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
+            // 
+            // tsmAddDyh
+            // 
+            this.tsmAddDyh.Name = "tsmAddDyh";
+            this.tsmAddDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddDyh.Text = "添加单引号";
+            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
+            // 
+            // tsmAddSyh
+            // 
+            this.tsmAddSyh.Name = "tsmAddSyh";
+            this.tsmAddSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddSyh.Text = "添加双引号";
+            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
+            // 
+            // tsmDelDyh
+            // 
+            this.tsmDelDyh.Name = "tsmDelDyh";
+            this.tsmDelDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelDyh.Text = "删除单引号";
+            this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
+            // 
+            // tsmDelSyh
+            // 
+            this.tsmDelSyh.Name = "tsmDelSyh";
+            this.tsmDelSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelSyh.Text = "删除双引号";
+            this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
+            // 
             // btnCreateModelFromDBScript
             // 
             this.btnCreateModelFromDBScript.AutoEllipsis = true;
             this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateModelFromDBScript.ForeColor = System.Drawing.Color.Blue;
-            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(277, 188);
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(275, 189);
             this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
             this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(149, 29);
@@ -134,40 +193,12 @@ namespace Tools.zhong
             this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
             this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
             // 
-            // btnCommaToBlank
-            // 
-            this.btnCommaToBlank.AutoEllipsis = true;
-            this.btnCommaToBlank.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCommaToBlank.ForeColor = System.Drawing.Color.Blue;
-            this.btnCommaToBlank.Location = new System.Drawing.Point(558, 188);
-            this.btnCommaToBlank.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCommaToBlank.Name = "btnCommaToBlank";
-            this.btnCommaToBlank.Size = new System.Drawing.Size(106, 29);
-            this.btnCommaToBlank.TabIndex = 17;
-            this.btnCommaToBlank.Text = "逗号To换行";
-            this.btnCommaToBlank.UseVisualStyleBackColor = true;
-            this.btnCommaToBlank.Click += new System.EventHandler(this.btnCommaToBlank_Click);
-            // 
-            // btnBlankToComma
-            // 
-            this.btnBlankToComma.AutoEllipsis = true;
-            this.btnBlankToComma.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBlankToComma.ForeColor = System.Drawing.Color.Blue;
-            this.btnBlankToComma.Location = new System.Drawing.Point(440, 189);
-            this.btnBlankToComma.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnBlankToComma.Name = "btnBlankToComma";
-            this.btnBlankToComma.Size = new System.Drawing.Size(106, 29);
-            this.btnBlankToComma.TabIndex = 16;
-            this.btnBlankToComma.Text = "空格To逗号";
-            this.btnBlankToComma.UseVisualStyleBackColor = true;
-            this.btnBlankToComma.Click += new System.EventHandler(this.btnBlankToComma_Click);
-            // 
             // btnImport
             // 
             this.btnImport.AutoEllipsis = true;
             this.btnImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(117, 189);
+            this.btnImport.Location = new System.Drawing.Point(118, 189);
             this.btnImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(148, 29);
@@ -181,7 +212,7 @@ namespace Tools.zhong
             this.btnRemoveAll.AutoEllipsis = true;
             this.btnRemoveAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveAll.Location = new System.Drawing.Point(5, 189);
+            this.btnRemoveAll.Location = new System.Drawing.Point(9, 189);
             this.btnRemoveAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(100, 29);
@@ -223,6 +254,7 @@ namespace Tools.zhong
             // 
             this.txtTempl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTempl.ContextMenuStrip = this.contextMenuStrip1;
             this.txtTempl.Location = new System.Drawing.Point(3, 41);
             this.txtTempl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTempl.Multiline = true;
@@ -656,6 +688,7 @@ namespace Tools.zhong
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -703,13 +736,18 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnCopy3;
         private System.Windows.Forms.Button btnPaste;
         private System.Windows.Forms.ComboBox txtTableName3;
-        private System.Windows.Forms.Button btnCommaToBlank;
-        private System.Windows.Forms.Button btnBlankToComma;
         private System.Windows.Forms.Button btnCreateModelFromDBScript;
         private System.Windows.Forms.Label txtCustom;
         private System.Windows.Forms.Button btnExportToFile2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnOpenPath2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tsmKg2Dh;
+        private System.Windows.Forms.ToolStripMenuItem tsmDh2Hh;
+        private System.Windows.Forms.ToolStripMenuItem tsmAddDyh;
+        private System.Windows.Forms.ToolStripMenuItem tsmAddSyh;
+        private System.Windows.Forms.ToolStripMenuItem tsmDelDyh;
+        private System.Windows.Forms.ToolStripMenuItem tsmDelSyh;
     }
 }
 

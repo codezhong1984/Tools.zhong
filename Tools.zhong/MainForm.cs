@@ -544,6 +544,79 @@ namespace Tools.zhong
 
         private void btnCommaToBlank_Click(object sender, EventArgs e)
         {
+           
+        }
+
+
+        #endregion
+
+        private void tsmAddDyh_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, "");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
+            if (inputTexts.Length == 0)
+            {
+                return;
+            }
+            txtOutput.Text = "'" + string.Join("','", inputTexts) + "'";
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmDelDyh_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, "");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            if (inputTexts.Length == 0)
+            {
+                return;
+            }
+            inputTexts = inputTexts.ToList().Select(i => i.Trim('\'')).ToArray();
+            txtOutput.Text = string.Join(",", inputTexts);
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmAddSyh_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, "");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
+            if (inputTexts.Length == 0)
+            {
+                return;
+            }
+            txtOutput.Text = "\"" + string.Join("\",\"", inputTexts) + "\"";
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmDelSyh_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, "");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            if (inputTexts.Length == 0)
+            {
+                return;
+            }
+            inputTexts = inputTexts.ToList().Select(i => i.Trim('\"')).ToArray();
+            txtOutput.Text = string.Join(",", inputTexts);
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmKg2Dh_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, " ").Replace("\t", " ");
+            var inputTexts = templ.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            txtOutput.Text = string.Join(",\t", inputTexts);
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmDh2Hh_Click(object sender, EventArgs e)
+        {
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -551,8 +624,5 @@ namespace Tools.zhong
             tabControl1.SelectedIndex = 1;
         }
 
-
-        #endregion
-       
     }
 }
