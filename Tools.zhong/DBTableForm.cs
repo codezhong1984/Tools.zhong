@@ -225,5 +225,18 @@ namespace Tools.zhong
             psi.Arguments = "/e,/root," + folderBrowserDialog1.SelectedPath;
             System.Diagnostics.Process.Start(psi);
         }
+
+
+        private void cbSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTableName.Items.Count == 0)
+            {
+                return;
+            }
+            for (int i = 0; i < cbTableName.Items.Count; i++)
+            {
+                cbTableName.SetItemChecked(i, cbSelectAll.Checked);
+            }
+        }
     }
 }

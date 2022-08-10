@@ -43,6 +43,7 @@ namespace Tools.zhong
             this.label3 = new System.Windows.Forms.Label();
             this.tbNameSpace = new System.Windows.Forms.TextBox();
             this.btnOpenPath2 = new System.Windows.Forms.Button();
+            this.cbSelectAll = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOk
@@ -140,11 +141,12 @@ namespace Tools.zhong
             this.cbTableName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTableName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cbTableName.CheckOnClick = true;
             this.cbTableName.FormattingEnabled = true;
             this.cbTableName.Location = new System.Drawing.Point(83, 127);
             this.cbTableName.Name = "cbTableName";
-            this.cbTableName.Size = new System.Drawing.Size(424, 284);
+            this.cbTableName.Size = new System.Drawing.Size(424, 260);
             this.cbTableName.TabIndex = 29;
             // 
             // btnSave
@@ -169,6 +171,8 @@ namespace Tools.zhong
             // 
             // tbNameSpace
             // 
+            this.tbNameSpace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNameSpace.Location = new System.Drawing.Point(83, 79);
             this.tbNameSpace.Name = "tbNameSpace";
             this.tbNameSpace.Size = new System.Drawing.Size(424, 25);
@@ -177,6 +181,7 @@ namespace Tools.zhong
             // 
             // btnOpenPath2
             // 
+            this.btnOpenPath2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
             this.btnOpenPath2.Location = new System.Drawing.Point(381, 520);
@@ -188,11 +193,24 @@ namespace Tools.zhong
             this.btnOpenPath2.UseVisualStyleBackColor = true;
             this.btnOpenPath2.Click += new System.EventHandler(this.btnOpenPath2_Click);
             // 
+            // cbSelectAll
+            // 
+            this.cbSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSelectAll.AutoSize = true;
+            this.cbSelectAll.Location = new System.Drawing.Point(445, 403);
+            this.cbSelectAll.Name = "cbSelectAll";
+            this.cbSelectAll.Size = new System.Drawing.Size(59, 19);
+            this.cbSelectAll.TabIndex = 34;
+            this.cbSelectAll.Text = "全选";
+            this.cbSelectAll.UseVisualStyleBackColor = true;
+            this.cbSelectAll.CheckedChanged += new System.EventHandler(this.cbSelectAll_CheckedChanged);
+            // 
             // DBTaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(551, 577);
+            this.Controls.Add(this.cbSelectAll);
             this.Controls.Add(this.btnOpenPath2);
             this.Controls.Add(this.tbNameSpace);
             this.Controls.Add(this.label3);
@@ -231,5 +249,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbNameSpace;
         private System.Windows.Forms.Button btnOpenPath2;
+        private System.Windows.Forms.CheckBox cbSelectAll;
     }
 }
