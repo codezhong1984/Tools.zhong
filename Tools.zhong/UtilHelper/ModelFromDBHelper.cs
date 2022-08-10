@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Tools.zhong.UtilHelper
@@ -11,7 +12,7 @@ namespace Tools.zhong.UtilHelper
     public class ModelFromDBHelper
     {
         public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false,
-            string ns = "DBModel")
+            string ns = "DBModel", string enumCode = null)
         {
             if (listColumns == null || listColumns.Count == 0)
             {
@@ -26,6 +27,11 @@ namespace Tools.zhong.UtilHelper
             sbResult.AppendLine();
             sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(ns) ? "DBModel" : ns)}");
             sbResult.AppendLine("{");
+
+            if (!string.IsNullOrWhiteSpace(enumCode))
+            {
+                sbResult.AppendLine(enumCode);
+            }
 
             sbResult.AppendLine("    /// <summary>");
             sbResult.AppendLine("    /// " + listColumns[0].TableComment);
@@ -71,12 +77,12 @@ namespace Tools.zhong.UtilHelper
             {
                 string dataType = string.Empty;
                 dataType = ChangeToCsharpType(item.DataType);
-                if (i++>0)
+                if (i++ > 0)
                 {
                     sbResult.AppendLine();
                 }
                 sbResult.AppendLine("        /// <summary>");
-                sbResult.AppendLine("        /// " + item.FieldRemarks.Replace("\\n",""));
+                sbResult.AppendLine("        /// " + item.FieldRemarks.Replace("\\n", ""));
                 sbResult.AppendLine("        /// </summary>");
 
                 if (addDisplayName)
@@ -84,6 +90,7 @@ namespace Tools.zhong.UtilHelper
                     sbResult.AppendLine("        [DisplayName(\"" + item.FieldRemarks + "\")]");
                 }
                 var fieldCode = $"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                              + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
                               + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
                               + "{ get; set; }";
 
@@ -92,6 +99,34 @@ namespace Tools.zhong.UtilHelper
             sbResult.AppendLine("    }");
             sbResult.AppendLine("}");
 
+            return sbResult.ToString();
+        }
+
+        public static string GenerateEnumCode(List<EnumColumnModel> list)
+        {
+            if (list == null || list.Count == 0)
+            {
+                return string.Empty;
+            }
+            StringBuilder sbResult = new StringBuilder();
+
+            sbResult.AppendLine("    #Region Enum " + ToUperFirstChar(list[0].TableName));
+
+            foreach (var colItem in list)
+            {
+                sbResult.AppendLine("    public enum " + ToUperFirstChar(list[0].TableName) + "_" + ToUperFirstChar(colItem.FieldName));
+                sbResult.AppendLine("    {");
+
+                int i = 0;
+                foreach (var item in colItem.EnumValues)
+                {
+                    var enumValItem = item.Replace("'", "").Replace(" ", "");
+                    sbResult.AppendLine($"        {enumValItem},");
+                }
+                sbResult.AppendLine("    }");
+            }
+
+            sbResult.AppendLine("    #End Region Enum " + list[0].TableName);
             return sbResult.ToString();
         }
 
@@ -229,6 +264,9 @@ namespace Tools.zhong.UtilHelper
                 case "variant":
                     reval = "object";
                     break;
+                case "enum"://mysql 单独定义枚举类型对象
+                    reval = "";
+                    break;
                 default:
                     reval = "string";
                     break;
@@ -238,7 +276,7 @@ namespace Tools.zhong.UtilHelper
 
         public static bool IsNullableType(string type)
         {
-            return type == "string" || type == "object" || type == "byte[]";
+            return type == "string" || type == "object" || type == "byte[]" || type == "enum";
         }
 
         /// <summary>
@@ -300,7 +338,7 @@ namespace Tools.zhong.UtilHelper
             var list = new List<TableColumnModel>();
             try
             {
-                if (dataTable != null && dataTable.Rows.Count > 1)
+                if (dataTable != null && dataTable.Rows.Count > 0)
                 {
                     foreach (DataRow drItem in dataTable.Rows)
                     {
@@ -311,6 +349,41 @@ namespace Tools.zhong.UtilHelper
                         modelItem.DataType = drItem["data_type"]?.ToString();
                         modelItem.FieldRemarks = drItem["column_comments"]?.ToString();
                         modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "Y";
+                        list.Add(modelItem);
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Oracle 取表属性
+        /// </summary>
+        public static List<EnumColumnModel> GetEnumFieldsFormDB(DataTable dataTable)
+        {
+            var list = new List<EnumColumnModel>();
+            try
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow drItem in dataTable.Rows)
+                    {
+                        var modelItem = new EnumColumnModel();
+                        modelItem.TableName = drItem["table_name"]?.ToString();
+                        modelItem.FieldName = drItem["column_name"]?.ToString();
+
+                        //enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America')
+                        string enumVals = drItem["column_type"]?.ToString();
+                        Regex regex = new Regex(@"enum\((.+)\)$");
+                        //'Asia','Europe','North America','Africa','Oceania','Antarctica','South America'
+                        var match = regex.Match(enumVals);
+                        enumVals = match.Groups.Count <= 1 ? "" : match.Groups[1].Value;
+                        modelItem.EnumValues = enumVals.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
                         list.Add(modelItem);
                     }
                 }
@@ -332,5 +405,15 @@ namespace Tools.zhong.UtilHelper
         public string FieldRemarks { get; set; }
         public string DataType { get; set; }
         public bool IsNullable { get; set; }
+    }
+
+    public class EnumColumnModel
+    {
+        public string TableName { get; set; }
+        public string TableComment { get; set; }
+        public string FieldName { get; set; }
+        public string FieldRemarks { get; set; }
+
+        public string[] EnumValues { get; set; }
     }
 }

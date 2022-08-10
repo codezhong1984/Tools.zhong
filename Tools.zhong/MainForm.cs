@@ -497,8 +497,8 @@ namespace Tools.zhong
                 }
                 if (cbDBType.Text == "MySQL")
                 {
-                    string sql = string.Format(@"select column_name from information_schema.columns where TABLE_NAME='{0}'", txtTableName3.Text.Trim());
-                    var dtData = DBHepler.MySQLHelper.ExecuteDataTable(sql);
+                    string sql = string.Format(@"select column_name from information_schema.columns where table_schema=@DataBase and TABLE_NAME='{0}'", txtTableName3.Text.Trim());
+                    var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                     if (dtData != null)
                     {
                         StringBuilder sbColumns = new StringBuilder();
@@ -511,10 +511,10 @@ namespace Tools.zhong
 
                     string sqlkey = string.Format(@"SELECT Column_Name
                                                     FROM  INFORMATION_SCHEMA.`KEY_COLUMN_USAGE`
-                                                    WHERE CONSTRAINT_NAME = 'PRIMARY' AND Table_Name = '{0}' ",
+                                                    WHERE CONSTRAINT_NAME = 'PRIMARY' AND Table_Name = '{0}' and table_schema=@DataBase ",
                                     txtTableName3.Text.Trim());
 
-                    dtData = DBHepler.MySQLHelper.ExecuteDataTable(sqlkey);
+                    dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sqlkey);
                     if (dtData != null)
                     {
                         StringBuilder sbColumns = new StringBuilder();
