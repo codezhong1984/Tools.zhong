@@ -31,19 +31,24 @@ namespace Tools.zhong
         {
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.cbTableName = new System.Windows.Forms.ComboBox();
             this.cbDBType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbLineDeal = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbDisplayName = new System.Windows.Forms.CheckBox();
+            this.cbTableName = new System.Windows.Forms.CheckedListBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbNameSpace = new System.Windows.Forms.TextBox();
+            this.btnOpenPath2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(233, 304);
+            this.btnOk.Location = new System.Drawing.Point(146, 519);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 27);
             this.btnOk.TabIndex = 2;
@@ -54,7 +59,7 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(99, 304);
+            this.btnCancel.Location = new System.Drawing.Point(50, 519);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 3;
@@ -62,49 +67,36 @@ namespace Tools.zhong
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // cbTableName
-            // 
-            this.cbTableName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cbTableName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTableName.FormattingEnabled = true;
-            this.cbTableName.Location = new System.Drawing.Point(130, 84);
-            this.cbTableName.Margin = new System.Windows.Forms.Padding(4);
-            this.cbTableName.Name = "cbTableName";
-            this.cbTableName.Size = new System.Drawing.Size(239, 23);
-            this.cbTableName.TabIndex = 24;
-            this.cbTableName.SelectedIndexChanged += new System.EventHandler(this.cbTableName_SelectedIndexChanged);
-            // 
             // cbDBType
             // 
-            this.cbDBType.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbDBType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbDBType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDBType.FormattingEnabled = true;
             this.cbDBType.Items.AddRange(new object[] {
             "请选择",
             "SQLSERVER",
             "ORACLE"});
-            this.cbDBType.Location = new System.Drawing.Point(130, 40);
+            this.cbDBType.Location = new System.Drawing.Point(84, 40);
             this.cbDBType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDBType.Name = "cbDBType";
-            this.cbDBType.Size = new System.Drawing.Size(239, 23);
+            this.cbDBType.Size = new System.Drawing.Size(423, 23);
             this.cbDBType.TabIndex = 22;
             this.cbDBType.SelectedIndexChanged += new System.EventHandler(this.cbDBType_SelectedIndexChanged);
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 45);
+            this.label5.Location = new System.Drawing.Point(17, 45);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 15);
+            this.label5.Size = new System.Drawing.Size(68, 15);
             this.label5.TabIndex = 23;
-            this.label5.Text = "数据库类型：";
+            this.label5.Text = "DB类型：";
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(81, 89);
+            this.label2.Location = new System.Drawing.Point(34, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 21;
@@ -112,8 +104,9 @@ namespace Tools.zhong
             // 
             // cbLineDeal
             // 
+            this.cbLineDeal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbLineDeal.AutoSize = true;
-            this.cbLineDeal.Location = new System.Drawing.Point(101, 177);
+            this.cbLineDeal.Location = new System.Drawing.Point(83, 444);
             this.cbLineDeal.Name = "cbLineDeal";
             this.cbLineDeal.Size = new System.Drawing.Size(134, 19);
             this.cbLineDeal.TabIndex = 26;
@@ -122,33 +115,92 @@ namespace Tools.zhong
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(87, 208);
+            this.label1.Location = new System.Drawing.Point(223, 444);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 15);
             this.label1.TabIndex = 27;
-            this.label1.Text = "注：首字母大定，下划线后接字母大写";
+            this.label1.Text = "注：首字母大写，下划线后接字母大写";
             // 
             // cbDisplayName
             // 
+            this.cbDisplayName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbDisplayName.AutoSize = true;
-            this.cbDisplayName.Location = new System.Drawing.Point(101, 240);
+            this.cbDisplayName.Location = new System.Drawing.Point(83, 480);
             this.cbDisplayName.Name = "cbDisplayName";
             this.cbDisplayName.Size = new System.Drawing.Size(177, 19);
             this.cbDisplayName.TabIndex = 28;
             this.cbDisplayName.Text = "是否生成DisplayName";
             this.cbDisplayName.UseVisualStyleBackColor = true;
             // 
+            // cbTableName
+            // 
+            this.cbTableName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTableName.CheckOnClick = true;
+            this.cbTableName.FormattingEnabled = true;
+            this.cbTableName.Location = new System.Drawing.Point(83, 127);
+            this.cbTableName.Name = "cbTableName";
+            this.cbTableName.Size = new System.Drawing.Size(424, 284);
+            this.cbTableName.TabIndex = 29;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnSave.Location = new System.Drawing.Point(242, 519);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(118, 27);
+            this.btnSave.TabIndex = 30;
+            this.btnSave.Text = "保存为文件";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 15);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "命名空间：";
+            // 
+            // tbNameSpace
+            // 
+            this.tbNameSpace.Location = new System.Drawing.Point(83, 79);
+            this.tbNameSpace.Name = "tbNameSpace";
+            this.tbNameSpace.Size = new System.Drawing.Size(424, 25);
+            this.tbNameSpace.TabIndex = 32;
+            this.tbNameSpace.Text = "DBModel";
+            // 
+            // btnOpenPath2
+            // 
+            this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
+            this.btnOpenPath2.Location = new System.Drawing.Point(381, 520);
+            this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOpenPath2.Name = "btnOpenPath2";
+            this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
+            this.btnOpenPath2.TabIndex = 33;
+            this.btnOpenPath2.Text = "打开生成目录";
+            this.btnOpenPath2.UseVisualStyleBackColor = true;
+            this.btnOpenPath2.Click += new System.EventHandler(this.btnOpenPath2_Click);
+            // 
             // DBTaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 378);
+            this.ClientSize = new System.Drawing.Size(551, 577);
+            this.Controls.Add(this.btnOpenPath2);
+            this.Controls.Add(this.tbNameSpace);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.cbTableName);
             this.Controls.Add(this.cbDisplayName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbLineDeal);
-            this.Controls.Add(this.cbTableName);
             this.Controls.Add(this.cbDBType);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
@@ -167,12 +219,17 @@ namespace Tools.zhong
         #endregion
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ComboBox cbTableName;
         private System.Windows.Forms.ComboBox cbDBType;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cbLineDeal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbDisplayName;
+        private System.Windows.Forms.CheckedListBox cbTableName;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbNameSpace;
+        private System.Windows.Forms.Button btnOpenPath2;
     }
 }

@@ -10,25 +10,26 @@ namespace Tools.zhong.UtilHelper
 {
     public class ModelFromDBHelper
     {
-        public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false)
+        public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false,
+            string ns = "DBModel")
         {
             if (listColumns == null || listColumns.Count == 0)
             {
                 return string.Empty;
             }
             StringBuilder sbResult = new StringBuilder();
-            string tabBlank = "    ";
             sbResult.AppendLine("using System;");
             if (addDisplayName)
             {
                 sbResult.AppendLine("using System.ComponentModel;");
             }
             sbResult.AppendLine();
-            sbResult.AppendLine("namespace DbModels");
+            sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(ns) ? "DBModel" : ns)}");
             sbResult.AppendLine("{");
 
             sbResult.AppendLine("    /// <summary>");
             sbResult.AppendLine("    /// " + listColumns[0].TableComment);
+            sbResult.AppendLine("    /// 创建于 " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             sbResult.AppendLine("    /// </summary>");
 
             sbResult.AppendLine("    public class " + listColumns[0].TableName);
@@ -65,11 +66,15 @@ namespace Tools.zhong.UtilHelper
 
             #endregion
 
+            int i = 0;
             foreach (var item in listColumns)
             {
                 string dataType = string.Empty;
                 dataType = ChangeToCsharpType(item.DataType);
-
+                if (i++>0)
+                {
+                    sbResult.AppendLine();
+                }
                 sbResult.AppendLine("        /// <summary>");
                 sbResult.AppendLine("        /// " + item.FieldRemarks);
                 sbResult.AppendLine("        /// </summary>");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,25 +32,72 @@ namespace Tools.zhong
                 MessageBox.Show("数据库表未选择！");
             }
 
+            List<string> listTables = new List<string>();
+            foreach (var item in cbTableName.CheckedItems)
+            {
+                listTables.Add(((DataRowView)item)["table_name"]?.ToString());
+            }
+
+            string tableName = string.Empty;
+            StringBuilder sbCodes = new StringBuilder();
             #region CreateCodeText
 
             if (cbDBType.Text == "ORACLE")
             {
-                string sql = @"select a.TABLE_NAME,c.COMMENTS as table_comments, a.column_name,a.DATA_TYPE,b.Comments as column_comments,a.NULLABLE
+                foreach (var item in listTables)
+                {
+                    if (listTables.Count > 1)
+                    {
+                        sbCodes.AppendLine();
+                        sbCodes.AppendLine($"//**************************** {item}  *******************************");
+                        sbCodes.AppendLine();
+                    }
+                    var codeOracle = GetCodeForOracle(item);
+                    sbCodes.AppendLine(codeOracle);
+                }
+
+                this.CodeText = sbCodes.ToString();
+            }
+            else if (cbDBType.Text == "SQLSERVER")
+            {
+                foreach (var item in listTables)
+                {
+                    if (listTables.Count > 1)
+                    {
+                        sbCodes.AppendLine();
+                        sbCodes.AppendLine($"//**************************** {item}  *******************************");
+                        sbCodes.AppendLine();
+                    }
+                    var codeSqlServer = GetCodeForSqlServer(item);
+                    sbCodes.AppendLine(codeSqlServer);
+                }
+
+                this.CodeText = sbCodes.ToString();
+            }
+
+            #endregion
+
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private string GetCodeForOracle(string tableName)
+        {
+            string sql = @"select a.TABLE_NAME,c.COMMENTS as table_comments, a.column_name,a.DATA_TYPE,b.Comments as column_comments,a.NULLABLE
                             from user_tab_columns a 
                             left join user_col_comments b on a.TABLE_NAME=b.TABLE_NAME and a.COLUMN_NAME = b.column_name
                             left join user_tab_comments c on a.TABLE_NAME=c.TABLE_NAME
                             where a.table_name ='{0}'
                             order by a.COLUMN_ID ";
 
-                var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, cbTableName.Text.Trim()));
-                var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-                var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked);
-                this.CodeText = code;
-            }
-            else if (cbDBType.Text == "SQLSERVER")
-            {
-                string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments,
+            var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked);
+            return code;
+        }
+
+        private string GetCodeForSqlServer(string tableName)
+        {
+            string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments,
                                     IIF(c.is_nullable=1,'Y','N') nullable
                                 from sys.tables a 
                                 left join sys.extended_properties b on a.object_id=b.major_id and b.minor_id=0
@@ -59,15 +107,10 @@ namespace Tools.zhong
                                 where a.name='{0}'
                                 order by c.column_id ";
 
-                var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, cbTableName.Text.Trim()));
-                var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-                var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked);
-                this.CodeText = code;
-            }
-
-            #endregion
-
-            this.DialogResult = DialogResult.OK;
+            var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, tableName));
+            var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim());
+            return code;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -86,6 +129,8 @@ namespace Tools.zhong
                     cbTableName.DataSource = dtData;
                     cbTableName.DisplayMember = "table_name";
                     cbTableName.ValueMember = "table_name";
+
+
                 }
                 else if (cbDBType.Text == "SQLSERVER")
                 {
@@ -105,11 +150,80 @@ namespace Tools.zhong
         private void DBTaleForm_Load(object sender, EventArgs e)
         {
             cbDBType.SelectedIndex = 0;
+            folderBrowserDialog1.SelectedPath = AppDomain.CurrentDomain.BaseDirectory;
         }
 
         private void cbTableName_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (cbDBType.SelectedIndex <= 0)
+            {
+                cbDBType.Focus();
+                MessageBox.Show("数据库类型未选择！");
+            }
+            if (cbTableName.SelectedIndex < 0)
+            {
+                cbTableName.Focus();
+                MessageBox.Show("数据库表未选择！");
+            }
+
+            string dirPath = string.Empty;
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                dirPath = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                return;
+            }
+
+            List<string> listTables = new List<string>();
+            foreach (var item in cbTableName.CheckedItems)
+            {
+                listTables.Add(((DataRowView)item)["table_name"]?.ToString());
+            }
+
+            string tableName = string.Empty;
+            #region CreateCodeText
+
+            if (cbDBType.Text == "ORACLE")
+            {
+                foreach (var item in listTables)
+                {
+                    var codeOracle = GetCodeForOracle(item);
+                    using (StreamWriter sw = new StreamWriter($"{dirPath}\\{item}.cs", false, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(codeOracle);
+                    }
+                }
+            }
+            else if (cbDBType.Text == "SQLSERVER")
+            {
+                foreach (var item in listTables)
+                {
+                    var codeSqlServer = GetCodeForSqlServer(item);
+                    using (StreamWriter sw = new StreamWriter($"{dirPath}\\{item}.cs", false, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(codeSqlServer);
+                    }
+                }
+            }
+
+            #endregion
+
+            MessageBox.Show("文件保存成功！");
+        }
+
+        private void btnOpenPath2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+            psi.Arguments = "/e,/root," + folderBrowserDialog1.SelectedPath;
+            System.Diagnostics.Process.Start(psi);
         }
     }
 }

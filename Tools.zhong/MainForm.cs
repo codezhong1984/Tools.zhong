@@ -167,7 +167,6 @@ namespace Tools.zhong
                 {
                     sw.WriteLine(txtOutput.Text.Trim());
                 }
-
             }
         }
 
