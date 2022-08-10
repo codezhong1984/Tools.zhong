@@ -8,6 +8,10 @@ namespace DbModels
     /// </summary>
     public class TS_OCPrice
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        [DisplayName("")]
+        private string vv { get; set; }
     }
 }

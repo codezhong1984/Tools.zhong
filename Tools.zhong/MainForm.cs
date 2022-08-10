@@ -30,8 +30,6 @@ namespace Tools.zhong
 
         private DataTable dt;
 
-        private bool SwitchLoadFormDB = false;
-
         #endregion
 
         public MainForm()
@@ -192,7 +190,6 @@ namespace Tools.zhong
         {
             txtOuput3.Text = "";
         }
-
 
         private void btnCreateSelect_Click(object sender, EventArgs e)
         {
@@ -397,7 +394,6 @@ namespace Tools.zhong
                     txtTableName3.DisplayMember = "table_name";
                     txtTableName3.ValueMember = "table_name";
                 }
-                SwitchLoadFormDB = true;
                 btnLoadFromDB.ForeColor = Color.Red;
             }
             catch (Exception ex)
@@ -520,7 +516,6 @@ namespace Tools.zhong
 
 
         #endregion
-
        
     }
 }

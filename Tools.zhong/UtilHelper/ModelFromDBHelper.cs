@@ -16,19 +16,24 @@ namespace Tools.zhong.UtilHelper
             {
                 return string.Empty;
             }
-            string text = string.Empty;
+            StringBuilder sbResult = new StringBuilder();
             string tabBlank = "    ";
-            text = "using System;\r\n";
+            sbResult.AppendLine("using System;");
             if (addDisplayName)
             {
-                text += "using System.ComponentModel;\r\n";
+                sbResult.AppendLine("using System.ComponentModel;");
             }
-            text += "\r\n";
+            sbResult.AppendLine();
+            sbResult.AppendLine("namespace DbModels");
+            sbResult.AppendLine("{");
 
-            text += "namespace " + "DbModels" + "\r\n{\r\n";
+            sbResult.AppendLine("    /// <summary>");
+            sbResult.AppendLine("    /// " + listColumns[0].TableComment);
+            sbResult.AppendLine("    /// </summary>");
 
-            text += tabBlank + tabBlank + "/// <summary>\r\n" + tabBlank + tabBlank + "/// " + listColumns[0].TableComment + "\r\n/// </summary>\r\n";
-            text += tabBlank + "public class " + listColumns[0].TableName + "\r\n" + tabBlank + "{\r\n";
+            sbResult.AppendLine("    public class " + listColumns[0].TableName);
+            sbResult.AppendLine("    {");
+
 
             #region 生成私有变量
 
@@ -65,21 +70,24 @@ namespace Tools.zhong.UtilHelper
                 string dataType = string.Empty;
                 dataType = ChangeToCsharpType(item.DataType);
 
-                text += "\r\n/// <summary>\r\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\r\n" + tabBlank + tabBlank + "/// </summary>\r\n";
+                sbResult.AppendLine("        /// <summary>");
+                sbResult.AppendLine("        /// " + item.FieldRemarks);
+                sbResult.AppendLine("        /// </summary>");
 
                 if (addDisplayName)
                 {
-                    text += $"\r\n[DisplayName(\"{item.FieldRemarks}\")]\r\n";
+                    sbResult.AppendLine("        [DisplayName(\"" + item.FieldRemarks + "\")]");
                 }
+                var fieldCode = $"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                              + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
+                              + "{ get; set; }";
 
-                text += tabBlank + tabBlank + "public " + dataType
-                        + (item.IsNullable && !IsNullableType(dataType) ? "?" : "")
-                        + " "
-                        + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))
-                        + " { get; set; }\r\n";
+                sbResult.AppendLine(fieldCode);
             }
-            text += tabBlank + "}\r\n" + "}";
-            return text;
+            sbResult.AppendLine("    }");
+            sbResult.AppendLine("}");
+
+            return sbResult.ToString();
         }
 
         public static string ToUperFirstChar(string fieldName)
