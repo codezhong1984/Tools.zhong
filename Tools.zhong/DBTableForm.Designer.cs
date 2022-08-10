@@ -77,7 +77,8 @@ namespace Tools.zhong
             this.cbDBType.Items.AddRange(new object[] {
             "请选择",
             "SQLSERVER",
-            "ORACLE"});
+            "ORACLE",
+            "MySQL"});
             this.cbDBType.Location = new System.Drawing.Point(84, 40);
             this.cbDBType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDBType.Name = "cbDBType";

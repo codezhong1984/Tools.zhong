@@ -32,7 +32,7 @@ namespace Tools.zhong.UtilHelper
             sbResult.AppendLine("    /// 创建于 " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             sbResult.AppendLine("    /// </summary>");
 
-            sbResult.AppendLine("    public class " + listColumns[0].TableName);
+            sbResult.AppendLine("    public class " + ToUperFirstChar(listColumns[0].TableName));
             sbResult.AppendLine("    {");
 
 

@@ -340,7 +340,7 @@ namespace Tools.zhong
             for (int i = 0; i < keys.Length; i++)
             {
                 var inputItem = keys[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
-                sbKeyColumns.Append(string.Concat(i == 0 ? "" : string.Concat(System.Environment.NewLine, "\tAND "),
+                sbKeyColumns.Append(string.Concat(i == 0 ? "" : " AND ",
                     inputItem, " = ", SQL_PARAM_PREFIX,
                     inputItem.TrimStart()));
             }
@@ -389,6 +389,14 @@ namespace Tools.zhong
                 {
                     string sql = "select name table_name from sys.tables ";
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                    txtTableName3.DataSource = dtData;
+                    txtTableName3.DisplayMember = "table_name";
+                    txtTableName3.ValueMember = "table_name";
+                }
+                else if (cbDBType.Text == "MySQL")
+                {
+                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase ";
+                    var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                     txtTableName3.DataSource = dtData;
                     txtTableName3.DisplayMember = "table_name";
                     txtTableName3.ValueMember = "table_name";
@@ -450,7 +458,7 @@ namespace Tools.zhong
                         StringBuilder sbColumns = new StringBuilder();
                         foreach (DataRow item in dtData.Rows)
                         {
-                            sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
+                            sbColumns.Append(item["column_name"]?.ToString() + ",");
                         }
                         txtKey3.Text = sbColumns.ToString();
                     }
@@ -482,7 +490,37 @@ namespace Tools.zhong
                         StringBuilder sbColumns = new StringBuilder();
                         foreach (DataRow item in dtData.Rows)
                         {
+                            sbColumns.Append(item["column_name"]?.ToString() + ",");
+                        }
+                        txtKey3.Text = sbColumns.ToString();
+                    }
+                }
+                if (cbDBType.Text == "MySQL")
+                {
+                    string sql = string.Format(@"select column_name from information_schema.columns where TABLE_NAME='{0}'", txtTableName3.Text.Trim());
+                    var dtData = DBHepler.MySQLHelper.ExecuteDataTable(sql);
+                    if (dtData != null)
+                    {
+                        StringBuilder sbColumns = new StringBuilder();
+                        foreach (DataRow item in dtData.Rows)
+                        {
                             sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
+                        }
+                        txtInput3.Text = sbColumns.ToString();
+                    }
+
+                    string sqlkey = string.Format(@"SELECT Column_Name
+                                                    FROM  INFORMATION_SCHEMA.`KEY_COLUMN_USAGE`
+                                                    WHERE CONSTRAINT_NAME = 'PRIMARY' AND Table_Name = '{0}' ",
+                                    txtTableName3.Text.Trim());
+
+                    dtData = DBHepler.MySQLHelper.ExecuteDataTable(sqlkey);
+                    if (dtData != null)
+                    {
+                        StringBuilder sbColumns = new StringBuilder();
+                        foreach (DataRow item in dtData.Rows)
+                        {
+                            sbColumns.Append(item["column_name"]?.ToString() + ",");
                         }
                         txtKey3.Text = sbColumns.ToString();
                     }

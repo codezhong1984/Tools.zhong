@@ -74,6 +74,22 @@ namespace Tools.zhong
 
                 this.CodeText = sbCodes.ToString();
             }
+            else if (cbDBType.Text == "MySQL")
+            {
+                foreach (var item in listTables)
+                {
+                    if (listTables.Count > 1)
+                    {
+                        sbCodes.AppendLine();
+                        sbCodes.AppendLine($"//**************************** {item}  *******************************");
+                        sbCodes.AppendLine();
+                    }
+                    var codeMySQL = GetCodeForMySQL(item);
+                    sbCodes.AppendLine(codeMySQL);
+                }
+
+                this.CodeText = sbCodes.ToString();
+            }
 
             #endregion
 
@@ -113,6 +129,20 @@ namespace Tools.zhong
             return code;
         }
 
+
+        private string GetCodeForMySQL(string tableName)
+        {
+            string sql = @" select b.table_name,b.table_comment table_comments,a.column_name,a.data_type,a.column_comment column_comments,if(a.is_Nullable='YES','Y','N') nullable
+                            from information_schema.columns a inner join information_schema.tables b on a.table_name=b.table_name and a.table_schema=b.table_schema
+                            where b.table_schema=@DataBase and b.table_name='{0}'
+                            order by a.ORDINAL_POSITION ";
+
+            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
+            var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim());
+            return code;
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -136,6 +166,14 @@ namespace Tools.zhong
                 {
                     string sql = "select name table_name from sys.tables ";
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                    cbTableName.DataSource = dtData;
+                    cbTableName.DisplayMember = "table_name";
+                    cbTableName.ValueMember = "table_name";
+                }
+                else if (cbDBType.Text == "MySQL")
+                {
+                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase ";
+                    var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                     cbTableName.DataSource = dtData;
                     cbTableName.DisplayMember = "table_name";
                     cbTableName.ValueMember = "table_name";
@@ -213,7 +251,17 @@ namespace Tools.zhong
                     }
                 }
             }
-
+            else if (cbDBType.Text == "MySQL")
+            {
+                foreach (var item in listTables)
+                {
+                    var codeMySQL = GetCodeForMySQL(item);
+                    using (StreamWriter sw = new StreamWriter($"{dirPath}\\{item}.cs", false, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(codeMySQL);
+                    }
+                }
+            }
             #endregion
 
             MessageBox.Show("文件保存成功！");

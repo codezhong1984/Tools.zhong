@@ -464,7 +464,8 @@ namespace Tools.zhong
             this.cbDBType.FormattingEnabled = true;
             this.cbDBType.Items.AddRange(new object[] {
             "SQLSERVER",
-            "ORACLE"});
+            "ORACLE",
+            "MySQL"});
             this.cbDBType.Location = new System.Drawing.Point(164, 5);
             this.cbDBType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDBType.Name = "cbDBType";
