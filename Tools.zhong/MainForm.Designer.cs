@@ -32,6 +32,13 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnCreateModelByInput = new System.Windows.Forms.Button();
+            this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.btnRemoveAll = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnRemoveCol = new System.Windows.Forms.Button();
+            this.txtTempl = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,12 +46,6 @@ namespace Tools.zhong
             this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
-            this.btnImport = new System.Windows.Forms.Button();
-            this.btnRemoveAll = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnRemoveCol = new System.Windows.Forms.Button();
-            this.txtTempl = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
@@ -104,6 +105,7 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnCreateModelByInput);
             this.tabPage1.Controls.Add(this.btnCreateModelFromDBScript);
             this.tabPage1.Controls.Add(this.btnImport);
             this.tabPage1.Controls.Add(this.btnRemoveAll);
@@ -124,67 +126,26 @@ namespace Tools.zhong
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // contextMenuStrip1
+            // btnCreateModelByInput
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmKg2Dh,
-            this.tsmDh2Hh,
-            this.tsmAddDyh,
-            this.tsmAddSyh,
-            this.tsmDelDyh,
-            this.tsmDelSyh});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 148);
-            // 
-            // tsmKg2Dh
-            // 
-            this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(183, 24);
-            this.tsmKg2Dh.Text = "空格替换为逗号";
-            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
-            // 
-            // tsmDh2Hh
-            // 
-            this.tsmDh2Hh.Name = "tsmDh2Hh";
-            this.tsmDh2Hh.Size = new System.Drawing.Size(183, 24);
-            this.tsmDh2Hh.Text = "逗号替换为换行";
-            this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
-            // 
-            // tsmAddDyh
-            // 
-            this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(183, 24);
-            this.tsmAddDyh.Text = "添加单引号";
-            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
-            // 
-            // tsmAddSyh
-            // 
-            this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(183, 24);
-            this.tsmAddSyh.Text = "添加双引号";
-            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
-            // 
-            // tsmDelDyh
-            // 
-            this.tsmDelDyh.Name = "tsmDelDyh";
-            this.tsmDelDyh.Size = new System.Drawing.Size(183, 24);
-            this.tsmDelDyh.Text = "删除单引号";
-            this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
-            // 
-            // tsmDelSyh
-            // 
-            this.tsmDelSyh.Name = "tsmDelSyh";
-            this.tsmDelSyh.Size = new System.Drawing.Size(183, 24);
-            this.tsmDelSyh.Text = "删除双引号";
-            this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
+            this.btnCreateModelByInput.AutoEllipsis = true;
+            this.btnCreateModelByInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateModelByInput.ForeColor = System.Drawing.Color.Blue;
+            this.btnCreateModelByInput.Location = new System.Drawing.Point(439, 189);
+            this.btnCreateModelByInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCreateModelByInput.Name = "btnCreateModelByInput";
+            this.btnCreateModelByInput.Size = new System.Drawing.Size(161, 29);
+            this.btnCreateModelByInput.TabIndex = 19;
+            this.btnCreateModelByInput.Text = "字符串生成Model类";
+            this.btnCreateModelByInput.UseVisualStyleBackColor = true;
+            this.btnCreateModelByInput.Click += new System.EventHandler(this.btnCreateModelByInput_Click);
             // 
             // btnCreateModelFromDBScript
             // 
             this.btnCreateModelFromDBScript.AutoEllipsis = true;
             this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateModelFromDBScript.ForeColor = System.Drawing.Color.Blue;
-            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(275, 189);
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(279, 189);
             this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
             this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(149, 29);
@@ -198,7 +159,7 @@ namespace Tools.zhong
             this.btnImport.AutoEllipsis = true;
             this.btnImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(118, 189);
+            this.btnImport.Location = new System.Drawing.Point(120, 189);
             this.btnImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(148, 29);
@@ -255,13 +216,68 @@ namespace Tools.zhong
             this.txtTempl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTempl.ContextMenuStrip = this.contextMenuStrip1;
-            this.txtTempl.Location = new System.Drawing.Point(3, 41);
+            this.txtTempl.Location = new System.Drawing.Point(6, 41);
             this.txtTempl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTempl.Multiline = true;
             this.txtTempl.Name = "txtTempl";
             this.txtTempl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempl.Size = new System.Drawing.Size(1125, 130);
+            this.txtTempl.Size = new System.Drawing.Size(1122, 130);
             this.txtTempl.TabIndex = 7;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmKg2Dh,
+            this.tsmDh2Hh,
+            this.tsmAddDyh,
+            this.tsmAddSyh,
+            this.tsmDelDyh,
+            this.tsmDelSyh});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 148);
+            // 
+            // tsmKg2Dh
+            // 
+            this.tsmKg2Dh.Name = "tsmKg2Dh";
+            this.tsmKg2Dh.Size = new System.Drawing.Size(183, 24);
+            this.tsmKg2Dh.Text = "空格替换为逗号";
+            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
+            // 
+            // tsmDh2Hh
+            // 
+            this.tsmDh2Hh.Name = "tsmDh2Hh";
+            this.tsmDh2Hh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDh2Hh.Text = "逗号替换为换行";
+            this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
+            // 
+            // tsmAddDyh
+            // 
+            this.tsmAddDyh.Name = "tsmAddDyh";
+            this.tsmAddDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddDyh.Text = "添加单引号";
+            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
+            // 
+            // tsmAddSyh
+            // 
+            this.tsmAddSyh.Name = "tsmAddSyh";
+            this.tsmAddSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddSyh.Text = "添加双引号";
+            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
+            // 
+            // tsmDelDyh
+            // 
+            this.tsmDelDyh.Name = "tsmDelDyh";
+            this.tsmDelDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelDyh.Text = "删除单引号";
+            this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
+            // 
+            // tsmDelSyh
+            // 
+            this.tsmDelSyh.Name = "tsmDelSyh";
+            this.tsmDelSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelSyh.Text = "删除双引号";
+            this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
             // 
             // txtTitle
             // 
@@ -295,12 +311,12 @@ namespace Tools.zhong
             this.btnOutput.AutoEllipsis = true;
             this.btnOutput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOutput.ForeColor = System.Drawing.Color.Blue;
-            this.btnOutput.Location = new System.Drawing.Point(1037, 231);
+            this.btnOutput.Location = new System.Drawing.Point(1023, 231);
             this.btnOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOutput.Name = "btnOutput";
-            this.btnOutput.Size = new System.Drawing.Size(75, 29);
+            this.btnOutput.Size = new System.Drawing.Size(100, 29);
             this.btnOutput.TabIndex = 10;
-            this.btnOutput.Text = "输出";
+            this.btnOutput.Text = "生成结果";
             this.btnOutput.UseVisualStyleBackColor = true;
             this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
             // 
@@ -748,6 +764,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmAddSyh;
         private System.Windows.Forms.ToolStripMenuItem tsmDelDyh;
         private System.Windows.Forms.ToolStripMenuItem tsmDelSyh;
+        private System.Windows.Forms.Button btnCreateModelByInput;
     }
 }
 

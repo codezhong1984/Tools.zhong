@@ -82,7 +82,7 @@ namespace Tools.zhong.UtilHelper
                     sbResult.AppendLine();
                 }
                 sbResult.AppendLine("        /// <summary>");
-                sbResult.AppendLine("        /// " + item.FieldRemarks.Replace("\\n", ""));
+                sbResult.AppendLine("        /// " + item.FieldRemarks?.Replace("\\n", ""));
                 sbResult.AppendLine("        /// </summary>");
 
                 if (addDisplayName)

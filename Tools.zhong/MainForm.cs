@@ -544,7 +544,7 @@ namespace Tools.zhong
 
         private void btnCommaToBlank_Click(object sender, EventArgs e)
         {
-           
+
         }
 
 
@@ -624,5 +624,14 @@ namespace Tools.zhong
             tabControl1.SelectedIndex = 1;
         }
 
+        private void btnCreateModelByInput_Click(object sender, EventArgs e)
+        {
+            var frm = new CreateModelBySplitStringForm();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtOutput.Text = frm.CodeText;
+                tabControl1.SelectedIndex = 1;
+            }
+        }
     }
 }

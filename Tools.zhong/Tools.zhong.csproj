@@ -58,6 +58,12 @@
     <Compile Include="DBTableForm.Designer.cs">
       <DependentUpon>DBTableForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateModelBySplitStringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateModelBySplitStringForm.Designer.cs">
+      <DependentUpon>CreateModelBySplitStringForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="UtilHelper\ModelFromDBHelper.cs" />
     <EmbeddedResource Include="DBTableForm.resx">
       <DependentUpon>DBTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateModelBySplitStringForm.resx">
+      <DependentUpon>CreateModelBySplitStringForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
