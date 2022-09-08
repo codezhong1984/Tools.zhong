@@ -12,10 +12,10 @@ using Tools.zhong.UtilHelper;
 
 namespace Tools.zhong
 {
-    public partial class DBTaleForm : Form
+    public partial class DbTableForm : Form
     {
         public string CodeText { get; set; }
-        public DBTaleForm()
+        public DbTableForm()
         {
             InitializeComponent();
         }
@@ -28,11 +28,13 @@ namespace Tools.zhong
                 {
                     cbDBType.Focus();
                     MessageBox.Show("数据库类型未选择！");
+                    return;
                 }
                 if (cbTableName.SelectedIndex < 0)
                 {
                     cbTableName.Focus();
                     MessageBox.Show("数据库表未选择！");
+                    return;
                 }
 
                 List<string> listTables = new List<string>();
@@ -117,7 +119,7 @@ namespace Tools.zhong
 
             var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
             var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked);
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim());
             return code;
         }
 

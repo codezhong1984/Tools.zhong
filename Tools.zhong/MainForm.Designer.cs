@@ -79,6 +79,7 @@ namespace Tools.zhong
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -233,49 +234,50 @@ namespace Tools.zhong
             this.tsmAddDyh,
             this.tsmAddSyh,
             this.tsmDelDyh,
-            this.tsmDelSyh});
+            this.tsmDelSyh,
+            this.tsmReplaceLine});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 148);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 200);
             // 
             // tsmKg2Dh
             // 
             this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(183, 24);
+            this.tsmKg2Dh.Size = new System.Drawing.Size(210, 24);
             this.tsmKg2Dh.Text = "空格替换为逗号";
             this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
             // 
             // tsmDh2Hh
             // 
             this.tsmDh2Hh.Name = "tsmDh2Hh";
-            this.tsmDh2Hh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDh2Hh.Size = new System.Drawing.Size(210, 24);
             this.tsmDh2Hh.Text = "逗号替换为换行";
             this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
             // 
             // tsmAddDyh
             // 
             this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddDyh.Size = new System.Drawing.Size(210, 24);
             this.tsmAddDyh.Text = "添加单引号";
             this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
             // 
             // tsmAddSyh
             // 
             this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddSyh.Size = new System.Drawing.Size(210, 24);
             this.tsmAddSyh.Text = "添加双引号";
             this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
             // 
             // tsmDelDyh
             // 
             this.tsmDelDyh.Name = "tsmDelDyh";
-            this.tsmDelDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelDyh.Size = new System.Drawing.Size(210, 24);
             this.tsmDelDyh.Text = "删除单引号";
             this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
             // 
             // tsmDelSyh
             // 
             this.tsmDelSyh.Name = "tsmDelSyh";
-            this.tsmDelSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelSyh.Size = new System.Drawing.Size(210, 24);
             this.tsmDelSyh.Text = "删除双引号";
             this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
             // 
@@ -689,6 +691,13 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
+            // tsmReplaceLine
+            // 
+            this.tsmReplaceLine.Name = "tsmReplaceLine";
+            this.tsmReplaceLine.Size = new System.Drawing.Size(210, 24);
+            this.tsmReplaceLine.Text = "替换回车换行";
+            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -765,6 +774,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmDelDyh;
         private System.Windows.Forms.ToolStripMenuItem tsmDelSyh;
         private System.Windows.Forms.Button btnCreateModelByInput;
+        private System.Windows.Forms.ToolStripMenuItem tsmReplaceLine;
     }
 }
 

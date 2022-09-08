@@ -150,7 +150,7 @@ namespace Tools.zhong
 
         private void btnCreateModelFromDBScript_Click(object sender, EventArgs e)
         {
-            DBTaleForm subForm = new DBTaleForm();
+            DbTableForm subForm = new DbTableForm();
             if (subForm.ShowDialog() == DialogResult.OK)
             {
                 txtOutput.Text = subForm.CodeText;
@@ -624,6 +624,16 @@ namespace Tools.zhong
             tabControl1.SelectedIndex = 1;
         }
 
+        private void tsmReplaceLine_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, "");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i=>i.Trim());
+            txtOutput.Text = string.Join(",", inputTexts);
+            tabControl1.SelectedIndex = 1;
+        }
+
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
         {
             var frm = new CreateModelBySplitStringForm();
@@ -633,5 +643,7 @@ namespace Tools.zhong
                 tabControl1.SelectedIndex = 1;
             }
         }
+
+        
     }
 }

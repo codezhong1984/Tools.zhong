@@ -1,7 +1,7 @@
 ﻿
 namespace Tools.zhong
 {
-    partial class DBTaleForm
+    partial class DbTableForm
     {
         /// <summary>
         /// Required designer variable.
