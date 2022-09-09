@@ -26,6 +26,7 @@ namespace Tools.zhong
         {
             try
             {
+                lblMsg.Text = "正在执行，请稍候";
                 if (dataGridView1.Rows.Count == 0 || txtSQL.Text.Trim().Length == 0)
                 {
                     return;
@@ -70,23 +71,21 @@ namespace Tools.zhong
                         default:
                             break;
                     }
-                    paramItem.DbType = dbType;
+                    if (!string.IsNullOrWhiteSpace(dbTypeString))
+                    {
+                        paramItem.DbType = dbType;
+                    }                    
                     paramCols.Add(paramItem);
                 }
-
-                //OracleParameter[] paramCols = new OracleParameter[] {
-                //    new OracleParameter(":param_StartDate",OracleType.DateTime),
-                //    new OracleParameter(":param_EndDate",OracleType.DateTime)
-                //};
-                //paramCols[0].Value = new DateTime(2022, 9, 7, 0, 0, 0);
-                //paramCols[1].Value = new DateTime(2022, 9, 7, 23, 59, 59);
 
                 txtSQL.Text = sql;
                 var dtData = OracleHelper.ExecuteDataTable(sql, paramCols.ToArray());
                 dataGridViewResult.DataSource = dtData;
+                lblMsg.Text = $"执行完成，共获取[{dtData.Rows.Count}]条记录";
             }
             catch (Exception ex)
             {
+                lblMsg.Text = $"执行异常，{ex.Message}";
                 MessageBox.Show(ex.Message);
             }
         }
@@ -123,6 +122,10 @@ namespace Tools.zhong
             foreach (DataGridViewRow dataRow in dataGridView1.Rows)
             {
                 var paramName = dataRow.Cells["ParamName"].Value?.ToString();
+                if (string.IsNullOrWhiteSpace(paramName))
+                {
+                    continue;
+                }
                 txtSQL.Text = txtSQL.Text.Replace(paramName, ":" + paramName);
             }
         }

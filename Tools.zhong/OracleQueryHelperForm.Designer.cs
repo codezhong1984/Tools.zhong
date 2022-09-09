@@ -34,13 +34,14 @@ namespace Tools.zhong
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewResult = new System.Windows.Forms.DataGridView();
-            this.txtSQL = new System.Windows.Forms.TextBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnParam = new System.Windows.Forms.Button();
             this.ParamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ParamValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ParamType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewResult = new System.Windows.Forms.DataGridView();
+            this.txtSQL = new System.Windows.Forms.TextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblMsg = new System.Windows.Forms.Label();
+            this.btnParam = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,6 +104,30 @@ namespace Tools.zhong
             this.dataGridView1.TabIndex = 32;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // ParamName
+            // 
+            this.ParamName.HeaderText = "参数名";
+            this.ParamName.MinimumWidth = 6;
+            this.ParamName.Name = "ParamName";
+            // 
+            // ParamValue
+            // 
+            this.ParamValue.HeaderText = "参数值";
+            this.ParamValue.MinimumWidth = 6;
+            this.ParamValue.Name = "ParamValue";
+            // 
+            // ParamType
+            // 
+            this.ParamType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ParamType.HeaderText = "参数类型";
+            this.ParamType.Items.AddRange(new object[] {
+            "DateTime",
+            "Varchar",
+            "Varchar2",
+            "Number"});
+            this.ParamType.MinimumWidth = 6;
+            this.ParamType.Name = "ParamType";
+            // 
             // dataGridViewResult
             // 
             this.dataGridViewResult.AllowUserToAddRows = false;
@@ -149,6 +174,7 @@ namespace Tools.zhong
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblMsg);
             this.splitContainer1.Panel2.Controls.Add(this.btnParam);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridViewResult);
@@ -156,6 +182,16 @@ namespace Tools.zhong
             this.splitContainer1.Size = new System.Drawing.Size(1137, 537);
             this.splitContainer1.SplitterDistance = 260;
             this.splitContainer1.TabIndex = 35;
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMsg.ForeColor = System.Drawing.Color.Tomato;
+            this.lblMsg.Location = new System.Drawing.Point(82, 11);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(2, 17);
+            this.lblMsg.TabIndex = 35;
             // 
             // btnParam
             // 
@@ -169,30 +205,6 @@ namespace Tools.zhong
             this.btnParam.Text = "参数化语句";
             this.btnParam.UseVisualStyleBackColor = true;
             this.btnParam.Click += new System.EventHandler(this.btnParam_Click);
-            // 
-            // ParamName
-            // 
-            this.ParamName.HeaderText = "参数名";
-            this.ParamName.MinimumWidth = 6;
-            this.ParamName.Name = "ParamName";
-            // 
-            // ParamValue
-            // 
-            this.ParamValue.HeaderText = "参数值";
-            this.ParamValue.MinimumWidth = 6;
-            this.ParamValue.Name = "ParamValue";
-            // 
-            // ParamType
-            // 
-            this.ParamType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ParamType.HeaderText = "参数类型";
-            this.ParamType.Items.AddRange(new object[] {
-            "DateTime",
-            "Varchar",
-            "Varchar2",
-            "Number"});
-            this.ParamType.MinimumWidth = 6;
-            this.ParamType.Name = "ParamType";
             // 
             // OracleQueryHelperForm
             // 
@@ -234,5 +246,6 @@ namespace Tools.zhong
         private System.Windows.Forms.DataGridViewTextBoxColumn ParamName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ParamValue;
         private System.Windows.Forms.DataGridViewComboBoxColumn ParamType;
+        private System.Windows.Forms.Label lblMsg;
     }
 }
