@@ -46,6 +46,7 @@ namespace Tools.zhong
             this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
@@ -79,7 +80,7 @@ namespace Tools.zhong
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnOracleQueryHelper = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -106,6 +107,7 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnOracleQueryHelper);
             this.tabPage1.Controls.Add(this.btnCreateModelByInput);
             this.tabPage1.Controls.Add(this.btnCreateModelFromDBScript);
             this.tabPage1.Controls.Add(this.btnImport);
@@ -237,49 +239,56 @@ namespace Tools.zhong
             this.tsmDelSyh,
             this.tsmReplaceLine});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 200);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 172);
             // 
             // tsmKg2Dh
             // 
             this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(210, 24);
+            this.tsmKg2Dh.Size = new System.Drawing.Size(183, 24);
             this.tsmKg2Dh.Text = "空格替换为逗号";
             this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
             // 
             // tsmDh2Hh
             // 
             this.tsmDh2Hh.Name = "tsmDh2Hh";
-            this.tsmDh2Hh.Size = new System.Drawing.Size(210, 24);
+            this.tsmDh2Hh.Size = new System.Drawing.Size(183, 24);
             this.tsmDh2Hh.Text = "逗号替换为换行";
             this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
             // 
             // tsmAddDyh
             // 
             this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(210, 24);
+            this.tsmAddDyh.Size = new System.Drawing.Size(183, 24);
             this.tsmAddDyh.Text = "添加单引号";
             this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
             // 
             // tsmAddSyh
             // 
             this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(210, 24);
+            this.tsmAddSyh.Size = new System.Drawing.Size(183, 24);
             this.tsmAddSyh.Text = "添加双引号";
             this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
             // 
             // tsmDelDyh
             // 
             this.tsmDelDyh.Name = "tsmDelDyh";
-            this.tsmDelDyh.Size = new System.Drawing.Size(210, 24);
+            this.tsmDelDyh.Size = new System.Drawing.Size(183, 24);
             this.tsmDelDyh.Text = "删除单引号";
             this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
             // 
             // tsmDelSyh
             // 
             this.tsmDelSyh.Name = "tsmDelSyh";
-            this.tsmDelSyh.Size = new System.Drawing.Size(210, 24);
+            this.tsmDelSyh.Size = new System.Drawing.Size(183, 24);
             this.tsmDelSyh.Text = "删除双引号";
             this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
+            // 
+            // tsmReplaceLine
+            // 
+            this.tsmReplaceLine.Name = "tsmReplaceLine";
+            this.tsmReplaceLine.Size = new System.Drawing.Size(183, 24);
+            this.tsmReplaceLine.Text = "替换回车换行";
+            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
             // 
             // txtTitle
             // 
@@ -691,12 +700,19 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // tsmReplaceLine
+            // btnOracleQueryHelper
             // 
-            this.tsmReplaceLine.Name = "tsmReplaceLine";
-            this.tsmReplaceLine.Size = new System.Drawing.Size(210, 24);
-            this.tsmReplaceLine.Text = "替换回车换行";
-            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
+            this.btnOracleQueryHelper.AutoEllipsis = true;
+            this.btnOracleQueryHelper.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOracleQueryHelper.ForeColor = System.Drawing.Color.Blue;
+            this.btnOracleQueryHelper.Location = new System.Drawing.Point(606, 189);
+            this.btnOracleQueryHelper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOracleQueryHelper.Name = "btnOracleQueryHelper";
+            this.btnOracleQueryHelper.Size = new System.Drawing.Size(161, 29);
+            this.btnOracleQueryHelper.TabIndex = 20;
+            this.btnOracleQueryHelper.Text = "Oracle查询辅助工具";
+            this.btnOracleQueryHelper.UseVisualStyleBackColor = true;
+            this.btnOracleQueryHelper.Click += new System.EventHandler(this.btnOracleQueryHelper_Click);
             // 
             // MainForm
             // 
@@ -775,6 +791,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmDelSyh;
         private System.Windows.Forms.Button btnCreateModelByInput;
         private System.Windows.Forms.ToolStripMenuItem tsmReplaceLine;
+        private System.Windows.Forms.Button btnOracleQueryHelper;
     }
 }
 

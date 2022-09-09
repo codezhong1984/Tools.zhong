@@ -629,7 +629,7 @@ namespace Tools.zhong
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(i=>i.Trim());
+                .Select(i => i.Trim());
             txtOutput.Text = string.Join(",", inputTexts);
             tabControl1.SelectedIndex = 1;
         }
@@ -644,6 +644,10 @@ namespace Tools.zhong
             }
         }
 
-        
+        private void btnOracleQueryHelper_Click(object sender, EventArgs e)
+        {
+            OracleQueryHelperForm frm = new OracleQueryHelperForm();
+            frm.Show();
+        }
     }
 }
