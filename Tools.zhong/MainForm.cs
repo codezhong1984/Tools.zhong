@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using System.Text.RegularExpressions;
 using System.IO;
+using Tools.zhong.UtilHelper;
 
 namespace Tools.zhong
 {
@@ -79,6 +80,7 @@ namespace Tools.zhong
             }
 
             saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            cbEncodeType.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -648,6 +650,30 @@ namespace Tools.zhong
         {
             OracleQueryHelperForm frm = new OracleQueryHelperForm();
             frm.Show();
+        }
+
+        private void tsmNewLine2DyhIn_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, ",");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim());
+            txtOutput.Text = "'" + string.Join("','", inputTexts) + "'";
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void btnEncode_Click(object sender, EventArgs e)
+        {
+            txtOutput4.Text = cbEncodeType.SelectedIndex == 0
+                ? DESUtil.DESEncrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
+                : Base64Util.EncodeBase64(txtInput4.Text.Trim());
+        }
+
+        private void btnDecode_Click(object sender, EventArgs e)
+        {
+            txtOutput4.Text = cbEncodeType.SelectedIndex == 0
+                ? DESUtil.DESDecrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
+                : Base64Util.DecodeBase64(txtInput4.Text.Trim());
         }
     }
 }

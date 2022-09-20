@@ -84,7 +84,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilHelper\Base64Util.cs" />
     <Compile Include="UtilHelper\ConfigHelper.cs" />
+    <Compile Include="UtilHelper\DESUtil.cs" />
     <Compile Include="UtilHelper\ModelFromDBHelper.cs" />
     <EmbeddedResource Include="OracleQueryHelperForm.resx">
       <DependentUpon>OracleQueryHelperForm.cs</DependentUpon>

@@ -32,6 +32,7 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnOracleQueryHelper = new System.Windows.Forms.Button();
             this.btnCreateModelByInput = new System.Windows.Forms.Button();
             this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
@@ -42,11 +43,15 @@ namespace Tools.zhong
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmNewLine2DyhIn = new System.Windows.Forms.ToolStripMenuItem();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
@@ -78,15 +83,26 @@ namespace Tools.zhong
             this.label2 = new System.Windows.Forms.Label();
             this.btnCreateInsert = new System.Windows.Forms.Button();
             this.txtInput3 = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.cbEncodeType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtKey4 = new System.Windows.Forms.TextBox();
+            this.btnDecode = new System.Windows.Forms.Button();
+            this.btnEncode = new System.Windows.Forms.Button();
+            this.txtOutput4 = new System.Windows.Forms.TextBox();
+            this.txtInput4 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btnOracleQueryHelper = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,6 +114,7 @@ namespace Tools.zhong
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(-3, 5);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
@@ -128,6 +145,20 @@ namespace Tools.zhong
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnOracleQueryHelper
+            // 
+            this.btnOracleQueryHelper.AutoEllipsis = true;
+            this.btnOracleQueryHelper.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOracleQueryHelper.ForeColor = System.Drawing.Color.Blue;
+            this.btnOracleQueryHelper.Location = new System.Drawing.Point(606, 189);
+            this.btnOracleQueryHelper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOracleQueryHelper.Name = "btnOracleQueryHelper";
+            this.btnOracleQueryHelper.Size = new System.Drawing.Size(161, 29);
+            this.btnOracleQueryHelper.TabIndex = 20;
+            this.btnOracleQueryHelper.Text = "Oracle查询辅助工具";
+            this.btnOracleQueryHelper.UseVisualStyleBackColor = true;
+            this.btnOracleQueryHelper.Click += new System.EventHandler(this.btnOracleQueryHelper_Click);
             // 
             // btnCreateModelByInput
             // 
@@ -233,62 +264,88 @@ namespace Tools.zhong
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmKg2Dh,
             this.tsmDh2Hh,
+            this.toolStripSeparator2,
             this.tsmAddDyh,
             this.tsmAddSyh,
+            this.toolStripSeparator1,
             this.tsmDelDyh,
             this.tsmDelSyh,
-            this.tsmReplaceLine});
+            this.toolStripSeparator3,
+            this.tsmReplaceLine,
+            this.tsmNewLine2DyhIn});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 172);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(275, 214);
             // 
             // tsmKg2Dh
             // 
             this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(183, 24);
+            this.tsmKg2Dh.Size = new System.Drawing.Size(274, 24);
             this.tsmKg2Dh.Text = "空格替换为逗号";
             this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
             // 
             // tsmDh2Hh
             // 
             this.tsmDh2Hh.Name = "tsmDh2Hh";
-            this.tsmDh2Hh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDh2Hh.Size = new System.Drawing.Size(274, 24);
             this.tsmDh2Hh.Text = "逗号替换为换行";
             this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(271, 6);
             // 
             // tsmAddDyh
             // 
             this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddDyh.Size = new System.Drawing.Size(274, 24);
             this.tsmAddDyh.Text = "添加单引号";
             this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
             // 
             // tsmAddSyh
             // 
             this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmAddSyh.Size = new System.Drawing.Size(274, 24);
             this.tsmAddSyh.Text = "添加双引号";
             this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(271, 6);
             // 
             // tsmDelDyh
             // 
             this.tsmDelDyh.Name = "tsmDelDyh";
-            this.tsmDelDyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelDyh.Size = new System.Drawing.Size(274, 24);
             this.tsmDelDyh.Text = "删除单引号";
             this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
             // 
             // tsmDelSyh
             // 
             this.tsmDelSyh.Name = "tsmDelSyh";
-            this.tsmDelSyh.Size = new System.Drawing.Size(183, 24);
+            this.tsmDelSyh.Size = new System.Drawing.Size(274, 24);
             this.tsmDelSyh.Text = "删除双引号";
             this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(271, 6);
             // 
             // tsmReplaceLine
             // 
             this.tsmReplaceLine.Name = "tsmReplaceLine";
-            this.tsmReplaceLine.Size = new System.Drawing.Size(183, 24);
+            this.tsmReplaceLine.Size = new System.Drawing.Size(274, 24);
             this.tsmReplaceLine.Text = "替换回车换行";
             this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
+            // 
+            // tsmNewLine2DyhIn
+            // 
+            this.tsmNewLine2DyhIn.Name = "tsmNewLine2DyhIn";
+            this.tsmNewLine2DyhIn.Size = new System.Drawing.Size(274, 24);
+            this.tsmNewLine2DyhIn.Text = "回车换行To单引号（SQLIn）";
+            this.tsmNewLine2DyhIn.Click += new System.EventHandler(this.tsmNewLine2DyhIn_Click);
             // 
             // txtTitle
             // 
@@ -695,24 +752,135 @@ namespace Tools.zhong
             this.txtInput3.Size = new System.Drawing.Size(1125, 175);
             this.txtInput3.TabIndex = 0;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.txtInput4);
+            this.tabPage4.Controls.Add(this.cbEncodeType);
+            this.tabPage4.Controls.Add(this.label9);
+            this.tabPage4.Controls.Add(this.label8);
+            this.tabPage4.Controls.Add(this.label7);
+            this.tabPage4.Controls.Add(this.label6);
+            this.tabPage4.Controls.Add(this.txtKey4);
+            this.tabPage4.Controls.Add(this.btnDecode);
+            this.tabPage4.Controls.Add(this.btnEncode);
+            this.tabPage4.Controls.Add(this.txtOutput4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "加密解密工具";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // cbEncodeType
+            // 
+            this.cbEncodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEncodeType.FormattingEnabled = true;
+            this.cbEncodeType.Items.AddRange(new object[] {
+            "DES",
+            "BASE64"});
+            this.cbEncodeType.Location = new System.Drawing.Point(296, 187);
+            this.cbEncodeType.Name = "cbEncodeType";
+            this.cbEncodeType.Size = new System.Drawing.Size(121, 23);
+            this.cbEncodeType.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(207, 189);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 15);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "加密类型：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 236);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(52, 15);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "输出：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "输入：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 189);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "密钥：";
+            // 
+            // txtKey4
+            // 
+            this.txtKey4.Location = new System.Drawing.Point(65, 186);
+            this.txtKey4.MaxLength = 8;
+            this.txtKey4.Name = "txtKey4";
+            this.txtKey4.Size = new System.Drawing.Size(102, 25);
+            this.txtKey4.TabIndex = 4;
+            this.txtKey4.Text = "PTS20228";
+            // 
+            // btnDecode
+            // 
+            this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDecode.ForeColor = System.Drawing.Color.Blue;
+            this.btnDecode.Location = new System.Drawing.Point(1044, 184);
+            this.btnDecode.Name = "btnDecode";
+            this.btnDecode.Size = new System.Drawing.Size(75, 25);
+            this.btnDecode.TabIndex = 3;
+            this.btnDecode.Text = "解密";
+            this.btnDecode.UseVisualStyleBackColor = true;
+            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
+            // 
+            // btnEncode
+            // 
+            this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEncode.ForeColor = System.Drawing.Color.Blue;
+            this.btnEncode.Location = new System.Drawing.Point(952, 186);
+            this.btnEncode.Name = "btnEncode";
+            this.btnEncode.Size = new System.Drawing.Size(75, 25);
+            this.btnEncode.TabIndex = 2;
+            this.btnEncode.Text = "加密";
+            this.btnEncode.UseVisualStyleBackColor = true;
+            this.btnEncode.Click += new System.EventHandler(this.btnEncode_Click);
+            // 
+            // txtOutput4
+            // 
+            this.txtOutput4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutput4.Location = new System.Drawing.Point(61, 236);
+            this.txtOutput4.Multiline = true;
+            this.txtOutput4.Name = "txtOutput4";
+            this.txtOutput4.Size = new System.Drawing.Size(1067, 366);
+            this.txtOutput4.TabIndex = 1;
+            // 
+            // txtInput4
+            // 
+            this.txtInput4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInput4.Location = new System.Drawing.Point(60, 16);
+            this.txtInput4.Multiline = true;
+            this.txtInput4.Name = "txtInput4";
+            this.txtInput4.Size = new System.Drawing.Size(1070, 151);
+            this.txtInput4.TabIndex = 0;
+            this.txtInput4.Text = "PTS1020220101000000";
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
-            // 
-            // btnOracleQueryHelper
-            // 
-            this.btnOracleQueryHelper.AutoEllipsis = true;
-            this.btnOracleQueryHelper.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOracleQueryHelper.ForeColor = System.Drawing.Color.Blue;
-            this.btnOracleQueryHelper.Location = new System.Drawing.Point(606, 189);
-            this.btnOracleQueryHelper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnOracleQueryHelper.Name = "btnOracleQueryHelper";
-            this.btnOracleQueryHelper.Size = new System.Drawing.Size(161, 29);
-            this.btnOracleQueryHelper.TabIndex = 20;
-            this.btnOracleQueryHelper.Text = "Oracle查询辅助工具";
-            this.btnOracleQueryHelper.UseVisualStyleBackColor = true;
-            this.btnOracleQueryHelper.Click += new System.EventHandler(this.btnOracleQueryHelper_Click);
             // 
             // MainForm
             // 
@@ -735,6 +903,8 @@ namespace Tools.zhong
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -792,6 +962,21 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnCreateModelByInput;
         private System.Windows.Forms.ToolStripMenuItem tsmReplaceLine;
         private System.Windows.Forms.Button btnOracleQueryHelper;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem tsmNewLine2DyhIn;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtKey4;
+        private System.Windows.Forms.Button btnDecode;
+        private System.Windows.Forms.Button btnEncode;
+        private System.Windows.Forms.TextBox txtOutput4;
+        private System.Windows.Forms.TextBox txtInput4;
+        private System.Windows.Forms.ComboBox cbEncodeType;
+        private System.Windows.Forms.Label label9;
     }
 }
 

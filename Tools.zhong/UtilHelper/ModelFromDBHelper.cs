@@ -12,7 +12,7 @@ namespace Tools.zhong.UtilHelper
     public class ModelFromDBHelper
     {
         public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false,
-            string ns = "DBModel", string enumCode = null)
+            string ns = "DBModel", string enumCode = null, bool EnableMapperTableName = false)
         {
             if (listColumns == null || listColumns.Count == 0)
             {
@@ -20,9 +20,13 @@ namespace Tools.zhong.UtilHelper
             }
             StringBuilder sbResult = new StringBuilder();
             sbResult.AppendLine("using System;");
-            if (addDisplayName)
+            if (addDisplayName || EnableMapperTableName)
             {
                 sbResult.AppendLine("using System.ComponentModel;");
+            }
+            if (EnableMapperTableName)
+            {
+                sbResult.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
             }
             sbResult.AppendLine();
             sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(ns) ? "DBModel" : ns)}");
@@ -37,7 +41,10 @@ namespace Tools.zhong.UtilHelper
             sbResult.AppendLine("    /// " + listColumns[0].TableComment);
             sbResult.AppendLine("    /// 创建于 " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             sbResult.AppendLine("    /// </summary>");
-
+            if (EnableMapperTableName)
+            {
+                sbResult.AppendLine("    [Table(\"" + ToUperFirstChar(listColumns[0].TableName) + "\")]");
+            }
             sbResult.AppendLine("    public class " + ToUperFirstChar(listColumns[0].TableName));
             sbResult.AppendLine("    {");
 
@@ -88,6 +95,10 @@ namespace Tools.zhong.UtilHelper
                 if (addDisplayName)
                 {
                     sbResult.AppendLine("        [DisplayName(\"" + item.FieldRemarks + "\")]");
+                }
+                if (EnableMapperTableName && i == 1)
+                {
+                    sbResult.AppendLine("        [Key]");
                 }
                 var fieldCode = $"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
                               + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"

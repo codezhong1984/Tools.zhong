@@ -14,6 +14,7 @@ namespace Tools.zhong
 {
     public partial class DbTableForm : Form
     {
+        private bool EnableMapperTableName = true;
         public string CodeText { get; set; }
         public DbTableForm()
         {
@@ -119,7 +120,7 @@ namespace Tools.zhong
 
             var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
             var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim());
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), null, EnableMapperTableName);
             return code;
         }
 
@@ -137,7 +138,7 @@ namespace Tools.zhong
 
             var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, tableName));
             var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim());
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), null, EnableMapperTableName);
             return code;
         }
 
@@ -155,7 +156,7 @@ namespace Tools.zhong
             var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
             var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
             var enumCode = GetEnumCodeForMySQL(tableName);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), enumCode);
+            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), enumCode, EnableMapperTableName);
             return code;
         }
 
@@ -183,7 +184,7 @@ namespace Tools.zhong
             {
                 if (cbDBType.Text == "ORACLE")
                 {
-                    string sql = "select table_name from user_tables ";
+                    string sql = "select table_name from user_tables order by table_name ";
                     var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
                     cbTableName.DataSource = dtData;
                     cbTableName.DisplayMember = "table_name";
@@ -193,7 +194,7 @@ namespace Tools.zhong
                 }
                 else if (cbDBType.Text == "SQLSERVER")
                 {
-                    string sql = "select name table_name from sys.tables ";
+                    string sql = "select name table_name from sys.tables  order by name ";
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
                     cbTableName.DataSource = dtData;
                     cbTableName.DisplayMember = "table_name";
@@ -201,7 +202,7 @@ namespace Tools.zhong
                 }
                 else if (cbDBType.Text == "MySQL")
                 {
-                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase ";
+                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name  ";
                     var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                     cbTableName.DataSource = dtData;
                     cbTableName.DisplayMember = "table_name";
@@ -321,6 +322,11 @@ namespace Tools.zhong
             {
                 cbTableName.SetItemChecked(i, cbSelectAll.Checked);
             }
+        }
+
+        private void cbCreateTbName_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableMapperTableName = cbCreateTbName.Checked;
         }
     }
 }
