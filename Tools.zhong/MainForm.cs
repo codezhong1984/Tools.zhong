@@ -230,7 +230,7 @@ namespace Tools.zhong
         {
             txtOuput3.Text = "";
             string inputText = txtInput3.Text.Trim();
-            if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
+            if (inputText.IndexOf(",") != -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
                 inputText = inputText.Replace(System.Environment.NewLine, ",");
             }
@@ -250,11 +250,12 @@ namespace Tools.zhong
             for (int i = 0; i < inputVals.Length; i++)
             {
                 var inputItem = inputVals[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
-                sbColumns.Append(string.Concat(i == 0 ? "" : ", ", inputItem,
-                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine : ""));
+                var newLineFlag = (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 && rowsPerCount != inputVals.Length;
+                sbColumns.Append(string.Concat(i == 0 ? "" : ", ",
+                    inputItem, newLineFlag ? System.Environment.NewLine : ""));
 
                 sbInsertParamColumns.Append(string.Concat(i == 0 ? "" : ", ", SQL_PARAM_PREFIX, inputItem.TrimStart(),
-                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine : ""));
+                    newLineFlag ? System.Environment.NewLine : ""));
             }
 
             var outText = INSERT_TEMPLATE.Replace("{#TABLE_NAME}", tableName)
@@ -269,7 +270,7 @@ namespace Tools.zhong
         {
             txtOuput3.Text = "";
             string inputText = txtInput3.Text.Trim();
-            if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
+            if (inputText.IndexOf(",") != -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
                 inputText = inputText.Replace(System.Environment.NewLine, ",");
             }
@@ -297,7 +298,7 @@ namespace Tools.zhong
                 var inputItem = inputVals[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
                 sbUpdateColumns.Append(string.Concat(i == 0 ? "" : ", ",
                     inputItem, " = ", SQL_PARAM_PREFIX,
-                    inputItem.TrimStart(), (i + 1) % rowsPerCount == 0 ? System.Environment.NewLine + "\t" : ""));
+                    inputItem.TrimStart(), (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "\t" : ""));
             }
 
             string[] keys = key.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -381,7 +382,7 @@ namespace Tools.zhong
             {
                 if (cbDBType.Text == "ORACLE")
                 {
-                    string sql = "select table_name from user_tables ";
+                    string sql = "select table_name from user_tables order by table_name";
                     var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
                     txtTableName3.DataSource = dtData;
                     txtTableName3.DisplayMember = "table_name";
@@ -389,7 +390,7 @@ namespace Tools.zhong
                 }
                 else if (cbDBType.Text == "SQLSERVER")
                 {
-                    string sql = "select name table_name from sys.tables ";
+                    string sql = "select name table_name from sys.tables order by name";
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
                     txtTableName3.DataSource = dtData;
                     txtTableName3.DisplayMember = "table_name";
@@ -397,7 +398,7 @@ namespace Tools.zhong
                 }
                 else if (cbDBType.Text == "MySQL")
                 {
-                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase ";
+                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name";
                     var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                     txtTableName3.DataSource = dtData;
                     txtTableName3.DisplayMember = "table_name";
@@ -549,8 +550,21 @@ namespace Tools.zhong
 
         }
 
+        private void btnNoNewLine3_Click(object sender, EventArgs e)
+        {
+            txtPerColNum.Text = "-1";
+            txtPerColNum.Enabled = false;
+        }
+
+        private void btnDefaultNewLine3_Click(object sender, EventArgs e)
+        {
+            txtPerColNum.Text = "8";
+            txtPerColNum.Enabled = true;
+        }
 
         #endregion
+
+        #region 快捷替换操作
 
         private void tsmAddDyh_Click(object sender, EventArgs e)
         {
@@ -594,6 +608,47 @@ namespace Tools.zhong
             tabControl1.SelectedIndex = 1;
         }
 
+        private void tsmDyhzy_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            txtOutput.Text = "\'" + ReplaceSpecialCharSQL(templ) + "\'";
+            tabControl1.SelectedIndex = 1;
+        }
+        private string ReplaceSpecialCharSQL(string srcString, char replaceChar = '\'')
+        {
+            if (string.IsNullOrWhiteSpace(srcString))
+            {
+                return srcString;
+            }
+            char[] specialChars = new char[] { '\'', '\"' };
+            foreach (var item in specialChars)
+            {
+                srcString = srcString.Replace(item.ToString(), replaceChar.ToString() + item);
+            }
+            return srcString;
+        }
+
+        private void tsmSyhZy_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            txtOutput.Text = "\"" + ReplaceSpecialChar(templ) + "\"";
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private string ReplaceSpecialChar(string srcString, char replaceChar = '\\')
+        {
+            if (string.IsNullOrWhiteSpace(srcString))
+            {
+                return srcString;
+            }
+            char[] specialChars = new char[] { '\'', '\"', '\\' };
+            foreach (var item in specialChars)
+            {
+                srcString = srcString.Replace(item.ToString(), replaceChar.ToString() + item);
+            }
+            return srcString;
+        }
+
         private void tsmDelSyh_Click(object sender, EventArgs e)
         {
             var templ = txtTempl.Text.Trim();
@@ -622,6 +677,7 @@ namespace Tools.zhong
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputTexts = inputTexts.Select(i => i.Trim()).ToArray();
             txtOutput.Text = string.Join(System.Environment.NewLine, inputTexts);
             tabControl1.SelectedIndex = 1;
         }
@@ -635,6 +691,35 @@ namespace Tools.zhong
             txtOutput.Text = string.Join(",", inputTexts);
             tabControl1.SelectedIndex = 1;
         }
+
+        private void tsmNewLine2DyhIn_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, ",");
+            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim());
+            txtOutput.Text = "'" + string.Join("','", inputTexts) + "'";
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmAddComma_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim());
+            txtOutput.Text = string.Join("," + System.Environment.NewLine, inputTexts);
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmDelComma_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim().TrimEnd(','));
+            txtOutput.Text = string.Join(System.Environment.NewLine, inputTexts);
+            tabControl1.SelectedIndex = 1;
+        }
+        #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
         {
@@ -652,16 +737,7 @@ namespace Tools.zhong
             frm.Show();
         }
 
-        private void tsmNewLine2DyhIn_Click(object sender, EventArgs e)
-        {
-            var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(System.Environment.NewLine, ",");
-            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(i => i.Trim());
-            txtOutput.Text = "'" + string.Join("','", inputTexts) + "'";
-            tabControl1.SelectedIndex = 1;
-        }
-
+        #region 加密解密
         private void btnEncode_Click(object sender, EventArgs e)
         {
             txtOutput4.Text = cbEncodeType.SelectedIndex == 0
@@ -675,5 +751,7 @@ namespace Tools.zhong
                 ? DESUtil.DESDecrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
                 : Base64Util.DecodeBase64(txtInput4.Text.Trim());
         }
+
+        #endregion        
     }
 }
