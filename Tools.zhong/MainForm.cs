@@ -212,11 +212,20 @@ namespace Tools.zhong
             StringBuilder sbColumns = new StringBuilder();
 
             string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
             for (int i = 0; i < inputVals.Length; i++)
             {
-                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
-                sbColumns.Append(string.Concat(i == 0 ? "" : ", ", inputItem,
-                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "\t" : ""));
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                sbColumns.Append(string.Concat(i == 0 ? "" : " ,", inputItem,
+                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "" : ""));
             }
 
             var outText = SELECT_TEMPLATE.Replace("{#TABLE_NAME}", tableName)
@@ -230,7 +239,7 @@ namespace Tools.zhong
         {
             txtOuput3.Text = "";
             string inputText = txtInput3.Text.Trim();
-            if (inputText.IndexOf(",") != -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
+            if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
                 inputText = inputText.Replace(System.Environment.NewLine, ",");
             }
@@ -247,14 +256,23 @@ namespace Tools.zhong
             StringBuilder sbInsertParamColumns = new StringBuilder();
 
             string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
             for (int i = 0; i < inputVals.Length; i++)
             {
-                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
                 var newLineFlag = (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 && rowsPerCount != inputVals.Length;
-                sbColumns.Append(string.Concat(i == 0 ? "" : ", ",
+                sbColumns.Append(string.Concat(i == 0 ? " " : " ,",
                     inputItem, newLineFlag ? System.Environment.NewLine : ""));
 
-                sbInsertParamColumns.Append(string.Concat(i == 0 ? "" : ", ", SQL_PARAM_PREFIX, inputItem.TrimStart(),
+                sbInsertParamColumns.Append(string.Concat(i == 0 ? "" : ",", SQL_PARAM_PREFIX, inputItem.TrimStart(),
                     newLineFlag ? System.Environment.NewLine : ""));
             }
 
@@ -293,19 +311,37 @@ namespace Tools.zhong
             StringBuilder sbKeyColumns = new StringBuilder();
 
             string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
             for (int i = 0; i < inputVals.Length; i++)
             {
-                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                var newLineFlag = (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 && rowsPerCount != inputVals.Length;
                 sbUpdateColumns.Append(string.Concat(i == 0 ? "" : ", ",
                     inputItem, " = ", SQL_PARAM_PREFIX,
-                    inputItem.TrimStart(), (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "\t" : ""));
+                    inputItem.TrimStart(), newLineFlag ? System.Environment.NewLine + "\t" : ""));
             }
 
             string[] keys = key.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
             for (int i = 0; i < keys.Length; i++)
             {
-                var inputItem = keys[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
-
+                var inputItem = keys[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
                 sbKeyColumns.Append(string.Concat(i == 0 ? "" : string.Concat(System.Environment.NewLine, "\tAND "),
                     inputItem, " = ", SQL_PARAM_PREFIX,
                     inputItem.TrimStart()));
@@ -340,9 +376,18 @@ namespace Tools.zhong
             StringBuilder sbKeyColumns = new StringBuilder();
 
             string[] keys = key.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
             for (int i = 0; i < keys.Length; i++)
             {
-                var inputItem = keys[i].Replace(System.Environment.NewLine, "").Replace(",", "").Replace("，", "").Replace(";", "");
+                var inputItem = keys[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
                 sbKeyColumns.Append(string.Concat(i == 0 ? "" : " AND ",
                     inputItem, " = ", SQL_PARAM_PREFIX,
                     inputItem.TrimStart()));
@@ -719,6 +764,16 @@ namespace Tools.zhong
             txtOutput.Text = string.Join(System.Environment.NewLine, inputTexts);
             tabControl1.SelectedIndex = 1;
         }
+
+        private void tsmCustomLine_Click(object sender, EventArgs e)
+        {
+            PerNewLineForm frm = new PerNewLineForm(txtTempl.Text.Trim());
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtOutput.Text = frm.InputText;
+                tabControl1.SelectedIndex = 1;
+            }
+        }
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
@@ -752,6 +807,13 @@ namespace Tools.zhong
                 : Base64Util.DecodeBase64(txtInput4.Text.Trim());
         }
 
-        #endregion        
+
+        #endregion
+
+        private void btnCopyToInput_Click(object sender, EventArgs e)
+        {
+            txtTempl.Text = txtOutput.Text;
+            tabControl1.SelectedIndex = 0;
+        }
     }
 }

@@ -40,6 +40,23 @@ namespace Tools.zhong
             this.btnClear = new System.Windows.Forms.Button();
             this.btnRemoveCol = new System.Windows.Forms.Button();
             this.txtTempl = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmNewLine2DyhIn = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmDyhzy = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSyhZy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAddComma = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDelComma = new System.Windows.Forms.ToolStripMenuItem();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
@@ -51,11 +68,25 @@ namespace Tools.zhong
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txtInput4 = new System.Windows.Forms.TextBox();
+            this.cbEncodeType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtKey4 = new System.Windows.Forms.TextBox();
+            this.btnDecode = new System.Windows.Forms.Button();
+            this.btnEncode = new System.Windows.Forms.Button();
+            this.txtOutput4 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnLoadFromDB = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnDefaultNewLine3 = new System.Windows.Forms.Button();
+            this.btnNoNewLine3 = new System.Windows.Forms.Button();
             this.txtTableName3 = new System.Windows.Forms.ComboBox();
             this.btnPaste = new System.Windows.Forms.Button();
             this.btnCopy3 = new System.Windows.Forms.Button();
-            this.btnLoadFromDB = new System.Windows.Forms.Button();
             this.cbDBType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtKey3 = new System.Windows.Forms.TextBox();
@@ -71,47 +102,19 @@ namespace Tools.zhong
             this.label2 = new System.Windows.Forms.Label();
             this.btnCreateInsert = new System.Windows.Forms.Button();
             this.txtInput3 = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.txtInput4 = new System.Windows.Forms.TextBox();
-            this.cbEncodeType = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtKey4 = new System.Windows.Forms.TextBox();
-            this.btnDecode = new System.Windows.Forms.Button();
-            this.btnEncode = new System.Windows.Forms.Button();
-            this.txtOutput4 = new System.Windows.Forms.TextBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btnNoNewLine3 = new System.Windows.Forms.Button();
-            this.btnDefaultNewLine3 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmNewLine2DyhIn = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmDyhzy = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmSyhZy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmAddComma = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmDelComma = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCopyToInput = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -266,6 +269,135 @@ namespace Tools.zhong
             this.txtTempl.Size = new System.Drawing.Size(1122, 130);
             this.txtTempl.TabIndex = 7;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmKg2Dh,
+            this.tsmDh2Hh,
+            this.toolStripSeparator2,
+            this.tsmAddDyh,
+            this.tsmAddSyh,
+            this.tsmNewLine2DyhIn,
+            this.toolStripSeparator4,
+            this.tsmDyhzy,
+            this.tsmSyhZy,
+            this.toolStripSeparator1,
+            this.tsmDelDyh,
+            this.tsmDelSyh,
+            this.toolStripSeparator3,
+            this.tsmReplaceLine,
+            this.tsmAddComma,
+            this.tsmDelComma,
+            this.toolStripSeparator5,
+            this.tsmCustomLine});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 346);
+            // 
+            // tsmKg2Dh
+            // 
+            this.tsmKg2Dh.Name = "tsmKg2Dh";
+            this.tsmKg2Dh.Size = new System.Drawing.Size(243, 24);
+            this.tsmKg2Dh.Text = "空格>逗号";
+            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
+            // 
+            // tsmDh2Hh
+            // 
+            this.tsmDh2Hh.Name = "tsmDh2Hh";
+            this.tsmDh2Hh.Size = new System.Drawing.Size(243, 24);
+            this.tsmDh2Hh.Text = "逗号>换行";
+            this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmAddDyh
+            // 
+            this.tsmAddDyh.Name = "tsmAddDyh";
+            this.tsmAddDyh.Size = new System.Drawing.Size(243, 24);
+            this.tsmAddDyh.Text = "添加单引号（逗号结尾）";
+            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
+            // 
+            // tsmAddSyh
+            // 
+            this.tsmAddSyh.Name = "tsmAddSyh";
+            this.tsmAddSyh.Size = new System.Drawing.Size(243, 24);
+            this.tsmAddSyh.Text = "添加双引号（逗号结尾）";
+            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
+            // 
+            // tsmNewLine2DyhIn
+            // 
+            this.tsmNewLine2DyhIn.Name = "tsmNewLine2DyhIn";
+            this.tsmNewLine2DyhIn.Size = new System.Drawing.Size(243, 24);
+            this.tsmNewLine2DyhIn.Text = "SQLIN";
+            this.tsmNewLine2DyhIn.Click += new System.EventHandler(this.tsmNewLine2DyhIn_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmDyhzy
+            // 
+            this.tsmDyhzy.Name = "tsmDyhzy";
+            this.tsmDyhzy.Size = new System.Drawing.Size(243, 24);
+            this.tsmDyhzy.Text = "添加单引号(\'转义SQL)";
+            this.tsmDyhzy.Click += new System.EventHandler(this.tsmDyhzy_Click);
+            // 
+            // tsmSyhZy
+            // 
+            this.tsmSyhZy.Name = "tsmSyhZy";
+            this.tsmSyhZy.Size = new System.Drawing.Size(243, 24);
+            this.tsmSyhZy.Text = "添加双引号（\\转义C#)";
+            this.tsmSyhZy.Click += new System.EventHandler(this.tsmSyhZy_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmDelDyh
+            // 
+            this.tsmDelDyh.Name = "tsmDelDyh";
+            this.tsmDelDyh.Size = new System.Drawing.Size(243, 24);
+            this.tsmDelDyh.Text = "删除单引号";
+            this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
+            // 
+            // tsmDelSyh
+            // 
+            this.tsmDelSyh.Name = "tsmDelSyh";
+            this.tsmDelSyh.Size = new System.Drawing.Size(243, 24);
+            this.tsmDelSyh.Text = "删除双引号";
+            this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmReplaceLine
+            // 
+            this.tsmReplaceLine.Name = "tsmReplaceLine";
+            this.tsmReplaceLine.Size = new System.Drawing.Size(243, 24);
+            this.tsmReplaceLine.Text = "去除回车换行";
+            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
+            // 
+            // tsmAddComma
+            // 
+            this.tsmAddComma.Name = "tsmAddComma";
+            this.tsmAddComma.Size = new System.Drawing.Size(243, 24);
+            this.tsmAddComma.Text = "结尾添加逗号";
+            this.tsmAddComma.Click += new System.EventHandler(this.tsmAddComma_Click);
+            // 
+            // tsmDelComma
+            // 
+            this.tsmDelComma.Name = "tsmDelComma";
+            this.tsmDelComma.Size = new System.Drawing.Size(243, 24);
+            this.tsmDelComma.Text = "结尾去除逗号";
+            this.tsmDelComma.Click += new System.EventHandler(this.tsmDelComma_Click);
+            // 
             // txtTitle
             // 
             this.txtTitle.AutoSize = true;
@@ -334,6 +466,7 @@ namespace Tools.zhong
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnCopyToInput);
             this.tabPage2.Controls.Add(this.btnOpenPath2);
             this.tabPage2.Controls.Add(this.btnExportToFile2);
             this.tabPage2.Controls.Add(this.button1);
@@ -352,7 +485,7 @@ namespace Tools.zhong
             // 
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
-            this.btnOpenPath2.Location = new System.Drawing.Point(781, 6);
+            this.btnOpenPath2.Location = new System.Drawing.Point(611, 6);
             this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenPath2.Name = "btnOpenPath2";
             this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
@@ -365,7 +498,7 @@ namespace Tools.zhong
             // 
             this.btnExportToFile2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportToFile2.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportToFile2.Location = new System.Drawing.Point(919, 5);
+            this.btnExportToFile2.Location = new System.Drawing.Point(750, 5);
             this.btnExportToFile2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExportToFile2.Name = "btnExportToFile2";
             this.btnExportToFile2.Size = new System.Drawing.Size(103, 26);
@@ -378,12 +511,12 @@ namespace Tools.zhong
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Blue;
-            this.button1.Location = new System.Drawing.Point(1036, 5);
+            this.button1.Location = new System.Drawing.Point(997, 5);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 26);
+            this.button1.Size = new System.Drawing.Size(114, 26);
             this.button1.TabIndex = 6;
-            this.button1.Text = "返 回";
+            this.button1.Text = "返回至输入";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -410,6 +543,131 @@ namespace Tools.zhong
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtOutput.Size = new System.Drawing.Size(1123, 564);
             this.txtOutput.TabIndex = 5;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.txtInput4);
+            this.tabPage4.Controls.Add(this.cbEncodeType);
+            this.tabPage4.Controls.Add(this.label9);
+            this.tabPage4.Controls.Add(this.label8);
+            this.tabPage4.Controls.Add(this.label7);
+            this.tabPage4.Controls.Add(this.label6);
+            this.tabPage4.Controls.Add(this.txtKey4);
+            this.tabPage4.Controls.Add(this.btnDecode);
+            this.tabPage4.Controls.Add(this.btnEncode);
+            this.tabPage4.Controls.Add(this.txtOutput4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "加密解密";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // txtInput4
+            // 
+            this.txtInput4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInput4.Location = new System.Drawing.Point(60, 16);
+            this.txtInput4.Multiline = true;
+            this.txtInput4.Name = "txtInput4";
+            this.txtInput4.Size = new System.Drawing.Size(1070, 151);
+            this.txtInput4.TabIndex = 0;
+            this.txtInput4.Text = "PTS1020220101000000";
+            // 
+            // cbEncodeType
+            // 
+            this.cbEncodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEncodeType.FormattingEnabled = true;
+            this.cbEncodeType.Items.AddRange(new object[] {
+            "DES",
+            "BASE64"});
+            this.cbEncodeType.Location = new System.Drawing.Point(296, 187);
+            this.cbEncodeType.Name = "cbEncodeType";
+            this.cbEncodeType.Size = new System.Drawing.Size(121, 23);
+            this.cbEncodeType.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(207, 189);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 15);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "加密类型：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 236);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(52, 15);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "输出：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "输入：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 189);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "密钥：";
+            // 
+            // txtKey4
+            // 
+            this.txtKey4.Location = new System.Drawing.Point(65, 186);
+            this.txtKey4.MaxLength = 8;
+            this.txtKey4.Name = "txtKey4";
+            this.txtKey4.Size = new System.Drawing.Size(102, 25);
+            this.txtKey4.TabIndex = 4;
+            this.txtKey4.Text = "PTS20228";
+            // 
+            // btnDecode
+            // 
+            this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDecode.ForeColor = System.Drawing.Color.Blue;
+            this.btnDecode.Location = new System.Drawing.Point(1044, 184);
+            this.btnDecode.Name = "btnDecode";
+            this.btnDecode.Size = new System.Drawing.Size(75, 25);
+            this.btnDecode.TabIndex = 3;
+            this.btnDecode.Text = "解密";
+            this.btnDecode.UseVisualStyleBackColor = true;
+            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
+            // 
+            // btnEncode
+            // 
+            this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEncode.ForeColor = System.Drawing.Color.Blue;
+            this.btnEncode.Location = new System.Drawing.Point(952, 186);
+            this.btnEncode.Name = "btnEncode";
+            this.btnEncode.Size = new System.Drawing.Size(75, 25);
+            this.btnEncode.TabIndex = 2;
+            this.btnEncode.Text = "加密";
+            this.btnEncode.UseVisualStyleBackColor = true;
+            this.btnEncode.Click += new System.EventHandler(this.btnEncode_Click);
+            // 
+            // txtOutput4
+            // 
+            this.txtOutput4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutput4.Location = new System.Drawing.Point(61, 236);
+            this.txtOutput4.Multiline = true;
+            this.txtOutput4.Name = "txtOutput4";
+            this.txtOutput4.Size = new System.Drawing.Size(1069, 366);
+            this.txtOutput4.TabIndex = 1;
             // 
             // tabPage3
             // 
@@ -443,6 +701,55 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnLoadFromDB
+            // 
+            this.btnLoadFromDB.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnLoadFromDB.Font = new System.Drawing.Font("微软雅黑", 9.5F);
+            this.btnLoadFromDB.ForeColor = System.Drawing.Color.Blue;
+            this.btnLoadFromDB.Location = new System.Drawing.Point(889, 1);
+            this.btnLoadFromDB.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLoadFromDB.Name = "btnLoadFromDB";
+            this.btnLoadFromDB.Size = new System.Drawing.Size(103, 31);
+            this.btnLoadFromDB.TabIndex = 17;
+            this.btnLoadFromDB.Text = "DB加载";
+            this.btnLoadFromDB.UseVisualStyleBackColor = true;
+            this.btnLoadFromDB.Click += new System.EventHandler(this.btnLoadFromDB_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(554, 230);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 15);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "字段";
+            // 
+            // btnDefaultNewLine3
+            // 
+            this.btnDefaultNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDefaultNewLine3.ForeColor = System.Drawing.Color.Black;
+            this.btnDefaultNewLine3.Location = new System.Drawing.Point(605, 223);
+            this.btnDefaultNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDefaultNewLine3.Name = "btnDefaultNewLine3";
+            this.btnDefaultNewLine3.Size = new System.Drawing.Size(68, 31);
+            this.btnDefaultNewLine3.TabIndex = 22;
+            this.btnDefaultNewLine3.Text = "设置";
+            this.btnDefaultNewLine3.UseVisualStyleBackColor = true;
+            this.btnDefaultNewLine3.Click += new System.EventHandler(this.btnDefaultNewLine3_Click);
+            // 
+            // btnNoNewLine3
+            // 
+            this.btnNoNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNoNewLine3.ForeColor = System.Drawing.Color.Black;
+            this.btnNoNewLine3.Location = new System.Drawing.Point(679, 223);
+            this.btnNoNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNoNewLine3.Name = "btnNoNewLine3";
+            this.btnNoNewLine3.Size = new System.Drawing.Size(92, 31);
+            this.btnNoNewLine3.TabIndex = 21;
+            this.btnNoNewLine3.Text = "恢复默认";
+            this.btnNoNewLine3.UseVisualStyleBackColor = true;
+            this.btnNoNewLine3.Click += new System.EventHandler(this.btnNoNewLine3_Click);
             // 
             // txtTableName3
             // 
@@ -482,20 +789,6 @@ namespace Tools.zhong
             this.btnCopy3.Text = "复制";
             this.btnCopy3.UseVisualStyleBackColor = true;
             this.btnCopy3.Click += new System.EventHandler(this.btnCopy3_Click);
-            // 
-            // btnLoadFromDB
-            // 
-            this.btnLoadFromDB.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLoadFromDB.Font = new System.Drawing.Font("微软雅黑", 9.5F);
-            this.btnLoadFromDB.ForeColor = System.Drawing.Color.Blue;
-            this.btnLoadFromDB.Location = new System.Drawing.Point(889, 1);
-            this.btnLoadFromDB.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLoadFromDB.Name = "btnLoadFromDB";
-            this.btnLoadFromDB.Size = new System.Drawing.Size(103, 31);
-            this.btnLoadFromDB.TabIndex = 17;
-            this.btnLoadFromDB.Text = "DB加载";
-            this.btnLoadFromDB.UseVisualStyleBackColor = true;
-            this.btnLoadFromDB.Click += new System.EventHandler(this.btnLoadFromDB_Click);
             // 
             // cbDBType
             // 
@@ -676,297 +969,35 @@ namespace Tools.zhong
             this.txtInput3.Size = new System.Drawing.Size(1125, 175);
             this.txtInput3.TabIndex = 0;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.txtInput4);
-            this.tabPage4.Controls.Add(this.cbEncodeType);
-            this.tabPage4.Controls.Add(this.label9);
-            this.tabPage4.Controls.Add(this.label8);
-            this.tabPage4.Controls.Add(this.label7);
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.txtKey4);
-            this.tabPage4.Controls.Add(this.btnDecode);
-            this.tabPage4.Controls.Add(this.btnEncode);
-            this.tabPage4.Controls.Add(this.txtOutput4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1136, 608);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "加密解密";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // txtInput4
-            // 
-            this.txtInput4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInput4.Location = new System.Drawing.Point(60, 16);
-            this.txtInput4.Multiline = true;
-            this.txtInput4.Name = "txtInput4";
-            this.txtInput4.Size = new System.Drawing.Size(1070, 151);
-            this.txtInput4.TabIndex = 0;
-            this.txtInput4.Text = "PTS1020220101000000";
-            // 
-            // cbEncodeType
-            // 
-            this.cbEncodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEncodeType.FormattingEnabled = true;
-            this.cbEncodeType.Items.AddRange(new object[] {
-            "DES",
-            "BASE64"});
-            this.cbEncodeType.Location = new System.Drawing.Point(296, 187);
-            this.cbEncodeType.Name = "cbEncodeType";
-            this.cbEncodeType.Size = new System.Drawing.Size(121, 23);
-            this.cbEncodeType.TabIndex = 10;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(207, 189);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 15);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "加密类型：";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 236);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 15);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "输出：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 15);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "输入：";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 189);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "密钥：";
-            // 
-            // txtKey4
-            // 
-            this.txtKey4.Location = new System.Drawing.Point(65, 186);
-            this.txtKey4.MaxLength = 8;
-            this.txtKey4.Name = "txtKey4";
-            this.txtKey4.Size = new System.Drawing.Size(102, 25);
-            this.txtKey4.TabIndex = 4;
-            this.txtKey4.Text = "PTS20228";
-            // 
-            // btnDecode
-            // 
-            this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDecode.ForeColor = System.Drawing.Color.Blue;
-            this.btnDecode.Location = new System.Drawing.Point(1044, 184);
-            this.btnDecode.Name = "btnDecode";
-            this.btnDecode.Size = new System.Drawing.Size(75, 25);
-            this.btnDecode.TabIndex = 3;
-            this.btnDecode.Text = "解密";
-            this.btnDecode.UseVisualStyleBackColor = true;
-            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
-            // 
-            // btnEncode
-            // 
-            this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnEncode.ForeColor = System.Drawing.Color.Blue;
-            this.btnEncode.Location = new System.Drawing.Point(952, 186);
-            this.btnEncode.Name = "btnEncode";
-            this.btnEncode.Size = new System.Drawing.Size(75, 25);
-            this.btnEncode.TabIndex = 2;
-            this.btnEncode.Text = "加密";
-            this.btnEncode.UseVisualStyleBackColor = true;
-            this.btnEncode.Click += new System.EventHandler(this.btnEncode_Click);
-            // 
-            // txtOutput4
-            // 
-            this.txtOutput4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutput4.Location = new System.Drawing.Point(61, 236);
-            this.txtOutput4.Multiline = true;
-            this.txtOutput4.Name = "txtOutput4";
-            this.txtOutput4.Size = new System.Drawing.Size(1069, 366);
-            this.txtOutput4.TabIndex = 1;
-            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // btnNoNewLine3
+            // toolStripSeparator5
             // 
-            this.btnNoNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNoNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnNoNewLine3.Location = new System.Drawing.Point(636, 223);
-            this.btnNoNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNoNewLine3.Name = "btnNoNewLine3";
-            this.btnNoNewLine3.Size = new System.Drawing.Size(92, 31);
-            this.btnNoNewLine3.TabIndex = 21;
-            this.btnNoNewLine3.Text = "取消设置";
-            this.btnNoNewLine3.UseVisualStyleBackColor = true;
-            this.btnNoNewLine3.Click += new System.EventHandler(this.btnNoNewLine3_Click);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(240, 6);
             // 
-            // btnDefaultNewLine3
+            // tsmCustomLine
             // 
-            this.btnDefaultNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDefaultNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnDefaultNewLine3.Location = new System.Drawing.Point(734, 223);
-            this.btnDefaultNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDefaultNewLine3.Name = "btnDefaultNewLine3";
-            this.btnDefaultNewLine3.Size = new System.Drawing.Size(92, 31);
-            this.btnDefaultNewLine3.TabIndex = 22;
-            this.btnDefaultNewLine3.Text = "恢复默认";
-            this.btnDefaultNewLine3.UseVisualStyleBackColor = true;
-            this.btnDefaultNewLine3.Click += new System.EventHandler(this.btnDefaultNewLine3_Click);
+            this.tsmCustomLine.Name = "tsmCustomLine";
+            this.tsmCustomLine.Size = new System.Drawing.Size(243, 24);
+            this.tsmCustomLine.Text = "定制化换行";
+            this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
             // 
-            // label10
+            // btnCopyToInput
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(554, 230);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 15);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "字段";
-            // 
-            // tsmKg2Dh
-            // 
-            this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(247, 24);
-            this.tsmKg2Dh.Text = "空格>逗号";
-            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
-            // 
-            // tsmDh2Hh
-            // 
-            this.tsmDh2Hh.Name = "tsmDh2Hh";
-            this.tsmDh2Hh.Size = new System.Drawing.Size(247, 24);
-            this.tsmDh2Hh.Text = "逗号>换行";
-            this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(244, 6);
-            // 
-            // tsmAddDyh
-            // 
-            this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(247, 24);
-            this.tsmAddDyh.Text = "添加单引号（逗号结尾）";
-            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
-            // 
-            // tsmAddSyh
-            // 
-            this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(247, 24);
-            this.tsmAddSyh.Text = "添加双引号（逗号结尾）";
-            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
-            // 
-            // tsmNewLine2DyhIn
-            // 
-            this.tsmNewLine2DyhIn.Name = "tsmNewLine2DyhIn";
-            this.tsmNewLine2DyhIn.Size = new System.Drawing.Size(243, 24);
-            this.tsmNewLine2DyhIn.Text = "SQLIN";
-            this.tsmNewLine2DyhIn.Click += new System.EventHandler(this.tsmNewLine2DyhIn_Click);
-            // 
-            // tsmDyhzy
-            // 
-            this.tsmDyhzy.Name = "tsmDyhzy";
-            this.tsmDyhzy.Size = new System.Drawing.Size(247, 24);
-            this.tsmDyhzy.Text = "添加单引号(\'转义SQL)";
-            this.tsmDyhzy.Click += new System.EventHandler(this.tsmDyhzy_Click);
-            // 
-            // tsmSyhZy
-            // 
-            this.tsmSyhZy.Name = "tsmSyhZy";
-            this.tsmSyhZy.Size = new System.Drawing.Size(247, 24);
-            this.tsmSyhZy.Text = "添加双引号（\\转义C#)";
-            this.tsmSyhZy.Click += new System.EventHandler(this.tsmSyhZy_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(244, 6);
-            // 
-            // tsmDelDyh
-            // 
-            this.tsmDelDyh.Name = "tsmDelDyh";
-            this.tsmDelDyh.Size = new System.Drawing.Size(247, 24);
-            this.tsmDelDyh.Text = "删除单引号";
-            this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
-            // 
-            // tsmDelSyh
-            // 
-            this.tsmDelSyh.Name = "tsmDelSyh";
-            this.tsmDelSyh.Size = new System.Drawing.Size(247, 24);
-            this.tsmDelSyh.Text = "删除双引号";
-            this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(244, 6);
-            // 
-            // tsmReplaceLine
-            // 
-            this.tsmReplaceLine.Name = "tsmReplaceLine";
-            this.tsmReplaceLine.Size = new System.Drawing.Size(247, 24);
-            this.tsmReplaceLine.Text = "去除回车换行";
-            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
-            // 
-            // tsmAddComma
-            // 
-            this.tsmAddComma.Name = "tsmAddComma";
-            this.tsmAddComma.Size = new System.Drawing.Size(247, 24);
-            this.tsmAddComma.Text = "结尾添加逗号";
-            this.tsmAddComma.Click += new System.EventHandler(this.tsmAddComma_Click);
-            // 
-            // tsmDelComma
-            // 
-            this.tsmDelComma.Name = "tsmDelComma";
-            this.tsmDelComma.Size = new System.Drawing.Size(247, 24);
-            this.tsmDelComma.Text = "结尾去除逗号";
-            this.tsmDelComma.Click += new System.EventHandler(this.tsmDelComma_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmKg2Dh,
-            this.tsmDh2Hh,
-            this.toolStripSeparator2,
-            this.tsmAddDyh,
-            this.tsmAddSyh,
-            this.tsmNewLine2DyhIn,
-            this.toolStripSeparator4,
-            this.tsmDyhzy,
-            this.tsmSyhZy,
-            this.toolStripSeparator1,
-            this.tsmDelDyh,
-            this.tsmDelSyh,
-            this.toolStripSeparator3,
-            this.tsmReplaceLine,
-            this.tsmAddComma,
-            this.tsmDelComma});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 316);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(240, 6);
+            this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
+            this.btnCopyToInput.Location = new System.Drawing.Point(868, 5);
+            this.btnCopyToInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCopyToInput.Name = "btnCopyToInput";
+            this.btnCopyToInput.Size = new System.Drawing.Size(114, 26);
+            this.btnCopyToInput.TabIndex = 9;
+            this.btnCopyToInput.Text = "复制到输入";
+            this.btnCopyToInput.UseVisualStyleBackColor = true;
+            this.btnCopyToInput.Click += new System.EventHandler(this.btnCopyToInput_Click);
             // 
             // MainForm
             // 
@@ -983,15 +1014,15 @@ namespace Tools.zhong
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1071,6 +1102,9 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmAddComma;
         private System.Windows.Forms.ToolStripMenuItem tsmDelComma;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem tsmCustomLine;
+        private System.Windows.Forms.Button btnCopyToInput;
     }
 }
 
