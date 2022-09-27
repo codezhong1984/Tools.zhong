@@ -28,8 +28,8 @@ namespace Tools.zhong
             if (!string.IsNullOrWhiteSpace(inputText))
             {
                 var inputVals = inputText.Split(new string[] { cbChar.Text }, StringSplitOptions.RemoveEmptyEntries);
-                int perCol = -1;
-                int.TryParse(txtCols.Text.Trim(), out perCol);
+                int.TryParse(txtCols.Text.Trim(), out int perCol);
+                perCol = perCol == 0 ? -1 : perCol;
                 if (perCol == -1)
                 {
                     this.DialogResult = DialogResult.OK;
