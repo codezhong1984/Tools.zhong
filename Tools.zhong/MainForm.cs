@@ -815,5 +815,11 @@ namespace Tools.zhong
             txtTempl.Text = txtOutput.Text;
             tabControl1.SelectedIndex = 0;
         }
+
+        private void btnUpdateConfig_Click(object sender, EventArgs e)
+        {
+            UpdateAppkeyForm frm = new UpdateAppkeyForm();
+            frm.Show();
+        }
     }
 }

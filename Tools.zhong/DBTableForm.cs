@@ -217,6 +217,7 @@ namespace Tools.zhong
 
         private void DBTaleForm_Load(object sender, EventArgs e)
         {
+            tbNameSpace.Text = ConfigHelper.GetValue("NameSpace");
             cbDBType.SelectedIndex = 0;
             folderBrowserDialog1.SelectedPath = AppDomain.CurrentDomain.BaseDirectory;
         }

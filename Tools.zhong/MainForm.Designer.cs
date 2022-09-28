@@ -32,6 +32,7 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnUpdateConfig = new System.Windows.Forms.Button();
             this.btnOracleQueryHelper = new System.Windows.Forms.Button();
             this.btnCreateModelByInput = new System.Windows.Forms.Button();
             this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
@@ -57,12 +58,15 @@ namespace Tools.zhong
             this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAddComma = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelComma = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
             this.txtCustom = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnCopyToInput = new System.Windows.Forms.Button();
             this.btnOpenPath2 = new System.Windows.Forms.Button();
             this.btnExportToFile2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -103,10 +107,7 @@ namespace Tools.zhong
             this.btnCreateInsert = new System.Windows.Forms.Button();
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCopyToInput = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -135,6 +136,7 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnUpdateConfig);
             this.tabPage1.Controls.Add(this.btnOracleQueryHelper);
             this.tabPage1.Controls.Add(this.btnCreateModelByInput);
             this.tabPage1.Controls.Add(this.btnCreateModelFromDBScript);
@@ -156,6 +158,20 @@ namespace Tools.zhong
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateConfig
+            // 
+            this.btnUpdateConfig.AutoEllipsis = true;
+            this.btnUpdateConfig.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUpdateConfig.ForeColor = System.Drawing.Color.Blue;
+            this.btnUpdateConfig.Location = new System.Drawing.Point(873, 4);
+            this.btnUpdateConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnUpdateConfig.Name = "btnUpdateConfig";
+            this.btnUpdateConfig.Size = new System.Drawing.Size(122, 29);
+            this.btnUpdateConfig.TabIndex = 21;
+            this.btnUpdateConfig.Text = "更新配置文件";
+            this.btnUpdateConfig.UseVisualStyleBackColor = true;
+            this.btnUpdateConfig.Click += new System.EventHandler(this.btnUpdateConfig_Click);
             // 
             // btnOracleQueryHelper
             // 
@@ -398,6 +414,18 @@ namespace Tools.zhong
             this.tsmDelComma.Text = "结尾去除逗号";
             this.tsmDelComma.Click += new System.EventHandler(this.tsmDelComma_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmCustomLine
+            // 
+            this.tsmCustomLine.Name = "tsmCustomLine";
+            this.tsmCustomLine.Size = new System.Drawing.Size(243, 24);
+            this.tsmCustomLine.Text = "定制化换行";
+            this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
+            // 
             // txtTitle
             // 
             this.txtTitle.AutoSize = true;
@@ -428,12 +456,12 @@ namespace Tools.zhong
             // 
             this.btnOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOutput.AutoEllipsis = true;
-            this.btnOutput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOutput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOutput.ForeColor = System.Drawing.Color.Blue;
-            this.btnOutput.Location = new System.Drawing.Point(1023, 231);
+            this.btnOutput.Location = new System.Drawing.Point(1011, 231);
             this.btnOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOutput.Name = "btnOutput";
-            this.btnOutput.Size = new System.Drawing.Size(100, 29);
+            this.btnOutput.Size = new System.Drawing.Size(112, 29);
             this.btnOutput.TabIndex = 10;
             this.btnOutput.Text = "生成结果";
             this.btnOutput.UseVisualStyleBackColor = true;
@@ -480,6 +508,19 @@ namespace Tools.zhong
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "结果输出";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnCopyToInput
+            // 
+            this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
+            this.btnCopyToInput.Location = new System.Drawing.Point(868, 5);
+            this.btnCopyToInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCopyToInput.Name = "btnCopyToInput";
+            this.btnCopyToInput.Size = new System.Drawing.Size(114, 26);
+            this.btnCopyToInput.TabIndex = 9;
+            this.btnCopyToInput.Text = "复制到输入";
+            this.btnCopyToInput.UseVisualStyleBackColor = true;
+            this.btnCopyToInput.Click += new System.EventHandler(this.btnCopyToInput_Click);
             // 
             // btnOpenPath2
             // 
@@ -974,31 +1015,6 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(240, 6);
-            // 
-            // tsmCustomLine
-            // 
-            this.tsmCustomLine.Name = "tsmCustomLine";
-            this.tsmCustomLine.Size = new System.Drawing.Size(243, 24);
-            this.tsmCustomLine.Text = "定制化换行";
-            this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
-            // 
-            // btnCopyToInput
-            // 
-            this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnCopyToInput.Location = new System.Drawing.Point(868, 5);
-            this.btnCopyToInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCopyToInput.Name = "btnCopyToInput";
-            this.btnCopyToInput.Size = new System.Drawing.Size(114, 26);
-            this.btnCopyToInput.TabIndex = 9;
-            this.btnCopyToInput.Text = "复制到输入";
-            this.btnCopyToInput.UseVisualStyleBackColor = true;
-            this.btnCopyToInput.Click += new System.EventHandler(this.btnCopyToInput_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1105,6 +1121,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem tsmCustomLine;
         private System.Windows.Forms.Button btnCopyToInput;
+        private System.Windows.Forms.Button btnUpdateConfig;
     }
 }
 

@@ -83,6 +83,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateAppkeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateAppkeyForm.Designer.cs">
+      <DependentUpon>UpdateAppkeyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PerNewLineForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateAppkeyForm.resx">
+      <DependentUpon>UpdateAppkeyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PerNewLineForm.resx">
       <DependentUpon>PerNewLineForm.cs</DependentUpon>

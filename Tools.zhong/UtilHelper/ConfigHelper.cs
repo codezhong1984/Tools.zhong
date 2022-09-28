@@ -9,7 +9,7 @@ namespace Tools.zhong.UtilHelper
 {
     public class ConfigHelper
     {
-        public string GetValue(string key)
+        public static string GetValue(string key)
         {
             return ConfigurationManager.AppSettings[key];
         }
