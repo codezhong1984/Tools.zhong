@@ -486,7 +486,7 @@ namespace Tools.zhong
             {
                 if (cbDBType.Text == "ORACLE")
                 {
-                    string sql = $"select column_name from user_tab_columns where table_name='{txtTableName3.Text.Trim()}' ";
+                    string sql = $"select column_name from user_tab_columns where table_name='{txtTableName3.Text.Trim()}' order by  COLUMN_ID ";
                     var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
                     if (dtData != null)
                     {
