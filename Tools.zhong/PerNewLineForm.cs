@@ -39,7 +39,7 @@ namespace Tools.zhong
                 for (int i = 0; i < inputVals.Length; i++)
                 {
                     sbResult.Append(inputVals[i]);
-                    sbResult.Append((i + 1) % perCol == 0 && perCol != inputVals.Length - 1 ? Environment.NewLine : "");
+                    sbResult.Append((i + 1) % perCol == 0 && perCol != inputVals.Length - 1 ? Environment.NewLine : cbChar.Text);
                 }
                 this.inputText = sbResult.ToString();
             }

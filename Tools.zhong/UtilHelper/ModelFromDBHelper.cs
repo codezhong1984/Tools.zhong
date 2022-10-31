@@ -26,6 +26,7 @@ namespace Tools.zhong.UtilHelper
             }
             if (EnableMapperTableName)
             {
+                sbResult.AppendLine("using System.ComponentModel.DataAnnotations;");
                 sbResult.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
             }
             sbResult.AppendLine();
