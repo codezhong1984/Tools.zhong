@@ -31,6 +31,9 @@ namespace Tools.zhong
 
         private DataTable dt;
 
+
+        private string lastText;
+
         #endregion
 
         public MainForm()
@@ -613,7 +616,8 @@ namespace Tools.zhong
 
         private void tsmAddDyh_Click(object sender, EventArgs e)
         {
-            var templ = txtTempl.Text.Trim();
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();           
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
@@ -621,12 +625,13 @@ namespace Tools.zhong
             {
                 return;
             }
-            txtOutput.Text = "'" + string.Join("','", inputTexts) + "'";
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = "'" + string.Join("','", inputTexts) + "'";
+            //tabControl1.SelectedIndex = 1;
         }
 
         private void tsmDelDyh_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -635,12 +640,12 @@ namespace Tools.zhong
                 return;
             }
             inputTexts = inputTexts.ToList().Select(i => i.Trim('\'')).ToArray();
-            txtOutput.Text = string.Join(",", inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join(",", inputTexts);
         }
 
         private void tsmAddSyh_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -649,15 +654,14 @@ namespace Tools.zhong
             {
                 return;
             }
-            txtOutput.Text = "\"" + string.Join("\",\"", inputTexts) + "\"";
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = "\"" + string.Join("\",\"", inputTexts) + "\"";
         }
 
         private void tsmDyhzy_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            txtOutput.Text = "\'" + ReplaceSpecialCharSQL(templ) + "\'";
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = "\'" + ReplaceSpecialCharSQL(templ) + "\'";
         }
         private string ReplaceSpecialCharSQL(string srcString, char replaceChar = '\'')
         {
@@ -675,9 +679,9 @@ namespace Tools.zhong
 
         private void tsmSyhZy_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            txtOutput.Text = "\"" + ReplaceSpecialChar(templ) + "\"";
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = "\"" + ReplaceSpecialChar(templ) + "\"";
         }
 
         private string ReplaceSpecialChar(string srcString, char replaceChar = '\\')
@@ -696,6 +700,7 @@ namespace Tools.zhong
 
         private void tsmDelSyh_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -704,76 +709,97 @@ namespace Tools.zhong
                 return;
             }
             inputTexts = inputTexts.ToList().Select(i => i.Trim('\"')).ToArray();
-            txtOutput.Text = string.Join(",", inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join(",", inputTexts);
         }
 
         private void tsmKg2Dh_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, " ").Replace("\t", " ");
             var inputTexts = templ.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-            txtOutput.Text = string.Join(",\t", inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join(",\t", inputTexts);
         }
 
         private void tsmDh2Hh_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.Select(i => i.Trim()).ToArray();
-            txtOutput.Text = string.Join(System.Environment.NewLine, inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join(System.Environment.NewLine, inputTexts);
+            //tabControl1.SelectedIndex = 1;
         }
 
         private void tsmReplaceLine_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim());
-            txtOutput.Text = string.Join(",", inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join(",", inputTexts);
+            //tabControl1.SelectedIndex = 1;
         }
 
         private void tsmNewLine2DyhIn_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, ",");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim());
-            txtOutput.Text = "'" + string.Join("','", inputTexts) + "'";
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = "'" + string.Join("','", inputTexts) + "'";
+            //tabControl1.SelectedIndex = 1;
         }
 
         private void tsmAddComma_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim());
-            txtOutput.Text = string.Join("," + System.Environment.NewLine, inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join("," + System.Environment.NewLine, inputTexts);
+            //tabControl1.SelectedIndex = 1;
         }
 
         private void tsmDelComma_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim().TrimEnd(','));
-            txtOutput.Text = string.Join(System.Environment.NewLine, inputTexts);
-            tabControl1.SelectedIndex = 1;
+            txtTempl.Text = string.Join(System.Environment.NewLine, inputTexts);
+            //tabControl1.SelectedIndex = 1;
         }
 
         private void tsmCustomLine_Click(object sender, EventArgs e)
         {
+            lastText = txtTempl.Text;
             PerNewLineForm frm = new PerNewLineForm(txtTempl.Text.Trim());
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                txtOutput.Text = frm.InputText;
-                tabControl1.SelectedIndex = 1;
+                txtTempl.Text = frm.InputText;
+                //tabControl1.SelectedIndex = 1;
             }
         }
+
+        private void tsmTrim_Click(object sender, EventArgs e)
+        {
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim().TrimEnd(','));
+            txtTempl.Text = string.Join(System.Environment.NewLine, inputTexts);
+            //tabControl1.SelectedIndex = 1;
+        }
+
+        private void tsmRedo_Click(object sender, EventArgs e)
+        {
+            txtTempl.Text = lastText;
+        }
+
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
@@ -820,6 +846,26 @@ namespace Tools.zhong
         {
             UpdateAppkeyForm frm = new UpdateAppkeyForm();
             frm.Show();
+        }
+
+        private void btnImportFromInput_Click(object sender, EventArgs e)
+        {
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim()).ToList();
+            foreach (var textItem in inputTexts)
+            {
+                var drNew = dt.NewRow();
+                var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();                
+                for (int i = 0; i < colItem.Count(); i++)
+                {
+                    if (dt.Columns.Contains($"col{i}"))
+                    {
+                        drNew[$"col{i}"] = colItem[i];
+                    }                   
+                }
+                dt.Rows.Add(drNew);
+            }            
         }
     }
 }

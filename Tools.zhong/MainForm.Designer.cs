@@ -32,6 +32,7 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnImportFromInput = new System.Windows.Forms.Button();
             this.btnUpdateConfig = new System.Windows.Forms.Button();
             this.btnOracleQueryHelper = new System.Windows.Forms.Button();
             this.btnCreateModelByInput = new System.Windows.Forms.Button();
@@ -60,6 +61,9 @@ namespace Tools.zhong
             this.tsmDelComma = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTrim = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmRedo = new System.Windows.Forms.ToolStripMenuItem();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
@@ -136,6 +140,7 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnImportFromInput);
             this.tabPage1.Controls.Add(this.btnUpdateConfig);
             this.tabPage1.Controls.Add(this.btnOracleQueryHelper);
             this.tabPage1.Controls.Add(this.btnCreateModelByInput);
@@ -159,6 +164,20 @@ namespace Tools.zhong
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnImportFromInput
+            // 
+            this.btnImportFromInput.AutoEllipsis = true;
+            this.btnImportFromInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnImportFromInput.ForeColor = System.Drawing.Color.Blue;
+            this.btnImportFromInput.Location = new System.Drawing.Point(6, 195);
+            this.btnImportFromInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnImportFromInput.Name = "btnImportFromInput";
+            this.btnImportFromInput.Size = new System.Drawing.Size(117, 29);
+            this.btnImportFromInput.TabIndex = 22;
+            this.btnImportFromInput.Text = "输入框导入列";
+            this.btnImportFromInput.UseVisualStyleBackColor = true;
+            this.btnImportFromInput.Click += new System.EventHandler(this.btnImportFromInput_Click);
+            // 
             // btnUpdateConfig
             // 
             this.btnUpdateConfig.AutoEllipsis = true;
@@ -178,7 +197,7 @@ namespace Tools.zhong
             this.btnOracleQueryHelper.AutoEllipsis = true;
             this.btnOracleQueryHelper.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOracleQueryHelper.ForeColor = System.Drawing.Color.Blue;
-            this.btnOracleQueryHelper.Location = new System.Drawing.Point(606, 189);
+            this.btnOracleQueryHelper.Location = new System.Drawing.Point(729, 195);
             this.btnOracleQueryHelper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOracleQueryHelper.Name = "btnOracleQueryHelper";
             this.btnOracleQueryHelper.Size = new System.Drawing.Size(161, 29);
@@ -192,7 +211,7 @@ namespace Tools.zhong
             this.btnCreateModelByInput.AutoEllipsis = true;
             this.btnCreateModelByInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateModelByInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnCreateModelByInput.Location = new System.Drawing.Point(439, 189);
+            this.btnCreateModelByInput.Location = new System.Drawing.Point(562, 195);
             this.btnCreateModelByInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateModelByInput.Name = "btnCreateModelByInput";
             this.btnCreateModelByInput.Size = new System.Drawing.Size(161, 29);
@@ -206,7 +225,7 @@ namespace Tools.zhong
             this.btnCreateModelFromDBScript.AutoEllipsis = true;
             this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateModelFromDBScript.ForeColor = System.Drawing.Color.Blue;
-            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(279, 189);
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(402, 195);
             this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
             this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(149, 29);
@@ -220,7 +239,7 @@ namespace Tools.zhong
             this.btnImport.AutoEllipsis = true;
             this.btnImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(120, 189);
+            this.btnImport.Location = new System.Drawing.Point(243, 195);
             this.btnImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(148, 29);
@@ -234,7 +253,7 @@ namespace Tools.zhong
             this.btnRemoveAll.AutoEllipsis = true;
             this.btnRemoveAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveAll.Location = new System.Drawing.Point(9, 189);
+            this.btnRemoveAll.Location = new System.Drawing.Point(132, 195);
             this.btnRemoveAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(100, 29);
@@ -306,9 +325,12 @@ namespace Tools.zhong
             this.tsmAddComma,
             this.tsmDelComma,
             this.toolStripSeparator5,
-            this.tsmCustomLine});
+            this.tsmCustomLine,
+            this.tsmTrim,
+            this.toolStripSeparator6,
+            this.tsmRedo});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 346);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 400);
             // 
             // tsmKg2Dh
             // 
@@ -425,6 +447,26 @@ namespace Tools.zhong
             this.tsmCustomLine.Size = new System.Drawing.Size(243, 24);
             this.tsmCustomLine.Text = "定制化换行";
             this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
+            // 
+            // tsmTrim
+            // 
+            this.tsmTrim.Name = "tsmTrim";
+            this.tsmTrim.Size = new System.Drawing.Size(243, 24);
+            this.tsmTrim.Text = "去除首尾空格";
+            this.tsmTrim.Click += new System.EventHandler(this.tsmTrim_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmRedo
+            // 
+            this.tsmRedo.Name = "tsmRedo";
+            this.tsmRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.tsmRedo.Size = new System.Drawing.Size(243, 24);
+            this.tsmRedo.Text = "撤销";
+            this.tsmRedo.Click += new System.EventHandler(this.tsmRedo_Click);
             // 
             // txtTitle
             // 
@@ -1122,6 +1164,10 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmCustomLine;
         private System.Windows.Forms.Button btnCopyToInput;
         private System.Windows.Forms.Button btnUpdateConfig;
+        private System.Windows.Forms.ToolStripMenuItem tsmTrim;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem tsmRedo;
+        private System.Windows.Forms.Button btnImportFromInput;
     }
 }
 
