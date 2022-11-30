@@ -859,13 +859,51 @@ namespace Tools.zhong
                 var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();                
                 for (int i = 0; i < colItem.Count(); i++)
                 {
-                    if (dt.Columns.Contains($"col{i}"))
+                    if (!dt.Columns.Contains($"col{i}"))
                     {
-                        drNew[$"col{i}"] = colItem[i];
-                    }                   
+                        dt.Columns.Add($"col{i}");
+                    }
+                    drNew[$"col{i}"] = colItem[i];
                 }
                 dt.Rows.Add(drNew);
             }            
+        }
+
+        private void btnExportData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sql = txtInput3.Text.Trim();
+                if (cbDBType.Text == "ORACLE")
+                {
+                    var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
+                    var resultText = string.Empty;
+                    StringBuilder sb = new StringBuilder();
+                    if (dtData != null)
+                    {
+                        foreach (DataRow dataRow in dtData.Rows)
+                        {
+                            var drData = dataRow[0];
+                            string drVal = string.Empty;
+                            if (drData is byte[])
+                            {
+                                drVal = System.Text.Encoding.Default.GetString(drData as byte[]);
+                            }
+                            else
+                            {
+                                drVal = drData?.ToString();
+                            }
+                            sb.AppendLine(drVal);
+                        }
+                    }
+                    txtOuput3.Text = sb.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        
         }
     }
 }

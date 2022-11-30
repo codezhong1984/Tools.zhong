@@ -112,6 +112,7 @@ namespace Tools.zhong
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btnExportData = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -754,6 +755,7 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnExportData);
             this.tabPage3.Controls.Add(this.btnLoadFromDB);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.btnDefaultNewLine3);
@@ -1015,6 +1017,7 @@ namespace Tools.zhong
             this.txtOuput3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOuput3.Multiline = true;
             this.txtOuput3.Name = "txtOuput3";
+            this.txtOuput3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtOuput3.Size = new System.Drawing.Size(1128, 340);
             this.txtOuput3.TabIndex = 3;
             // 
@@ -1056,6 +1059,19 @@ namespace Tools.zhong
             // 
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
+            // 
+            // btnExportData
+            // 
+            this.btnExportData.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExportData.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnExportData.Location = new System.Drawing.Point(795, 223);
+            this.btnExportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExportData.Name = "btnExportData";
+            this.btnExportData.Size = new System.Drawing.Size(107, 31);
+            this.btnExportData.TabIndex = 24;
+            this.btnExportData.Text = "导数据";
+            this.btnExportData.UseVisualStyleBackColor = true;
+            this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click);
             // 
             // MainForm
             // 
@@ -1168,6 +1184,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem tsmRedo;
         private System.Windows.Forms.Button btnImportFromInput;
+        private System.Windows.Forms.Button btnExportData;
     }
 }
 
