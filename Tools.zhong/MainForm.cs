@@ -869,41 +869,77 @@ namespace Tools.zhong
             }            
         }
 
+        /// <summary>
+        /// 导出数据到excel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExportData_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = txtInput3.Text.Trim();
+                DataTable dtData = new DataTable();
                 if (cbDBType.Text == "ORACLE")
                 {
-                    var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
-                    var resultText = string.Empty;
-                    StringBuilder sb = new StringBuilder();
-                    if (dtData != null)
+                    dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);                  
+                }
+                else if (cbDBType.Text == "SQLSERVER")
+                {
+                    dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                }
+                else if (cbDBType.Text == "MySQL")
+                {
+                    dtData = DBHepler.MySQLHelper.ExecuteDataTable(sql);
+                }
+                #region ob...
+                //var resultText = string.Empty;
+                //StringBuilder sb = new StringBuilder();
+                //if (dtData != null)
+                //{
+                //    foreach (DataRow dataRow in dtData.Rows)
+                //    {
+                //        var drData = dataRow[0];
+                //        string drVal = string.Empty;
+                //        if (drData is byte[])
+                //        {
+                //            drVal = System.Text.Encoding.Default.GetString(drData as byte[]);
+                //        }
+                //        else
+                //        {
+                //            drVal = drData?.ToString();
+                //        }
+                //        sb.AppendLine(drVal);
+                //    }
+                //}
+                //txtOuput3.Text = sb.ToString();
+                #endregion
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog1.FileName;
+                    var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
+                    using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew))
                     {
-                        foreach (DataRow dataRow in dtData.Rows)
-                        {
-                            var drData = dataRow[0];
-                            string drVal = string.Empty;
-                            if (drData is byte[])
-                            {
-                                drVal = System.Text.Encoding.Default.GetString(drData as byte[]);
-                            }
-                            else
-                            {
-                                drVal = drData?.ToString();
-                            }
-                            sb.AppendLine(drVal);
-                        }
+                        wookbook.Write(fs);
                     }
-                    txtOuput3.Text = sb.ToString();
+                    MessageBox.Show("保存成功！");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        
+            }        
+        }
+
+        private void btnCreateDicSingleTable_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreateDicAllDB_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
