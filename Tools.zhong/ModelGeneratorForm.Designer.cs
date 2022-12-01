@@ -1,7 +1,7 @@
 ﻿
 namespace Tools.zhong
 {
-    partial class CreateModelBySplitStringForm
+    partial class ModelGeneratorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,6 +50,10 @@ namespace Tools.zhong
             this.txtTableDescription = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbSplitChar = new System.Windows.Forms.ComboBox();
+            this.cbFullProp = new System.Windows.Forms.CheckBox();
+            this.cbCreateTbName = new System.Windows.Forms.CheckBox();
+            this.cbDisplayName = new System.Windows.Forms.CheckBox();
+            this.cbLineDeal = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +80,9 @@ namespace Tools.zhong
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(563, 576);
+            this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOk.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnOk.Location = new System.Drawing.Point(983, 574);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(100, 33);
             this.btnOk.TabIndex = 2;
@@ -87,9 +93,9 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(429, 576);
+            this.btnCancel.Location = new System.Drawing.Point(831, 574);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 33);
+            this.btnCancel.Size = new System.Drawing.Size(86, 33);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "取 消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -268,11 +274,61 @@ namespace Tools.zhong
             this.cbSplitChar.TabIndex = 38;
             this.cbSplitChar.SelectedIndexChanged += new System.EventHandler(this.cbSplitChar_SelectedIndexChanged);
             // 
+            // cbFullProp
+            // 
+            this.cbFullProp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbFullProp.AutoSize = true;
+            this.cbFullProp.Location = new System.Drawing.Point(228, 595);
+            this.cbFullProp.Name = "cbFullProp";
+            this.cbFullProp.Size = new System.Drawing.Size(205, 19);
+            this.cbFullProp.TabIndex = 39;
+            this.cbFullProp.Text = "是否生成完整GET|SET方法";
+            this.cbFullProp.UseVisualStyleBackColor = true;
+            // 
+            // cbCreateTbName
+            // 
+            this.cbCreateTbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbCreateTbName.AutoSize = true;
+            this.cbCreateTbName.Checked = true;
+            this.cbCreateTbName.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCreateTbName.Location = new System.Drawing.Point(228, 570);
+            this.cbCreateTbName.Name = "cbCreateTbName";
+            this.cbCreateTbName.Size = new System.Drawing.Size(383, 19);
+            this.cbCreateTbName.TabIndex = 42;
+            this.cbCreateTbName.Text = "是否映射DB表类名，代码中包含：[Table(\"TANEM\")]";
+            this.cbCreateTbName.UseVisualStyleBackColor = true;
+            // 
+            // cbDisplayName
+            // 
+            this.cbDisplayName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbDisplayName.AutoSize = true;
+            this.cbDisplayName.Location = new System.Drawing.Point(19, 595);
+            this.cbDisplayName.Name = "cbDisplayName";
+            this.cbDisplayName.Size = new System.Drawing.Size(177, 19);
+            this.cbDisplayName.TabIndex = 41;
+            this.cbDisplayName.Text = "是否生成DisplayName";
+            this.cbDisplayName.UseVisualStyleBackColor = true;
+            // 
+            // cbLineDeal
+            // 
+            this.cbLineDeal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbLineDeal.AutoSize = true;
+            this.cbLineDeal.Location = new System.Drawing.Point(19, 570);
+            this.cbLineDeal.Name = "cbLineDeal";
+            this.cbLineDeal.Size = new System.Drawing.Size(134, 19);
+            this.cbLineDeal.TabIndex = 40;
+            this.cbLineDeal.Text = "是否处理下划线";
+            this.cbLineDeal.UseVisualStyleBackColor = true;
+            // 
             // CreateModelBySplitStringForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 621);
+            this.Controls.Add(this.cbCreateTbName);
+            this.Controls.Add(this.cbDisplayName);
+            this.Controls.Add(this.cbLineDeal);
+            this.Controls.Add(this.cbFullProp);
             this.Controls.Add(this.cbSplitChar);
             this.Controls.Add(this.txtTableDescription);
             this.Controls.Add(this.label4);
@@ -321,5 +377,9 @@ namespace Tools.zhong
         private System.Windows.Forms.TextBox txtTableDescription;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbSplitChar;
+        private System.Windows.Forms.CheckBox cbFullProp;
+        private System.Windows.Forms.CheckBox cbCreateTbName;
+        private System.Windows.Forms.CheckBox cbDisplayName;
+        private System.Windows.Forms.CheckBox cbLineDeal;
     }
 }

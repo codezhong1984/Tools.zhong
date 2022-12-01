@@ -8,18 +8,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tools.zhong.Model;
 using Tools.zhong.UtilHelper;
 
 namespace Tools.zhong
 {
     public partial class DbTableForm : Form
     {
+        #region 公共属性
+
         private bool EnableMapperTableName = true;
         public string CodeText { get; set; }
-        public DbTableForm()
+        private MainForm mainFrm;
+        #endregion
+
+        public DbTableForm(MainForm mainFrm)
         {
+            this.mainFrm = mainFrm;
             InitializeComponent();
         }
+
+        #region 获取数据表结构
+
+        private string GetCodeForOracle(string tableName)
+        {
+            var list = DbObjectHelper.GetColumnsForOracle(tableName);
+            var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
+                tbNameSpace.Text.Trim(), null, EnableMapperTableName, cbFullProp.Checked);
+            return code;
+        }
+
+        private string GetCodeForSqlServer(string tableName)
+        {
+            var list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+            var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
+                tbNameSpace.Text.Trim(), null, EnableMapperTableName, cbFullProp.Checked);
+            return code;
+        }
+
+        private string GetCodeForMySQL(string tableName)
+        {
+            var list = DbObjectHelper.GetColumnsForMySQL(tableName);
+            var enumCode = GetEnumCodeForMySQL(tableName);
+            var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
+                tbNameSpace.Text.Trim(), enumCode, EnableMapperTableName, cbFullProp.Checked);
+            return code;
+        }
+
+        private string GetEnumCodeForMySQL(string tableName)
+        {
+            var dtData = DbObjectHelper.GetEnumCodeForMySQL(tableName);
+            var list = UtilHelper.DbObjectHelper.GetEnumFieldsFormDB(dtData);
+            var code = UtilHelper.DbObjectHelper.GenerateEnumCode(list);
+            return code;
+        }
+
+        #endregion
+
+        #region 控件事件定义
 
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -48,7 +94,8 @@ namespace Tools.zhong
                 StringBuilder sbCodes = new StringBuilder();
                 #region CreateCodeText
 
-                if (cbDBType.Text == "ORACLE")
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
                 {
                     foreach (var item in listTables)
                     {
@@ -64,7 +111,7 @@ namespace Tools.zhong
 
                     this.CodeText = sbCodes.ToString();
                 }
-                else if (cbDBType.Text == "SQLSERVER")
+                else if (dbType == DataBaseType.SQLSERVER)
                 {
                     foreach (var item in listTables)
                     {
@@ -80,7 +127,7 @@ namespace Tools.zhong
 
                     this.CodeText = sbCodes.ToString();
                 }
-                else if (cbDBType.Text == "MySQL")
+                else if (dbType == DataBaseType.MySQL)
                 {
                     foreach (var item in listTables)
                     {
@@ -104,73 +151,10 @@ namespace Tools.zhong
             {
                 MessageBox.Show(ex.Message);
             }
-            this.DialogResult = DialogResult.OK;
-        }
-
-        private string GetCodeForOracle(string tableName)
-        {
-            //--添加表注释 COMMENT ON TABLE STUDENT_INFO IS '学生信息表'
-            //添加字段注释 comment on column R_StockAnalysis_T.WORKNO is '工单号';
-            string sql = @"select a.TABLE_NAME,c.COMMENTS as table_comments, a.column_name,a.DATA_TYPE,b.Comments as column_comments,a.NULLABLE
-                            from user_tab_columns a 
-                            left join user_col_comments b on a.TABLE_NAME=b.TABLE_NAME and a.COLUMN_NAME = b.column_name
-                            left join user_tab_comments c on a.TABLE_NAME=c.TABLE_NAME
-                            where a.table_name ='{0}'
-                            order by a.COLUMN_ID ";
-
-            var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
-            var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), null, EnableMapperTableName);
-            return code;
-        }
-
-        private string GetCodeForSqlServer(string tableName)
-        {
-            string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments,
-                                    IIF(c.is_nullable=1,'Y','N') nullable
-                                from sys.tables a 
-                                left join sys.extended_properties b on a.object_id=b.major_id and b.minor_id=0
-                                left join sys.columns c on a.object_id=c.object_id
-                                left join sys.extended_properties d on d.major_id=c.object_id and d.minor_id=c.column_id
-                                left join sys.systypes e on c.system_type_id=e.xtype and e.xtype=e.xusertype
-                                where a.name='{0}'
-                                order by c.column_id ";
-
-            var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, tableName));
-            var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), null, EnableMapperTableName);
-            return code;
-        }
-
-
-        private string GetCodeForMySQL(string tableName)
-        {
-            //添加表注释 alter table test1 comment '修改后的表的注释';
-            //添加列注释 alter table test modify column id int not null default 0 comment '测试表id'
-
-            string sql = @" select b.table_name,b.table_comment table_comments,a.column_name,a.data_type,a.column_comment column_comments,if(a.is_Nullable='YES','Y','N') nullable
-                            from information_schema.columns a inner join information_schema.tables b on a.table_name=b.table_name and a.table_schema=b.table_schema
-                            where b.table_schema=@DataBase and b.table_name='{0}'
-                            order by a.ORDINAL_POSITION ";
-
-            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
-            var list = UtilHelper.ModelFromDBHelper.GetFieldsFormDB(dtData);
-            var enumCode = GetEnumCodeForMySQL(tableName);
-            var code = UtilHelper.ModelFromDBHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked, tbNameSpace.Text.Trim(), enumCode, EnableMapperTableName);
-            return code;
-        }
-
-        private string GetEnumCodeForMySQL(string tableName)
-        {
-            string sql = @" select table_name,column_name,column_type 
-                            from information_schema.columns 
-                            where table_name='{0}' and data_type='enum' and table_schema=@DataBase
-                            order by ORDINAL_POSITION ";
-
-            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
-            var list = UtilHelper.ModelFromDBHelper.GetEnumFieldsFormDB(dtData);
-            var code = UtilHelper.ModelFromDBHelper.GenerateEnumCode(list);
-            return code;
+            //this.DialogResult = DialogResult.OK;
+            this.mainFrm.TextOutPut.Text = this.CodeText;
+            this.mainFrm.TabControl.SelectedIndex = 1;
+            this.mainFrm.BringToFront();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -180,9 +164,14 @@ namespace Tools.zhong
 
         private void cbDBType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbDBType.Text == "请选择")
+            {
+                return;
+            }
             try
             {
-                if (cbDBType.Text == "ORACLE")
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
                 {
                     string sql = "select table_name from user_tables order by table_name ";
                     var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
@@ -192,7 +181,7 @@ namespace Tools.zhong
 
 
                 }
-                else if (cbDBType.Text == "SQLSERVER")
+                else if (dbType == DataBaseType.SQLSERVER)
                 {
                     string sql = "select name table_name from sys.tables  order by name ";
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
@@ -200,7 +189,7 @@ namespace Tools.zhong
                     cbTableName.DisplayMember = "table_name";
                     cbTableName.ValueMember = "table_name";
                 }
-                else if (cbDBType.Text == "MySQL")
+                else if (dbType == DataBaseType.MySQL)
                 {
                     string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name  ";
                     var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
@@ -218,8 +207,12 @@ namespace Tools.zhong
         private void DBTaleForm_Load(object sender, EventArgs e)
         {
             tbNameSpace.Text = ConfigHelper.GetValue("NameSpace");
-            cbDBType.SelectedIndex = 0;
             folderBrowserDialog1.SelectedPath = AppDomain.CurrentDomain.BaseDirectory;
+            //加载数据库类型
+            var dbTypes = Enum.GetNames(typeof(DataBaseType)).ToList<string>();
+            dbTypes.Insert(0, "请选择");
+            cbDBType.DataSource = dbTypes;
+            cbDBType.SelectedIndex = 0;
         }
 
         private void cbTableName_SelectedIndexChanged(object sender, EventArgs e)
@@ -261,35 +254,35 @@ namespace Tools.zhong
 
                 string tableName = string.Empty;
                 #region CreateCodeText
-
-                if (cbDBType.Text == "ORACLE")
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
                 {
                     foreach (var item in listTables)
                     {
                         var codeOracle = GetCodeForOracle(item);
-                        using (StreamWriter sw = new StreamWriter($"{dirPath}\\{ModelFromDBHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
+                        using (StreamWriter sw = new StreamWriter($"{dirPath}\\{DbObjectHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
                         {
                             sw.WriteLine(codeOracle);
                         }
                     }
                 }
-                else if (cbDBType.Text == "SQLSERVER")
+                else if (dbType == DataBaseType.SQLSERVER)
                 {
                     foreach (var item in listTables)
                     {
                         var codeSqlServer = GetCodeForSqlServer(item);
-                        using (StreamWriter sw = new StreamWriter($"{dirPath}\\{ModelFromDBHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
+                        using (StreamWriter sw = new StreamWriter($"{dirPath}\\{DbObjectHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
                         {
                             sw.WriteLine(codeSqlServer);
                         }
                     }
                 }
-                else if (cbDBType.Text == "MySQL")
+                else if (dbType == DataBaseType.MySQL)
                 {
                     foreach (var item in listTables)
                     {
                         var codeMySQL = GetCodeForMySQL(item);
-                        using (StreamWriter sw = new StreamWriter($"{dirPath}\\{ModelFromDBHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
+                        using (StreamWriter sw = new StreamWriter($"{dirPath}\\{DbObjectHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
                         {
                             sw.WriteLine(codeMySQL);
                         }
@@ -312,7 +305,6 @@ namespace Tools.zhong
             System.Diagnostics.Process.Start(psi);
         }
 
-
         private void cbSelectAll_CheckedChanged(object sender, EventArgs e)
         {
             if (cbTableName.Items.Count == 0)
@@ -329,5 +321,7 @@ namespace Tools.zhong
         {
             EnableMapperTableName = cbCreateTbName.Checked;
         }
+
+        #endregion
     }
 }

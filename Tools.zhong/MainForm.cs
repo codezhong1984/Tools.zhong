@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.IO;
 using Tools.zhong.UtilHelper;
+using Tools.zhong.Model;
 
 namespace Tools.zhong
 {
@@ -31,8 +32,16 @@ namespace Tools.zhong
 
         private DataTable dt;
 
-
         private string lastText;
+
+        private DbTableForm subForm;
+
+        //    txtOutput.Text = subForm.CodeText;
+        //    tabControl1.SelectedIndex = 1;
+
+        public TextBox TextOutPut => txtOutput;
+        public TabControl TabControl => tabControl1;
+        
 
         #endregion
 
@@ -84,6 +93,11 @@ namespace Tools.zhong
 
             saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             cbEncodeType.SelectedIndex = 0;
+
+            //加载数据库类型
+            string[] dbTypes =Enum.GetNames(typeof(DataBaseType));
+            cbDBType.Items.Clear();
+            cbDBType.DataSource = dbTypes;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -155,12 +169,16 @@ namespace Tools.zhong
 
         private void btnCreateModelFromDBScript_Click(object sender, EventArgs e)
         {
-            DbTableForm subForm = new DbTableForm();
-            if (subForm.ShowDialog() == DialogResult.OK)
+            if (subForm == null)
             {
-                txtOutput.Text = subForm.CodeText;
-                tabControl1.SelectedIndex = 1;
+                subForm = new DbTableForm(this);
             }
+            subForm.Show();
+            //if (subForm.DialogResult == DialogResult.OK)
+            //{
+            //    txtOutput.Text = subForm.CodeText;
+            //    tabControl1.SelectedIndex = 1;
+            //}
         }
 
         private void btnExportToFile2_Click(object sender, EventArgs e)
@@ -428,7 +446,8 @@ namespace Tools.zhong
         {
             try
             {
-                if (cbDBType.Text == "ORACLE")
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
                 {
                     string sql = "select table_name from user_tables order by table_name";
                     var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
@@ -436,7 +455,7 @@ namespace Tools.zhong
                     txtTableName3.DisplayMember = "table_name";
                     txtTableName3.ValueMember = "table_name";
                 }
-                else if (cbDBType.Text == "SQLSERVER")
+                if (dbType == DataBaseType.SQLSERVER)
                 {
                     string sql = "select name table_name from sys.tables order by name";
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
@@ -444,7 +463,7 @@ namespace Tools.zhong
                     txtTableName3.DisplayMember = "table_name";
                     txtTableName3.ValueMember = "table_name";
                 }
-                else if (cbDBType.Text == "MySQL")
+                if (dbType == DataBaseType.MySQL)
                 {
                     string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name";
                     var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
@@ -487,7 +506,8 @@ namespace Tools.zhong
             }
             try
             {
-                if (cbDBType.Text == "ORACLE")
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
                 {
                     string sql = $"select column_name from user_tab_columns where table_name='{txtTableName3.Text.Trim()}' order by  COLUMN_ID ";
                     var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
@@ -514,7 +534,7 @@ namespace Tools.zhong
                         txtKey3.Text = sbColumns.ToString();
                     }
                 }
-                if (cbDBType.Text == "SQLSERVER")
+                if (dbType == DataBaseType.SQLSERVER)
                 {
                     string sql = string.Format(@"select column_name from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{0}'", txtTableName3.Text.Trim());
                     var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
@@ -546,7 +566,7 @@ namespace Tools.zhong
                         txtKey3.Text = sbColumns.ToString();
                     }
                 }
-                if (cbDBType.Text == "MySQL")
+                if (dbType == DataBaseType.MySQL)
                 {
                     string sql = string.Format(@"select column_name from information_schema.columns where table_schema=@DataBase and TABLE_NAME='{0}'", txtTableName3.Text.Trim());
                     var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
@@ -617,7 +637,7 @@ namespace Tools.zhong
         private void tsmAddDyh_Click(object sender, EventArgs e)
         {
             lastText = txtTempl.Text;
-            var templ = txtTempl.Text.Trim();           
+            var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
@@ -804,7 +824,7 @@ namespace Tools.zhong
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
         {
-            var frm = new CreateModelBySplitStringForm();
+            var frm = new ModelGeneratorForm();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 txtOutput.Text = frm.CodeText;
@@ -856,7 +876,7 @@ namespace Tools.zhong
             foreach (var textItem in inputTexts)
             {
                 var drNew = dt.NewRow();
-                var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();                
+                var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();
                 for (int i = 0; i < colItem.Count(); i++)
                 {
                     if (!dt.Columns.Contains($"col{i}"))
@@ -866,7 +886,7 @@ namespace Tools.zhong
                     drNew[$"col{i}"] = colItem[i];
                 }
                 dt.Rows.Add(drNew);
-            }            
+            }
         }
 
         /// <summary>
@@ -880,15 +900,16 @@ namespace Tools.zhong
             {
                 string sql = txtInput3.Text.Trim();
                 DataTable dtData = new DataTable();
-                if (cbDBType.Text == "ORACLE")
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
                 {
-                    dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);                  
+                    dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
                 }
-                else if (cbDBType.Text == "SQLSERVER")
+                else if (dbType == DataBaseType.SQLSERVER)
                 {
                     dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
                 }
-                else if (cbDBType.Text == "MySQL")
+                else if (dbType == DataBaseType.MySQL)
                 {
                     dtData = DBHepler.MySQLHelper.ExecuteDataTable(sql);
                 }
@@ -915,6 +936,7 @@ namespace Tools.zhong
                 //txtOuput3.Text = sb.ToString();
                 #endregion
 
+                saveFileDialog1.Filter = "Excel(*.xlsx)|*.xlsx";
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = saveFileDialog1.FileName;
@@ -925,21 +947,80 @@ namespace Tools.zhong
                     }
                     MessageBox.Show("保存成功！");
                 }
+                saveFileDialog1.Filter = "All files(*.*)|*.*";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }        
+            }
         }
 
+        /// <summary>
+        /// 生成数据字典（单表)
+        /// </summary>
         private void btnCreateDicSingleTable_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtTableName3.Text))
+            {
+                MessageBox.Show("请指定表名！");
+            }
+            try
+            {
 
+                saveFileDialog1.Filter = "Word(*.docx)|*.docx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog1.FileName;
+                    //var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
+                    var data = DbObjectHelper.GetColumnsForOracle(txtTableName3.Text.Trim());
+
+                    using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew))
+                    {
+                        //wookbook.Write(fs);
+                    }
+                    MessageBox.Show("生成成功！");
+                }
+                saveFileDialog1.Filter = "All files(*.*)|*.*";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        /// <summary>
+        /// 生成数据字典（数据库)
+        /// </summary>
         private void btnCreateDicAllDB_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                saveFileDialog1.Filter = "Word(*.docx)|*.docx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog1.FileName;
+                    //var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
+                    using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew))
+                    {
+                        //wookbook.Write(fs);
+                    }
+                    MessageBox.Show("生成成功！");
+                }
+                saveFileDialog1.Filter = "All files(*.*)|*.*";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (subForm != null)
+            {
+                subForm.Dispose();
+            }
         }
     }
 }

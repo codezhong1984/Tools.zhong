@@ -7,18 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tools.zhong.Model;
 using Tools.zhong.UtilHelper;
 
 namespace Tools.zhong
 {
-    public partial class CreateModelBySplitStringForm : Form
+    public partial class ModelGeneratorForm : Form
     {
         private BindingList<TableColumnModel> _ListColumns = new BindingList<TableColumnModel>();
         public string CodeText { get; set; }
 
         private string SplitChar = "\t";
 
-        public CreateModelBySplitStringForm()
+        public ModelGeneratorForm()
         {
             InitializeComponent();
         }
@@ -26,7 +27,8 @@ namespace Tools.zhong
         private void btnOk_Click(object sender, EventArgs e)
         {
             var dataList = _ListColumns.ToList<TableColumnModel>();
-            this.CodeText = ModelFromDBHelper.GenerateCode(dataList, false, false, tbNameSpace.Text.Trim());
+            this.CodeText = DbObjectHelper.GenerateCode(dataList, cbLineDeal.Checked, cbDisplayName.Checked,
+              tbNameSpace.Text.Trim(), null, false, cbFullProp.Checked);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -46,10 +48,10 @@ namespace Tools.zhong
             string[] inputVals = inputVal.Split(new string[] { SplitChar }, StringSplitOptions.RemoveEmptyEntries);
             _ListColumns.Clear();
             //dataGridView1.DataSource = null;
-            if (dataGridView1.DataSource!=null && dataGridView1.RowCount>0)
+            if (dataGridView1.DataSource != null && dataGridView1.RowCount > 0)
             {
                 dataGridView1.Rows.Clear();
-            }          
+            }
 
             foreach (var item in inputVals)
             {
@@ -61,7 +63,7 @@ namespace Tools.zhong
                 //针对MySql、Oracel等去除首尾双引号
                 propName = propName.TrimStart('"').TrimEnd('"');
 
-                colItem.FieldName = ModelFromDBHelper.ToUperFirstChar(propName);
+                colItem.FieldName = DbObjectHelper.ToUperFirstChar(propName);
                 colItem.DataType = "string";
                 colItem.TableName = txtClassName.Text.Trim();
                 colItem.TableComment = txtTableDescription.Text.Trim();
@@ -77,11 +79,12 @@ namespace Tools.zhong
         {
             switch (cbSplitChar.Text)
             {
-                case "Tab": SplitChar = "\t";break;
-                case "空格": SplitChar = " ";break;
-                case "逗号": SplitChar = ",";break;
-                case "回车换行": SplitChar = Environment.NewLine;break;
-                default:SplitChar = "\t";
+                case "Tab": SplitChar = "\t"; break;
+                case "空格": SplitChar = " "; break;
+                case "逗号": SplitChar = ","; break;
+                case "回车换行": SplitChar = Environment.NewLine; break;
+                default:
+                    SplitChar = "\t";
                     break;
             }
         }

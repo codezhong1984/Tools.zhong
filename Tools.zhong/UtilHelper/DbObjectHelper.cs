@@ -6,13 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Tools.zhong.Model;
 
 namespace Tools.zhong.UtilHelper
 {
-    public class ModelFromDBHelper
+    public class DbObjectHelper
     {
         public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false,
-            string ns = "DBModel", string enumCode = null, bool EnableMapperTableName = false)
+            string ns = "DBModel", string enumCode = null, bool EnableMapperTableName = false, bool fullPropFlag = false)
         {
             if (listColumns == null || listColumns.Count == 0)
             {
@@ -48,7 +49,6 @@ namespace Tools.zhong.UtilHelper
             }
             sbResult.AppendLine("    public class " + ToUperFirstChar(listColumns[0].TableName));
             sbResult.AppendLine("    {");
-
 
             #region 生成私有变量
 
@@ -101,12 +101,30 @@ namespace Tools.zhong.UtilHelper
                 {
                     sbResult.AppendLine("        [Key]");
                 }
-                var fieldCode = $"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
-                              + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
-                              + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
-                              + "{ get; set; }";
 
-                sbResult.AppendLine(fieldCode);
+                var fieldCode = new StringBuilder();
+                if (fullPropFlag)
+                {
+                    fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                           + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                           + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} ");
+                    fieldCode.AppendLine("        {");
+                    fieldCode.AppendLine("            get { return _" + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; }");
+                    fieldCode.AppendLine("            set { _" + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value; }");
+                    fieldCode.AppendLine("        }");
+                    fieldCode.AppendLine($"        private {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                           + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                           + $" _{(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))}; ");
+                }
+                else
+                {
+                    fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                             + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                             + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
+                             + "{ get; set; }");
+                }
+
+                sbResult.AppendLine(fieldCode.ToString());
             }
             sbResult.AppendLine("    }");
             sbResult.AppendLine("}");
@@ -173,11 +191,14 @@ namespace Tools.zhong.UtilHelper
             return sb.ToString();
         }
 
-
         //数据库对应类型
         public static string ChangeToCsharpType(string type)
         {
             string reval = string.Empty;
+            if (type == null)
+            {
+                return "string";
+            }
             switch (type.ToLower())
             {
                 case "int":
@@ -345,7 +366,7 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// Oracle 取表属性
         /// </summary>
-        public static List<TableColumnModel> GetFieldsFormDB(DataTable dataTable)
+        private static List<TableColumnModel> GetFieldsFormDB(DataTable dataTable)
         {
             var list = new List<TableColumnModel>();
             try
@@ -395,7 +416,6 @@ namespace Tools.zhong.UtilHelper
                         var match = regex.Match(enumVals);
                         enumVals = match.Groups.Count <= 1 ? "" : match.Groups[1].Value;
                         modelItem.EnumValues = enumVals.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-
                         list.Add(modelItem);
                     }
                 }
@@ -406,26 +426,73 @@ namespace Tools.zhong.UtilHelper
                 throw new Exception(ex.Message);
             }
         }
-    }
 
-    public class TableColumnModel
-    {
-        public string TableName { get; set; }
-        public string TableComment { get; set; }
-        public string FieldName { get; set; }
-        public int DataLength { get; set; }
-        public string FieldRemarks { get; set; }
-        public string DataType { get; set; }
-        public bool IsNullable { get; set; }
-    }
+        /// <summary>
+        /// 获取Orcle 数据表字段
+        /// </summary>
+        public static List<TableColumnModel> GetColumnsForOracle(string tableName)
+        {
+            //--添加表注释 COMMENT ON TABLE STUDENT_INFO IS '学生信息表'
+            //添加字段注释 comment on column R_StockAnalysis_T.WORKNO is '工单号';
+            string sql = @"select a.TABLE_NAME,c.COMMENTS as table_comments, a.column_name,a.DATA_TYPE,b.Comments as column_comments,a.NULLABLE
+                            from user_tab_columns a 
+                            left join user_col_comments b on a.TABLE_NAME=b.TABLE_NAME and a.COLUMN_NAME = b.column_name
+                            left join user_tab_comments c on a.TABLE_NAME=c.TABLE_NAME
+                            where a.table_name ='{0}'
+                            order by a.COLUMN_ID ";
 
-    public class EnumColumnModel
-    {
-        public string TableName { get; set; }
-        public string TableComment { get; set; }
-        public string FieldName { get; set; }
-        public string FieldRemarks { get; set; }
+            var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            var list = GetFieldsFormDB(dtData);
+            return list;
+        }
 
-        public string[] EnumValues { get; set; }
+        /// <summary>
+        /// 获取SqlServer 数据表字段
+        /// </summary>
+        public static List<TableColumnModel> GetColumnsForSqlServer(string tableName)
+        {
+            string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments,
+                                    IIF(c.is_nullable=1,'Y','N') nullable
+                                from sys.tables a 
+                                left join sys.extended_properties b on a.object_id=b.major_id and b.minor_id=0
+                                left join sys.columns c on a.object_id=c.object_id
+                                left join sys.extended_properties d on d.major_id=c.object_id and d.minor_id=c.column_id
+                                left join sys.systypes e on c.system_type_id=e.xtype and e.xtype=e.xusertype
+                                where a.name='{0}'
+                                order by c.column_id ";
+
+            var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, tableName));
+            var list = GetFieldsFormDB(dtData);
+            return list;
+        }
+
+        /// <summary>
+        /// 获取MySql 数据表字段
+        /// </summary>
+        public static List<TableColumnModel> GetColumnsForMySQL(string tableName)
+        {
+            //添加表注释 alter table test1 comment '修改后的表的注释';
+            //添加列注释 alter table test modify column id int not null default 0 comment '测试表id'
+
+            string sql = @" select b.table_name,b.table_comment table_comments,a.column_name,a.data_type,a.column_comment column_comments,if(a.is_Nullable='YES','Y','N') nullable
+                            from information_schema.columns a inner join information_schema.tables b on a.table_name=b.table_name and a.table_schema=b.table_schema
+                            where b.table_schema=@DataBase and b.table_name='{0}'
+                            order by a.ORDINAL_POSITION ";
+
+            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
+            var list = GetFieldsFormDB(dtData);
+            return list;
+        }
+
+        public static DataTable GetEnumCodeForMySQL(string tableName)
+        {
+            string sql = @" select table_name,column_name,column_type 
+                            from information_schema.columns 
+                            where table_name='{0}' and data_type='enum' and table_schema=@DataBase
+                            order by ORDINAL_POSITION ";
+
+            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
+            return dtData;
+        }
     }
 }

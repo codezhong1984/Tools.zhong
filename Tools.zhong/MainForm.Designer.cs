@@ -88,6 +88,8 @@ namespace Tools.zhong
             this.btnEncode = new System.Windows.Forms.Button();
             this.txtOutput4 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnCreateDicAllDB = new System.Windows.Forms.Button();
+            this.btnCreateDicSingleTable = new System.Windows.Forms.Button();
             this.btnExportData = new System.Windows.Forms.Button();
             this.btnLoadFromDB = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -113,8 +115,6 @@ namespace Tools.zhong
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnCreateDicSingleTable = new System.Windows.Forms.Button();
-            this.btnCreateDicAllDB = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -791,6 +791,32 @@ namespace Tools.zhong
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnCreateDicAllDB
+            // 
+            this.btnCreateDicAllDB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateDicAllDB.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCreateDicAllDB.Location = new System.Drawing.Point(300, 257);
+            this.btnCreateDicAllDB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCreateDicAllDB.Name = "btnCreateDicAllDB";
+            this.btnCreateDicAllDB.Size = new System.Drawing.Size(163, 31);
+            this.btnCreateDicAllDB.TabIndex = 26;
+            this.btnCreateDicAllDB.Text = "生成数据字典(库)";
+            this.btnCreateDicAllDB.UseVisualStyleBackColor = true;
+            this.btnCreateDicAllDB.Click += new System.EventHandler(this.btnCreateDicAllDB_Click);
+            // 
+            // btnCreateDicSingleTable
+            // 
+            this.btnCreateDicSingleTable.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateDicSingleTable.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCreateDicSingleTable.Location = new System.Drawing.Point(124, 257);
+            this.btnCreateDicSingleTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCreateDicSingleTable.Name = "btnCreateDicSingleTable";
+            this.btnCreateDicSingleTable.Size = new System.Drawing.Size(168, 31);
+            this.btnCreateDicSingleTable.TabIndex = 25;
+            this.btnCreateDicSingleTable.Text = "生成数据字典(单表)";
+            this.btnCreateDicSingleTable.UseVisualStyleBackColor = true;
+            this.btnCreateDicSingleTable.Click += new System.EventHandler(this.btnCreateDicSingleTable_Click);
+            // 
             // btnExportData
             // 
             this.btnExportData.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -798,7 +824,7 @@ namespace Tools.zhong
             this.btnExportData.Location = new System.Drawing.Point(11, 257);
             this.btnExportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportData.Name = "btnExportData";
-            this.btnExportData.Size = new System.Drawing.Size(147, 31);
+            this.btnExportData.Size = new System.Drawing.Size(104, 31);
             this.btnExportData.TabIndex = 24;
             this.btnExportData.Text = "导出数据";
             this.btnExportData.UseVisualStyleBackColor = true;
@@ -896,10 +922,6 @@ namespace Tools.zhong
             // 
             this.cbDBType.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbDBType.FormattingEnabled = true;
-            this.cbDBType.Items.AddRange(new object[] {
-            "SQLSERVER",
-            "ORACLE",
-            "MySQL"});
             this.cbDBType.Location = new System.Drawing.Point(164, 5);
             this.cbDBType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDBType.Name = "cbDBType";
@@ -1077,32 +1099,6 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // btnCreateDicSingleTable
-            // 
-            this.btnCreateDicSingleTable.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateDicSingleTable.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDicSingleTable.Location = new System.Drawing.Point(165, 257);
-            this.btnCreateDicSingleTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCreateDicSingleTable.Name = "btnCreateDicSingleTable";
-            this.btnCreateDicSingleTable.Size = new System.Drawing.Size(168, 31);
-            this.btnCreateDicSingleTable.TabIndex = 25;
-            this.btnCreateDicSingleTable.Text = "生成数据字典(单表)";
-            this.btnCreateDicSingleTable.UseVisualStyleBackColor = true;
-            this.btnCreateDicSingleTable.Click += new System.EventHandler(this.btnCreateDicSingleTable_Click);
-            // 
-            // btnCreateDicAllDB
-            // 
-            this.btnCreateDicAllDB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateDicAllDB.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDicAllDB.Location = new System.Drawing.Point(340, 257);
-            this.btnCreateDicAllDB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCreateDicAllDB.Name = "btnCreateDicAllDB";
-            this.btnCreateDicAllDB.Size = new System.Drawing.Size(163, 31);
-            this.btnCreateDicAllDB.TabIndex = 26;
-            this.btnCreateDicAllDB.Text = "生成数据字典(库)";
-            this.btnCreateDicAllDB.UseVisualStyleBackColor = true;
-            this.btnCreateDicAllDB.Click += new System.EventHandler(this.btnCreateDicAllDB_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1114,6 +1110,7 @@ namespace Tools.zhong
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "代码生成辅助工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

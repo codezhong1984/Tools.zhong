@@ -65,11 +65,20 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xceed.Document.NET, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.2.2.0\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.2.2.0\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBHelper\OracleHelper.cs" />
     <Compile Include="DBHelper\MySQLHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
+    <Compile Include="Model\DataBaseType.cs" />
+    <Compile Include="Model\EnumColumnModel.cs" />
+    <Compile Include="Model\TableColumnModel.cs" />
     <Compile Include="OracleQueryHelperForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,11 +91,11 @@
     <Compile Include="DBTableForm.Designer.cs">
       <DependentUpon>DBTableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateModelBySplitStringForm.cs">
+    <Compile Include="ModelGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateModelBySplitStringForm.Designer.cs">
-      <DependentUpon>CreateModelBySplitStringForm.cs</DependentUpon>
+    <Compile Include="ModelGeneratorForm.Designer.cs">
+      <DependentUpon>ModelGeneratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportForm.cs">
       <SubType>Form</SubType>
@@ -117,9 +126,10 @@
     <Compile Include="UtilHelper\Base64Util.cs" />
     <Compile Include="UtilHelper\ConfigHelper.cs" />
     <Compile Include="UtilHelper\DESUtil.cs" />
+    <Compile Include="UtilHelper\DocxHelper.cs" />
     <Compile Include="UtilHelper\EnumUtil.cs" />
     <Compile Include="UtilHelper\ExcelUtil.cs" />
-    <Compile Include="UtilHelper\ModelFromDBHelper.cs" />
+    <Compile Include="UtilHelper\DbObjectHelper.cs" />
     <Compile Include="UtilHelper\ObjectUtil.cs" />
     <Compile Include="UtilHelper\ReflectUtil.cs" />
     <Compile Include="UtilHelper\StringUtil.cs" />
@@ -129,8 +139,8 @@
     <EmbeddedResource Include="DBTableForm.resx">
       <DependentUpon>DBTableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateModelBySplitStringForm.resx">
-      <DependentUpon>CreateModelBySplitStringForm.cs</DependentUpon>
+    <EmbeddedResource Include="ModelGeneratorForm.resx">
+      <DependentUpon>ModelGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
@@ -168,8 +178,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
