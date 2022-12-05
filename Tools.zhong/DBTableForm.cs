@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBHepler;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -159,7 +160,9 @@ namespace Tools.zhong
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            //this.DialogResult = DialogResult.Cancel;
+            this.Close();
+            this.Dispose();
         }
 
         private void cbDBType_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,7 +177,7 @@ namespace Tools.zhong
                 if (dbType == DataBaseType.ORACLE)
                 {
                     string sql = "select table_name from user_tables order by table_name ";
-                    var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
+                    var dtData = OracleHelper.ExecuteDataTable(sql);
                     cbTableName.DataSource = dtData;
                     cbTableName.DisplayMember = "table_name";
                     cbTableName.ValueMember = "table_name";

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Collections;
 using System.Configuration;
+using System.Data.Common;
 
 namespace DBHepler
 { 
@@ -13,8 +14,21 @@ namespace DBHepler
     /// </summary>
     public abstract class SQLHelper
     {
+        /// <summary>
+        /// 从连接字符串中获取数据库名
+        /// </summary>
+        /// <returns></returns>
+        public static string GetDataBaseName()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SQLServerDB"].ConnectionString;
+            DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
+            builder.ConnectionString = connectionString;
+            string databaseName = builder["Initial Catalog"] as string;
+            return databaseName;
+        }
+
         //数据库连接字符串        
-        
+
         public static SqlConnection GetSqlConnection()
         {
             string connectString = ConfigurationManager.ConnectionStrings["SQLServerDB"].ConnectionString;

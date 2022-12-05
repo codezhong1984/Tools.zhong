@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.OracleClient;
 using System.IO;
 using System.Text;
@@ -19,6 +20,20 @@ namespace DBHepler
     {
         //Create a hashtable for the parameter cached
         private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());
+
+        /// <summary>
+        /// 从连接字符串中获取数据库名
+        /// </summary>
+        /// <returns></returns>
+        public static string GetDataBaseName()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["OracleDB"].ConnectionString;
+            DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
+            builder.ConnectionString = connectionString;
+            string databaseName = builder["Data Source"] as string;
+            databaseName = databaseName.Substring(databaseName.IndexOf("/")+1);
+            return databaseName;
+        }
 
         /// <summary>
         /// 创建连接对象（默认连上PTS数据库）

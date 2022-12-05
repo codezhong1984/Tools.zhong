@@ -51,7 +51,9 @@ namespace Tools.zhong
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(146, 592);
+            this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOk.ForeColor = System.Drawing.Color.Blue;
+            this.btnOk.Location = new System.Drawing.Point(324, 593);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 27);
             this.btnOk.TabIndex = 2;
@@ -62,11 +64,11 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(50, 592);
+            this.btnCancel.Location = new System.Drawing.Point(429, 593);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "取 消";
+            this.btnCancel.Text = "关 闭";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -150,7 +152,7 @@ namespace Tools.zhong
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(242, 592);
+            this.btnSave.Location = new System.Drawing.Point(22, 593);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(118, 27);
             this.btnSave.TabIndex = 30;
@@ -182,7 +184,7 @@ namespace Tools.zhong
             this.btnOpenPath2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
-            this.btnOpenPath2.Location = new System.Drawing.Point(381, 593);
+            this.btnOpenPath2.Location = new System.Drawing.Point(170, 593);
             this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenPath2.Name = "btnOpenPath2";
             this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);

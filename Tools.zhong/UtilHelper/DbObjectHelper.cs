@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBHepler;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -435,24 +436,26 @@ namespace Tools.zhong.UtilHelper
             //--添加表注释 COMMENT ON TABLE STUDENT_INFO IS '学生信息表'
             //添加字段注释 comment on column R_StockAnalysis_T.WORKNO is '工单号';
             string sql = @"select a.TABLE_NAME,c.COMMENTS as table_comments, a.column_name,a.DATA_TYPE,b.Comments as column_comments,a.NULLABLE
+                                 ,a.DATA_LENGTH as DataLength,a.DATA_PRECISION as DataPrecision,a.DATA_SCALE as DataScale
                             from user_tab_columns a 
                             left join user_col_comments b on a.TABLE_NAME=b.TABLE_NAME and a.COLUMN_NAME = b.column_name
                             left join user_tab_comments c on a.TABLE_NAME=c.TABLE_NAME
                             where a.table_name ='{0}'
                             order by a.COLUMN_ID ";
 
-            var dtData = DBHepler.OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            var dtData = OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
             var list = GetFieldsFormDB(dtData);
             return list;
         }
-
+        
         /// <summary>
         /// 获取SqlServer 数据表字段
         /// </summary>
         public static List<TableColumnModel> GetColumnsForSqlServer(string tableName)
         {
-            string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments,
-                                    IIF(c.is_nullable=1,'Y','N') nullable
+            string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments
+                                    ,IIF(c.is_nullable=1,'Y','N') nullable,c.max_length as DataLength,iif(c.precision='0',null,c.precision) DataPrecision
+                                    ,c.scale as DataScale
                                 from sys.tables a 
                                 left join sys.extended_properties b on a.object_id=b.major_id and b.minor_id=0
                                 left join sys.columns c on a.object_id=c.object_id
@@ -493,6 +496,21 @@ namespace Tools.zhong.UtilHelper
 
             var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
             return dtData;
+        }
+
+        public static string GetDataBaseName(DataBaseType dataBaseType)
+        {
+            switch (dataBaseType)
+            {
+                case DataBaseType.SQLSERVER:
+                    return SQLHelper.GetDataBaseName();
+                case DataBaseType.ORACLE:
+                    return OracleHelper.GetDataBaseName();
+                case DataBaseType.MySQL:
+                    return MySQLHelper.GetDataBaseName();
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

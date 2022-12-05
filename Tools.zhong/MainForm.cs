@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using Tools.zhong.UtilHelper;
 using Tools.zhong.Model;
+using DBHepler;
 
 namespace Tools.zhong
 {
@@ -450,7 +451,7 @@ namespace Tools.zhong
                 if (dbType == DataBaseType.ORACLE)
                 {
                     string sql = "select table_name from user_tables order by table_name";
-                    var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
+                    var dtData = OracleHelper.ExecuteDataTable(sql);
                     txtTableName3.DataSource = dtData;
                     txtTableName3.DisplayMember = "table_name";
                     txtTableName3.ValueMember = "table_name";
@@ -510,7 +511,7 @@ namespace Tools.zhong
                 if (dbType == DataBaseType.ORACLE)
                 {
                     string sql = $"select column_name from user_tab_columns where table_name='{txtTableName3.Text.Trim()}' order by  COLUMN_ID ";
-                    var dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
+                    var dtData = OracleHelper.ExecuteDataTable(sql);
                     if (dtData != null)
                     {
                         StringBuilder sbColumns = new StringBuilder();
@@ -523,7 +524,7 @@ namespace Tools.zhong
 
                     string sqlkey = $"select column_name from user_cons_columns cu, user_constraints au " +
                                     $"where cu.constraint_name = au.constraint_name and au.constraint_type = 'P' and au.table_name = '{txtTableName3.Text.Trim()}'";
-                    dtData = DBHepler.OracleHelper.ExecuteDataTable(sqlkey);
+                    dtData = OracleHelper.ExecuteDataTable(sqlkey);
                     if (dtData != null)
                     {
                         StringBuilder sbColumns = new StringBuilder();
@@ -817,7 +818,7 @@ namespace Tools.zhong
 
         private void tsmRedo_Click(object sender, EventArgs e)
         {
-            txtTempl.Text = lastText;
+            //txtTempl.Text = lastText;
         }
 
         #endregion
@@ -870,23 +871,31 @@ namespace Tools.zhong
 
         private void btnImportFromInput_Click(object sender, EventArgs e)
         {
-            var templ = txtTempl.Text.Trim();
-            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(i => i.Trim()).ToList();
-            foreach (var textItem in inputTexts)
+            try
             {
-                var drNew = dt.NewRow();
-                var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();
-                for (int i = 0; i < colItem.Count(); i++)
+                var templ = txtTempl.Text.Trim();
+                var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(i => i.Trim()).ToList();
+                foreach (var textItem in inputTexts)
                 {
-                    if (!dt.Columns.Contains($"col{i}"))
+                    var drNew = dt.NewRow();
+                    var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();
+                    for (int i = 0; i < colItem.Count(); i++)
                     {
-                        dt.Columns.Add($"col{i}");
+                        if (!dt.Columns.Contains($"col{i}"))
+                        {
+                            dt.Columns.Add($"col{i}");
+                        }
+                        drNew[$"col{i}"] = colItem[i];
                     }
-                    drNew[$"col{i}"] = colItem[i];
+                    dt.Rows.Add(drNew);
                 }
-                dt.Rows.Add(drNew);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+          
         }
 
         /// <summary>
@@ -903,7 +912,7 @@ namespace Tools.zhong
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
                 if (dbType == DataBaseType.ORACLE)
                 {
-                    dtData = DBHepler.OracleHelper.ExecuteDataTable(sql);
+                    dtData = OracleHelper.ExecuteDataTable(sql);
                 }
                 else if (dbType == DataBaseType.SQLSERVER)
                 {
@@ -972,12 +981,24 @@ namespace Tools.zhong
                 {
                     string filePath = saveFileDialog1.FileName;
                     //var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
-                    var data = DbObjectHelper.GetColumnsForOracle(txtTableName3.Text.Trim());
-
-                    using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew))
+                    List<TableColumnModel> data = null;
+                    
+                    var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                    string dataBaseName = DbObjectHelper.GetDataBaseName(dbType);
+                    if (dbType == DataBaseType.ORACLE)
                     {
-                        //wookbook.Write(fs);
+                        data = DbObjectHelper.GetColumnsForOracle(txtTableName3.Text.Trim());
                     }
+                    else if (dbType == DataBaseType.SQLSERVER)
+                    {
+                        data = DbObjectHelper.GetColumnsForSqlServer(txtTableName3.Text.Trim());
+                    }
+                    else if (dbType == DataBaseType.MySQL)
+                    {
+                        data = DbObjectHelper.GetColumnsForMySQL(txtTableName3.Text.Trim());
+                    }
+
+                    DocxHelper.GenerateDocx(filePath, dataBaseName, data);
                     MessageBox.Show("生成成功！");
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
