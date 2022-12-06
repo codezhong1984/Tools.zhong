@@ -49,7 +49,8 @@ namespace Tools.zhong
 
         private string GetCodeForMySQL(string tableName)
         {
-            var list = DbObjectHelper.GetColumnsForMySQL(tableName);
+            var dataBaseName = DbObjectHelper.GetDataBaseName(DataBaseType.MySQL);
+            var list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
             var enumCode = GetEnumCodeForMySQL(tableName);
             var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
                 tbNameSpace.Text.Trim(), enumCode, EnableMapperTableName, cbFullProp.Checked);
@@ -174,32 +175,10 @@ namespace Tools.zhong
             try
             {
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                if (dbType == DataBaseType.ORACLE)
-                {
-                    string sql = "select table_name from user_tables order by table_name ";
-                    var dtData = OracleHelper.ExecuteDataTable(sql);
-                    cbTableName.DataSource = dtData;
-                    cbTableName.DisplayMember = "table_name";
-                    cbTableName.ValueMember = "table_name";
-
-
-                }
-                else if (dbType == DataBaseType.SQLSERVER)
-                {
-                    string sql = "select name table_name from sys.tables  order by name ";
-                    var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
-                    cbTableName.DataSource = dtData;
-                    cbTableName.DisplayMember = "table_name";
-                    cbTableName.ValueMember = "table_name";
-                }
-                else if (dbType == DataBaseType.MySQL)
-                {
-                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name  ";
-                    var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
-                    cbTableName.DataSource = dtData;
-                    cbTableName.DisplayMember = "table_name";
-                    cbTableName.ValueMember = "table_name";
-                }
+                var dtData = DbObjectHelper.GetDataBaseTables(dbType);
+                cbTableName.DataSource = dtData;
+                cbTableName.DisplayMember = "table_name";
+                cbTableName.ValueMember = "table_name";
             }
             catch (Exception ex)
             {

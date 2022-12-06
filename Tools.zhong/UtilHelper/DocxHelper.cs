@@ -12,76 +12,127 @@ namespace Tools.zhong.UtilHelper
 {
     public class DocxHelper
     {
-        public static void GenerateDocx(string fileName, string dataBaseFileName, List<TableColumnModel> listData)
-        {
-            string filePath = @"C:\Users\Administrator\Desktop\11.docx";
-            DocX doc = DocX.Load(filePath);
+        private static readonly string DATABASE_TITLE_SUFFIX = "数据库设计文档";
+        private static readonly string[] TABLE_FIELDS = new string[] { "字段名称", "字段描述",
+            "字段类型", "字段长度", "数据精度", "小数位数", "是否必填" };
 
-            if (listData == null || listData.Count == 0)
-            {
-                return;
-            }
+        public static DocX CreateDocx(string fileName)
+        {
+            return DocX.Create(fileName);
+        }
+
+        public static void GenerateDocxByTable(string fileName, string dbName, List<TableColumnModel> listData)
+        {
             try
             {
-                using (var document = DocX.Create(fileName))
+                using (var docx = CreateDocx(fileName))
                 {
-                    var p = document.InsertParagraph();
-                    p.Append(listData[0].TableName)
-                        .Font(new Xceed.Document.NET.Font("宋体"))
-                        .FontSize(14)
-                        .Color(Color.Black)
-                        .Bold()
-                        .Spacing(18);
-
-                    p = document.InsertParagraph();
-                    p.Append(listData[0].TableComment)
-                        .Font(new Xceed.Document.NET.Font("宋体")).Color(Color.Black)//.Italic()
-                        .SpacingAfter(0);
-
-                    //表字段表格
-                    string[] headTexts = new string[] { "序号", "字段名称", "字段描述", "字段类型", "字段长度", "数据精度", "小数位数", "是否必填" };
-                    //var table = document.AddTable(1 + listData.Count, headTexts.Length);
-                    var columnWidths = new float[] { 50f, 150f, 150f, 100f, 50f, 50f, 50f, 50f };
-                    var table = document.InsertTable(1 + listData.Count, headTexts.Length);
-                    table.SetWidths(columnWidths);
-                    table.AutoFit = AutoFit.Window;
-
-                    table.TableCaption = listData[0].TableName;
-                    table.TableDescription = listData[0].TableComment;
-                    table.Design = TableDesign.TableGrid;
-                    table.Alignment = Alignment.center;
-                    for (int i = 0; i < headTexts.Length; i++)
-                    {
-                        table.Rows[0].Cells[i].Paragraphs[0].Append(headTexts[i]);
-                        if (i == 0)
-                        {
-                            table.Rows[0].Cells[i].Width = 3;
-                        }
-                        if (i == 2)
-                        {
-                            table.Rows[0].Cells[i].Width = 10;
-                        }
-                    }
-
-                    //添加表格数据
-                    for (int i = 0; i < listData.Count; i++)
-                    {
-                        table.Rows[i + 1].Cells[0].Paragraphs[0].Append((i + 1).ToString());
-                        table.Rows[i + 1].Cells[1].Paragraphs[0].Append(listData[i].FieldName);
-                        table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].FieldRemarks);
-                        table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataType);
-                        table.Rows[i + 1].Cells[4].Paragraphs[0].Append(listData[i].DataLength?.ToString());
-                        table.Rows[i + 1].Cells[5].Paragraphs[0].Append(listData[i].DataPrecision?.ToString());
-                        table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].DataScale?.ToString());
-                        table.Rows[i + 1].Cells[7].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N");
-                    }
-                
-                    document.Save();
+                    WriteDocxTitle(docx, dbName + DATABASE_TITLE_SUFFIX);
+                    WriteDocxSingleTable(docx, listData);
+                    docx.Save();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void GenerateDocxByTables(string fileName, string dbName, List<List<TableColumnModel>> lists)
+        {
+            try
+            {
+                using (var docx = CreateDocx(fileName))
+                {
+                    WriteDocxTitle(docx, dbName + "数据库设计文档");
+                    WriteDocxTables(docx, lists);
+                    docx.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void WriteDocxTitle(DocX document, string title)
+        {
+            var p = document.InsertParagraph();
+            p.Append(title)
+                .Font(new Xceed.Document.NET.Font("宋体"))
+                .FontSize(14)
+                .Color(Color.Black)
+                .Bold()
+                .SpacingAfter(5);
+            p.Alignment = Alignment.center;
+            p.InsertPageBreakAfterSelf();
+        }
+
+        private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData)
+        {
+            if (listData == null || listData.Count == 0)
+            {
+                return;
+            }
+            var p = docx.InsertParagraph();
+            p.Append(listData[0].TableName)
+                .Font(new Xceed.Document.NET.Font("宋体"))
+                .FontSize(12)
+                .Color(Color.Black)
+                .Bold()
+                .SpacingBefore(10);
+            p.Alignment = Alignment.left;
+
+            //docx.AddList(listData[0].TableName, 1, ListItemType.Numbered, null, false, true
+            //    , new Formatting() { Size = 20, Bold = true, FontFamily = new Xceed.Document.NET.Font("宋体") });
+
+            if (!string.IsNullOrWhiteSpace(listData[0].TableComment))
+            {
+                var pComment = docx.InsertParagraph();
+                pComment.Append(listData[0].TableComment)
+                    .Font(new Xceed.Document.NET.Font("宋体")).Color(Color.Black)
+                    .SpacingAfter(0);
+                pComment.Alignment = Alignment.left;
+            }
+
+            //表字段表格         
+            var tableFontSize = 10.5;
+            var columnWidths = new float[] { 0.17f, 0.18f, 0.17f, 0.12f, 0.12f, 0.12f, 0.12f };
+            var table = docx.InsertTable(1 + listData.Count, TABLE_FIELDS.Length);
+            table.SetWidthsPercentage(columnWidths);
+            table.AutoFit = AutoFit.Window;
+
+            table.TableCaption = listData[0].TableName;
+            table.TableDescription = listData[0].TableComment;
+            table.Design = TableDesign.TableGrid;
+            table.Alignment = Alignment.left;
+            for (int i = 0; i < TABLE_FIELDS.Length; i++)
+            {
+                table.Rows[0].Cells[i].Paragraphs[0].Append(TABLE_FIELDS[i]).FontSize(tableFontSize).Bold(true);
+            }
+
+            //添加表格数据
+            for (int i = 0; i < listData.Count; i++)
+            {
+                table.Rows[i + 1].Cells[0].Paragraphs[0].Append(listData[i].FieldName).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[1].Paragraphs[0].Append(listData[i].FieldRemarks).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].DataType).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataLength?.ToString()).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[4].Paragraphs[0].Append(listData[i].DataPrecision?.ToString()).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[5].Paragraphs[0].Append(listData[i].DataScale?.ToString()).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
+            }
+        }
+
+        private static void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists)
+        {
+            if (lists == null || lists.Count == 0)
+            {
+                return;
+            }
+            foreach (var listItem in lists)
+            {
+                WriteDocxSingleTable(document, listItem);
             }
         }
     }

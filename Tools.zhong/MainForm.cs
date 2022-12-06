@@ -42,7 +42,7 @@ namespace Tools.zhong
 
         public TextBox TextOutPut => txtOutput;
         public TabControl TabControl => tabControl1;
-        
+
 
         #endregion
 
@@ -96,7 +96,7 @@ namespace Tools.zhong
             cbEncodeType.SelectedIndex = 0;
 
             //加载数据库类型
-            string[] dbTypes =Enum.GetNames(typeof(DataBaseType));
+            string[] dbTypes = Enum.GetNames(typeof(DataBaseType));
             cbDBType.Items.Clear();
             cbDBType.DataSource = dbTypes;
         }
@@ -448,30 +448,19 @@ namespace Tools.zhong
             try
             {
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                if (dbType == DataBaseType.ORACLE)
+                var dtData = DbObjectHelper.GetDataBaseTables(dbType);
+                txtTableName3.DataSource = dtData;
+                txtTableName3.DisplayMember = "table_name";
+                txtTableName3.ValueMember = "table_name";
+                cblTableLists.Items.Clear();
+                if (dtData != null)
                 {
-                    string sql = "select table_name from user_tables order by table_name";
-                    var dtData = OracleHelper.ExecuteDataTable(sql);
-                    txtTableName3.DataSource = dtData;
-                    txtTableName3.DisplayMember = "table_name";
-                    txtTableName3.ValueMember = "table_name";
+                    foreach (DataRow drItem in dtData.Rows)
+                    {
+                        cblTableLists.Items.Add(drItem["table_name"]);
+                    }
                 }
-                if (dbType == DataBaseType.SQLSERVER)
-                {
-                    string sql = "select name table_name from sys.tables order by name";
-                    var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
-                    txtTableName3.DataSource = dtData;
-                    txtTableName3.DisplayMember = "table_name";
-                    txtTableName3.ValueMember = "table_name";
-                }
-                if (dbType == DataBaseType.MySQL)
-                {
-                    string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name";
-                    var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
-                    txtTableName3.DataSource = dtData;
-                    txtTableName3.DisplayMember = "table_name";
-                    txtTableName3.ValueMember = "table_name";
-                }
+
                 btnLoadFromDB.ForeColor = Color.Red;
             }
             catch (Exception ex)
@@ -895,7 +884,7 @@ namespace Tools.zhong
             {
                 MessageBox.Show(ex.Message);
             }
-          
+
         }
 
         /// <summary>
@@ -980,9 +969,8 @@ namespace Tools.zhong
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = saveFileDialog1.FileName;
-                    //var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
                     List<TableColumnModel> data = null;
-                    
+
                     var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
                     string dataBaseName = DbObjectHelper.GetDataBaseName(dbType);
                     if (dbType == DataBaseType.ORACLE)
@@ -995,11 +983,11 @@ namespace Tools.zhong
                     }
                     else if (dbType == DataBaseType.MySQL)
                     {
-                        data = DbObjectHelper.GetColumnsForMySQL(txtTableName3.Text.Trim());
+                        data = DbObjectHelper.GetColumnsForMySQL(dataBaseName, txtTableName3.Text.Trim());
                     }
 
-                    DocxHelper.GenerateDocx(filePath, dataBaseName, data);
-                    MessageBox.Show("生成成功！");
+                    DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data);
+                    MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
             }
@@ -1016,17 +1004,90 @@ namespace Tools.zhong
         {
             try
             {
-
                 saveFileDialog1.Filter = "Word(*.docx)|*.docx";
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = saveFileDialog1.FileName;
-                    //var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
-                    using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew))
+                    List<List<TableColumnModel>> lists = new List<List<TableColumnModel>>();
+
+                    var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                    string dataBaseName = DbObjectHelper.GetDataBaseName(dbType);
+                    var dtTables = DbObjectHelper.GetDataBaseTables(dbType);
+                    if (dtTables == null || dtTables.Rows.Count == 0)
                     {
-                        //wookbook.Write(fs);
+                        MessageBox.Show("未能查到相关数据表！");
                     }
-                    MessageBox.Show("生成成功！");
+                    foreach (DataRow drItem in dtTables.Rows)
+                    {
+                        string tableName = drItem.Field<string>("table_name");
+                        if (dbType == DataBaseType.ORACLE)
+                        {
+                            var list = DbObjectHelper.GetColumnsForOracle(tableName);
+                            lists.Add(list);
+                        }
+                        else if (dbType == DataBaseType.SQLSERVER)
+                        {
+                            var list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+                            lists.Add(list);
+                        }
+                        else if (dbType == DataBaseType.MySQL)
+                        {
+                            var list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
+                            lists.Add(list);
+                        }
+                    }
+
+                    DocxHelper.GenerateDocxByTables(filePath, dataBaseName, lists);
+                    MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                saveFileDialog1.Filter = "All files(*.*)|*.*";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnExportDocxTables_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.Filter = "Word(*.docx)|*.docx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog1.FileName;
+                    List<List<TableColumnModel>> lists = new List<List<TableColumnModel>>();
+
+                    var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                    string dataBaseName = DbObjectHelper.GetDataBaseName(dbType);
+
+                    if (cblTableLists.SelectedItems == null || cblTableLists.SelectedItems.Count == 0)
+                    {
+                        MessageBox.Show("未能查到相关数据表！");
+                    }
+
+                    foreach (var item in cblTableLists.CheckedItems)
+                    {
+                        string tableName = item?.ToString();
+                        if (dbType == DataBaseType.ORACLE)
+                        {
+                            var list = DbObjectHelper.GetColumnsForOracle(tableName);
+                            lists.Add(list);
+                        }
+                        else if (dbType == DataBaseType.SQLSERVER)
+                        {
+                            var list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+                            lists.Add(list);
+                        }
+                        else if (dbType == DataBaseType.MySQL)
+                        {
+                            var list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
+                            lists.Add(list);
+                        }
+                    }
+
+                    DocxHelper.GenerateDocxByTables(filePath, dataBaseName, lists);
+                    MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
             }
@@ -1043,5 +1104,7 @@ namespace Tools.zhong
                 subForm.Dispose();
             }
         }
+
+
     }
 }

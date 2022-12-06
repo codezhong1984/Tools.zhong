@@ -382,6 +382,21 @@ namespace Tools.zhong.UtilHelper
                         modelItem.FieldName = drItem["column_name"]?.ToString();
                         modelItem.DataType = drItem["data_type"]?.ToString();
                         modelItem.FieldRemarks = drItem["column_comments"]?.ToString();
+                        if (drItem["DataLength"] != null && drItem["DataLength"] != DBNull.Value
+                            && int.Parse(drItem["DataLength"].ToString()) != 0)
+                        {
+                            modelItem.DataLength = int.Parse(drItem["DataLength"].ToString());
+                        }
+                        if (drItem["DataPrecision"] != null && drItem["DataPrecision"] != DBNull.Value
+                            && int.Parse(drItem["DataPrecision"].ToString()) != 0)
+                        {
+                            modelItem.DataPrecision = int.Parse(drItem["DataPrecision"].ToString());
+                        }
+                        if (drItem["DataScale"] != null && drItem["DataScale"] != DBNull.Value
+                            && int.Parse(drItem["DataScale"].ToString()) != 0)
+                        {
+                            modelItem.DataScale = int.Parse(drItem["DataScale"].ToString());
+                        }
                         modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "Y";
                         list.Add(modelItem);
                     }
@@ -428,6 +443,35 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
+        #region 获取数据表列表
+
+        public static DataTable GetDataBaseTables(DataBaseType dbType)
+        {
+            if (dbType == DataBaseType.ORACLE)
+            {
+                string sql = "select table_name from user_tables order by table_name";
+                var dtData = OracleHelper.ExecuteDataTable(sql);
+                return dtData;
+            }
+            if (dbType == DataBaseType.SQLSERVER)
+            {
+                string sql = "select name table_name from sys.tables order by name";
+                var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                return dtData;
+            }
+            if (dbType == DataBaseType.MySQL)
+            {
+                string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name";
+                var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
+                return dtData;
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region 获取数据库表字段
+
         /// <summary>
         /// 获取Orcle 数据表字段
         /// </summary>
@@ -447,7 +491,7 @@ namespace Tools.zhong.UtilHelper
             var list = GetFieldsFormDB(dtData);
             return list;
         }
-        
+
         /// <summary>
         /// 获取SqlServer 数据表字段
         /// </summary>
@@ -472,20 +516,23 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// 获取MySql 数据表字段
         /// </summary>
-        public static List<TableColumnModel> GetColumnsForMySQL(string tableName)
+        public static List<TableColumnModel> GetColumnsForMySQL(string dataBaseName, string tableName)
         {
             //添加表注释 alter table test1 comment '修改后的表的注释';
             //添加列注释 alter table test modify column id int not null default 0 comment '测试表id'
 
             string sql = @" select b.table_name,b.table_comment table_comments,a.column_name,a.data_type,a.column_comment column_comments,if(a.is_Nullable='YES','Y','N') nullable
+                               ,a.CHARACTER_MAXIMUM_LENGTH as DataLength,a.NUMERIC_PRECISION as DataPrecision,a.NUMERIC_SCALE as DataScale
                             from information_schema.columns a inner join information_schema.tables b on a.table_name=b.table_name and a.table_schema=b.table_schema
-                            where b.table_schema=@DataBase and b.table_name='{0}'
+                            where b.table_schema='{0}' and b.table_name='{1}'
                             order by a.ORDINAL_POSITION ";
 
-            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, tableName));
+            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, dataBaseName, tableName));
             var list = GetFieldsFormDB(dtData);
             return list;
         }
+
+        #endregion
 
         public static DataTable GetEnumCodeForMySQL(string tableName)
         {
@@ -512,5 +559,8 @@ namespace Tools.zhong.UtilHelper
                     return string.Empty;
             }
         }
+
+
+
     }
 }
