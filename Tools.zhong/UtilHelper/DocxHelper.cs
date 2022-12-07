@@ -108,7 +108,7 @@ namespace Tools.zhong.UtilHelper
             table.Alignment = Alignment.left;
             for (int i = 0; i < TABLE_FIELDS.Length; i++)
             {
-                table.Rows[0].Cells[i].Paragraphs[0].Append(TABLE_FIELDS[i]).FontSize(tableFontSize).Bold(true);
+                table.Rows[0].Cells[i].Paragraphs[0].Append(TABLE_FIELDS[i]).FontSize(tableFontSize);//.Bold(true);
             }
 
             //添加表格数据

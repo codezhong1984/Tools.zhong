@@ -397,7 +397,7 @@ namespace Tools.zhong.UtilHelper
                         {
                             modelItem.DataScale = int.Parse(drItem["DataScale"].ToString());
                         }
-                        modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "Y";
+                        modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "N";
                         list.Add(modelItem);
                     }
                 }
