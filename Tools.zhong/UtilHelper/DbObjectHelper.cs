@@ -367,51 +367,6 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// Oracle 取表属性
         /// </summary>
-        private static List<TableColumnModel> GetFieldsFormDB(DataTable dataTable)
-        {
-            var list = new List<TableColumnModel>();
-            try
-            {
-                if (dataTable != null && dataTable.Rows.Count > 0)
-                {
-                    foreach (DataRow drItem in dataTable.Rows)
-                    {
-                        var modelItem = new TableColumnModel();
-                        modelItem.TableName = drItem["table_name"]?.ToString();
-                        modelItem.TableComment = drItem["table_comments"]?.ToString();
-                        modelItem.FieldName = drItem["column_name"]?.ToString();
-                        modelItem.DataType = drItem["data_type"]?.ToString();
-                        modelItem.FieldRemarks = drItem["column_comments"]?.ToString();
-                        if (drItem["DataLength"] != null && drItem["DataLength"] != DBNull.Value
-                            && int.Parse(drItem["DataLength"].ToString()) != 0)
-                        {
-                            modelItem.DataLength = int.Parse(drItem["DataLength"].ToString());
-                        }
-                        if (drItem["DataPrecision"] != null && drItem["DataPrecision"] != DBNull.Value
-                            && int.Parse(drItem["DataPrecision"].ToString()) != 0)
-                        {
-                            modelItem.DataPrecision = int.Parse(drItem["DataPrecision"].ToString());
-                        }
-                        if (drItem["DataScale"] != null && drItem["DataScale"] != DBNull.Value
-                            && int.Parse(drItem["DataScale"].ToString()) != 0)
-                        {
-                            modelItem.DataScale = int.Parse(drItem["DataScale"].ToString());
-                        }
-                        modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "N";
-                        list.Add(modelItem);
-                    }
-                }
-                return list;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Oracle 取表属性
-        /// </summary>
         public static List<EnumColumnModel> GetEnumFieldsFormDB(DataTable dataTable)
         {
             var list = new List<EnumColumnModel>();
@@ -534,6 +489,92 @@ namespace Tools.zhong.UtilHelper
 
         #endregion
 
+        #region 获取数据表的创建时间、修改时间
+        /// <summary>
+        /// 获取Orcle 数据表信息
+        /// </summary>
+        public static TableModel GetOracleTableInfo(string tableName)
+        {
+            string sql = @"SELECT object_name TableName,CREATED CreateDate,LAST_DDL_TIME LastUpdateDate 
+                           from user_objects 
+                           where object_name=upper('{0}') ";
+
+            var dtData = OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            var model = GetTabelInfoFormDB(dtData);
+            return model;
+        }
+
+        /// <summary>
+        /// 获取SqlServer 数据表信息
+        /// </summary>
+        public static TableModel GetSqlServerTableInfo(string tableName)
+        {
+            string sql = @"select name TableName,create_date CreateDate,modify_date LastUpdateDate
+                           from sys.tables
+                           where name='{0}' ";
+
+            var dtData = SQLHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            var model = GetTabelInfoFormDB(dtData);
+            return model;
+        }
+
+        /// <summary>
+        /// 获取MySql 数据表信息
+        /// </summary>
+        public static TableModel GetMySqlTableInfo(string dataBaseName, string tableName)
+        {
+            string sql = @"select table_name TableName,Create_Time CreateDate,Update_Time LastUpdateDate from information_schema.TABLES 
+                           where table_schema='{0}' and table_name='{1}'; ";
+
+            var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(string.Format(sql, dataBaseName, tableName));
+            var model = GetTabelInfoFormDB(dtData);
+            return model;
+        }
+        #endregion
+
+        #region 获取数据表的主键
+
+        /// <summary>
+        /// 获取指定数据表的主键信息
+        /// </summary>
+        public static List<string> GetOracleTablePrimaryKey(string tableName)
+        {
+            string sql = @"select column_name ColumnName 
+                           from user_cons_columns cu, user_constraints au 
+                           where cu.constraint_name = au.constraint_name and au.constraint_type = 'P' and au.table_name = '{0}'";
+            var dtData = OracleHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            return GetTablePrimaryKey(dtData);
+        }
+
+        /// <summary>
+        /// 获取指定数据表的主键信息
+        /// </summary>
+        public static List<string> GetSqlServerTablePrimaryKey(string tableName)
+        {
+            string sql = @"SELECT cols.name ColumnName
+                        FROM sys.index_columns indexCols
+                        INNER JOIN sys.columns cols ON indexCols.object_id = cols.object_id AND indexCols.column_id = cols.column_id
+                        INNER JOIN sys.indexes inds ON indexCols.object_id = inds.object_id AND indexCols.index_id = inds.index_id
+                        WHERE indexCols.object_id = OBJECT_ID('{0}', 'u') AND inds.is_primary_key = 1";
+            var dtData = SQLHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            return GetTablePrimaryKey(dtData);
+        }
+
+        /// <summary>
+        /// 获取指定数据表的主键信息
+        /// </summary>
+        public static List<string> GetMySqlTablePrimaryKey(string dataBaseName,string tableName)
+        {
+            string sql = @"SELECT Column_Name ColumnName
+                           FROM  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+                           WHERE CONSTRAINT_NAME = 'PRIMARY' AND Table_Name='{0}' and table_schema='{1}'";
+            sql = string.Format(sql, tableName.Trim(), dataBaseName);
+            var dtData = MySQLHelper.ExecuteDataTable(sql);
+            return GetTablePrimaryKey(dtData);
+        }
+
+        #endregion
+
         public static DataTable GetEnumCodeForMySQL(string tableName)
         {
             string sql = @" select table_name,column_name,column_type 
@@ -560,7 +601,97 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
+        /// <summary>
+        /// 取表字段属性 DataTable -> List
+        /// </summary>
+        private static List<TableColumnModel> GetFieldsFormDB(DataTable dataTable)
+        {
+            var list = new List<TableColumnModel>();
+            try
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow drItem in dataTable.Rows)
+                    {
+                        var modelItem = new TableColumnModel();
+                        modelItem.TableName = drItem["table_name"]?.ToString();
+                        modelItem.TableComment = drItem["table_comments"]?.ToString();
+                        modelItem.FieldName = drItem["column_name"]?.ToString();
+                        modelItem.DataType = drItem["data_type"]?.ToString();
+                        modelItem.FieldRemarks = drItem["column_comments"]?.ToString();
+                        if (drItem["DataLength"] != null && drItem["DataLength"] != DBNull.Value
+                            && int.Parse(drItem["DataLength"].ToString()) != 0)
+                        {
+                            modelItem.DataLength = int.Parse(drItem["DataLength"].ToString());
+                        }
+                        if (drItem["DataPrecision"] != null && drItem["DataPrecision"] != DBNull.Value
+                            && int.Parse(drItem["DataPrecision"].ToString()) != 0)
+                        {
+                            modelItem.DataPrecision = int.Parse(drItem["DataPrecision"].ToString());
+                        }
+                        if (drItem["DataScale"] != null && drItem["DataScale"] != DBNull.Value
+                            && int.Parse(drItem["DataScale"].ToString()) != 0)
+                        {
+                            modelItem.DataScale = int.Parse(drItem["DataScale"].ToString());
+                        }
+                        modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "N";
+                        list.Add(modelItem);
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
+        /// <summary>
+        /// 取表属性 DataTable -> List
+        /// </summary>
+        private static TableModel GetTabelInfoFormDB(DataTable dataTable)
+        {
+            try
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow drItem in dataTable.Rows)
+                    {
+                        var modelItem = new TableModel();
+                        if (drItem["TableName"] != null && drItem["TableName"] != DBNull.Value)
+                        {
+                            modelItem.TableName = drItem["TableName"]?.ToString();
+                        }
+                        if (drItem["CreateDate"] != null && drItem["CreateDate"] != DBNull.Value)
+                        {
+                            modelItem.CreateDate = DateTime.Parse(drItem["CreateDate"].ToString());
+                        }
+                        if (drItem["LastUpdateDate"] != null && drItem["LastUpdateDate"] != DBNull.Value)
+                        {
+                            modelItem.LastUpdateDate = DateTime.Parse(drItem["LastUpdateDate"].ToString());
+                        }
+                        return modelItem;
+                    }
+                }
+                return new TableModel();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
+        private static List<string> GetTablePrimaryKey(DataTable dtData)
+        {
+            var list = new List<string>();
+            if (dtData != null && dtData.Rows.Count > 0)
+            {
+                foreach (DataRow item in dtData.Rows)
+                {
+                    list.Add(item.Field<string>("ColumnName"));
+                }
+            }
+            return list;
+        }
     }
 }

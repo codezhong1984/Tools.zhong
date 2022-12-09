@@ -79,6 +79,7 @@
     <Compile Include="Model\DataBaseType.cs" />
     <Compile Include="Model\EnumColumnModel.cs" />
     <Compile Include="Model\TableColumnModel.cs" />
+    <Compile Include="Model\TableModel.cs" />
     <Compile Include="OracleQueryHelperForm.cs">
       <SubType>Form</SubType>
     </Compile>

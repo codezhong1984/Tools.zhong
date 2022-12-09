@@ -496,96 +496,35 @@ namespace Tools.zhong
             }
             try
             {
+                string tableName = txtTableName3.Text.Trim();
+                string tableInfoTmpl = "表名：{0} | 创建时间：{1} | 修改时间：{2}";
+                var tableInfoModel = new TableModel();
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
                 if (dbType == DataBaseType.ORACLE)
                 {
-                    string sql = $"select column_name from user_tab_columns where table_name='{txtTableName3.Text.Trim()}' order by  COLUMN_ID ";
-                    var dtData = OracleHelper.ExecuteDataTable(sql);
-                    if (dtData != null)
-                    {
-                        StringBuilder sbColumns = new StringBuilder();
-                        foreach (DataRow item in dtData.Rows)
-                        {
-                            sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
-                        }
-                        txtInput3.Text = sbColumns.ToString();
-                    }
-
-                    string sqlkey = $"select column_name from user_cons_columns cu, user_constraints au " +
-                                    $"where cu.constraint_name = au.constraint_name and au.constraint_type = 'P' and au.table_name = '{txtTableName3.Text.Trim()}'";
-                    dtData = OracleHelper.ExecuteDataTable(sqlkey);
-                    if (dtData != null)
-                    {
-                        StringBuilder sbColumns = new StringBuilder();
-                        foreach (DataRow item in dtData.Rows)
-                        {
-                            sbColumns.Append(item["column_name"]?.ToString() + ",");
-                        }
-                        txtKey3.Text = sbColumns.ToString();
-                    }
+                    var colList = DbObjectHelper.GetColumnsForOracle(tableName);
+                    txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
+                    txtKey3.Text = string.Join(",", DbObjectHelper.GetOracleTablePrimaryKey(tableName));
+                    tableInfoModel = DbObjectHelper.GetOracleTableInfo(tableName);
                 }
                 if (dbType == DataBaseType.SQLSERVER)
                 {
-                    string sql = string.Format(@"select column_name from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{0}'", txtTableName3.Text.Trim());
-                    var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
-                    if (dtData != null)
-                    {
-                        StringBuilder sbColumns = new StringBuilder();
-                        foreach (DataRow item in dtData.Rows)
-                        {
-                            sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
-                        }
-                        txtInput3.Text = sbColumns.ToString();
-                    }
-
-                    string sqlkey = string.Format(@"SELECT cols.name column_name
-                                    FROM sys.index_columns indexCols
-                                    INNER JOIN sys.columns cols ON indexCols.object_id = cols.object_id AND indexCols.column_id = cols.column_id
-                                    INNER JOIN sys.indexes inds ON indexCols.object_id = inds.object_id AND indexCols.index_id = inds.index_id
-                                    WHERE indexCols.object_id = OBJECT_ID('{0}', 'u') AND inds.is_primary_key = 1",
-                                    txtTableName3.Text.Trim());
-
-                    dtData = DBHepler.SQLHelper.ExecuteDataTable(sqlkey);
-                    if (dtData != null)
-                    {
-                        StringBuilder sbColumns = new StringBuilder();
-                        foreach (DataRow item in dtData.Rows)
-                        {
-                            sbColumns.Append(item["column_name"]?.ToString() + ",");
-                        }
-                        txtKey3.Text = sbColumns.ToString();
-                    }
+                    var colList = DbObjectHelper.GetColumnsForSqlServer(tableName);
+                    txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
+                    txtKey3.Text = string.Join(",", DbObjectHelper.GetSqlServerTablePrimaryKey(tableName));
+                    tableInfoModel = DbObjectHelper.GetSqlServerTableInfo(tableName);
                 }
                 if (dbType == DataBaseType.MySQL)
                 {
-                    string sql = string.Format(@"select column_name from information_schema.columns where table_schema=@DataBase and TABLE_NAME='{0}'", txtTableName3.Text.Trim());
-                    var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
-                    if (dtData != null)
-                    {
-                        StringBuilder sbColumns = new StringBuilder();
-                        foreach (DataRow item in dtData.Rows)
-                        {
-                            sbColumns.AppendLine(item["column_name"]?.ToString() + ",");
-                        }
-                        txtInput3.Text = sbColumns.ToString();
-                    }
-
-                    string sqlkey = string.Format(@"SELECT Column_Name
-                                                    FROM  INFORMATION_SCHEMA.`KEY_COLUMN_USAGE`
-                                                    WHERE CONSTRAINT_NAME = 'PRIMARY' AND Table_Name = '{0}' and table_schema=@DataBase ",
-                                    txtTableName3.Text.Trim());
-
-                    dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sqlkey);
-                    if (dtData != null)
-                    {
-                        StringBuilder sbColumns = new StringBuilder();
-                        foreach (DataRow item in dtData.Rows)
-                        {
-                            sbColumns.Append(item["column_name"]?.ToString() + ",");
-                        }
-                        txtKey3.Text = sbColumns.ToString();
-                    }
+                    var dbName = DbObjectHelper.GetDataBaseName(dbType);
+                    var colList = DbObjectHelper.GetColumnsForMySQL(dbName, tableName);
+                    txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
+                    txtKey3.Text = string.Join(",", DbObjectHelper.GetMySqlTablePrimaryKey(dbName, tableName));
+                    tableInfoModel = DbObjectHelper.GetMySqlTableInfo(dbName, tableName);
                 }
+
+                lblTableInfo.Text = string.Format(tableInfoTmpl, tableInfoModel.TableName,
+                    tableInfoModel.CreateDate?.ToString("yyyy-MM-dd HH:mm:ss"), tableInfoModel.LastUpdateDate?.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
             {
@@ -1105,6 +1044,20 @@ namespace Tools.zhong
             }
         }
 
+        private void btnSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < cblTableLists.Items.Count; i++)
+            {
+                cblTableLists.SetItemChecked(i, true);
+            }
+        }
 
+        private void btnCancelSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < cblTableLists.Items.Count; i++)
+            {
+                cblTableLists.SetItemChecked(i, false);
+            }
+        }
     }
 }
