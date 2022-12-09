@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,16 +22,33 @@ namespace Tools.zhong.UtilHelper
             return DocX.Create(fileName);
         }
 
+        public static DocX LoadDocx(string fileName)
+        {
+            return DocX.Load(fileName);
+        }
+
         public static void GenerateDocxByTable(string fileName, string dbName, List<TableColumnModel> listData)
         {
             try
             {
-                using (var docx = CreateDocx(fileName))
+                bool exists = File.Exists(fileName);
+                if (exists)
                 {
-                    WriteDocxTitle(docx, dbName + DATABASE_TITLE_SUFFIX);
-                    WriteDocxSingleTable(docx, listData);
-                    docx.Save();
+                    using (var docx = LoadDocx(fileName))
+                    {
+                        WriteDocxSingleTable(docx, listData);
+                        docx.Save();
+                    }
                 }
+                else
+                {
+                    using (var docx = CreateDocx(fileName))
+                    {
+                        WriteDocxTitle(docx, dbName + DATABASE_TITLE_SUFFIX);
+                        WriteDocxSingleTable(docx, listData);
+                        docx.Save();
+                    }
+                }               
             }
             catch (Exception ex)
             {
@@ -42,12 +60,24 @@ namespace Tools.zhong.UtilHelper
         {
             try
             {
-                using (var docx = CreateDocx(fileName))
+                bool exists = File.Exists(fileName);
+                if (exists)
                 {
-                    WriteDocxTitle(docx, dbName + "数据库设计文档");
-                    WriteDocxTables(docx, lists);
-                    docx.Save();
+                    using (var docx = LoadDocx(fileName))
+                    {
+                        WriteDocxTables(docx, lists);
+                        docx.Save();
+                    }
                 }
+                else
+                {
+                    using (var docx = CreateDocx(fileName))
+                    {
+                        WriteDocxTitle(docx, dbName + "数据库设计文档");
+                        WriteDocxTables(docx, lists);
+                        docx.Save();
+                    }
+                }              
             }
             catch (Exception ex)
             {

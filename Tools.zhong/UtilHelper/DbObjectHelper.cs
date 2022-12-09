@@ -400,23 +400,26 @@ namespace Tools.zhong.UtilHelper
 
         #region 获取数据表列表
 
-        public static DataTable GetDataBaseTables(DataBaseType dbType)
+        public static DataTable GetDataBaseTables(DataBaseType dbType, string tableFilter = null)
         {
             if (dbType == DataBaseType.ORACLE)
             {
-                string sql = "select table_name from user_tables order by table_name";
+                string sql = "select table_name from user_tables {0} order by table_name";
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where table_name like '%{tableFilter}%'" : "");
                 var dtData = OracleHelper.ExecuteDataTable(sql);
                 return dtData;
             }
             if (dbType == DataBaseType.SQLSERVER)
             {
-                string sql = "select name table_name from sys.tables order by name";
+                string sql = "select name table_name from sys.tables {0} order by name";
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where name like '%{tableFilter}%'" : "");
                 var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
                 return dtData;
             }
             if (dbType == DataBaseType.MySQL)
             {
-                string sql = "select table_name from information_schema.tables where table_schema=@DataBase order by table_name";
+                string sql = "select table_name from information_schema.tables where table_schema=@DataBase {0} order by table_name";
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"and table_name like '%{tableFilter}%'" : "");
                 var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                 return dtData;
             }

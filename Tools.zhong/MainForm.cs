@@ -447,8 +447,9 @@ namespace Tools.zhong
         {
             try
             {
+                string tableFilter = txtTableFilter.Text.Trim();
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                var dtData = DbObjectHelper.GetDataBaseTables(dbType);
+                var dtData = DbObjectHelper.GetDataBaseTables(dbType, tableFilter);
                 txtTableName3.DataSource = dtData;
                 txtTableName3.DisplayMember = "table_name";
                 txtTableName3.ValueMember = "table_name";

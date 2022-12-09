@@ -88,6 +88,7 @@ namespace Tools.zhong
             this.btnEncode = new System.Windows.Forms.Button();
             this.txtOutput4 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblTableInfo = new System.Windows.Forms.Label();
             this.btnCancelSelectAll = new System.Windows.Forms.Button();
             this.btnSelectAll = new System.Windows.Forms.Button();
             this.btnExportDocxTables = new System.Windows.Forms.Button();
@@ -121,7 +122,8 @@ namespace Tools.zhong
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.lblTableInfo = new System.Windows.Forms.Label();
+            this.txtTableFilter = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -767,6 +769,8 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.txtTableFilter);
+            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.lblTableInfo);
             this.tabPage3.Controls.Add(this.btnCancelSelectAll);
             this.tabPage3.Controls.Add(this.btnSelectAll);
@@ -805,6 +809,16 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lblTableInfo
+            // 
+            this.lblTableInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTableInfo.ForeColor = System.Drawing.Color.Blue;
+            this.lblTableInfo.Location = new System.Drawing.Point(5, 582);
+            this.lblTableInfo.Name = "lblTableInfo";
+            this.lblTableInfo.Size = new System.Drawing.Size(1128, 23);
+            this.lblTableInfo.TabIndex = 31;
+            this.lblTableInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancelSelectAll
             // 
@@ -903,10 +917,10 @@ namespace Tools.zhong
             // 
             this.btnLoadFromDB.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.btnLoadFromDB.ForeColor = System.Drawing.Color.Blue;
-            this.btnLoadFromDB.Location = new System.Drawing.Point(838, 1);
+            this.btnLoadFromDB.Location = new System.Drawing.Point(910, 1);
             this.btnLoadFromDB.Margin = new System.Windows.Forms.Padding(0);
             this.btnLoadFromDB.Name = "btnLoadFromDB";
-            this.btnLoadFromDB.Size = new System.Drawing.Size(103, 31);
+            this.btnLoadFromDB.Size = new System.Drawing.Size(85, 31);
             this.btnLoadFromDB.TabIndex = 17;
             this.btnLoadFromDB.Text = "DB加载";
             this.btnLoadFromDB.UseVisualStyleBackColor = true;
@@ -950,10 +964,10 @@ namespace Tools.zhong
             // txtTableName3
             // 
             this.txtTableName3.FormattingEnabled = true;
-            this.txtTableName3.Location = new System.Drawing.Point(277, 5);
+            this.txtTableName3.Location = new System.Drawing.Point(264, 5);
             this.txtTableName3.Margin = new System.Windows.Forms.Padding(4);
             this.txtTableName3.Name = "txtTableName3";
-            this.txtTableName3.Size = new System.Drawing.Size(207, 23);
+            this.txtTableName3.Size = new System.Drawing.Size(186, 23);
             this.txtTableName3.TabIndex = 20;
             this.txtTableName3.SelectedIndexChanged += new System.EventHandler(this.txtTableName3_SelectedIndexChanged);
             // 
@@ -988,7 +1002,7 @@ namespace Tools.zhong
             // cbDBType
             // 
             this.cbDBType.FormattingEnabled = true;
-            this.cbDBType.Location = new System.Drawing.Point(113, 5);
+            this.cbDBType.Location = new System.Drawing.Point(101, 5);
             this.cbDBType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDBType.Name = "cbDBType";
             this.cbDBType.Size = new System.Drawing.Size(108, 23);
@@ -1006,17 +1020,17 @@ namespace Tools.zhong
             // 
             // txtKey3
             // 
-            this.txtKey3.Location = new System.Drawing.Point(540, 5);
+            this.txtKey3.Location = new System.Drawing.Point(513, 5);
             this.txtKey3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtKey3.Multiline = true;
             this.txtKey3.Name = "txtKey3";
-            this.txtKey3.Size = new System.Drawing.Size(292, 25);
+            this.txtKey3.Size = new System.Drawing.Size(141, 25);
             this.txtKey3.TabIndex = 15;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(488, 10);
+            this.label4.Location = new System.Drawing.Point(461, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 14;
@@ -1126,7 +1140,7 @@ namespace Tools.zhong
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(228, 10);
+            this.label2.Location = new System.Drawing.Point(215, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 2;
@@ -1186,15 +1200,23 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // lblTableInfo
+            // txtTableFilter
             // 
-            this.lblTableInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTableInfo.ForeColor = System.Drawing.Color.Blue;
-            this.lblTableInfo.Location = new System.Drawing.Point(5, 582);
-            this.lblTableInfo.Name = "lblTableInfo";
-            this.lblTableInfo.Size = new System.Drawing.Size(1128, 23);
-            this.lblTableInfo.TabIndex = 31;
-            this.lblTableInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtTableFilter.Location = new System.Drawing.Point(744, 4);
+            this.txtTableFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTableFilter.Multiline = true;
+            this.txtTableFilter.Name = "txtTableFilter";
+            this.txtTableFilter.Size = new System.Drawing.Size(145, 25);
+            this.txtTableFilter.TabIndex = 33;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(668, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(84, 15);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "表名LIKE：";
             // 
             // MainForm
             // 
@@ -1320,6 +1342,8 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnCancelSelectAll;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Label lblTableInfo;
+        private System.Windows.Forms.TextBox txtTableFilter;
+        private System.Windows.Forms.Label label11;
     }
 }
 
