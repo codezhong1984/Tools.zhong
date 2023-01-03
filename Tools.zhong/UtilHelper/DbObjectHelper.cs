@@ -426,6 +426,32 @@ namespace Tools.zhong.UtilHelper
             return null;
         }
 
+        public static DataTable GetDataBaseViews(DataBaseType dbType, string tableFilter = null)
+        {
+            if (dbType == DataBaseType.ORACLE)
+            {
+                string sql = "select view_name table_name from user_views {0} order by view_name";
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where view_name like '%{tableFilter}%'" : "");
+                var dtData = OracleHelper.ExecuteDataTable(sql);
+                return dtData;
+            }
+            if (dbType == DataBaseType.SQLSERVER)
+            {
+                string sql = "select name table_name from sys.views {0} order by name";
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where name like '%{tableFilter}%'" : "");
+                var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                return dtData;
+            }
+            if (dbType == DataBaseType.MySQL)
+            {
+                string sql = "select table_name from information_schema.views where table_schema=@DataBase {0} order by table_name";
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"and table_name like '%{tableFilter}%'" : "");
+                var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
+                return dtData;
+            }
+            return null;
+        }
+
         #endregion
 
         #region 获取数据库表字段
@@ -453,20 +479,20 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// 获取SqlServer 数据表字段
         /// </summary>
-        public static List<TableColumnModel> GetColumnsForSqlServer(string tableName)
+        public static List<TableColumnModel> GetColumnsForSqlServer(string tableName, bool isView = false)
         {
             string sql = @" select a.name table_name,b.value table_comments,c.name column_name,e.name data_type,d.value column_comments
                                     ,IIF(c.is_nullable=1,'Y','N') nullable,c.max_length as DataLength,iif(c.precision='0',null,c.precision) DataPrecision
                                     ,c.scale as DataScale
-                                from sys.tables a 
+                                from sys.{0} a 
                                 left join sys.extended_properties b on a.object_id=b.major_id and b.minor_id=0
                                 left join sys.columns c on a.object_id=c.object_id
                                 left join sys.extended_properties d on d.major_id=c.object_id and d.minor_id=c.column_id
                                 left join sys.systypes e on c.system_type_id=e.xtype and e.xtype=e.xusertype
-                                where a.name='{0}'
+                                where a.name='{1}'
                                 order by c.column_id ";
 
-            var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, tableName));
+            var dtData = DBHepler.SQLHelper.ExecuteDataTable(string.Format(sql, isView ? "views" : "tables", tableName));
             var list = GetFieldsFormDB(dtData);
             return list;
         }
@@ -510,13 +536,13 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// 获取SqlServer 数据表信息
         /// </summary>
-        public static TableModel GetSqlServerTableInfo(string tableName)
+        public static TableModel GetSqlServerTableInfo(string tableName, bool viewFlag = false)
         {
             string sql = @"select name TableName,create_date CreateDate,modify_date LastUpdateDate
-                           from sys.tables
-                           where name='{0}' ";
+                           from sys.{0}
+                           where name='{1}' ";
 
-            var dtData = SQLHelper.ExecuteDataTable(string.Format(sql, tableName.Trim()));
+            var dtData = SQLHelper.ExecuteDataTable(string.Format(sql, viewFlag ? "views" : "tables", tableName.Trim()));
             var model = GetTabelInfoFormDB(dtData);
             return model;
         }
@@ -566,7 +592,7 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// 获取指定数据表的主键信息
         /// </summary>
-        public static List<string> GetMySqlTablePrimaryKey(string dataBaseName,string tableName)
+        public static List<string> GetMySqlTablePrimaryKey(string dataBaseName, string tableName)
         {
             string sql = @"SELECT Column_Name ColumnName
                            FROM  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
@@ -637,7 +663,7 @@ namespace Tools.zhong.UtilHelper
                         {
                             modelItem.DataScale = int.Parse(drItem["DataScale"].ToString());
                         }
-                        modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "N";
+                        modelItem.IsNullable = drItem["NULLABLE"] == null || drItem["NULLABLE"]?.ToString() == "Y";
                         list.Add(modelItem);
                     }
                 }

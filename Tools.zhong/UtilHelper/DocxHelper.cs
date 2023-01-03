@@ -15,7 +15,7 @@ namespace Tools.zhong.UtilHelper
     {
         private static readonly string DATABASE_TITLE_SUFFIX = "数据库设计文档";
         private static readonly string[] TABLE_FIELDS = new string[] { "字段名称", "字段描述",
-            "字段类型", "字段长度", "数据精度", "小数位数", "是否必填" };
+            "字段类型", "字段长度", "数据精度", "小数位数", "是否可空" };
 
         public static DocX CreateDocx(string fileName)
         {
@@ -95,7 +95,7 @@ namespace Tools.zhong.UtilHelper
                 .Bold()
                 .SpacingAfter(5);
             p.Alignment = Alignment.center;
-            p.InsertPageBreakAfterSelf();
+            //p.InsertPageBreakAfterSelf();
         }
 
         private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData)

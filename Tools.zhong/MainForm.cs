@@ -43,7 +43,10 @@ namespace Tools.zhong
         public TextBox TextOutPut => txtOutput;
         public TabControl TabControl => tabControl1;
 
-
+        /// <summary>
+        /// 标记是否加载的视图
+        /// </summary>
+        public bool ViewFlag { get; set; }
         #endregion
 
         public MainForm()
@@ -170,16 +173,19 @@ namespace Tools.zhong
 
         private void btnCreateModelFromDBScript_Click(object sender, EventArgs e)
         {
-            if (subForm == null)
+            if (subForm != null)
+            {
+                if (subForm.IsDisposed)
+                    subForm = new DbTableForm(this);//如果已经销毁，则重新创建子窗口对象
+                subForm.Show();
+                subForm.Focus();
+            }
+            else
             {
                 subForm = new DbTableForm(this);
+                subForm.Show();
+                subForm.Focus();
             }
-            subForm.Show();
-            //if (subForm.DialogResult == DialogResult.OK)
-            //{
-            //    txtOutput.Text = subForm.CodeText;
-            //    tabControl1.SelectedIndex = 1;
-            //}
         }
 
         private void btnExportToFile2_Click(object sender, EventArgs e)
@@ -447,6 +453,7 @@ namespace Tools.zhong
         {
             try
             {
+                ViewFlag = false;
                 string tableFilter = txtTableFilter.Text.Trim();
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
                 var dtData = DbObjectHelper.GetDataBaseTables(dbType, tableFilter);
@@ -463,12 +470,41 @@ namespace Tools.zhong
                 }
 
                 btnLoadFromDB.ForeColor = Color.Red;
+                btnLoadView.ForeColor = Color.Black;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void btnLoadView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ViewFlag = true;
+                string tableFilter = txtTableFilter.Text.Trim();
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                var dtData = DbObjectHelper.GetDataBaseViews(dbType, tableFilter);
+                txtTableName3.DataSource = dtData;
+                txtTableName3.DisplayMember = "table_name";
+                txtTableName3.ValueMember = "table_name";
+                cblTableLists.Items.Clear();
+                if (dtData != null)
+                {
+                    foreach (DataRow drItem in dtData.Rows)
+                    {
+                        cblTableLists.Items.Add(drItem["table_name"]);
+                    }
+                }
+                btnLoadFromDB.ForeColor = Color.Black;
+                btnLoadView.ForeColor = Color.Red;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCopy3_Click(object sender, EventArgs e)
@@ -510,10 +546,10 @@ namespace Tools.zhong
                 }
                 if (dbType == DataBaseType.SQLSERVER)
                 {
-                    var colList = DbObjectHelper.GetColumnsForSqlServer(tableName);
+                    var colList = DbObjectHelper.GetColumnsForSqlServer(tableName, ViewFlag);
                     txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
                     txtKey3.Text = string.Join(",", DbObjectHelper.GetSqlServerTablePrimaryKey(tableName));
-                    tableInfoModel = DbObjectHelper.GetSqlServerTableInfo(tableName);
+                    tableInfoModel = DbObjectHelper.GetSqlServerTableInfo(tableName,ViewFlag);
                 }
                 if (dbType == DataBaseType.MySQL)
                 {
@@ -925,7 +961,7 @@ namespace Tools.zhong
                     {
                         data = DbObjectHelper.GetColumnsForMySQL(dataBaseName, txtTableName3.Text.Trim());
                     }
-
+                    dataBaseName = txtDocxTitle.Text.Trim().Length > 0 ? txtDocxTitle.Text.Trim() : dataBaseName;
                     DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -1060,5 +1096,7 @@ namespace Tools.zhong
                 cblTableLists.SetItemChecked(i, false);
             }
         }
+
+
     }
 }

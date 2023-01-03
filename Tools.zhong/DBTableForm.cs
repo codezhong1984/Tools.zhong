@@ -19,6 +19,7 @@ namespace Tools.zhong
         #region 公共属性
 
         private bool EnableMapperTableName = true;
+        private bool DisplayView = false;
         public string CodeText { get; set; }
         private MainForm mainFrm;
         #endregion
@@ -39,9 +40,9 @@ namespace Tools.zhong
             return code;
         }
 
-        private string GetCodeForSqlServer(string tableName)
+        private string GetCodeForSqlServer(string tableName, bool isView)
         {
-            var list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+            var list = DbObjectHelper.GetColumnsForSqlServer(tableName, isView);
             var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
                 tbNameSpace.Text.Trim(), null, EnableMapperTableName, cbFullProp.Checked);
             return code;
@@ -73,6 +74,11 @@ namespace Tools.zhong
         {
             try
             {
+                if (!string.IsNullOrWhiteSpace(tbNameSpace.Text))
+                {
+                    ConfigHelper.SetValue("NameSpace", tbNameSpace.Text.Trim());
+                }
+
                 if (cbDBType.SelectedIndex <= 0)
                 {
                     cbDBType.Focus();
@@ -123,7 +129,7 @@ namespace Tools.zhong
                             sbCodes.AppendLine($"//**************************** {item}  *******************************");
                             sbCodes.AppendLine();
                         }
-                        var codeSqlServer = GetCodeForSqlServer(item);
+                        var codeSqlServer = GetCodeForSqlServer(item, DisplayView);
                         sbCodes.AppendLine(codeSqlServer);
                     }
 
@@ -168,22 +174,7 @@ namespace Tools.zhong
 
         private void cbDBType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbDBType.Text == "请选择")
-            {
-                return;
-            }
-            try
-            {
-                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                var dtData = DbObjectHelper.GetDataBaseTables(dbType);
-                cbTableName.DataSource = dtData;
-                cbTableName.DisplayMember = "table_name";
-                cbTableName.ValueMember = "table_name";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+          
         }
 
         private void DBTaleForm_Load(object sender, EventArgs e)
@@ -252,7 +243,7 @@ namespace Tools.zhong
                 {
                     foreach (var item in listTables)
                     {
-                        var codeSqlServer = GetCodeForSqlServer(item);
+                        var codeSqlServer = GetCodeForSqlServer(item, DisplayView);
                         using (StreamWriter sw = new StreamWriter($"{dirPath}\\{DbObjectHelper.ToUperFirstChar(item)}.cs", false, System.Text.Encoding.UTF8))
                         {
                             sw.WriteLine(codeSqlServer);
@@ -305,5 +296,30 @@ namespace Tools.zhong
         }
 
         #endregion
+
+        private void cbView_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayView = cbView.Checked;
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            if (cbDBType.Text == "请选择")
+            {
+                return;
+            }
+            try
+            {
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                DataTable dtData = DisplayView ? DbObjectHelper.GetDataBaseViews(dbType, tbFilter.Text) : DbObjectHelper.GetDataBaseTables(dbType, tbFilter.Text);
+                cbTableName.DataSource = dtData;
+                cbTableName.DisplayMember = "table_name";
+                cbTableName.ValueMember = "table_name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

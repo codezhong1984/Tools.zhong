@@ -13,5 +13,10 @@ namespace Tools.zhong.UtilHelper
         {
             return ConfigurationManager.AppSettings[key];
         }
-    }
+
+        public static void SetValue(string key,string value)
+        {
+            ConfigurationManager.AppSettings.Set(key, value);
+        }
+}
 }

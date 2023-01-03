@@ -25,5 +25,10 @@ namespace Tools.zhong.Model
         /// 小数位数
         /// </summary>
         public int? DataScale { get; set; }
+
+        /// <summary>
+        /// 标识是否为主键
+        /// </summary>
+        public bool IsPK { get; set; }
     }
 }
