@@ -405,7 +405,7 @@ namespace Tools.zhong.UtilHelper
             if (dbType == DataBaseType.ORACLE)
             {
                 string sql = "select table_name from user_tables {0} order by table_name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where table_name like '%{tableFilter}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where table_name like '%{tableFilter.ToUpper()}%'" : "");
                 var dtData = OracleHelper.ExecuteDataTable(sql);
                 return dtData;
             }

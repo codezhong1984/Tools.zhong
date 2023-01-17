@@ -1037,9 +1037,10 @@ namespace Tools.zhong
                     var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
                     string dataBaseName = DbObjectHelper.GetDataBaseName(dbType);
 
-                    if (cblTableLists.SelectedItems == null || cblTableLists.SelectedItems.Count == 0)
+                    if (cblTableLists.CheckedItems == null || cblTableLists.CheckedItems.Count == 0)
                     {
                         MessageBox.Show("未能查到相关数据表！");
+                        return;
                     }
 
                     foreach (var item in cblTableLists.CheckedItems)

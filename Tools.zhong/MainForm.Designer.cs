@@ -88,6 +88,7 @@ namespace Tools.zhong
             this.btnEncode = new System.Windows.Forms.Button();
             this.txtOutput4 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnLoadView = new System.Windows.Forms.Button();
             this.txtDocxTitle = new System.Windows.Forms.TextBox();
             this.txtTableFilter = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -95,6 +96,7 @@ namespace Tools.zhong
             this.btnCancelSelectAll = new System.Windows.Forms.Button();
             this.btnSelectAll = new System.Windows.Forms.Button();
             this.btnExportDocxTables = new System.Windows.Forms.Button();
+            this.cblTableLists = new System.Windows.Forms.CheckedListBox();
             this.btnCreateDicAllDB = new System.Windows.Forms.Button();
             this.btnCreateDicSingleTable = new System.Windows.Forms.Button();
             this.btnExportData = new System.Windows.Forms.Button();
@@ -123,8 +125,6 @@ namespace Tools.zhong
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnLoadView = new System.Windows.Forms.Button();
-            this.cblTableLists = new System.Windows.Forms.CheckedListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -812,15 +812,30 @@ namespace Tools.zhong
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnLoadView
+            // 
+            this.btnLoadView.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnLoadView.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLoadView.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnLoadView.Location = new System.Drawing.Point(956, 4);
+            this.btnLoadView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLoadView.Name = "btnLoadView";
+            this.btnLoadView.Size = new System.Drawing.Size(112, 31);
+            this.btnLoadView.TabIndex = 35;
+            this.btnLoadView.Text = "加载视图";
+            this.btnLoadView.UseVisualStyleBackColor = true;
+            this.btnLoadView.Click += new System.EventHandler(this.btnLoadView_Click);
+            // 
             // txtDocxTitle
             // 
             this.txtDocxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDocxTitle.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtDocxTitle.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.txtDocxTitle.Location = new System.Drawing.Point(955, 43);
             this.txtDocxTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDocxTitle.Multiline = true;
             this.txtDocxTitle.Name = "txtDocxTitle";
-            this.txtDocxTitle.Size = new System.Drawing.Size(172, 23);
+            this.txtDocxTitle.Size = new System.Drawing.Size(172, 28);
             this.txtDocxTitle.TabIndex = 34;
             this.txtDocxTitle.Text = "数据库设计文档";
             this.txtDocxTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -894,6 +909,18 @@ namespace Tools.zhong
             this.btnExportDocxTables.Text = "导出word(选定表)";
             this.btnExportDocxTables.UseVisualStyleBackColor = true;
             this.btnExportDocxTables.Click += new System.EventHandler(this.btnExportDocxTables_Click);
+            // 
+            // cblTableLists
+            // 
+            this.cblTableLists.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cblTableLists.CheckOnClick = true;
+            this.cblTableLists.FormattingEnabled = true;
+            this.cblTableLists.Location = new System.Drawing.Point(730, 40);
+            this.cblTableLists.Margin = new System.Windows.Forms.Padding(0);
+            this.cblTableLists.Name = "cblTableLists";
+            this.cblTableLists.Size = new System.Drawing.Size(206, 224);
+            this.cblTableLists.TabIndex = 27;
             // 
             // btnCreateDicAllDB
             // 
@@ -1218,32 +1245,6 @@ namespace Tools.zhong
             // 
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
-            // 
-            // btnLoadView
-            // 
-            this.btnLoadView.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnLoadView.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnLoadView.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnLoadView.Location = new System.Drawing.Point(956, 4);
-            this.btnLoadView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnLoadView.Name = "btnLoadView";
-            this.btnLoadView.Size = new System.Drawing.Size(112, 31);
-            this.btnLoadView.TabIndex = 35;
-            this.btnLoadView.Text = "加载视图";
-            this.btnLoadView.UseVisualStyleBackColor = true;
-            this.btnLoadView.Click += new System.EventHandler(this.btnLoadView_Click);
-            // 
-            // cblTableLists
-            // 
-            this.cblTableLists.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cblTableLists.CheckOnClick = true;
-            this.cblTableLists.FormattingEnabled = true;
-            this.cblTableLists.Location = new System.Drawing.Point(730, 40);
-            this.cblTableLists.Margin = new System.Windows.Forms.Padding(0);
-            this.cblTableLists.Name = "cblTableLists";
-            this.cblTableLists.Size = new System.Drawing.Size(206, 224);
-            this.cblTableLists.TabIndex = 27;
             // 
             // MainForm
             // 
