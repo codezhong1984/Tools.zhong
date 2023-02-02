@@ -549,7 +549,7 @@ namespace Tools.zhong
                     var colList = DbObjectHelper.GetColumnsForSqlServer(tableName, ViewFlag);
                     txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
                     txtKey3.Text = string.Join(",", DbObjectHelper.GetSqlServerTablePrimaryKey(tableName));
-                    tableInfoModel = DbObjectHelper.GetSqlServerTableInfo(tableName,ViewFlag);
+                    tableInfoModel = DbObjectHelper.GetSqlServerTableInfo(tableName, ViewFlag);
                 }
                 if (dbType == DataBaseType.MySQL)
                 {
@@ -1013,7 +1013,7 @@ namespace Tools.zhong
                         }
                     }
 
-                    DocxHelper.GenerateDocxByTables(filePath, dataBaseName, lists);
+                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -1063,7 +1063,7 @@ namespace Tools.zhong
                         }
                     }
 
-                    DocxHelper.GenerateDocxByTables(filePath, dataBaseName, lists);
+                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";

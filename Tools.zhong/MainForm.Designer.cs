@@ -98,7 +98,6 @@ namespace Tools.zhong
             this.btnExportDocxTables = new System.Windows.Forms.Button();
             this.cblTableLists = new System.Windows.Forms.CheckedListBox();
             this.btnCreateDicAllDB = new System.Windows.Forms.Button();
-            this.btnCreateDicSingleTable = new System.Windows.Forms.Button();
             this.btnExportData = new System.Windows.Forms.Button();
             this.btnLoadFromDB = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -780,7 +779,6 @@ namespace Tools.zhong
             this.tabPage3.Controls.Add(this.btnExportDocxTables);
             this.tabPage3.Controls.Add(this.cblTableLists);
             this.tabPage3.Controls.Add(this.btnCreateDicAllDB);
-            this.tabPage3.Controls.Add(this.btnCreateDicSingleTable);
             this.tabPage3.Controls.Add(this.btnExportData);
             this.tabPage3.Controls.Add(this.btnLoadFromDB);
             this.tabPage3.Controls.Add(this.label10);
@@ -829,13 +827,13 @@ namespace Tools.zhong
             // txtDocxTitle
             // 
             this.txtDocxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDocxTitle.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDocxTitle.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.txtDocxTitle.Location = new System.Drawing.Point(955, 43);
+            this.txtDocxTitle.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDocxTitle.ForeColor = System.Drawing.Color.Black;
+            this.txtDocxTitle.Location = new System.Drawing.Point(955, 48);
             this.txtDocxTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDocxTitle.Multiline = true;
             this.txtDocxTitle.Name = "txtDocxTitle";
-            this.txtDocxTitle.Size = new System.Drawing.Size(172, 28);
+            this.txtDocxTitle.Size = new System.Drawing.Size(172, 27);
             this.txtDocxTitle.TabIndex = 34;
             this.txtDocxTitle.Text = "数据库设计文档";
             this.txtDocxTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -901,7 +899,7 @@ namespace Tools.zhong
             this.btnExportDocxTables.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportDocxTables.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportDocxTables.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnExportDocxTables.Location = new System.Drawing.Point(956, 159);
+            this.btnExportDocxTables.Location = new System.Drawing.Point(957, 148);
             this.btnExportDocxTables.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportDocxTables.Name = "btnExportDocxTables";
             this.btnExportDocxTables.Size = new System.Drawing.Size(171, 31);
@@ -927,7 +925,7 @@ namespace Tools.zhong
             this.btnCreateDicAllDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateDicAllDB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateDicAllDB.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDicAllDB.Location = new System.Drawing.Point(956, 119);
+            this.btnCreateDicAllDB.Location = new System.Drawing.Point(956, 94);
             this.btnCreateDicAllDB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateDicAllDB.Name = "btnCreateDicAllDB";
             this.btnCreateDicAllDB.Size = new System.Drawing.Size(171, 31);
@@ -935,20 +933,6 @@ namespace Tools.zhong
             this.btnCreateDicAllDB.Text = "导出word(库)";
             this.btnCreateDicAllDB.UseVisualStyleBackColor = true;
             this.btnCreateDicAllDB.Click += new System.EventHandler(this.btnCreateDicAllDB_Click);
-            // 
-            // btnCreateDicSingleTable
-            // 
-            this.btnCreateDicSingleTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateDicSingleTable.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateDicSingleTable.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDicSingleTable.Location = new System.Drawing.Point(956, 79);
-            this.btnCreateDicSingleTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCreateDicSingleTable.Name = "btnCreateDicSingleTable";
-            this.btnCreateDicSingleTable.Size = new System.Drawing.Size(171, 31);
-            this.btnCreateDicSingleTable.TabIndex = 25;
-            this.btnCreateDicSingleTable.Text = "导出word(表)";
-            this.btnCreateDicSingleTable.UseVisualStyleBackColor = true;
-            this.btnCreateDicSingleTable.Click += new System.EventHandler(this.btnCreateDicSingleTable_Click);
             // 
             // btnExportData
             // 
@@ -1360,7 +1344,6 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmRedo;
         private System.Windows.Forms.Button btnImportFromInput;
         private System.Windows.Forms.Button btnExportData;
-        private System.Windows.Forms.Button btnCreateDicSingleTable;
         private System.Windows.Forms.Button btnCreateDicAllDB;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TextBox textBox1;

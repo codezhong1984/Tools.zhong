@@ -56,7 +56,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        public static void GenerateDocxByTables(string fileName, string dbName, List<List<TableColumnModel>> lists)
+        public static void GenerateDocxByTables(string fileName, string docTitle, List<List<TableColumnModel>> lists)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Tools.zhong.UtilHelper
                 {
                     using (var docx = CreateDocx(fileName))
                     {
-                        WriteDocxTitle(docx, dbName + "数据库设计文档");
+                        WriteDocxTitle(docx, docTitle);
                         WriteDocxTables(docx, lists);
                         docx.Save();
                     }
@@ -90,7 +90,7 @@ namespace Tools.zhong.UtilHelper
             var p = document.InsertParagraph();
             p.Append(title)
                 .Font(new Xceed.Document.NET.Font("宋体"))
-                .FontSize(14)
+                .FontSize(20)
                 .Color(Color.Black)
                 .Bold()
                 .SpacingAfter(5);
