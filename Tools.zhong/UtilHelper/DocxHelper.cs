@@ -172,72 +172,18 @@ namespace Tools.zhong.UtilHelper
                 }
                 p.Remove(false);
             }
-            //var list = docx.AddList(/*null*/, 0, ListItemType.Numbered, 1);
-            //var listItem = docx.AddListItem(list, listData[0].TableName, 0);
-            //p = docx.InsertParagraph();
-            //p.Append(listData[0].TableName)
-            //    .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
-            //    .FontSize(14)
-            //    .Color(Color.FromArgb(46, 116, 181))
-            //    .Bold()
-            //    .SpacingBefore(10)
-            //    .Heading(HeadingType.Heading1);
-            //p.Alignment = Alignment.left;
-            //p.ListItemType = ListItemType.Numbered;
-            //listItem.AddItem(p);
-
-            //listItem.InsertParagraphAfterSelf(listData[0].TableName, false)
-            //     .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
-            //     .FontSize(14)
-            //     .Color(Color.FromArgb(46, 116, 181))
-            //     .Bold()
-            //     .SpacingBefore(10)
-            //     .Heading(HeadingType.Heading1);
-
-            //var list = docx.Lists.FirstOrDefault();
-            //if (list != null)
-            //{
-            //    var listItem = docx.AddListItem(list, listData[0].TableName, 0, ListItemType.Numbered, null, true, true, new Formatting()
-            //    {
-            //        Bold = true,
-            //        //FontFamily = new Xceed.Document.NET.Font("等线 Light (中文标题)"),
-            //        Size = 14,
-            //        FontColor = Color.FromArgb(46, 116, 181)
-            //    });
-            //}
-            //else
-            //{
-            //    list = docx.AddList();
-            //    var listItem = docx.AddListItem(list, listData[0].TableName, 0, ListItemType.Numbered, 1, true, false, new Formatting()
-            //    {
-            //        Bold = true,
-            //        //FontFamily = new Xceed.Document.NET.Font("等线 Light (中文标题)"),
-            //        Size = 14,
-            //        FontColor = Color.FromArgb(46, 116, 181)
-            //    });
-            //    docx.InsertList(list);
-            //}
-            bool hasList = docx.Lists.Count>0;
-            var list = docx.AddList(listData[0].TableName, 0, ListItemType.Numbered, 1, true, hasList, new Formatting()
-            {
-                Bold = true,
-                Size = 14,
-                FontColor = Color.FromArgb(46, 116, 181)
-            });
-            docx.InsertList(list);
 
             p = docx.InsertParagraph();
-            //p.Append(listData[0].TableName)
-            //    .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
-            //    .FontSize(14)
-            //    .Color(Color.FromArgb(46, 116, 181))
-            //    .Bold()
-            //    .SpacingBefore(10)
-            //    .Heading(HeadingType.Heading1);
-            //p.Alignment = Alignment.left;
-            //p.ListItemType = ListItemType.Numbered;
-
-            //listItem.AddItem(p);           
+            p.Append(listData[0].TableName)
+                .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
+                .FontSize(14)
+                .Color(Color.FromArgb(46, 116, 181))
+                .Bold()
+                .SpacingBefore(10)
+                .Heading(HeadingType.Heading1);
+                
+            p.Alignment = Alignment.left;
+            p.ListItemType = ListItemType.Numbered;
 
             if (!string.IsNullOrWhiteSpace(listData[0].TableComment))
             {
