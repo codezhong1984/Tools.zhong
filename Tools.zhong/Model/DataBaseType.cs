@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Tools.zhong.Model
 {
     public enum DataBaseType
-    {
-        SQLSERVER = 0,
-        ORACLE = 1,
+    {        
+        ORACLE = 0,
+        SQLSERVER = 1,
         MySQL = 2
     }
 }

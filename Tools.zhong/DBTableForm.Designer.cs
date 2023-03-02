@@ -236,9 +236,9 @@ namespace Tools.zhong
             // 
             // cbView
             // 
-            this.cbView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbView.AutoSize = true;
-            this.cbView.Location = new System.Drawing.Point(328, 93);
+            this.cbView.Location = new System.Drawing.Point(335, 93);
             this.cbView.Name = "cbView";
             this.cbView.Size = new System.Drawing.Size(104, 19);
             this.cbView.TabIndex = 37;
@@ -266,12 +266,12 @@ namespace Tools.zhong
             // 
             // btnLoad
             // 
-            this.btnLoad.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoad.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLoad.ForeColor = System.Drawing.Color.Blue;
-            this.btnLoad.Location = new System.Drawing.Point(432, 89);
+            this.btnLoad.Location = new System.Drawing.Point(454, 89);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(84, 27);
+            this.btnLoad.Size = new System.Drawing.Size(62, 27);
             this.btnLoad.TabIndex = 40;
             this.btnLoad.Text = "加载";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -304,6 +304,7 @@ namespace Tools.zhong
             this.Controls.Add(this.btnOk);
             this.Name = "DbTableForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "选择数据库表";
             this.Load += new System.EventHandler(this.DBTaleForm_Load);
             this.ResumeLayout(false);

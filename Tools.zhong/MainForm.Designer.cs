@@ -840,17 +840,16 @@ namespace Tools.zhong
             // 
             // txtTableFilter
             // 
-            this.txtTableFilter.Location = new System.Drawing.Point(744, 7);
+            this.txtTableFilter.Location = new System.Drawing.Point(734, 7);
             this.txtTableFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtTableFilter.Multiline = true;
             this.txtTableFilter.Name = "txtTableFilter";
-            this.txtTableFilter.Size = new System.Drawing.Size(124, 25);
+            this.txtTableFilter.Size = new System.Drawing.Size(138, 25);
             this.txtTableFilter.TabIndex = 33;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(668, 12);
+            this.label11.Location = new System.Drawing.Point(658, 12);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(84, 15);
             this.label11.TabIndex = 32;

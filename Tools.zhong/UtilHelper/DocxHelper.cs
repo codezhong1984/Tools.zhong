@@ -48,7 +48,7 @@ namespace Tools.zhong.UtilHelper
                         WriteDocxSingleTable(docx, listData);
                         docx.Save();
                     }
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace Tools.zhong.UtilHelper
                         WriteDocxTables(docx, lists);
                         docx.Save();
                     }
-                }              
+                }
             }
             catch (Exception ex)
             {
@@ -98,9 +98,10 @@ namespace Tools.zhong.UtilHelper
             //p.InsertPageBreakAfterSelf();
         }
 
-        private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData)
+        [Obsolete]
+        private static void WriteDocxSingleTable_BackUP(DocX docx, List<TableColumnModel> listData)
         {
-           // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
+            // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
             if (listData == null || listData.Count == 0)
             {
                 return;
@@ -153,6 +154,148 @@ namespace Tools.zhong.UtilHelper
                 table.Rows[i + 1].Cells[5].Paragraphs[0].Append(listData[i].DataScale?.ToString()).FontSize(tableFontSize);
                 table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
             }
+        }
+
+        private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData)
+        {
+            // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
+            if (listData == null || listData.Count == 0)
+            {
+                return;
+            }
+            var p = docx.Paragraphs.FirstOrDefault(i => i.Text == listData[0].TableName);
+            if (p != null)
+            {
+                if (!string.IsNullOrWhiteSpace(listData[0].TableComment))
+                {
+                    p.NextParagraph.Remove(false);
+                }
+                p.Remove(false);
+            }
+            //var list = docx.AddList(/*null*/, 0, ListItemType.Numbered, 1);
+            //var listItem = docx.AddListItem(list, listData[0].TableName, 0);
+            //p = docx.InsertParagraph();
+            //p.Append(listData[0].TableName)
+            //    .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
+            //    .FontSize(14)
+            //    .Color(Color.FromArgb(46, 116, 181))
+            //    .Bold()
+            //    .SpacingBefore(10)
+            //    .Heading(HeadingType.Heading1);
+            //p.Alignment = Alignment.left;
+            //p.ListItemType = ListItemType.Numbered;
+            //listItem.AddItem(p);
+
+            //listItem.InsertParagraphAfterSelf(listData[0].TableName, false)
+            //     .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
+            //     .FontSize(14)
+            //     .Color(Color.FromArgb(46, 116, 181))
+            //     .Bold()
+            //     .SpacingBefore(10)
+            //     .Heading(HeadingType.Heading1);
+
+            //var list = docx.Lists.FirstOrDefault();
+            //if (list != null)
+            //{
+            //    var listItem = docx.AddListItem(list, listData[0].TableName, 0, ListItemType.Numbered, null, true, true, new Formatting()
+            //    {
+            //        Bold = true,
+            //        //FontFamily = new Xceed.Document.NET.Font("等线 Light (中文标题)"),
+            //        Size = 14,
+            //        FontColor = Color.FromArgb(46, 116, 181)
+            //    });
+            //}
+            //else
+            //{
+            //    list = docx.AddList();
+            //    var listItem = docx.AddListItem(list, listData[0].TableName, 0, ListItemType.Numbered, 1, true, false, new Formatting()
+            //    {
+            //        Bold = true,
+            //        //FontFamily = new Xceed.Document.NET.Font("等线 Light (中文标题)"),
+            //        Size = 14,
+            //        FontColor = Color.FromArgb(46, 116, 181)
+            //    });
+            //    docx.InsertList(list);
+            //}
+            bool hasList = docx.Lists.Count>0;
+            var list = docx.AddList(listData[0].TableName, 0, ListItemType.Numbered, 1, true, hasList, new Formatting()
+            {
+                Bold = true,
+                Size = 14,
+                FontColor = Color.FromArgb(46, 116, 181)
+            });
+            docx.InsertList(list);
+
+            p = docx.InsertParagraph();
+            //p.Append(listData[0].TableName)
+            //    .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
+            //    .FontSize(14)
+            //    .Color(Color.FromArgb(46, 116, 181))
+            //    .Bold()
+            //    .SpacingBefore(10)
+            //    .Heading(HeadingType.Heading1);
+            //p.Alignment = Alignment.left;
+            //p.ListItemType = ListItemType.Numbered;
+
+            //listItem.AddItem(p);           
+
+            if (!string.IsNullOrWhiteSpace(listData[0].TableComment))
+            {
+                var pComment = p.InsertParagraphAfterSelf(listData[0].TableComment)
+                    .Font(new Xceed.Document.NET.Font("宋体")).Color(Color.Black)
+                    .SpacingAfter(0);
+                pComment.Alignment = Alignment.left;
+                p = pComment;
+            }
+
+            var table = docx.Tables.FirstOrDefault(i => i.TableCaption == listData[0].TableName);
+            if (table != null)
+            {
+                table.Remove();
+            }
+
+            //表字段表格         
+            var tableFontSize = 10.5;
+            var columnWidths = new float[] { 0.17f, 0.18f, 0.17f, 0.12f, 0.12f, 0.12f, 0.12f };
+            table = p.InsertTableAfterSelf(1 + listData.Count, TABLE_FIELDS.Length);
+            //table = listItem.InsertTableAfterSelf(1 + listData.Count, TABLE_FIELDS.Length);
+            table.SetWidthsPercentage(columnWidths);
+            table.AutoFit = AutoFit.Window;
+
+            table.TableCaption = listData[0].TableName;
+            table.TableDescription = listData[0].TableComment;
+            table.Design = TableDesign.TableGrid;
+            table.Alignment = Alignment.left;
+            for (int i = 0; i < TABLE_FIELDS.Length; i++)
+            {
+                table.Rows[0].Cells[i].Paragraphs[0].Append(TABLE_FIELDS[i]).FontSize(tableFontSize);//.Bold(true);
+            }
+
+            //添加表格数据
+            for (int i = 0; i < listData.Count; i++)
+            {
+                table.Rows[i + 1].Cells[0].Paragraphs[0].Append(listData[i].FieldName).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[1].Paragraphs[0].Append(listData[i].FieldRemarks).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].DataType).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataLength?.ToString()).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[4].Paragraphs[0].Append(listData[i].DataPrecision?.ToString()).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[5].Paragraphs[0].Append(listData[i].DataScale?.ToString()).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
+            }
+
+            //var numberedList = docx.AddList("Berries", 0, ListItemType.Numbered, 1);
+            //// Add Sub-items(level 1) to the preceding ListItem.
+            //docx.AddListItem(numberedList, "Strawberries", 1);
+            //docx.AddListItem(numberedList, "Blueberries", 1);
+            //docx.AddListItem(numberedList, "Raspberries", 1);
+            ////docxn item (level 0)
+            //docx.AddListItem(numberedList, "Banana", 0);
+            //docx.AddListItem(numberedList, "Apple", 0);
+
+            //docx.AddListItem(numberedList, "Red", 1);
+            //docx.AddListItem(numberedList, "Green", 1);
+            //docx.AddListItem(numberedList, "Yellow", 1);
+            //docx.InsertList(numberedList);
         }
 
         private static void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists)

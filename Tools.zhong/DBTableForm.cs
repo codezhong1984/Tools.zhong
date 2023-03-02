@@ -183,7 +183,7 @@ namespace Tools.zhong
             folderBrowserDialog1.SelectedPath = AppDomain.CurrentDomain.BaseDirectory;
             //加载数据库类型
             var dbTypes = Enum.GetNames(typeof(DataBaseType)).ToList<string>();
-            dbTypes.Insert(0, "请选择");
+            //dbTypes.Insert(0, "请选择");
             cbDBType.DataSource = dbTypes;
             cbDBType.SelectedIndex = 0;
         }
