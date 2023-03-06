@@ -74,17 +74,17 @@ namespace Tools.zhong
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(tbNameSpace.Text))
+                if (string.IsNullOrWhiteSpace(tbNameSpace.Text))
                 {
                     ConfigHelper.SetValue("NameSpace", tbNameSpace.Text.Trim());
                 }
 
-                if (cbDBType.SelectedIndex <= 0)
-                {
-                    cbDBType.Focus();
-                    MessageBox.Show("数据库类型未选择！");
-                    return;
-                }
+                //if (cbDBType.SelectedIndex <= 0)
+                //{
+                //    cbDBType.Focus();
+                //    MessageBox.Show("数据库类型未选择！");
+                //    return;
+                //}
                 if (cbTableName.SelectedIndex < 0)
                 {
                     cbTableName.Focus();
