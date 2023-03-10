@@ -88,5 +88,15 @@ namespace Tools.zhong
                     break;
             }
         }
+
+        private void cbIfTrim_CheckedChanged(object sender, EventArgs e)
+        {
+            cbFullProp.Checked = !cbIfTrim.Checked;
+        }
+
+        private void cbFullProp_CheckedChanged(object sender, EventArgs e)
+        {
+            cbIfTrim.Checked = !cbFullProp.Checked;
+        }
     }
 }

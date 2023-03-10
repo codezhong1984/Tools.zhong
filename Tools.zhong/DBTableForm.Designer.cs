@@ -50,6 +50,7 @@ namespace Tools.zhong
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.cbLikeType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnOk
@@ -57,7 +58,7 @@ namespace Tools.zhong
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.ForeColor = System.Drawing.Color.Blue;
-            this.btnOk.Location = new System.Drawing.Point(438, 593);
+            this.btnOk.Location = new System.Drawing.Point(454, 593);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 27);
             this.btnOk.TabIndex = 2;
@@ -68,7 +69,7 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(330, 593);
+            this.btnCancel.Location = new System.Drawing.Point(346, 593);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 3;
@@ -85,7 +86,7 @@ namespace Tools.zhong
             this.cbDBType.Location = new System.Drawing.Point(92, 20);
             this.cbDBType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbDBType.Name = "cbDBType";
-            this.cbDBType.Size = new System.Drawing.Size(423, 23);
+            this.cbDBType.Size = new System.Drawing.Size(454, 23);
             this.cbDBType.TabIndex = 22;
             this.cbDBType.SelectedIndexChanged += new System.EventHandler(this.cbDBType_SelectedIndexChanged);
             // 
@@ -150,13 +151,13 @@ namespace Tools.zhong
             this.cbTableName.FormattingEnabled = true;
             this.cbTableName.Location = new System.Drawing.Point(92, 126);
             this.cbTableName.Name = "cbTableName";
-            this.cbTableName.Size = new System.Drawing.Size(424, 280);
+            this.cbTableName.Size = new System.Drawing.Size(455, 280);
             this.cbTableName.TabIndex = 29;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(22, 593);
+            this.btnSave.Location = new System.Drawing.Point(38, 593);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(118, 27);
             this.btnSave.TabIndex = 30;
@@ -179,7 +180,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNameSpace.Location = new System.Drawing.Point(92, 54);
             this.tbNameSpace.Name = "tbNameSpace";
-            this.tbNameSpace.Size = new System.Drawing.Size(424, 25);
+            this.tbNameSpace.Size = new System.Drawing.Size(455, 25);
             this.tbNameSpace.TabIndex = 32;
             this.tbNameSpace.Text = "DBModel";
             // 
@@ -188,7 +189,7 @@ namespace Tools.zhong
             this.btnOpenPath2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
-            this.btnOpenPath2.Location = new System.Drawing.Point(173, 593);
+            this.btnOpenPath2.Location = new System.Drawing.Point(189, 593);
             this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenPath2.Name = "btnOpenPath2";
             this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
@@ -201,7 +202,7 @@ namespace Tools.zhong
             // 
             this.cbSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSelectAll.AutoSize = true;
-            this.cbSelectAll.Location = new System.Drawing.Point(454, 420);
+            this.cbSelectAll.Location = new System.Drawing.Point(485, 420);
             this.cbSelectAll.Name = "cbSelectAll";
             this.cbSelectAll.Size = new System.Drawing.Size(59, 19);
             this.cbSelectAll.TabIndex = 34;
@@ -238,7 +239,7 @@ namespace Tools.zhong
             // 
             this.cbView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbView.AutoSize = true;
-            this.cbView.Location = new System.Drawing.Point(335, 93);
+            this.cbView.Location = new System.Drawing.Point(379, 93);
             this.cbView.Name = "cbView";
             this.cbView.Size = new System.Drawing.Size(104, 19);
             this.cbView.TabIndex = 37;
@@ -250,9 +251,9 @@ namespace Tools.zhong
             // 
             this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbFilter.Location = new System.Drawing.Point(92, 90);
+            this.tbFilter.Location = new System.Drawing.Point(193, 90);
             this.tbFilter.Name = "tbFilter";
-            this.tbFilter.Size = new System.Drawing.Size(230, 25);
+            this.tbFilter.Size = new System.Drawing.Size(168, 25);
             this.tbFilter.TabIndex = 39;
             // 
             // label4
@@ -269,7 +270,7 @@ namespace Tools.zhong
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoad.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLoad.ForeColor = System.Drawing.Color.Blue;
-            this.btnLoad.Location = new System.Drawing.Point(454, 89);
+            this.btnLoad.Location = new System.Drawing.Point(485, 89);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(62, 27);
             this.btnLoad.TabIndex = 40;
@@ -277,11 +278,21 @@ namespace Tools.zhong
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // cbLikeType
+            // 
+            this.cbLikeType.FormattingEnabled = true;
+            this.cbLikeType.Location = new System.Drawing.Point(90, 91);
+            this.cbLikeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLikeType.Name = "cbLikeType";
+            this.cbLikeType.Size = new System.Drawing.Size(97, 23);
+            this.cbLikeType.TabIndex = 41;
+            // 
             // DbTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 648);
+            this.ClientSize = new System.Drawing.Size(582, 648);
+            this.Controls.Add(this.cbLikeType);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.tbFilter);
             this.Controls.Add(this.label4);
@@ -334,5 +345,6 @@ namespace Tools.zhong
         private System.Windows.Forms.TextBox tbFilter;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.ComboBox cbLikeType;
     }
 }

@@ -94,9 +94,16 @@ namespace Tools.zhong
             {
                 cbDBType.SelectedIndex = 0;
             }
-
+            
             saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             cbEncodeType.SelectedIndex = 0;
+
+            cbLikeType.Items.Add(new ListItem("LIKE", "LIKE"));
+            cbLikeType.Items.Add(new ListItem("NOT LIKE", "NOT LIKE"));
+            cbLikeType.Items.Add(new ListItem("=", "="));
+            cbLikeType.DisplayMember = "Text";
+            cbLikeType.ValueMember = "Value";
+            cbLikeType.SelectedIndex = 0;
 
             //加载数据库类型
             string[] dbTypes = Enum.GetNames(typeof(DataBaseType));
@@ -456,7 +463,7 @@ namespace Tools.zhong
                 ViewFlag = false;
                 string tableFilter = txtTableFilter.Text.Trim();
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                var dtData = DbObjectHelper.GetDataBaseTables(dbType, tableFilter);
+                var dtData = DbObjectHelper.GetDataBaseTables(dbType, tableFilter,cbLikeType.Text);
                 txtTableName3.DataSource = dtData;
                 txtTableName3.DisplayMember = "table_name";
                 txtTableName3.ValueMember = "table_name";

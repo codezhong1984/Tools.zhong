@@ -54,6 +54,7 @@ namespace Tools.zhong
             this.cbCreateTbName = new System.Windows.Forms.CheckBox();
             this.cbDisplayName = new System.Windows.Forms.CheckBox();
             this.cbLineDeal = new System.Windows.Forms.CheckBox();
+            this.cbIfTrim = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,11 +76,10 @@ namespace Tools.zhong
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(1072, 65);
             this.txtCode.TabIndex = 1;
-            this.txtCode.Text = "    AVGITEM1  AVGITEM2  AVGITEM3  AVG3  MAXITEM MINITEM";
             // 
             // btnOk
             // 
-            this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnOk.Location = new System.Drawing.Point(983, 574);
@@ -92,8 +92,8 @@ namespace Tools.zhong
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(831, 574);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(849, 574);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 33);
             this.btnCancel.TabIndex = 3;
@@ -278,12 +278,13 @@ namespace Tools.zhong
             // 
             this.cbFullProp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbFullProp.AutoSize = true;
-            this.cbFullProp.Location = new System.Drawing.Point(228, 595);
+            this.cbFullProp.Location = new System.Drawing.Point(208, 569);
             this.cbFullProp.Name = "cbFullProp";
             this.cbFullProp.Size = new System.Drawing.Size(205, 19);
             this.cbFullProp.TabIndex = 39;
             this.cbFullProp.Text = "是否生成完整GET|SET方法";
             this.cbFullProp.UseVisualStyleBackColor = true;
+            this.cbFullProp.CheckedChanged += new System.EventHandler(this.cbFullProp_CheckedChanged);
             // 
             // cbCreateTbName
             // 
@@ -291,7 +292,7 @@ namespace Tools.zhong
             this.cbCreateTbName.AutoSize = true;
             this.cbCreateTbName.Checked = true;
             this.cbCreateTbName.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCreateTbName.Location = new System.Drawing.Point(228, 570);
+            this.cbCreateTbName.Location = new System.Drawing.Point(208, 595);
             this.cbCreateTbName.Name = "cbCreateTbName";
             this.cbCreateTbName.Size = new System.Drawing.Size(383, 19);
             this.cbCreateTbName.TabIndex = 42;
@@ -320,11 +321,24 @@ namespace Tools.zhong
             this.cbLineDeal.Text = "是否处理下划线";
             this.cbLineDeal.UseVisualStyleBackColor = true;
             // 
-            // CreateModelBySplitStringForm
+            // cbIfTrim
+            // 
+            this.cbIfTrim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbIfTrim.AutoSize = true;
+            this.cbIfTrim.Location = new System.Drawing.Point(446, 570);
+            this.cbIfTrim.Name = "cbIfTrim";
+            this.cbIfTrim.Size = new System.Drawing.Size(173, 19);
+            this.cbIfTrim.TabIndex = 43;
+            this.cbIfTrim.Text = "是否对SET方法去空格";
+            this.cbIfTrim.UseVisualStyleBackColor = true;
+            this.cbIfTrim.CheckedChanged += new System.EventHandler(this.cbIfTrim_CheckedChanged);
+            // 
+            // ModelGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 621);
+            this.Controls.Add(this.cbIfTrim);
             this.Controls.Add(this.cbCreateTbName);
             this.Controls.Add(this.cbDisplayName);
             this.Controls.Add(this.cbLineDeal);
@@ -343,7 +357,7 @@ namespace Tools.zhong
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label1);
-            this.Name = "CreateModelBySplitStringForm";
+            this.Name = "ModelGeneratorForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "根据输入字符串自动生成类对象";
@@ -381,5 +395,6 @@ namespace Tools.zhong
         private System.Windows.Forms.CheckBox cbCreateTbName;
         private System.Windows.Forms.CheckBox cbDisplayName;
         private System.Windows.Forms.CheckBox cbLineDeal;
+        private System.Windows.Forms.CheckBox cbIfTrim;
     }
 }

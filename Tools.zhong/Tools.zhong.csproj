@@ -78,6 +78,7 @@
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Model\DataBaseType.cs" />
     <Compile Include="Model\EnumColumnModel.cs" />
+    <Compile Include="Model\ListItem.cs" />
     <Compile Include="Model\TableColumnModel.cs" />
     <Compile Include="Model\TableModel.cs" />
     <Compile Include="OracleQueryHelperForm.cs">

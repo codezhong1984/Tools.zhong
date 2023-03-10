@@ -174,7 +174,7 @@ namespace Tools.zhong
 
         private void cbDBType_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
         }
 
         private void DBTaleForm_Load(object sender, EventArgs e)
@@ -186,6 +186,13 @@ namespace Tools.zhong
             //dbTypes.Insert(0, "请选择");
             cbDBType.DataSource = dbTypes;
             cbDBType.SelectedIndex = 0;
+
+            cbLikeType.Items.Add(new ListItem("LIKE", "LIKE"));
+            cbLikeType.Items.Add(new ListItem("NOT LIKE", "NOT LIKE"));
+            cbLikeType.Items.Add(new ListItem("=", "="));
+            cbLikeType.DisplayMember = "Text";
+            cbLikeType.ValueMember = "Value";
+            cbLikeType.SelectedIndex = 0;
         }
 
         private void cbTableName_SelectedIndexChanged(object sender, EventArgs e)
@@ -311,7 +318,7 @@ namespace Tools.zhong
             try
             {
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                DataTable dtData = DisplayView ? DbObjectHelper.GetDataBaseViews(dbType, tbFilter.Text) : DbObjectHelper.GetDataBaseTables(dbType, tbFilter.Text);
+                DataTable dtData = DisplayView ? DbObjectHelper.GetDataBaseViews(dbType, tbFilter.Text, cbLikeType.Text) : DbObjectHelper.GetDataBaseTables(dbType, tbFilter.Text, cbLikeType.Text);
                 cbTableName.DataSource = dtData;
                 cbTableName.DisplayMember = "table_name";
                 cbTableName.ValueMember = "table_name";

@@ -91,7 +91,6 @@ namespace Tools.zhong
             this.btnLoadView = new System.Windows.Forms.Button();
             this.txtDocxTitle = new System.Windows.Forms.TextBox();
             this.txtTableFilter = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.lblTableInfo = new System.Windows.Forms.Label();
             this.btnCancelSelectAll = new System.Windows.Forms.Button();
             this.btnSelectAll = new System.Windows.Forms.Button();
@@ -124,6 +123,8 @@ namespace Tools.zhong
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.cbLikeType = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -133,6 +134,10 @@ namespace Tools.zhong
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -244,7 +249,7 @@ namespace Tools.zhong
             this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
             this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(149, 29);
             this.btnCreateModelFromDBScript.TabIndex = 18;
-            this.btnCreateModelFromDBScript.Text = "DB表生成Model类";
+            this.btnCreateModelFromDBScript.Text = "库表生成Model类";
             this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
             this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
             // 
@@ -769,15 +774,15 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.cbLikeType);
+            this.tabPage3.Controls.Add(this.splitContainer1);
             this.tabPage3.Controls.Add(this.btnLoadView);
             this.tabPage3.Controls.Add(this.txtDocxTitle);
             this.tabPage3.Controls.Add(this.txtTableFilter);
-            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.lblTableInfo);
             this.tabPage3.Controls.Add(this.btnCancelSelectAll);
             this.tabPage3.Controls.Add(this.btnSelectAll);
             this.tabPage3.Controls.Add(this.btnExportDocxTables);
-            this.tabPage3.Controls.Add(this.cblTableLists);
             this.tabPage3.Controls.Add(this.btnCreateDicAllDB);
             this.tabPage3.Controls.Add(this.btnExportData);
             this.tabPage3.Controls.Add(this.btnLoadFromDB);
@@ -800,7 +805,6 @@ namespace Tools.zhong
             this.tabPage3.Controls.Add(this.txtOuput3);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.btnCreateInsert);
-            this.tabPage3.Controls.Add(this.txtInput3);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
@@ -812,7 +816,7 @@ namespace Tools.zhong
             // 
             // btnLoadView
             // 
-            this.btnLoadView.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnLoadView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoadView.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLoadView.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnLoadView.Location = new System.Drawing.Point(956, 4);
@@ -845,15 +849,6 @@ namespace Tools.zhong
             this.txtTableFilter.Name = "txtTableFilter";
             this.txtTableFilter.Size = new System.Drawing.Size(138, 25);
             this.txtTableFilter.TabIndex = 33;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(658, 12);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(84, 15);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "表名LIKE：";
             // 
             // lblTableInfo
             // 
@@ -909,14 +904,13 @@ namespace Tools.zhong
             // 
             // cblTableLists
             // 
-            this.cblTableLists.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cblTableLists.CheckOnClick = true;
+            this.cblTableLists.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cblTableLists.FormattingEnabled = true;
-            this.cblTableLists.Location = new System.Drawing.Point(730, 40);
+            this.cblTableLists.Location = new System.Drawing.Point(0, 0);
             this.cblTableLists.Margin = new System.Windows.Forms.Padding(0);
             this.cblTableLists.Name = "cblTableLists";
-            this.cblTableLists.Size = new System.Drawing.Size(206, 224);
+            this.cblTableLists.Size = new System.Drawing.Size(377, 211);
             this.cblTableLists.TabIndex = 27;
             // 
             // btnCreateDicAllDB
@@ -1047,7 +1041,7 @@ namespace Tools.zhong
             this.txtKey3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtKey3.Multiline = true;
             this.txtKey3.Name = "txtKey3";
-            this.txtKey3.Size = new System.Drawing.Size(141, 25);
+            this.txtKey3.Size = new System.Drawing.Size(108, 25);
             this.txtKey3.TabIndex = 15;
             // 
             // label4
@@ -1189,14 +1183,12 @@ namespace Tools.zhong
             // 
             // txtInput3
             // 
-            this.txtInput3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInput3.Location = new System.Drawing.Point(5, 40);
+            this.txtInput3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInput3.Location = new System.Drawing.Point(0, 0);
             this.txtInput3.Margin = new System.Windows.Forms.Padding(0);
             this.txtInput3.Multiline = true;
             this.txtInput3.Name = "txtInput3";
-            this.txtInput3.Size = new System.Drawing.Size(719, 204);
+            this.txtInput3.Size = new System.Drawing.Size(550, 211);
             this.txtInput3.TabIndex = 0;
             // 
             // tabPage5
@@ -1229,6 +1221,34 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.*)|*.*\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(5, 38);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtInput3);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.cblTableLists);
+            this.splitContainer1.Size = new System.Drawing.Size(931, 211);
+            this.splitContainer1.SplitterDistance = 550;
+            this.splitContainer1.TabIndex = 36;
+            // 
+            // cbLikeType
+            // 
+            this.cbLikeType.FormattingEnabled = true;
+            this.cbLikeType.Location = new System.Drawing.Point(627, 8);
+            this.cbLikeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLikeType.Name = "cbLikeType";
+            this.cbLikeType.Size = new System.Drawing.Size(101, 23);
+            this.cbLikeType.TabIndex = 37;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1256,6 +1276,11 @@ namespace Tools.zhong
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1351,10 +1376,11 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Label lblTableInfo;
         private System.Windows.Forms.TextBox txtTableFilter;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtDocxTitle;
         private System.Windows.Forms.Button btnLoadView;
         private System.Windows.Forms.CheckedListBox cblTableLists;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ComboBox cbLikeType;
     }
 }
 

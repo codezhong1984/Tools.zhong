@@ -400,52 +400,54 @@ namespace Tools.zhong.UtilHelper
 
         #region 获取数据表列表
 
-        public static DataTable GetDataBaseTables(DataBaseType dbType, string tableFilter = null)
+        public static DataTable GetDataBaseTables(DataBaseType dbType, string tableFilter = null, string filterType = "LIKE")
         {
+            var filterChar = filterType == "=" ? string.Empty : "%";
             if (dbType == DataBaseType.ORACLE)
             {
                 string sql = "select table_name from user_tables {0} order by table_name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where table_name like '%{tableFilter.ToUpper()}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where table_name {filterType} '{filterChar}{tableFilter.ToUpper()}{filterChar}'" : "");
                 var dtData = OracleHelper.ExecuteDataTable(sql);
                 return dtData;
             }
             if (dbType == DataBaseType.SQLSERVER)
             {
                 string sql = "select name table_name from sys.tables {0} order by name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where name like '%{tableFilter}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where name {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
                 var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
                 return dtData;
             }
             if (dbType == DataBaseType.MySQL)
             {
                 string sql = "select table_name from information_schema.tables where table_schema=@DataBase {0} order by table_name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"and table_name like '%{tableFilter}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"and table_name {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
                 var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                 return dtData;
             }
             return null;
         }
 
-        public static DataTable GetDataBaseViews(DataBaseType dbType, string tableFilter = null)
+        public static DataTable GetDataBaseViews(DataBaseType dbType, string tableFilter = null, string filterType = "LIKE")
         {
+            var filterChar = filterType == "=" ? string.Empty : "%";
             if (dbType == DataBaseType.ORACLE)
             {
                 string sql = "select view_name table_name from user_views {0} order by view_name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where view_name like '%{tableFilter}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where view_name like {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
                 var dtData = OracleHelper.ExecuteDataTable(sql);
                 return dtData;
             }
             if (dbType == DataBaseType.SQLSERVER)
             {
                 string sql = "select name table_name from sys.views {0} order by name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where name like '%{tableFilter}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where name {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
                 var dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
                 return dtData;
             }
             if (dbType == DataBaseType.MySQL)
             {
                 string sql = "select table_name from information_schema.views where table_schema=@DataBase {0} order by table_name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"and table_name like '%{tableFilter}%'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"and table_name {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
                 var dtData = DBHepler.MySQLHelper.ExecuteDataTableDataBaseParam(sql);
                 return dtData;
             }
