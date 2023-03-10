@@ -68,7 +68,6 @@ namespace Tools.zhong
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
-            this.txtCustom = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnCopyToInput = new System.Windows.Forms.Button();
             this.btnOpenPath2 = new System.Windows.Forms.Button();
@@ -114,7 +113,6 @@ namespace Tools.zhong
             this.btnCreateDelete = new System.Windows.Forms.Button();
             this.btnCreateUpdate = new System.Windows.Forms.Button();
             this.btnOutput3 = new System.Windows.Forms.Button();
-            this.btnInput3 = new System.Windows.Forms.Button();
             this.txtOuput3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCreateInsert = new System.Windows.Forms.Button();
@@ -125,6 +123,7 @@ namespace Tools.zhong
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cbLikeType = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -154,11 +153,12 @@ namespace Tools.zhong
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1144, 637);
+            this.tabControl1.Size = new System.Drawing.Size(1085, 634);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.btnImportFromInput);
             this.tabPage1.Controls.Add(this.btnUpdateConfig);
             this.tabPage1.Controls.Add(this.btnOracleQueryHelper);
@@ -173,12 +173,11 @@ namespace Tools.zhong
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.btnOutput);
             this.tabPage1.Controls.Add(this.btnCustom);
-            this.tabPage1.Controls.Add(this.txtCustom);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage1.Size = new System.Drawing.Size(1077, 605);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -188,7 +187,7 @@ namespace Tools.zhong
             this.btnImportFromInput.AutoEllipsis = true;
             this.btnImportFromInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImportFromInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnImportFromInput.Location = new System.Drawing.Point(6, 195);
+            this.btnImportFromInput.Location = new System.Drawing.Point(551, 227);
             this.btnImportFromInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImportFromInput.Name = "btnImportFromInput";
             this.btnImportFromInput.Size = new System.Drawing.Size(117, 29);
@@ -200,9 +199,9 @@ namespace Tools.zhong
             // btnUpdateConfig
             // 
             this.btnUpdateConfig.AutoEllipsis = true;
-            this.btnUpdateConfig.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUpdateConfig.ForeColor = System.Drawing.Color.Blue;
-            this.btnUpdateConfig.Location = new System.Drawing.Point(873, 4);
+            this.btnUpdateConfig.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnUpdateConfig.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnUpdateConfig.Location = new System.Drawing.Point(805, 4);
             this.btnUpdateConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnUpdateConfig.Name = "btnUpdateConfig";
             this.btnUpdateConfig.Size = new System.Drawing.Size(122, 29);
@@ -216,12 +215,12 @@ namespace Tools.zhong
             this.btnOracleQueryHelper.AutoEllipsis = true;
             this.btnOracleQueryHelper.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOracleQueryHelper.ForeColor = System.Drawing.Color.Blue;
-            this.btnOracleQueryHelper.Location = new System.Drawing.Point(729, 195);
+            this.btnOracleQueryHelper.Location = new System.Drawing.Point(405, 227);
             this.btnOracleQueryHelper.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOracleQueryHelper.Name = "btnOracleQueryHelper";
-            this.btnOracleQueryHelper.Size = new System.Drawing.Size(161, 29);
+            this.btnOracleQueryHelper.Size = new System.Drawing.Size(108, 29);
             this.btnOracleQueryHelper.TabIndex = 20;
-            this.btnOracleQueryHelper.Text = "Oracle查询辅助工具";
+            this.btnOracleQueryHelper.Text = "Oracle查询";
             this.btnOracleQueryHelper.UseVisualStyleBackColor = true;
             this.btnOracleQueryHelper.Click += new System.EventHandler(this.btnOracleQueryHelper_Click);
             // 
@@ -230,12 +229,12 @@ namespace Tools.zhong
             this.btnCreateModelByInput.AutoEllipsis = true;
             this.btnCreateModelByInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateModelByInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnCreateModelByInput.Location = new System.Drawing.Point(562, 195);
+            this.btnCreateModelByInput.Location = new System.Drawing.Point(141, 227);
             this.btnCreateModelByInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateModelByInput.Name = "btnCreateModelByInput";
-            this.btnCreateModelByInput.Size = new System.Drawing.Size(161, 29);
+            this.btnCreateModelByInput.Size = new System.Drawing.Size(158, 29);
             this.btnCreateModelByInput.TabIndex = 19;
-            this.btnCreateModelByInput.Text = "字符串生成Model类";
+            this.btnCreateModelByInput.Text = "字符串生成实体类";
             this.btnCreateModelByInput.UseVisualStyleBackColor = true;
             this.btnCreateModelByInput.Click += new System.EventHandler(this.btnCreateModelByInput_Click);
             // 
@@ -244,12 +243,12 @@ namespace Tools.zhong
             this.btnCreateModelFromDBScript.AutoEllipsis = true;
             this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateModelFromDBScript.ForeColor = System.Drawing.Color.Blue;
-            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(402, 195);
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(6, 227);
             this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
-            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(149, 29);
+            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(132, 29);
             this.btnCreateModelFromDBScript.TabIndex = 18;
-            this.btnCreateModelFromDBScript.Text = "库表生成Model类";
+            this.btnCreateModelFromDBScript.Text = "库表生成实体类";
             this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
             this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
             // 
@@ -258,12 +257,12 @@ namespace Tools.zhong
             this.btnImport.AutoEllipsis = true;
             this.btnImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(243, 195);
+            this.btnImport.Location = new System.Drawing.Point(302, 227);
             this.btnImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(148, 29);
+            this.btnImport.Size = new System.Drawing.Size(100, 29);
             this.btnImport.TabIndex = 15;
-            this.btnImport.Text = "类代码属性中提取";
+            this.btnImport.Text = "类代码提取";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
@@ -272,7 +271,7 @@ namespace Tools.zhong
             this.btnRemoveAll.AutoEllipsis = true;
             this.btnRemoveAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveAll.Location = new System.Drawing.Point(132, 195);
+            this.btnRemoveAll.Location = new System.Drawing.Point(833, 227);
             this.btnRemoveAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(100, 29);
@@ -285,9 +284,9 @@ namespace Tools.zhong
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.AutoEllipsis = true;
-            this.btnClear.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnClear.ForeColor = System.Drawing.Color.Blue;
-            this.btnClear.Location = new System.Drawing.Point(1001, 4);
+            this.btnClear.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnClear.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnClear.Location = new System.Drawing.Point(942, 4);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(127, 29);
@@ -301,12 +300,12 @@ namespace Tools.zhong
             this.btnRemoveCol.AutoEllipsis = true;
             this.btnRemoveCol.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveCol.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveCol.Location = new System.Drawing.Point(201, 232);
+            this.btnRemoveCol.Location = new System.Drawing.Point(758, 227);
             this.btnRemoveCol.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveCol.Name = "btnRemoveCol";
-            this.btnRemoveCol.Size = new System.Drawing.Size(127, 29);
+            this.btnRemoveCol.Size = new System.Drawing.Size(67, 29);
             this.btnRemoveCol.TabIndex = 12;
-            this.btnRemoveCol.Text = "删除最后一列";
+            this.btnRemoveCol.Text = "删除列";
             this.btnRemoveCol.UseVisualStyleBackColor = true;
             this.btnRemoveCol.Click += new System.EventHandler(this.btnRemoveCol_Click);
             // 
@@ -320,7 +319,7 @@ namespace Tools.zhong
             this.txtTempl.Multiline = true;
             this.txtTempl.Name = "txtTempl";
             this.txtTempl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempl.Size = new System.Drawing.Size(1122, 130);
+            this.txtTempl.Size = new System.Drawing.Size(1063, 168);
             this.txtTempl.TabIndex = 7;
             // 
             // contextMenuStrip1
@@ -511,19 +510,19 @@ namespace Tools.zhong
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(1121, 333);
+            this.dataGridView1.Size = new System.Drawing.Size(1062, 330);
             this.dataGridView1.TabIndex = 11;
             // 
             // btnOutput
             // 
             this.btnOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOutput.AutoEllipsis = true;
-            this.btnOutput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOutput.ForeColor = System.Drawing.Color.Blue;
-            this.btnOutput.Location = new System.Drawing.Point(1011, 231);
+            this.btnOutput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOutput.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnOutput.Location = new System.Drawing.Point(977, 227);
             this.btnOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOutput.Name = "btnOutput";
-            this.btnOutput.Size = new System.Drawing.Size(112, 29);
+            this.btnOutput.Size = new System.Drawing.Size(94, 29);
             this.btnOutput.TabIndex = 10;
             this.btnOutput.Text = "生成结果";
             this.btnOutput.UseVisualStyleBackColor = true;
@@ -534,7 +533,7 @@ namespace Tools.zhong
             this.btnCustom.AutoEllipsis = true;
             this.btnCustom.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCustom.ForeColor = System.Drawing.Color.Blue;
-            this.btnCustom.Location = new System.Drawing.Point(117, 232);
+            this.btnCustom.Location = new System.Drawing.Point(676, 227);
             this.btnCustom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCustom.Name = "btnCustom";
             this.btnCustom.Size = new System.Drawing.Size(74, 29);
@@ -542,17 +541,6 @@ namespace Tools.zhong
             this.btnCustom.Text = "添加列";
             this.btnCustom.UseVisualStyleBackColor = true;
             this.btnCustom.Click += new System.EventHandler(this.btnAddColumn_Click);
-            // 
-            // txtCustom
-            // 
-            this.txtCustom.AutoSize = true;
-            this.txtCustom.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCustom.ForeColor = System.Drawing.Color.Blue;
-            this.txtCustom.Location = new System.Drawing.Point(11, 238);
-            this.txtCustom.Name = "txtCustom";
-            this.txtCustom.Size = new System.Drawing.Size(82, 15);
-            this.txtCustom.TabIndex = 8;
-            this.txtCustom.Text = "定制化列表";
             // 
             // tabPage2
             // 
@@ -566,7 +554,7 @@ namespace Tools.zhong
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage2.Size = new System.Drawing.Size(1077, 605);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "结果输出";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -575,7 +563,7 @@ namespace Tools.zhong
             // 
             this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnCopyToInput.Location = new System.Drawing.Point(868, 5);
+            this.btnCopyToInput.Location = new System.Drawing.Point(821, 5);
             this.btnCopyToInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCopyToInput.Name = "btnCopyToInput";
             this.btnCopyToInput.Size = new System.Drawing.Size(114, 26);
@@ -588,7 +576,7 @@ namespace Tools.zhong
             // 
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
-            this.btnOpenPath2.Location = new System.Drawing.Point(611, 6);
+            this.btnOpenPath2.Location = new System.Drawing.Point(564, 6);
             this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenPath2.Name = "btnOpenPath2";
             this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
@@ -601,7 +589,7 @@ namespace Tools.zhong
             // 
             this.btnExportToFile2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportToFile2.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportToFile2.Location = new System.Drawing.Point(750, 5);
+            this.btnExportToFile2.Location = new System.Drawing.Point(703, 5);
             this.btnExportToFile2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExportToFile2.Name = "btnExportToFile2";
             this.btnExportToFile2.Size = new System.Drawing.Size(103, 26);
@@ -614,7 +602,7 @@ namespace Tools.zhong
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Blue;
-            this.button1.Location = new System.Drawing.Point(997, 5);
+            this.button1.Location = new System.Drawing.Point(950, 5);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 26);
@@ -644,7 +632,7 @@ namespace Tools.zhong
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(1123, 564);
+            this.txtOutput.Size = new System.Drawing.Size(1064, 561);
             this.txtOutput.TabIndex = 5;
             // 
             // tabPage4
@@ -662,7 +650,7 @@ namespace Tools.zhong
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage4.Size = new System.Drawing.Size(1077, 605);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "加密解密";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -674,7 +662,7 @@ namespace Tools.zhong
             this.txtInput4.Location = new System.Drawing.Point(60, 16);
             this.txtInput4.Multiline = true;
             this.txtInput4.Name = "txtInput4";
-            this.txtInput4.Size = new System.Drawing.Size(1070, 151);
+            this.txtInput4.Size = new System.Drawing.Size(1011, 151);
             this.txtInput4.TabIndex = 0;
             this.txtInput4.Text = "PTS1020220101000000";
             // 
@@ -740,7 +728,7 @@ namespace Tools.zhong
             this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDecode.ForeColor = System.Drawing.Color.Blue;
-            this.btnDecode.Location = new System.Drawing.Point(1044, 184);
+            this.btnDecode.Location = new System.Drawing.Point(985, 184);
             this.btnDecode.Name = "btnDecode";
             this.btnDecode.Size = new System.Drawing.Size(75, 25);
             this.btnDecode.TabIndex = 3;
@@ -753,7 +741,7 @@ namespace Tools.zhong
             this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEncode.ForeColor = System.Drawing.Color.Blue;
-            this.btnEncode.Location = new System.Drawing.Point(952, 186);
+            this.btnEncode.Location = new System.Drawing.Point(893, 186);
             this.btnEncode.Name = "btnEncode";
             this.btnEncode.Size = new System.Drawing.Size(75, 25);
             this.btnEncode.TabIndex = 2;
@@ -769,7 +757,7 @@ namespace Tools.zhong
             this.txtOutput4.Location = new System.Drawing.Point(61, 236);
             this.txtOutput4.Multiline = true;
             this.txtOutput4.Name = "txtOutput4";
-            this.txtOutput4.Size = new System.Drawing.Size(1069, 366);
+            this.txtOutput4.Size = new System.Drawing.Size(1010, 363);
             this.txtOutput4.TabIndex = 1;
             // 
             // tabPage3
@@ -801,7 +789,6 @@ namespace Tools.zhong
             this.tabPage3.Controls.Add(this.btnCreateDelete);
             this.tabPage3.Controls.Add(this.btnCreateUpdate);
             this.tabPage3.Controls.Add(this.btnOutput3);
-            this.tabPage3.Controls.Add(this.btnInput3);
             this.tabPage3.Controls.Add(this.txtOuput3);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.btnCreateInsert);
@@ -809,7 +796,7 @@ namespace Tools.zhong
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage3.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage3.Size = new System.Drawing.Size(1077, 605);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -819,10 +806,10 @@ namespace Tools.zhong
             this.btnLoadView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoadView.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLoadView.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnLoadView.Location = new System.Drawing.Point(956, 4);
+            this.btnLoadView.Location = new System.Drawing.Point(957, 4);
             this.btnLoadView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoadView.Name = "btnLoadView";
-            this.btnLoadView.Size = new System.Drawing.Size(112, 31);
+            this.btnLoadView.Size = new System.Drawing.Size(107, 35);
             this.btnLoadView.TabIndex = 35;
             this.btnLoadView.Text = "加载视图";
             this.btnLoadView.UseVisualStyleBackColor = true;
@@ -833,7 +820,7 @@ namespace Tools.zhong
             this.txtDocxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDocxTitle.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtDocxTitle.ForeColor = System.Drawing.Color.Black;
-            this.txtDocxTitle.Location = new System.Drawing.Point(955, 48);
+            this.txtDocxTitle.Location = new System.Drawing.Point(892, 49);
             this.txtDocxTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDocxTitle.Multiline = true;
             this.txtDocxTitle.Name = "txtDocxTitle";
@@ -854,7 +841,7 @@ namespace Tools.zhong
             // 
             this.lblTableInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTableInfo.ForeColor = System.Drawing.Color.Blue;
-            this.lblTableInfo.Location = new System.Drawing.Point(5, 582);
+            this.lblTableInfo.Location = new System.Drawing.Point(5, 579);
             this.lblTableInfo.Name = "lblTableInfo";
             this.lblTableInfo.Size = new System.Drawing.Size(1128, 23);
             this.lblTableInfo.TabIndex = 31;
@@ -865,7 +852,7 @@ namespace Tools.zhong
             this.btnCancelSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancelSelectAll.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancelSelectAll.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCancelSelectAll.Location = new System.Drawing.Point(1028, 208);
+            this.btnCancelSelectAll.Location = new System.Drawing.Point(969, 208);
             this.btnCancelSelectAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancelSelectAll.Name = "btnCancelSelectAll";
             this.btnCancelSelectAll.Size = new System.Drawing.Size(99, 31);
@@ -879,7 +866,7 @@ namespace Tools.zhong
             this.btnSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectAll.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSelectAll.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnSelectAll.Location = new System.Drawing.Point(955, 208);
+            this.btnSelectAll.Location = new System.Drawing.Point(892, 208);
             this.btnSelectAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(72, 31);
@@ -893,10 +880,10 @@ namespace Tools.zhong
             this.btnExportDocxTables.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportDocxTables.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportDocxTables.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnExportDocxTables.Location = new System.Drawing.Point(957, 148);
+            this.btnExportDocxTables.Location = new System.Drawing.Point(892, 148);
             this.btnExportDocxTables.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportDocxTables.Name = "btnExportDocxTables";
-            this.btnExportDocxTables.Size = new System.Drawing.Size(171, 31);
+            this.btnExportDocxTables.Size = new System.Drawing.Size(177, 31);
             this.btnExportDocxTables.TabIndex = 28;
             this.btnExportDocxTables.Text = "导出word(选定表)";
             this.btnExportDocxTables.UseVisualStyleBackColor = true;
@@ -910,7 +897,7 @@ namespace Tools.zhong
             this.cblTableLists.Location = new System.Drawing.Point(0, 0);
             this.cblTableLists.Margin = new System.Windows.Forms.Padding(0);
             this.cblTableLists.Name = "cblTableLists";
-            this.cblTableLists.Size = new System.Drawing.Size(377, 211);
+            this.cblTableLists.Size = new System.Drawing.Size(353, 208);
             this.cblTableLists.TabIndex = 27;
             // 
             // btnCreateDicAllDB
@@ -918,10 +905,10 @@ namespace Tools.zhong
             this.btnCreateDicAllDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateDicAllDB.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateDicAllDB.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDicAllDB.Location = new System.Drawing.Point(956, 94);
+            this.btnCreateDicAllDB.Location = new System.Drawing.Point(892, 94);
             this.btnCreateDicAllDB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateDicAllDB.Name = "btnCreateDicAllDB";
-            this.btnCreateDicAllDB.Size = new System.Drawing.Size(171, 31);
+            this.btnCreateDicAllDB.Size = new System.Drawing.Size(176, 31);
             this.btnCreateDicAllDB.TabIndex = 26;
             this.btnCreateDicAllDB.Text = "导出word(库)";
             this.btnCreateDicAllDB.UseVisualStyleBackColor = true;
@@ -929,10 +916,10 @@ namespace Tools.zhong
             // 
             // btnExportData
             // 
-            this.btnExportData.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportData.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportData.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnExportData.Location = new System.Drawing.Point(830, 254);
+            this.btnExportData.Location = new System.Drawing.Point(800, 251);
             this.btnExportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportData.Name = "btnExportData";
             this.btnExportData.Size = new System.Drawing.Size(106, 31);
@@ -943,12 +930,13 @@ namespace Tools.zhong
             // 
             // btnLoadFromDB
             // 
+            this.btnLoadFromDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoadFromDB.Font = new System.Drawing.Font("微软雅黑", 9.5F);
             this.btnLoadFromDB.ForeColor = System.Drawing.Color.Blue;
             this.btnLoadFromDB.Location = new System.Drawing.Point(881, 4);
             this.btnLoadFromDB.Margin = new System.Windows.Forms.Padding(0);
             this.btnLoadFromDB.Name = "btnLoadFromDB";
-            this.btnLoadFromDB.Size = new System.Drawing.Size(73, 31);
+            this.btnLoadFromDB.Size = new System.Drawing.Size(73, 35);
             this.btnLoadFromDB.TabIndex = 17;
             this.btnLoadFromDB.Text = "加载表";
             this.btnLoadFromDB.UseVisualStyleBackColor = true;
@@ -956,9 +944,9 @@ namespace Tools.zhong
             // 
             // label10
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(566, 263);
+            this.label10.Location = new System.Drawing.Point(550, 260);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(37, 15);
             this.label10.TabIndex = 23;
@@ -966,10 +954,10 @@ namespace Tools.zhong
             // 
             // btnDefaultNewLine3
             // 
-            this.btnDefaultNewLine3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnDefaultNewLine3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDefaultNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDefaultNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnDefaultNewLine3.Location = new System.Drawing.Point(617, 254);
+            this.btnDefaultNewLine3.Location = new System.Drawing.Point(601, 251);
             this.btnDefaultNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDefaultNewLine3.Name = "btnDefaultNewLine3";
             this.btnDefaultNewLine3.Size = new System.Drawing.Size(59, 31);
@@ -980,10 +968,10 @@ namespace Tools.zhong
             // 
             // btnNoNewLine3
             // 
-            this.btnNoNewLine3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnNoNewLine3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNoNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNoNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnNoNewLine3.Location = new System.Drawing.Point(681, 254);
+            this.btnNoNewLine3.Location = new System.Drawing.Point(665, 251);
             this.btnNoNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNoNewLine3.Name = "btnNoNewLine3";
             this.btnNoNewLine3.Size = new System.Drawing.Size(92, 31);
@@ -1004,10 +992,10 @@ namespace Tools.zhong
             // 
             // btnCopy3
             // 
-            this.btnCopy3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCopy3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopy3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCopy3.ForeColor = System.Drawing.Color.Black;
-            this.btnCopy3.Location = new System.Drawing.Point(982, 254);
+            this.btnCopy3.Location = new System.Drawing.Point(927, 251);
             this.btnCopy3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCopy3.Name = "btnCopy3";
             this.btnCopy3.Size = new System.Drawing.Size(59, 31);
@@ -1055,9 +1043,9 @@ namespace Tools.zhong
             // 
             // txtPerColNum
             // 
-            this.txtPerColNum.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.txtPerColNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtPerColNum.Enabled = false;
-            this.txtPerColNum.Location = new System.Drawing.Point(519, 258);
+            this.txtPerColNum.Location = new System.Drawing.Point(503, 255);
             this.txtPerColNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPerColNum.Name = "txtPerColNum";
             this.txtPerColNum.Size = new System.Drawing.Size(40, 25);
@@ -1068,9 +1056,9 @@ namespace Tools.zhong
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(476, 262);
+            this.label3.Location = new System.Drawing.Point(460, 259);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 13;
@@ -1078,13 +1066,13 @@ namespace Tools.zhong
             // 
             // btnCreateSelect
             // 
-            this.btnCreateSelect.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCreateSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateSelect.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateSelect.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateSelect.Location = new System.Drawing.Point(13, 254);
+            this.btnCreateSelect.Location = new System.Drawing.Point(8, 251);
             this.btnCreateSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateSelect.Name = "btnCreateSelect";
-            this.btnCreateSelect.Size = new System.Drawing.Size(107, 31);
+            this.btnCreateSelect.Size = new System.Drawing.Size(96, 31);
             this.btnCreateSelect.TabIndex = 11;
             this.btnCreateSelect.Text = "SELECT";
             this.btnCreateSelect.UseVisualStyleBackColor = true;
@@ -1092,10 +1080,10 @@ namespace Tools.zhong
             // 
             // btnCreateDelete
             // 
-            this.btnCreateDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCreateDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateDelete.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateDelete.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDelete.Location = new System.Drawing.Point(361, 254);
+            this.btnCreateDelete.Location = new System.Drawing.Point(345, 251);
             this.btnCreateDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateDelete.Name = "btnCreateDelete";
             this.btnCreateDelete.Size = new System.Drawing.Size(107, 31);
@@ -1106,10 +1094,10 @@ namespace Tools.zhong
             // 
             // btnCreateUpdate
             // 
-            this.btnCreateUpdate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCreateUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateUpdate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateUpdate.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateUpdate.Location = new System.Drawing.Point(245, 254);
+            this.btnCreateUpdate.Location = new System.Drawing.Point(229, 251);
             this.btnCreateUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateUpdate.Name = "btnCreateUpdate";
             this.btnCreateUpdate.Size = new System.Drawing.Size(107, 31);
@@ -1120,10 +1108,10 @@ namespace Tools.zhong
             // 
             // btnOutput3
             // 
-            this.btnOutput3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnOutput3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOutput3.Font = new System.Drawing.Font("宋体", 9.5F);
             this.btnOutput3.ForeColor = System.Drawing.Color.Black;
-            this.btnOutput3.Location = new System.Drawing.Point(1052, 254);
+            this.btnOutput3.Location = new System.Drawing.Point(1007, 251);
             this.btnOutput3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOutput3.Name = "btnOutput3";
             this.btnOutput3.Size = new System.Drawing.Size(59, 31);
@@ -1132,30 +1120,16 @@ namespace Tools.zhong
             this.btnOutput3.UseVisualStyleBackColor = true;
             this.btnOutput3.Click += new System.EventHandler(this.btnOutput3_Click);
             // 
-            // btnInput3
-            // 
-            this.btnInput3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInput3.Font = new System.Drawing.Font("宋体", 9.5F);
-            this.btnInput3.ForeColor = System.Drawing.Color.Black;
-            this.btnInput3.Location = new System.Drawing.Point(1070, 5);
-            this.btnInput3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnInput3.Name = "btnInput3";
-            this.btnInput3.Size = new System.Drawing.Size(60, 31);
-            this.btnInput3.TabIndex = 5;
-            this.btnInput3.Text = "清空";
-            this.btnInput3.UseVisualStyleBackColor = true;
-            this.btnInput3.Click += new System.EventHandler(this.btnInput3_Click);
-            // 
             // txtOuput3
             // 
             this.txtOuput3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOuput3.Location = new System.Drawing.Point(5, 298);
+            this.txtOuput3.Location = new System.Drawing.Point(5, 295);
             this.txtOuput3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOuput3.Multiline = true;
             this.txtOuput3.Name = "txtOuput3";
             this.txtOuput3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOuput3.Size = new System.Drawing.Size(1128, 280);
+            this.txtOuput3.Size = new System.Drawing.Size(1069, 280);
             this.txtOuput3.TabIndex = 3;
             // 
             // label2
@@ -1169,10 +1143,10 @@ namespace Tools.zhong
             // 
             // btnCreateInsert
             // 
-            this.btnCreateInsert.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCreateInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateInsert.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateInsert.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateInsert.Location = new System.Drawing.Point(129, 254);
+            this.btnCreateInsert.Location = new System.Drawing.Point(113, 251);
             this.btnCreateInsert.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateInsert.Name = "btnCreateInsert";
             this.btnCreateInsert.Size = new System.Drawing.Size(107, 31);
@@ -1188,7 +1162,7 @@ namespace Tools.zhong
             this.txtInput3.Margin = new System.Windows.Forms.Padding(0);
             this.txtInput3.Multiline = true;
             this.txtInput3.Name = "txtInput3";
-            this.txtInput3.Size = new System.Drawing.Size(550, 211);
+            this.txtInput3.Size = new System.Drawing.Size(515, 208);
             this.txtInput3.TabIndex = 0;
             // 
             // tabPage5
@@ -1197,7 +1171,7 @@ namespace Tools.zhong
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1136, 608);
+            this.tabPage5.Size = new System.Drawing.Size(1077, 605);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "临时备份框";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1213,7 +1187,7 @@ namespace Tools.zhong
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(1122, 601);
+            this.textBox1.Size = new System.Drawing.Size(1063, 598);
             this.textBox1.TabIndex = 8;
             // 
             // saveFileDialog1
@@ -1236,8 +1210,8 @@ namespace Tools.zhong
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.cblTableLists);
-            this.splitContainer1.Size = new System.Drawing.Size(931, 211);
-            this.splitContainer1.SplitterDistance = 550;
+            this.splitContainer1.Size = new System.Drawing.Size(872, 208);
+            this.splitContainer1.SplitterDistance = 515;
             this.splitContainer1.TabIndex = 36;
             // 
             // cbLikeType
@@ -1249,11 +1223,20 @@ namespace Tools.zhong
             this.cbLikeType.Size = new System.Drawing.Size(101, 23);
             this.cbLikeType.TabIndex = 37;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(521, 234);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(15, 15);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "|";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 648);
+            this.ClientSize = new System.Drawing.Size(1082, 645);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
@@ -1304,7 +1287,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button btnOutput3;
-        private System.Windows.Forms.Button btnInput3;
         private System.Windows.Forms.TextBox txtOuput3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCreateInsert;
@@ -1322,7 +1304,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnCopy3;
         private System.Windows.Forms.ComboBox txtTableName3;
         private System.Windows.Forms.Button btnCreateModelFromDBScript;
-        private System.Windows.Forms.Label txtCustom;
         private System.Windows.Forms.Button btnExportToFile2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnOpenPath2;
@@ -1381,6 +1362,7 @@ namespace Tools.zhong
         private System.Windows.Forms.CheckedListBox cblTableLists;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ComboBox cbLikeType;
+        private System.Windows.Forms.Label label11;
     }
 }
 

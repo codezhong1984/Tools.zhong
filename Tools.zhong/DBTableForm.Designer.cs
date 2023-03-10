@@ -51,6 +51,7 @@ namespace Tools.zhong
             this.label4 = new System.Windows.Forms.Label();
             this.btnLoad = new System.Windows.Forms.Button();
             this.cbLikeType = new System.Windows.Forms.ComboBox();
+            this.cbIfTrim = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOk
@@ -287,11 +288,23 @@ namespace Tools.zhong
             this.cbLikeType.Size = new System.Drawing.Size(97, 23);
             this.cbLikeType.TabIndex = 41;
             // 
+            // cbIfTrim
+            // 
+            this.cbIfTrim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbIfTrim.AutoSize = true;
+            this.cbIfTrim.Location = new System.Drawing.Point(90, 557);
+            this.cbIfTrim.Name = "cbIfTrim";
+            this.cbIfTrim.Size = new System.Drawing.Size(173, 19);
+            this.cbIfTrim.TabIndex = 44;
+            this.cbIfTrim.Text = "是否对SET方法去空格";
+            this.cbIfTrim.UseVisualStyleBackColor = true;
+            // 
             // DbTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 648);
+            this.Controls.Add(this.cbIfTrim);
             this.Controls.Add(this.cbLikeType);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.tbFilter);
@@ -346,5 +359,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.ComboBox cbLikeType;
+        private System.Windows.Forms.CheckBox cbIfTrim;
     }
 }

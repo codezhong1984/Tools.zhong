@@ -19,27 +19,53 @@ namespace Tools.zhong
 
         private string SplitChar = "\t";
 
-        public ModelGeneratorForm()
+        private MainForm mainFrm;
+        public ModelGeneratorForm(MainForm mainFrm)
         {
+            this.mainFrm = mainFrm;
             InitializeComponent();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             var dataList = _ListColumns.ToList<TableColumnModel>();
-            this.CodeText = DbObjectHelper.GenerateCode(dataList, cbLineDeal.Checked, cbDisplayName.Checked,
-              tbNameSpace.Text.Trim(), null, false, cbFullProp.Checked);
-            this.DialogResult = DialogResult.OK;
+            var option = new CodeGenerateOption()
+            {
+                AddDisplayName = cbDisplayName.Checked,
+                EnumCode = null,
+                FullPropFlag = cbFullProp.Checked,
+                MapperTableName = cbCreateTbName.Checked,
+                NameSpace = tbNameSpace.Text.Trim(),
+                TrimProp = cbIfTrim.Checked,
+                Underline = cbLineDeal.Checked
+            };
+            this.CodeText = DbObjectHelper.GenerateCode(dataList, option);
+            //this.DialogResult = DialogResult.OK;
+            this.mainFrm.TextOutPut.Text = this.CodeText;
+            this.mainFrm.TabControl.SelectedIndex = 1;
+            this.mainFrm.BringToFront();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            //this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void ImportForm_Load(object sender, EventArgs e)
         {
-            cbSplitChar.SelectedIndex = 0;
+            cbSplitChar.SelectedIndex = 3;
+            var list = new List<ListItem>();
+            list.Add(new ListItem("字符串", "string"));
+            list.Add(new ListItem("整型", "int"));
+            list.Add(new ListItem("浮点型", "decimal"));
+            list.Add(new ListItem("日期", "DateTime"));
+            list.Add(new ListItem("是/否", "bool"));
+            list.Add(new ListItem("字符", "char"));
+            cbFieldType.DataSource = list;
+            cbFieldType.ValueMember = "Value";
+            cbFieldType.DisplayMember = "Text";
+            cbFieldType.SelectedIndex = 0;
         }
 
         private void btnPreCreate_Click(object sender, EventArgs e)
@@ -64,7 +90,7 @@ namespace Tools.zhong
                 propName = propName.TrimStart('"').TrimEnd('"');
 
                 colItem.FieldName = DbObjectHelper.ToUperFirstChar(propName);
-                colItem.DataType = "string";
+                colItem.DataType = cbFieldType.SelectedValue.ToString();
                 colItem.TableName = txtClassName.Text.Trim();
                 colItem.TableComment = txtTableDescription.Text.Trim();
                 colItem.FieldRemarks = "";
@@ -91,12 +117,12 @@ namespace Tools.zhong
 
         private void cbIfTrim_CheckedChanged(object sender, EventArgs e)
         {
-            cbFullProp.Checked = !cbIfTrim.Checked;
+
         }
 
         private void cbFullProp_CheckedChanged(object sender, EventArgs e)
         {
-            cbIfTrim.Checked = !cbFullProp.Checked;
+
         }
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="DBHelper\OracleHelper.cs" />
     <Compile Include="DBHelper\MySQLHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
+    <Compile Include="Model\CodeGenerateOption.cs" />
     <Compile Include="Model\DataBaseType.cs" />
     <Compile Include="Model\EnumColumnModel.cs" />
     <Compile Include="Model\ListItem.cs" />

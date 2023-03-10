@@ -37,6 +37,8 @@ namespace Tools.zhong
 
         private DbTableForm subForm;
 
+        private ModelGeneratorForm mgForm;
+
         //    txtOutput.Text = subForm.CodeText;
         //    tabControl1.SelectedIndex = 1;
 
@@ -94,7 +96,7 @@ namespace Tools.zhong
             {
                 cbDBType.SelectedIndex = 0;
             }
-            
+
             saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             cbEncodeType.SelectedIndex = 0;
 
@@ -463,7 +465,7 @@ namespace Tools.zhong
                 ViewFlag = false;
                 string tableFilter = txtTableFilter.Text.Trim();
                 var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                var dtData = DbObjectHelper.GetDataBaseTables(dbType, tableFilter,cbLikeType.Text);
+                var dtData = DbObjectHelper.GetDataBaseTables(dbType, tableFilter, cbLikeType.Text);
                 txtTableName3.DataSource = dtData;
                 txtTableName3.DisplayMember = "table_name";
                 txtTableName3.ValueMember = "table_name";
@@ -797,11 +799,18 @@ namespace Tools.zhong
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
         {
-            var frm = new ModelGeneratorForm();
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (mgForm != null)
             {
-                txtOutput.Text = frm.CodeText;
-                tabControl1.SelectedIndex = 1;
+                if (mgForm.IsDisposed)
+                    mgForm = new ModelGeneratorForm(this);//如果已经销毁，则重新创建子窗口对象
+                mgForm.Show();
+                mgForm.Focus();
+            }
+            else
+            {
+                mgForm = new ModelGeneratorForm(this);
+                mgForm.Show();
+                mgForm.Focus();
             }
         }
 
@@ -1086,6 +1095,10 @@ namespace Tools.zhong
             if (subForm != null)
             {
                 subForm.Dispose();
+            }
+            if (mgForm != null)
+            {
+                mgForm.Dispose();
             }
         }
 

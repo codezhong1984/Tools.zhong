@@ -13,8 +13,7 @@ namespace Tools.zhong.UtilHelper
 {
     public class DbObjectHelper
     {
-        public static string GenerateCode(List<TableColumnModel> listColumns, bool underline = false, bool addDisplayName = false,
-            string ns = "DBModel", string enumCode = null, bool EnableMapperTableName = false, bool fullPropFlag = false)
+        public static string GenerateCode(List<TableColumnModel> listColumns, CodeGenerateOption option)
         {
             if (listColumns == null || listColumns.Count == 0)
             {
@@ -22,64 +21,34 @@ namespace Tools.zhong.UtilHelper
             }
             StringBuilder sbResult = new StringBuilder();
             sbResult.AppendLine("using System;");
-            if (addDisplayName || EnableMapperTableName)
+            if (option.AddDisplayName || option.MapperTableName)
             {
                 sbResult.AppendLine("using System.ComponentModel;");
             }
-            if (EnableMapperTableName)
+            if (option.MapperTableName)
             {
                 sbResult.AppendLine("using System.ComponentModel.DataAnnotations;");
                 sbResult.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
             }
             sbResult.AppendLine();
-            sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(ns) ? "DBModel" : ns)}");
+            sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(option.NameSpace) ? "DBModel" : option.NameSpace)}");
             sbResult.AppendLine("{");
 
-            if (!string.IsNullOrWhiteSpace(enumCode))
+            if (!string.IsNullOrWhiteSpace(option.EnumCode))
             {
-                sbResult.AppendLine(enumCode);
+                sbResult.AppendLine(option.EnumCode);
             }
 
             sbResult.AppendLine("    /// <summary>");
             sbResult.AppendLine("    /// " + listColumns[0].TableComment);
             sbResult.AppendLine("    /// 创建于 " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             sbResult.AppendLine("    /// </summary>");
-            if (EnableMapperTableName)
+            if (option.MapperTableName)
             {
                 sbResult.AppendLine("    [Table(\"" + ToUperFirstChar(listColumns[0].TableName) + "\")]");
             }
             sbResult.AppendLine("    public class " + ToUperFirstChar(listColumns[0].TableName));
             sbResult.AppendLine("    {");
-
-            #region 生成私有变量
-
-            //foreach (var _item in listColumns)
-            //{
-            //    if (_item.FieldName.ToLower() != "id")
-            //    {
-            //        string oneValue = _item.FieldName.Substring(0, 1).ToLower();
-            //        string fullValue = oneValue + _item.FieldName.Substring(1);
-            //        string dataType = ChangeToCsharpType(_item.DataType);//根据数据库数据类型转换成c#对应数据类型
-            //        string dataTypeValue = DefaultForType(dataType);//根据c#数据类型获取初始值
-            //        text += tabBlank + tabBlank + "private " + dataType + " _" + fullValue + " = " + dataTypeValue + ";\r\n";
-            //    }
-            //}
-            //foreach (var item in listColumns)
-            //{
-            //    if (item.FieldName.ToLower() != "id")
-            //    {
-            //        string dataType = string.Empty;
-            //        dataType = ChangeToCsharpType(item.DataType);
-            //        text += tabBlank + tabBlank + "/// <summary>\r\n" + tabBlank + tabBlank + "/// " + item.FieldRemarks + "\r\n" + tabBlank + tabBlank + "/// </summary>\r\n";
-            //        text += tabBlank + tabBlank + "\r\npublic " + dataType + " " + item.FieldName + "\r\n";
-            //        string oneValue = item.FieldName.Substring(0, 1).ToLower();
-            //        string fullValue = oneValue + item.FieldName.Substring(1);
-            //        text += tabBlank + tabBlank + "{\r\n" + tabBlank + tabBlank + tabBlank + "get { return " + " _" + fullValue + "; }\r\n";
-            //        text += tabBlank + tabBlank + tabBlank + "set { " + " _" + fullValue + " = value; }\r\n" + tabBlank + tabBlank + "}\r\n";
-            //    }
-            //}
-
-            #endregion
 
             int i = 0;
             foreach (var item in listColumns)
@@ -94,35 +63,76 @@ namespace Tools.zhong.UtilHelper
                 sbResult.AppendLine("        /// " + item.FieldRemarks?.Replace("\\n", ""));
                 sbResult.AppendLine("        /// </summary>");
 
-                if (addDisplayName)
+                if (option.AddDisplayName)
                 {
                     sbResult.AppendLine("        [DisplayName(\"" + item.FieldRemarks + "\")]");
                 }
-                if (EnableMapperTableName && i == 1)
+                if (option.MapperTableName && i == 1)
                 {
                     sbResult.AppendLine("        [Key]");
                 }
 
                 var fieldCode = new StringBuilder();
-                if (fullPropFlag)
+                ////old version
+                //if (option.FullPropFlag)
+                //{
+                //    fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                //           + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                //           + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} ");
+                //    fieldCode.AppendLine("        {");
+                //    fieldCode.AppendLine("            get { return _" + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; }");
+                //    fieldCode.AppendLine("            set { _" + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value; }");
+                //    fieldCode.AppendLine("        }");
+                //    fieldCode.AppendLine($"        private {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                //           + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                //           + $" _{(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))}; ");
+                //}
+                //new version
+                if (option.FullPropFlag)
                 {
-                    fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
-                           + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
-                           + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} ");
-                    fieldCode.AppendLine("        {");
-                    fieldCode.AppendLine("            get { return _" + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; }");
-                    fieldCode.AppendLine("            set { _" + (underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value; }");
-                    fieldCode.AppendLine("        }");
+                    if (option.TrimProp && dataType.ToLower() == "string")
+                    {
+                        fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                               + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                               + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
+                               + " { get => _" + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; set => _"
+                               + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value?.Trim(); }");
+                    }
+                    else
+                    {
+                        fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                          + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                          + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
+                          + " { get => _" + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; set => _"
+                          + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value; }");
+                    }                      
+
                     fieldCode.AppendLine($"        private {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
                            + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
-                           + $" _{(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))}; ");
+                           + $" _{(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))}; ");
                 }
+              
                 else
                 {
-                    fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
-                             + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
-                             + $" {(underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
-                             + "{ get; set; }");
+                    if (option.TrimProp && dataType.ToLower() == "string")
+                    {
+                        fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                               + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                               + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
+                               + " { get => _" + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; set => _"
+                               + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value?.Trim(); }");
+
+                        fieldCode.AppendLine($"        private {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                               + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                               + $" _{(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))}; ");
+                    }
+                    else
+                    {
+                        fieldCode.AppendLine($"        public {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                           + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
+                           + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
+                           + "{ get; set; }");
+                    }                  
                 }
 
                 sbResult.AppendLine(fieldCode.ToString());

@@ -35,16 +35,34 @@ namespace Tools.zhong
         private string GetCodeForOracle(string tableName)
         {
             var list = DbObjectHelper.GetColumnsForOracle(tableName);
-            var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
-                tbNameSpace.Text.Trim(), null, EnableMapperTableName, cbFullProp.Checked);
+            var option = new CodeGenerateOption()
+            {
+                 AddDisplayName = cbDisplayName.Checked,
+                 EnumCode = null,
+                 FullPropFlag = cbFullProp.Checked,
+                 MapperTableName = cbCreateTbName.Checked,
+                 NameSpace = tbNameSpace.Text.Trim(),
+                 TrimProp= cbIfTrim.Checked,
+                 Underline = cbLineDeal.Checked
+            };
+            var code = UtilHelper.DbObjectHelper.GenerateCode(list, option);
             return code;
         }
 
         private string GetCodeForSqlServer(string tableName, bool isView)
         {
             var list = DbObjectHelper.GetColumnsForSqlServer(tableName, isView);
-            var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
-                tbNameSpace.Text.Trim(), null, EnableMapperTableName, cbFullProp.Checked);
+            var option = new CodeGenerateOption()
+            {
+                AddDisplayName = cbDisplayName.Checked,
+                EnumCode = null,
+                FullPropFlag = cbFullProp.Checked,
+                MapperTableName = cbCreateTbName.Checked,
+                NameSpace = tbNameSpace.Text.Trim(),
+                TrimProp = cbIfTrim.Checked,
+                Underline = cbLineDeal.Checked
+            };
+            var code = UtilHelper.DbObjectHelper.GenerateCode(list, option);
             return code;
         }
 
@@ -53,8 +71,17 @@ namespace Tools.zhong
             var dataBaseName = DbObjectHelper.GetDataBaseName(DataBaseType.MySQL);
             var list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
             var enumCode = GetEnumCodeForMySQL(tableName);
-            var code = UtilHelper.DbObjectHelper.GenerateCode(list, cbLineDeal.Checked, cbDisplayName.Checked,
-                tbNameSpace.Text.Trim(), enumCode, EnableMapperTableName, cbFullProp.Checked);
+            var option = new CodeGenerateOption()
+            {
+                AddDisplayName = cbDisplayName.Checked,
+                EnumCode = enumCode,
+                FullPropFlag = cbFullProp.Checked,
+                MapperTableName = cbCreateTbName.Checked,
+                NameSpace = tbNameSpace.Text.Trim(),
+                TrimProp = cbIfTrim.Checked,
+                Underline = cbLineDeal.Checked
+            };
+            var code = UtilHelper.DbObjectHelper.GenerateCode(list, option);
             return code;
         }
 
