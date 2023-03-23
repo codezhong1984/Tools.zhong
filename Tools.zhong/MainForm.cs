@@ -40,7 +40,7 @@ namespace Tools.zhong
         private ModelGeneratorForm mgForm;
 
         //    txtOutput.Text = subForm.CodeText;
-        //    tabControl1.SelectedIndex = 1;
+        //    tabControl1.SelectedIndex = 4;
 
         public TextBox TextOutPut => txtOutput;
         public TabControl TabControl => tabControl1;
@@ -75,7 +75,7 @@ namespace Tools.zhong
             }
 
             txtOutput.Text = sbOutput.ToString();
-            tabControl1.SelectedIndex = 1;
+            tabControl1.SelectedIndex = 4;
         }
 
         private void btnAddColumn_Click(object sender, EventArgs e)
@@ -97,7 +97,8 @@ namespace Tools.zhong
                 cbDBType.SelectedIndex = 0;
             }
 
-            saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var saveDefaultPath = ConfigHelper.GetValue("SaveDefaultPath");
+            saveFileDialog1.InitialDirectory = string.IsNullOrWhiteSpace(saveDefaultPath) ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop) : saveDefaultPath;
             cbEncodeType.SelectedIndex = 0;
 
             cbLikeType.Items.Add(new ListItem("LIKE", "LIKE"));
@@ -185,13 +186,13 @@ namespace Tools.zhong
             if (subForm != null)
             {
                 if (subForm.IsDisposed)
-                    subForm = new DbTableForm(this);//如果已经销毁，则重新创建子窗口对象
+                    subForm = new DbTableForm(this, cbLikeType.Text, txtTableFilter.Text);//如果已经销毁，则重新创建子窗口对象
                 subForm.Show();
                 subForm.Focus();
             }
             else
             {
-                subForm = new DbTableForm(this);
+                subForm = new DbTableForm(this, cbLikeType.Text, txtTableFilter.Text);
                 subForm.Show();
                 subForm.Focus();
             }
@@ -585,7 +586,7 @@ namespace Tools.zhong
             templ = templ.Replace(System.Environment.NewLine, " ").Replace("\t", " ");
             var inputTexts = templ.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             txtOutput.Text = string.Join(",\t", inputTexts);
-            tabControl1.SelectedIndex = 1;
+            tabControl1.SelectedIndex = 4;
         }
 
         private void btnCommaToBlank_Click(object sender, EventArgs e)
@@ -830,9 +831,16 @@ namespace Tools.zhong
 
         private void btnDecode_Click(object sender, EventArgs e)
         {
-            txtOutput4.Text = cbEncodeType.SelectedIndex == 0
-                ? DESUtil.DESDecrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
-                : Base64Util.DecodeBase64(txtInput4.Text.Trim());
+            try
+            {
+                txtOutput4.Text = cbEncodeType.SelectedIndex == 0
+               ? DESUtil.DESDecrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
+               : Base64Util.DecodeBase64(txtInput4.Text.Trim());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

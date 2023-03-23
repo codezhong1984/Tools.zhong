@@ -21,12 +21,16 @@ namespace Tools.zhong
         private bool EnableMapperTableName = true;
         private bool DisplayView = false;
         public string CodeText { get; set; }
+        public string LikeType { get; set; }
+        public string FilterText { get; set; }
         private MainForm mainFrm;
         #endregion
 
-        public DbTableForm(MainForm mainFrm)
+        public DbTableForm(MainForm mainFrm,string likeType,string filterText)
         {
             this.mainFrm = mainFrm;
+            LikeType = likeType;
+            FilterText = filterText;
             InitializeComponent();
         }
 
@@ -188,7 +192,7 @@ namespace Tools.zhong
             }
             //this.DialogResult = DialogResult.OK;
             this.mainFrm.TextOutPut.Text = this.CodeText;
-            this.mainFrm.TabControl.SelectedIndex = 1;
+            this.mainFrm.TabControl.SelectedIndex = 4;
             this.mainFrm.BringToFront();
         }
 
@@ -220,6 +224,9 @@ namespace Tools.zhong
             cbLikeType.DisplayMember = "Text";
             cbLikeType.ValueMember = "Value";
             cbLikeType.SelectedIndex = 0;
+
+            tbFilter.Text = FilterText;
+            cbLikeType.Text = LikeType;
         }
 
         private void cbTableName_SelectedIndexChanged(object sender, EventArgs e)

@@ -166,22 +166,19 @@ namespace Tools.zhong.UtilHelper
             var p = docx.Paragraphs.FirstOrDefault(i => i.Text == listData[0].TableName);
             if (p != null)
             {
-                if (!string.IsNullOrWhiteSpace(listData[0].TableComment))
+                if (!string.IsNullOrWhiteSpace(listData[0].TableComment) && p.NextParagraph != null)
                 {
                     p.NextParagraph.Remove(false);
                 }
                 p.Remove(false);
             }
-
-            p = docx.InsertParagraph();
-            p.Append(listData[0].TableName)
+            p = docx.InsertParagraph(listData[0].TableName, false)
                 .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
                 .FontSize(14)
                 .Color(Color.FromArgb(46, 116, 181))
                 .Bold()
                 .SpacingBefore(10)
                 .Heading(HeadingType.Heading1);
-                
             p.Alignment = Alignment.left;
             p.ListItemType = ListItemType.Numbered;
 
