@@ -14,6 +14,8 @@ using Tools.zhong.UtilHelper;
 using Tools.zhong.Model;
 using DBHepler;
 
+using System.Text.RegularExpressions;
+
 namespace Tools.zhong
 {
     public partial class MainForm : Form
@@ -1126,6 +1128,23 @@ namespace Tools.zhong
             }
         }
 
-
+        private void btnRegexMatch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbRegex.Text))
+            {
+                MessageBox.Show("正则表达式不能为空");
+                tbRegex.Focus();
+                return;
+            }
+            var regex = new Regex(tbRegex.Text);
+            var matches = regex.Matches(txtTempl.Text);
+            var sbResult = new StringBuilder();
+            foreach (Match item in matches)
+            {
+                sbResult.AppendLine(item.Groups.Count > 1 ? item.Groups[1].Value : item.Value);
+            }
+            txtOutput.Text = sbResult.ToString();
+            tabControl1.SelectedIndex = 4;
+        }
     }
 }
