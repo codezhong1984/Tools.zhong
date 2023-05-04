@@ -68,25 +68,8 @@ namespace Tools.zhong
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnCopyToInput = new System.Windows.Forms.Button();
-            this.btnOpenPath2 = new System.Windows.Forms.Button();
-            this.btnExportToFile2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtOutput = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.txtInput4 = new System.Windows.Forms.TextBox();
-            this.cbEncodeType = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtKey4 = new System.Windows.Forms.TextBox();
-            this.btnDecode = new System.Windows.Forms.Button();
-            this.btnEncode = new System.Windows.Forms.Button();
-            this.txtOutput4 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
             this.cbLikeType = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtInput3 = new System.Windows.Forms.TextBox();
@@ -119,23 +102,40 @@ namespace Tools.zhong
             this.txtOuput3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCreateInsert = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txtInput4 = new System.Windows.Forms.TextBox();
+            this.cbEncodeType = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtKey4 = new System.Windows.Forms.TextBox();
+            this.btnDecode = new System.Windows.Forms.Button();
+            this.btnEncode = new System.Windows.Forms.Button();
+            this.txtOutput4 = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnCopyToInput = new System.Windows.Forms.Button();
+            this.btnOpenPath2 = new System.Windows.Forms.Button();
+            this.btnExportToFile2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOutput = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,6 +206,7 @@ namespace Tools.zhong
             // 
             // btnUpdateConfig
             // 
+            this.btnUpdateConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpdateConfig.AutoEllipsis = true;
             this.btnUpdateConfig.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUpdateConfig.ForeColor = System.Drawing.SystemColors.HotTrack;
@@ -536,224 +537,6 @@ namespace Tools.zhong
             this.btnCustom.UseVisualStyleBackColor = true;
             this.btnCustom.Click += new System.EventHandler(this.btnAddColumn_Click);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.btnCopyToInput);
-            this.tabPage2.Controls.Add(this.btnOpenPath2);
-            this.tabPage2.Controls.Add(this.btnExportToFile2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.txtOutput);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1077, 605);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "结果输出";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnCopyToInput
-            // 
-            this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnCopyToInput.Location = new System.Drawing.Point(821, 5);
-            this.btnCopyToInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCopyToInput.Name = "btnCopyToInput";
-            this.btnCopyToInput.Size = new System.Drawing.Size(114, 26);
-            this.btnCopyToInput.TabIndex = 9;
-            this.btnCopyToInput.Text = "复制到输入";
-            this.btnCopyToInput.UseVisualStyleBackColor = true;
-            this.btnCopyToInput.Click += new System.EventHandler(this.btnCopyToInput_Click);
-            // 
-            // btnOpenPath2
-            // 
-            this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
-            this.btnOpenPath2.Location = new System.Drawing.Point(564, 6);
-            this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnOpenPath2.Name = "btnOpenPath2";
-            this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
-            this.btnOpenPath2.TabIndex = 8;
-            this.btnOpenPath2.Text = "打开生成目录";
-            this.btnOpenPath2.UseVisualStyleBackColor = true;
-            this.btnOpenPath2.Click += new System.EventHandler(this.btnOpenPath2_Click);
-            // 
-            // btnExportToFile2
-            // 
-            this.btnExportToFile2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExportToFile2.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportToFile2.Location = new System.Drawing.Point(703, 5);
-            this.btnExportToFile2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnExportToFile2.Name = "btnExportToFile2";
-            this.btnExportToFile2.Size = new System.Drawing.Size(103, 26);
-            this.btnExportToFile2.TabIndex = 7;
-            this.btnExportToFile2.Text = "生成文件";
-            this.btnExportToFile2.UseVisualStyleBackColor = true;
-            this.btnExportToFile2.Click += new System.EventHandler(this.btnExportToFile2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.Blue;
-            this.button1.Location = new System.Drawing.Point(950, 5);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 26);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "返回至输入";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(11, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "输出结果：";
-            // 
-            // txtOutput
-            // 
-            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutput.Location = new System.Drawing.Point(7, 36);
-            this.txtOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtOutput.Multiline = true;
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(1064, 561);
-            this.txtOutput.TabIndex = 5;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.txtInput4);
-            this.tabPage4.Controls.Add(this.cbEncodeType);
-            this.tabPage4.Controls.Add(this.label9);
-            this.tabPage4.Controls.Add(this.label8);
-            this.tabPage4.Controls.Add(this.label7);
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.txtKey4);
-            this.tabPage4.Controls.Add(this.btnDecode);
-            this.tabPage4.Controls.Add(this.btnEncode);
-            this.tabPage4.Controls.Add(this.txtOutput4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1077, 605);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "加密解密";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // txtInput4
-            // 
-            this.txtInput4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInput4.Location = new System.Drawing.Point(60, 16);
-            this.txtInput4.Multiline = true;
-            this.txtInput4.Name = "txtInput4";
-            this.txtInput4.Size = new System.Drawing.Size(1011, 151);
-            this.txtInput4.TabIndex = 0;
-            this.txtInput4.Text = "PTS1020220101000000";
-            // 
-            // cbEncodeType
-            // 
-            this.cbEncodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEncodeType.FormattingEnabled = true;
-            this.cbEncodeType.Items.AddRange(new object[] {
-            "DES",
-            "BASE64"});
-            this.cbEncodeType.Location = new System.Drawing.Point(296, 187);
-            this.cbEncodeType.Name = "cbEncodeType";
-            this.cbEncodeType.Size = new System.Drawing.Size(121, 23);
-            this.cbEncodeType.TabIndex = 10;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(207, 189);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 15);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "加密类型：";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 236);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 15);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "输出：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 15);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "输入：";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 189);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "密钥：";
-            // 
-            // txtKey4
-            // 
-            this.txtKey4.Location = new System.Drawing.Point(65, 186);
-            this.txtKey4.MaxLength = 8;
-            this.txtKey4.Name = "txtKey4";
-            this.txtKey4.Size = new System.Drawing.Size(102, 25);
-            this.txtKey4.TabIndex = 4;
-            this.txtKey4.Text = "PTS20228";
-            // 
-            // btnDecode
-            // 
-            this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDecode.ForeColor = System.Drawing.Color.Blue;
-            this.btnDecode.Location = new System.Drawing.Point(985, 184);
-            this.btnDecode.Name = "btnDecode";
-            this.btnDecode.Size = new System.Drawing.Size(75, 25);
-            this.btnDecode.TabIndex = 3;
-            this.btnDecode.Text = "解密";
-            this.btnDecode.UseVisualStyleBackColor = true;
-            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
-            // 
-            // btnEncode
-            // 
-            this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnEncode.ForeColor = System.Drawing.Color.Blue;
-            this.btnEncode.Location = new System.Drawing.Point(893, 186);
-            this.btnEncode.Name = "btnEncode";
-            this.btnEncode.Size = new System.Drawing.Size(75, 25);
-            this.btnEncode.TabIndex = 2;
-            this.btnEncode.Text = "加密";
-            this.btnEncode.UseVisualStyleBackColor = true;
-            this.btnEncode.Click += new System.EventHandler(this.btnEncode_Click);
-            // 
-            // txtOutput4
-            // 
-            this.txtOutput4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutput4.Location = new System.Drawing.Point(61, 236);
-            this.txtOutput4.Multiline = true;
-            this.txtOutput4.Name = "txtOutput4";
-            this.txtOutput4.Size = new System.Drawing.Size(1010, 363);
-            this.txtOutput4.TabIndex = 1;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnCreateModelFromDBScript);
@@ -795,6 +578,21 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnCreateModelFromDBScript
+            // 
+            this.btnCreateModelFromDBScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateModelFromDBScript.AutoEllipsis = true;
+            this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateModelFromDBScript.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(891, 83);
+            this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
+            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(176, 29);
+            this.btnCreateModelFromDBScript.TabIndex = 38;
+            this.btnCreateModelFromDBScript.Text = "库表生成实体类";
+            this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
+            this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
             // 
             // cbLikeType
             // 
@@ -1188,6 +986,131 @@ namespace Tools.zhong
             this.btnCreateInsert.UseVisualStyleBackColor = true;
             this.btnCreateInsert.Click += new System.EventHandler(this.btnCreateInsert_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.txtInput4);
+            this.tabPage4.Controls.Add(this.cbEncodeType);
+            this.tabPage4.Controls.Add(this.label9);
+            this.tabPage4.Controls.Add(this.label8);
+            this.tabPage4.Controls.Add(this.label7);
+            this.tabPage4.Controls.Add(this.label6);
+            this.tabPage4.Controls.Add(this.txtKey4);
+            this.tabPage4.Controls.Add(this.btnDecode);
+            this.tabPage4.Controls.Add(this.btnEncode);
+            this.tabPage4.Controls.Add(this.txtOutput4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1077, 605);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "加密解密";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // txtInput4
+            // 
+            this.txtInput4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInput4.Location = new System.Drawing.Point(60, 16);
+            this.txtInput4.Multiline = true;
+            this.txtInput4.Name = "txtInput4";
+            this.txtInput4.Size = new System.Drawing.Size(1011, 151);
+            this.txtInput4.TabIndex = 0;
+            this.txtInput4.Text = "PTS1020220101000000";
+            // 
+            // cbEncodeType
+            // 
+            this.cbEncodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEncodeType.FormattingEnabled = true;
+            this.cbEncodeType.Items.AddRange(new object[] {
+            "DES",
+            "BASE64"});
+            this.cbEncodeType.Location = new System.Drawing.Point(296, 187);
+            this.cbEncodeType.Name = "cbEncodeType";
+            this.cbEncodeType.Size = new System.Drawing.Size(121, 23);
+            this.cbEncodeType.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(207, 189);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 15);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "加密类型：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 236);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(52, 15);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "输出：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "输入：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 189);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "密钥：";
+            // 
+            // txtKey4
+            // 
+            this.txtKey4.Location = new System.Drawing.Point(65, 186);
+            this.txtKey4.MaxLength = 8;
+            this.txtKey4.Name = "txtKey4";
+            this.txtKey4.Size = new System.Drawing.Size(102, 25);
+            this.txtKey4.TabIndex = 4;
+            this.txtKey4.Text = "PTS20228";
+            // 
+            // btnDecode
+            // 
+            this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDecode.ForeColor = System.Drawing.Color.Blue;
+            this.btnDecode.Location = new System.Drawing.Point(985, 184);
+            this.btnDecode.Name = "btnDecode";
+            this.btnDecode.Size = new System.Drawing.Size(75, 25);
+            this.btnDecode.TabIndex = 3;
+            this.btnDecode.Text = "解密";
+            this.btnDecode.UseVisualStyleBackColor = true;
+            this.btnDecode.Click += new System.EventHandler(this.btnDecode_Click);
+            // 
+            // btnEncode
+            // 
+            this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEncode.ForeColor = System.Drawing.Color.Blue;
+            this.btnEncode.Location = new System.Drawing.Point(893, 186);
+            this.btnEncode.Name = "btnEncode";
+            this.btnEncode.Size = new System.Drawing.Size(75, 25);
+            this.btnEncode.TabIndex = 2;
+            this.btnEncode.Text = "加密";
+            this.btnEncode.UseVisualStyleBackColor = true;
+            this.btnEncode.Click += new System.EventHandler(this.btnEncode_Click);
+            // 
+            // txtOutput4
+            // 
+            this.txtOutput4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutput4.Location = new System.Drawing.Point(61, 236);
+            this.txtOutput4.Multiline = true;
+            this.txtOutput4.Name = "txtOutput4";
+            this.txtOutput4.Size = new System.Drawing.Size(1010, 363);
+            this.txtOutput4.TabIndex = 1;
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.textBox1);
@@ -1213,24 +1136,103 @@ namespace Tools.zhong
             this.textBox1.Size = new System.Drawing.Size(1063, 598);
             this.textBox1.TabIndex = 8;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnCopyToInput);
+            this.tabPage2.Controls.Add(this.btnOpenPath2);
+            this.tabPage2.Controls.Add(this.btnExportToFile2);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.txtOutput);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Size = new System.Drawing.Size(1077, 605);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "结果输出";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnCopyToInput
+            // 
+            this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
+            this.btnCopyToInput.Location = new System.Drawing.Point(821, 5);
+            this.btnCopyToInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCopyToInput.Name = "btnCopyToInput";
+            this.btnCopyToInput.Size = new System.Drawing.Size(114, 26);
+            this.btnCopyToInput.TabIndex = 9;
+            this.btnCopyToInput.Text = "复制到输入";
+            this.btnCopyToInput.UseVisualStyleBackColor = true;
+            this.btnCopyToInput.Click += new System.EventHandler(this.btnCopyToInput_Click);
+            // 
+            // btnOpenPath2
+            // 
+            this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
+            this.btnOpenPath2.Location = new System.Drawing.Point(564, 6);
+            this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOpenPath2.Name = "btnOpenPath2";
+            this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
+            this.btnOpenPath2.TabIndex = 8;
+            this.btnOpenPath2.Text = "打开生成目录";
+            this.btnOpenPath2.UseVisualStyleBackColor = true;
+            this.btnOpenPath2.Click += new System.EventHandler(this.btnOpenPath2_Click);
+            // 
+            // btnExportToFile2
+            // 
+            this.btnExportToFile2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExportToFile2.ForeColor = System.Drawing.Color.Blue;
+            this.btnExportToFile2.Location = new System.Drawing.Point(703, 5);
+            this.btnExportToFile2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnExportToFile2.Name = "btnExportToFile2";
+            this.btnExportToFile2.Size = new System.Drawing.Size(103, 26);
+            this.btnExportToFile2.TabIndex = 7;
+            this.btnExportToFile2.Text = "生成文件";
+            this.btnExportToFile2.UseVisualStyleBackColor = true;
+            this.btnExportToFile2.Click += new System.EventHandler(this.btnExportToFile2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.Color.Blue;
+            this.button1.Location = new System.Drawing.Point(950, 5);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(114, 26);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "返回至输入";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(11, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "输出结果：";
+            // 
+            // txtOutput
+            // 
+            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutput.Location = new System.Drawing.Point(7, 36);
+            this.txtOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtOutput.Multiline = true;
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtOutput.Size = new System.Drawing.Size(1064, 561);
+            this.txtOutput.TabIndex = 5;
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
-            // 
-            // btnCreateModelFromDBScript
-            // 
-            this.btnCreateModelFromDBScript.AutoEllipsis = true;
-            this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateModelFromDBScript.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(891, 83);
-            this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
-            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(176, 29);
-            this.btnCreateModelFromDBScript.TabIndex = 38;
-            this.btnCreateModelFromDBScript.Text = "库表生成实体类";
-            this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
-            this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
             // 
             // MainForm
             // 
@@ -1250,10 +1252,6 @@ namespace Tools.zhong
             this.tabPage1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -1261,8 +1259,12 @@ namespace Tools.zhong
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 

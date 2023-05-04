@@ -26,7 +26,7 @@ namespace Tools.zhong
         private MainForm mainFrm;
         #endregion
 
-        public DbTableForm(MainForm mainFrm,string likeType,string filterText)
+        public DbTableForm(MainForm mainFrm, string likeType, string filterText)
         {
             this.mainFrm = mainFrm;
             LikeType = likeType;
@@ -41,13 +41,14 @@ namespace Tools.zhong
             var list = DbObjectHelper.GetColumnsForOracle(tableName);
             var option = new CodeGenerateOption()
             {
-                 AddDisplayName = cbDisplayName.Checked,
-                 EnumCode = null,
-                 FullPropFlag = cbFullProp.Checked,
-                 MapperTableName = cbCreateTbName.Checked,
-                 NameSpace = tbNameSpace.Text.Trim(),
-                 TrimProp= cbIfTrim.Checked,
-                 Underline = cbLineDeal.Checked
+                AddDisplayName = cbDisplayName.Checked,
+                EnumCode = null,
+                FullPropFlag = cbFullProp.Checked,
+                MapperTableName = cbCreateTbName.Checked,
+                NameSpace = tbNameSpace.Text.Trim(),
+                TrimProp = cbIfTrim.Checked,
+                Underline = cbLineDeal.Checked,
+                Required = cbRequired.Checked,
             };
             var code = UtilHelper.DbObjectHelper.GenerateCode(list, option);
             return code;
@@ -64,7 +65,8 @@ namespace Tools.zhong
                 MapperTableName = cbCreateTbName.Checked,
                 NameSpace = tbNameSpace.Text.Trim(),
                 TrimProp = cbIfTrim.Checked,
-                Underline = cbLineDeal.Checked
+                Underline = cbLineDeal.Checked,
+                Required = cbRequired.Checked,
             };
             var code = UtilHelper.DbObjectHelper.GenerateCode(list, option);
             return code;
@@ -83,7 +85,8 @@ namespace Tools.zhong
                 MapperTableName = cbCreateTbName.Checked,
                 NameSpace = tbNameSpace.Text.Trim(),
                 TrimProp = cbIfTrim.Checked,
-                Underline = cbLineDeal.Checked
+                Underline = cbLineDeal.Checked,
+                Required = cbRequired.Checked,
             };
             var code = UtilHelper.DbObjectHelper.GenerateCode(list, option);
             return code;

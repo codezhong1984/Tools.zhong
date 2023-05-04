@@ -47,8 +47,6 @@ namespace Tools.zhong
             this.tbNameSpace = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPreCreate = new System.Windows.Forms.Button();
-            this.txtTableDescription = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.cbSplitChar = new System.Windows.Forms.ComboBox();
             this.cbFullProp = new System.Windows.Forms.CheckBox();
             this.cbCreateTbName = new System.Windows.Forms.CheckBox();
@@ -57,6 +55,11 @@ namespace Tools.zhong
             this.cbIfTrim = new System.Windows.Forms.CheckBox();
             this.cbFieldType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.cbRequired = new System.Windows.Forms.CheckBox();
+            this.btnDelColumn = new System.Windows.Forms.Button();
+            this.cbCol = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnRequired = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +80,7 @@ namespace Tools.zhong
             this.txtCode.Multiline = true;
             this.txtCode.Name = "txtCode";
             this.txtCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtCode.Size = new System.Drawing.Size(1072, 126);
+            this.txtCode.Size = new System.Drawing.Size(1072, 104);
             this.txtCode.TabIndex = 1;
             // 
             // btnOk
@@ -85,7 +88,7 @@ namespace Tools.zhong
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnOk.Location = new System.Drawing.Point(983, 574);
+            this.btnOk.Location = new System.Drawing.Point(983, 566);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(100, 33);
             this.btnOk.TabIndex = 2;
@@ -96,7 +99,7 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(877, 575);
+            this.btnCancel.Location = new System.Drawing.Point(877, 567);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 33);
             this.btnCancel.TabIndex = 3;
@@ -108,7 +111,7 @@ namespace Tools.zhong
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(769, 179);
+            this.label6.Location = new System.Drawing.Point(606, 149);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(97, 15);
             this.label6.TabIndex = 22;
@@ -117,9 +120,9 @@ namespace Tools.zhong
             // txtClassName
             // 
             this.txtClassName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtClassName.Location = new System.Drawing.Point(322, 175);
+            this.txtClassName.Location = new System.Drawing.Point(267, 143);
             this.txtClassName.Name = "txtClassName";
-            this.txtClassName.Size = new System.Drawing.Size(141, 25);
+            this.txtClassName.Size = new System.Drawing.Size(126, 25);
             this.txtClassName.TabIndex = 25;
             this.txtClassName.Text = "Model";
             // 
@@ -127,7 +130,7 @@ namespace Tools.zhong
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(274, 180);
+            this.label2.Location = new System.Drawing.Point(217, 150);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 24;
@@ -151,12 +154,12 @@ namespace Tools.zhong
             this.FieldRemarks,
             this.DataType,
             this.IsNullable});
-            this.dataGridView1.Location = new System.Drawing.Point(17, 212);
+            this.dataGridView1.Location = new System.Drawing.Point(17, 182);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(1067, 350);
+            this.dataGridView1.Size = new System.Drawing.Size(1067, 368);
             this.dataGridView1.TabIndex = 26;
             // 
             // TableName
@@ -214,9 +217,9 @@ namespace Tools.zhong
             // tbNameSpace
             // 
             this.tbNameSpace.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbNameSpace.Location = new System.Drawing.Point(101, 175);
+            this.tbNameSpace.Location = new System.Drawing.Point(103, 143);
             this.tbNameSpace.Name = "tbNameSpace";
-            this.tbNameSpace.Size = new System.Drawing.Size(170, 25);
+            this.tbNameSpace.Size = new System.Drawing.Size(109, 25);
             this.tbNameSpace.TabIndex = 34;
             this.tbNameSpace.Text = "DBModel";
             // 
@@ -224,7 +227,7 @@ namespace Tools.zhong
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 178);
+            this.label3.Location = new System.Drawing.Point(16, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 33;
@@ -235,31 +238,13 @@ namespace Tools.zhong
             this.btnPreCreate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnPreCreate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPreCreate.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnPreCreate.Location = new System.Drawing.Point(983, 173);
+            this.btnPreCreate.Location = new System.Drawing.Point(983, 143);
             this.btnPreCreate.Name = "btnPreCreate";
-            this.btnPreCreate.Size = new System.Drawing.Size(100, 27);
+            this.btnPreCreate.Size = new System.Drawing.Size(101, 27);
             this.btnPreCreate.TabIndex = 35;
-            this.btnPreCreate.Text = "预览字段";
+            this.btnPreCreate.Text = "导入字段";
             this.btnPreCreate.UseVisualStyleBackColor = true;
             this.btnPreCreate.Click += new System.EventHandler(this.btnPreCreate_Click);
-            // 
-            // txtTableDescription
-            // 
-            this.txtTableDescription.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtTableDescription.Location = new System.Drawing.Point(514, 173);
-            this.txtTableDescription.Name = "txtTableDescription";
-            this.txtTableDescription.Size = new System.Drawing.Size(252, 25);
-            this.txtTableDescription.TabIndex = 37;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(466, 179);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 15);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "描述:";
             // 
             // cbSplitChar
             // 
@@ -271,7 +256,7 @@ namespace Tools.zhong
             "空格",
             "逗号",
             "回车换行"});
-            this.cbSplitChar.Location = new System.Drawing.Point(869, 175);
+            this.cbSplitChar.Location = new System.Drawing.Point(708, 145);
             this.cbSplitChar.Name = "cbSplitChar";
             this.cbSplitChar.Size = new System.Drawing.Size(94, 23);
             this.cbSplitChar.TabIndex = 38;
@@ -281,7 +266,7 @@ namespace Tools.zhong
             // 
             this.cbFullProp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbFullProp.AutoSize = true;
-            this.cbFullProp.Location = new System.Drawing.Point(208, 569);
+            this.cbFullProp.Location = new System.Drawing.Point(208, 557);
             this.cbFullProp.Name = "cbFullProp";
             this.cbFullProp.Size = new System.Drawing.Size(205, 19);
             this.cbFullProp.TabIndex = 39;
@@ -292,7 +277,7 @@ namespace Tools.zhong
             // 
             this.cbCreateTbName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCreateTbName.AutoSize = true;
-            this.cbCreateTbName.Location = new System.Drawing.Point(208, 595);
+            this.cbCreateTbName.Location = new System.Drawing.Point(208, 589);
             this.cbCreateTbName.Name = "cbCreateTbName";
             this.cbCreateTbName.Size = new System.Drawing.Size(383, 19);
             this.cbCreateTbName.TabIndex = 42;
@@ -303,7 +288,7 @@ namespace Tools.zhong
             // 
             this.cbDisplayName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbDisplayName.AutoSize = true;
-            this.cbDisplayName.Location = new System.Drawing.Point(19, 595);
+            this.cbDisplayName.Location = new System.Drawing.Point(19, 589);
             this.cbDisplayName.Name = "cbDisplayName";
             this.cbDisplayName.Size = new System.Drawing.Size(177, 19);
             this.cbDisplayName.TabIndex = 41;
@@ -314,7 +299,7 @@ namespace Tools.zhong
             // 
             this.cbLineDeal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbLineDeal.AutoSize = true;
-            this.cbLineDeal.Location = new System.Drawing.Point(19, 570);
+            this.cbLineDeal.Location = new System.Drawing.Point(19, 558);
             this.cbLineDeal.Name = "cbLineDeal";
             this.cbLineDeal.Size = new System.Drawing.Size(134, 19);
             this.cbLineDeal.TabIndex = 40;
@@ -327,7 +312,7 @@ namespace Tools.zhong
             this.cbIfTrim.AutoSize = true;
             this.cbIfTrim.Checked = true;
             this.cbIfTrim.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIfTrim.Location = new System.Drawing.Point(446, 570);
+            this.cbIfTrim.Location = new System.Drawing.Point(446, 558);
             this.cbIfTrim.Name = "cbIfTrim";
             this.cbIfTrim.Size = new System.Drawing.Size(173, 19);
             this.cbIfTrim.TabIndex = 43;
@@ -339,7 +324,7 @@ namespace Tools.zhong
             this.cbFieldType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbFieldType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFieldType.FormattingEnabled = true;
-            this.cbFieldType.Location = new System.Drawing.Point(741, 580);
+            this.cbFieldType.Location = new System.Drawing.Point(741, 584);
             this.cbFieldType.Name = "cbFieldType";
             this.cbFieldType.Size = new System.Drawing.Size(94, 23);
             this.cbFieldType.TabIndex = 45;
@@ -348,17 +333,84 @@ namespace Tools.zhong
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(627, 584);
+            this.label5.Location = new System.Drawing.Point(627, 588);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 15);
             this.label5.TabIndex = 44;
             this.label5.Text = "默认字段类型：";
+            // 
+            // cbRequired
+            // 
+            this.cbRequired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbRequired.AutoSize = true;
+            this.cbRequired.Location = new System.Drawing.Point(630, 558);
+            this.cbRequired.Name = "cbRequired";
+            this.cbRequired.Size = new System.Drawing.Size(149, 19);
+            this.cbRequired.TabIndex = 46;
+            this.cbRequired.Text = "是否生成必填属性";
+            this.cbRequired.UseVisualStyleBackColor = true;
+            // 
+            // btnDelColumn
+            // 
+            this.btnDelColumn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnDelColumn.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDelColumn.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDelColumn.Location = new System.Drawing.Point(917, 143);
+            this.btnDelColumn.Name = "btnDelColumn";
+            this.btnDelColumn.Size = new System.Drawing.Size(61, 27);
+            this.btnDelColumn.TabIndex = 47;
+            this.btnDelColumn.Text = "重置";
+            this.btnDelColumn.UseVisualStyleBackColor = true;
+            this.btnDelColumn.Click += new System.EventHandler(this.btnDelColumn_Click);
+            // 
+            // cbCol
+            // 
+            this.cbCol.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbCol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCol.FormattingEnabled = true;
+            this.cbCol.Items.AddRange(new object[] {
+            "FieldName",
+            "FieldRemarks",
+            "DataType",
+            "IsNullable"});
+            this.cbCol.Location = new System.Drawing.Point(469, 145);
+            this.cbCol.Name = "cbCol";
+            this.cbCol.Size = new System.Drawing.Size(132, 23);
+            this.cbCol.TabIndex = 49;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(397, 149);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 15);
+            this.label7.TabIndex = 48;
+            this.label7.Text = "导入列：";
+            // 
+            // btnRequired
+            // 
+            this.btnRequired.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRequired.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRequired.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRequired.Location = new System.Drawing.Point(808, 143);
+            this.btnRequired.Name = "btnRequired";
+            this.btnRequired.Size = new System.Drawing.Size(104, 27);
+            this.btnRequired.TabIndex = 50;
+            this.btnRequired.Text = "全部非必填";
+            this.btnRequired.UseVisualStyleBackColor = true;
+            this.btnRequired.Click += new System.EventHandler(this.btnRequired_Click);
             // 
             // ModelGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 621);
+            this.Controls.Add(this.btnRequired);
+            this.Controls.Add(this.cbCol);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.btnDelColumn);
+            this.Controls.Add(this.cbRequired);
             this.Controls.Add(this.cbFieldType);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbIfTrim);
@@ -367,8 +419,6 @@ namespace Tools.zhong
             this.Controls.Add(this.cbLineDeal);
             this.Controls.Add(this.cbFullProp);
             this.Controls.Add(this.cbSplitChar);
-            this.Controls.Add(this.txtTableDescription);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnPreCreate);
             this.Controls.Add(this.tbNameSpace);
             this.Controls.Add(this.label3);
@@ -411,8 +461,6 @@ namespace Tools.zhong
         private System.Windows.Forms.DataGridViewTextBoxColumn DataType;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsNullable;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtTableDescription;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbSplitChar;
         private System.Windows.Forms.CheckBox cbFullProp;
         private System.Windows.Forms.CheckBox cbCreateTbName;
@@ -421,5 +469,10 @@ namespace Tools.zhong
         private System.Windows.Forms.CheckBox cbIfTrim;
         private System.Windows.Forms.ComboBox cbFieldType;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox cbRequired;
+        private System.Windows.Forms.Button btnDelColumn;
+        private System.Windows.Forms.ComboBox cbCol;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnRequired;
     }
 }

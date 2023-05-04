@@ -42,5 +42,10 @@ namespace Tools.zhong.Model
         /// 是否对SET方法去空格
         /// </summary>
         public bool TrimProp { get; set; }
+
+        /// <summary>
+        /// 是否增加必填属性
+        /// </summary>
+        public bool Required { get; set; }
     }
 }

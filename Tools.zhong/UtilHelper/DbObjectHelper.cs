@@ -55,14 +55,18 @@ namespace Tools.zhong.UtilHelper
             {
                 string dataType = string.Empty;
                 dataType = ChangeToCsharpType(item.DataType);
-                if (i++ > 0)
-                {
-                    sbResult.AppendLine();
-                }
+                //if (i++ > 0)
+                //{
+                //    sbResult.AppendLine();
+                //}
                 sbResult.AppendLine("        /// <summary>");
                 sbResult.AppendLine("        /// " + item.FieldRemarks?.Replace("\\n", ""));
                 sbResult.AppendLine("        /// </summary>");
 
+                if (option.Required && !item.IsNullable)
+                {
+                    sbResult.AppendLine("        [Required]");
+                }
                 if (option.AddDisplayName)
                 {
                     sbResult.AppendLine("        [DisplayName(\"" + item.FieldRemarks + "\")]");

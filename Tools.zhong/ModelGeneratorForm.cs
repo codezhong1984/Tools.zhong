@@ -37,12 +37,13 @@ namespace Tools.zhong
                 MapperTableName = cbCreateTbName.Checked,
                 NameSpace = tbNameSpace.Text.Trim(),
                 TrimProp = cbIfTrim.Checked,
-                Underline = cbLineDeal.Checked
+                Underline = cbLineDeal.Checked,
+                Required = cbRequired.Checked,
             };
             this.CodeText = DbObjectHelper.GenerateCode(dataList, option);
             //this.DialogResult = DialogResult.OK;
             this.mainFrm.TextOutPut.Text = this.CodeText;
-            this.mainFrm.TabControl.SelectedIndex = 1;
+            this.mainFrm.TabControl.SelectedIndex = 4;
             this.mainFrm.BringToFront();
         }
 
@@ -66,39 +67,61 @@ namespace Tools.zhong
             cbFieldType.ValueMember = "Value";
             cbFieldType.DisplayMember = "Text";
             cbFieldType.SelectedIndex = 0;
+            cbCol.SelectedIndex = 0;
         }
 
         private void btnPreCreate_Click(object sender, EventArgs e)
         {
             string inputVal = txtCode.Text.Trim();
             string[] inputVals = inputVal.Split(new string[] { SplitChar }, StringSplitOptions.RemoveEmptyEntries);
-            _ListColumns.Clear();
-            //dataGridView1.DataSource = null;
-            if (dataGridView1.DataSource != null && dataGridView1.RowCount > 0)
+            if (cbCol.Text == "FieldName")
             {
-                dataGridView1.Rows.Clear();
-            }
+                foreach (var item in inputVals)
+                {
+                    var colItem = new TableColumnModel();
+                    var propName = item.Replace(System.Environment.NewLine, "").Trim();
 
-            foreach (var item in inputVals)
+                    //针对SQLServer去除首尾的综括号
+                    propName = propName.TrimStart('[').TrimEnd(']');
+                    //针对MySql、Oracel等去除首尾双引号
+                    propName = propName.TrimStart('"').TrimEnd('"');
+
+                    colItem.FieldName = DbObjectHelper.ToUperFirstChar(propName);
+                    colItem.DataType = cbFieldType.SelectedValue.ToString();
+                    colItem.TableName = txtClassName.Text.Trim();
+                    colItem.TableComment = "";
+                    colItem.FieldRemarks = "";
+                    colItem.IsNullable = false;
+                    _ListColumns.Add(colItem);
+                }
+            }
+            else if (_ListColumns != null && _ListColumns.Count > 0)
             {
-                var colItem = new TableColumnModel();
-                var propName = item.Replace(System.Environment.NewLine, "").Trim();
-
-                //针对SQLServer去除首尾的综括号
-                propName = propName.TrimStart('[').TrimEnd(']');
-                //针对MySql、Oracel等去除首尾双引号
-                propName = propName.TrimStart('"').TrimEnd('"');
-
-                colItem.FieldName = DbObjectHelper.ToUperFirstChar(propName);
-                colItem.DataType = cbFieldType.SelectedValue.ToString();
-                colItem.TableName = txtClassName.Text.Trim();
-                colItem.TableComment = txtTableDescription.Text.Trim();
-                colItem.FieldRemarks = "";
-                colItem.IsNullable = true;
-                _ListColumns.Add(colItem);
+                for (int i = 0; i < _ListColumns.Count; i++)
+                {
+                    if (i > inputVals.Length - 1)
+                    {
+                        break;
+                    }
+                    var propName = inputVals[i].Replace(System.Environment.NewLine, "").Trim();
+                    propName = propName.TrimStart('[').TrimEnd(']');
+                    propName = propName.TrimStart('"').TrimEnd('"');
+                    if (cbCol.Text == "DataType")
+                    {
+                        _ListColumns[i].DataType = propName;
+                    }
+                    else if (cbCol.Text == "FieldRemarks")
+                    {
+                        _ListColumns[i].FieldRemarks = propName;
+                    }
+                    else if (cbCol.Text == "IsNullable")
+                    {
+                        _ListColumns[i].IsNullable = propName == "是";
+                    }
+                }
             }
-
             dataGridView1.DataSource = _ListColumns;
+            dataGridView1.Refresh();
         }
 
         private void cbSplitChar_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,6 +146,27 @@ namespace Tools.zhong
         private void cbFullProp_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDelColumn_Click(object sender, EventArgs e)
+        {
+            _ListColumns.Clear();
+            dataGridView1.DataSource = _ListColumns;
+        }
+
+        private void btnRequired_Click(object sender, EventArgs e)
+        {
+            if (_ListColumns != null && _ListColumns.Count > 0)
+            {
+                for (int i = 0; i < _ListColumns.Count; i++)
+                {
+                    _ListColumns[i].IsNullable = btnRequired.Text == "全部非必填";
+                }
+            }
+            dataGridView1.DataSource = _ListColumns;
+            dataGridView1.Refresh();
+
+            btnRequired.Text = btnRequired.Text == "全部非必填" ? "全部必填" : "全部非必填";
         }
     }
 }

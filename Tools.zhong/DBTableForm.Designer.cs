@@ -52,6 +52,7 @@ namespace Tools.zhong
             this.btnLoad = new System.Windows.Forms.Button();
             this.cbLikeType = new System.Windows.Forms.ComboBox();
             this.cbIfTrim = new System.Windows.Forms.CheckBox();
+            this.cbRequired = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOk
@@ -59,7 +60,7 @@ namespace Tools.zhong
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.ForeColor = System.Drawing.Color.Blue;
-            this.btnOk.Location = new System.Drawing.Point(454, 593);
+            this.btnOk.Location = new System.Drawing.Point(454, 614);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 27);
             this.btnOk.TabIndex = 2;
@@ -70,7 +71,7 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Location = new System.Drawing.Point(346, 593);
+            this.btnCancel.Location = new System.Drawing.Point(346, 614);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 3;
@@ -113,7 +114,7 @@ namespace Tools.zhong
             // 
             this.cbLineDeal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbLineDeal.AutoSize = true;
-            this.cbLineDeal.Location = new System.Drawing.Point(90, 453);
+            this.cbLineDeal.Location = new System.Drawing.Point(90, 449);
             this.cbLineDeal.Name = "cbLineDeal";
             this.cbLineDeal.Size = new System.Drawing.Size(134, 19);
             this.cbLineDeal.TabIndex = 26;
@@ -125,7 +126,7 @@ namespace Tools.zhong
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(230, 453);
+            this.label1.Location = new System.Drawing.Point(230, 449);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 15);
             this.label1.TabIndex = 27;
@@ -135,7 +136,7 @@ namespace Tools.zhong
             // 
             this.cbDisplayName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbDisplayName.AutoSize = true;
-            this.cbDisplayName.Location = new System.Drawing.Point(90, 479);
+            this.cbDisplayName.Location = new System.Drawing.Point(90, 475);
             this.cbDisplayName.Name = "cbDisplayName";
             this.cbDisplayName.Size = new System.Drawing.Size(177, 19);
             this.cbDisplayName.TabIndex = 28;
@@ -158,7 +159,7 @@ namespace Tools.zhong
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(38, 593);
+            this.btnSave.Location = new System.Drawing.Point(38, 614);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(118, 27);
             this.btnSave.TabIndex = 30;
@@ -190,7 +191,7 @@ namespace Tools.zhong
             this.btnOpenPath2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
-            this.btnOpenPath2.Location = new System.Drawing.Point(189, 593);
+            this.btnOpenPath2.Location = new System.Drawing.Point(189, 614);
             this.btnOpenPath2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenPath2.Name = "btnOpenPath2";
             this.btnOpenPath2.Size = new System.Drawing.Size(124, 26);
@@ -203,7 +204,7 @@ namespace Tools.zhong
             // 
             this.cbSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSelectAll.AutoSize = true;
-            this.cbSelectAll.Location = new System.Drawing.Point(485, 420);
+            this.cbSelectAll.Location = new System.Drawing.Point(485, 416);
             this.cbSelectAll.Name = "cbSelectAll";
             this.cbSelectAll.Size = new System.Drawing.Size(59, 19);
             this.cbSelectAll.TabIndex = 34;
@@ -217,7 +218,7 @@ namespace Tools.zhong
             this.cbCreateTbName.AutoSize = true;
             this.cbCreateTbName.Checked = true;
             this.cbCreateTbName.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCreateTbName.Location = new System.Drawing.Point(90, 507);
+            this.cbCreateTbName.Location = new System.Drawing.Point(90, 503);
             this.cbCreateTbName.Name = "cbCreateTbName";
             this.cbCreateTbName.Size = new System.Drawing.Size(383, 19);
             this.cbCreateTbName.TabIndex = 35;
@@ -229,7 +230,7 @@ namespace Tools.zhong
             // 
             this.cbFullProp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbFullProp.AutoSize = true;
-            this.cbFullProp.Location = new System.Drawing.Point(90, 532);
+            this.cbFullProp.Location = new System.Drawing.Point(90, 528);
             this.cbFullProp.Name = "cbFullProp";
             this.cbFullProp.Size = new System.Drawing.Size(205, 19);
             this.cbFullProp.TabIndex = 36;
@@ -292,18 +293,30 @@ namespace Tools.zhong
             // 
             this.cbIfTrim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbIfTrim.AutoSize = true;
-            this.cbIfTrim.Location = new System.Drawing.Point(90, 557);
+            this.cbIfTrim.Location = new System.Drawing.Point(90, 553);
             this.cbIfTrim.Name = "cbIfTrim";
             this.cbIfTrim.Size = new System.Drawing.Size(173, 19);
             this.cbIfTrim.TabIndex = 44;
             this.cbIfTrim.Text = "是否对SET方法去空格";
             this.cbIfTrim.UseVisualStyleBackColor = true;
             // 
+            // cbRequired
+            // 
+            this.cbRequired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbRequired.AutoSize = true;
+            this.cbRequired.Location = new System.Drawing.Point(91, 578);
+            this.cbRequired.Name = "cbRequired";
+            this.cbRequired.Size = new System.Drawing.Size(149, 19);
+            this.cbRequired.TabIndex = 45;
+            this.cbRequired.Text = "是否添加必填属性";
+            this.cbRequired.UseVisualStyleBackColor = true;
+            // 
             // DbTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 648);
+            this.ClientSize = new System.Drawing.Size(582, 654);
+            this.Controls.Add(this.cbRequired);
             this.Controls.Add(this.cbIfTrim);
             this.Controls.Add(this.cbLikeType);
             this.Controls.Add(this.btnLoad);
@@ -360,5 +373,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.ComboBox cbLikeType;
         private System.Windows.Forms.CheckBox cbIfTrim;
+        private System.Windows.Forms.CheckBox cbRequired;
     }
 }
