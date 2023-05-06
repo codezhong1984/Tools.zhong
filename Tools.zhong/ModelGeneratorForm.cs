@@ -152,6 +152,9 @@ namespace Tools.zhong
         {
             _ListColumns.Clear();
             dataGridView1.DataSource = _ListColumns;
+            dataGridView1.Refresh();
+            cbCol.SelectedIndex = 0;
+            txtCode.Text = "";
         }
 
         private void btnRequired_Click(object sender, EventArgs e)

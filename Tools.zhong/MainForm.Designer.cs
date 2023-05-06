@@ -32,6 +32,8 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbRegex = new System.Windows.Forms.TextBox();
+            this.btnRegexMatch = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.btnImportFromInput = new System.Windows.Forms.Button();
             this.btnUpdateConfig = new System.Windows.Forms.Button();
@@ -124,8 +126,6 @@ namespace Tools.zhong
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRegexMatch = new System.Windows.Forms.Button();
-            this.tbRegex = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -184,6 +184,30 @@ namespace Tools.zhong
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tbRegex
+            // 
+            this.tbRegex.Location = new System.Drawing.Point(458, 6);
+            this.tbRegex.MaxLength = 8;
+            this.tbRegex.Name = "tbRegex";
+            this.tbRegex.Size = new System.Drawing.Size(216, 25);
+            this.tbRegex.TabIndex = 25;
+            this.tbRegex.Text = "(\\w+)\\s+=\\s+";
+            // 
+            // btnRegexMatch
+            // 
+            this.btnRegexMatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRegexMatch.AutoEllipsis = true;
+            this.btnRegexMatch.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRegexMatch.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRegexMatch.Location = new System.Drawing.Point(674, 4);
+            this.btnRegexMatch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRegexMatch.Name = "btnRegexMatch";
+            this.btnRegexMatch.Size = new System.Drawing.Size(122, 29);
+            this.btnRegexMatch.TabIndex = 24;
+            this.btnRegexMatch.Text = "正则提取";
+            this.btnRegexMatch.UseVisualStyleBackColor = true;
+            this.btnRegexMatch.Click += new System.EventHandler(this.btnRegexMatch_Click);
             // 
             // label11
             // 
@@ -1237,30 +1261,6 @@ namespace Tools.zhong
             // 
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
-            // 
-            // btnRegexMatch
-            // 
-            this.btnRegexMatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRegexMatch.AutoEllipsis = true;
-            this.btnRegexMatch.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRegexMatch.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnRegexMatch.Location = new System.Drawing.Point(674, 4);
-            this.btnRegexMatch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnRegexMatch.Name = "btnRegexMatch";
-            this.btnRegexMatch.Size = new System.Drawing.Size(122, 29);
-            this.btnRegexMatch.TabIndex = 24;
-            this.btnRegexMatch.Text = "正则提取";
-            this.btnRegexMatch.UseVisualStyleBackColor = true;
-            this.btnRegexMatch.Click += new System.EventHandler(this.btnRegexMatch_Click);
-            // 
-            // tbRegex
-            // 
-            this.tbRegex.Location = new System.Drawing.Point(458, 6);
-            this.tbRegex.MaxLength = 8;
-            this.tbRegex.Name = "tbRegex";
-            this.tbRegex.Size = new System.Drawing.Size(216, 25);
-            this.tbRegex.TabIndex = 25;
-            this.tbRegex.Text = "(\\w+)\\s+=\\s+";
             // 
             // MainForm
             // 

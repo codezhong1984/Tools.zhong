@@ -217,16 +217,16 @@ namespace Tools.zhong.UtilHelper
             switch (type.ToLower())
             {
                 case "int":
-                    reval = "Int32";
+                    reval = "int";
                     break;
                 case "integer":
-                    reval = "Int32";
+                    reval = "int";
                     break;
                 case "text":
                     reval = "string";
                     break;
                 case "bigint":
-                    reval = "Int64";
+                    reval = "long";
                     break;
                 case "binary":
                     reval = "byte[]";

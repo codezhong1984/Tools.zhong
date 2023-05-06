@@ -29,6 +29,7 @@ namespace Tools.zhong
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -37,13 +38,6 @@ namespace Tools.zhong
             this.txtClassName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.TableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TableComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FieldRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsNullable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbNameSpace = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPreCreate = new System.Windows.Forms.Button();
@@ -60,6 +54,13 @@ namespace Tools.zhong
             this.cbCol = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnRequired = new System.Windows.Forms.Button();
+            this.TableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TableComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FieldRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.IsNullable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,58 +162,6 @@ namespace Tools.zhong
             this.dataGridView1.RowTemplate.Height = 27;
             this.dataGridView1.Size = new System.Drawing.Size(1067, 368);
             this.dataGridView1.TabIndex = 26;
-            // 
-            // TableName
-            // 
-            this.TableName.DataPropertyName = "TableName";
-            this.TableName.HeaderText = "对象名称";
-            this.TableName.MinimumWidth = 6;
-            this.TableName.Name = "TableName";
-            this.TableName.Visible = false;
-            // 
-            // DataLength
-            // 
-            this.DataLength.DataPropertyName = "DataLength";
-            this.DataLength.HeaderText = "数据长度";
-            this.DataLength.MinimumWidth = 6;
-            this.DataLength.Name = "DataLength";
-            this.DataLength.Visible = false;
-            // 
-            // TableComment
-            // 
-            this.TableComment.DataPropertyName = "TableComment";
-            this.TableComment.HeaderText = "对象描述";
-            this.TableComment.MinimumWidth = 6;
-            this.TableComment.Name = "TableComment";
-            this.TableComment.Visible = false;
-            // 
-            // FieldName
-            // 
-            this.FieldName.DataPropertyName = "FieldName";
-            this.FieldName.HeaderText = "字段名称";
-            this.FieldName.MinimumWidth = 6;
-            this.FieldName.Name = "FieldName";
-            // 
-            // FieldRemarks
-            // 
-            this.FieldRemarks.DataPropertyName = "FieldRemarks";
-            this.FieldRemarks.HeaderText = "字段描述";
-            this.FieldRemarks.MinimumWidth = 6;
-            this.FieldRemarks.Name = "FieldRemarks";
-            // 
-            // DataType
-            // 
-            this.DataType.DataPropertyName = "DataType";
-            this.DataType.HeaderText = "字段类型";
-            this.DataType.MinimumWidth = 6;
-            this.DataType.Name = "DataType";
-            // 
-            // IsNullable
-            // 
-            this.IsNullable.DataPropertyName = "IsNullable";
-            this.IsNullable.HeaderText = "可否为空";
-            this.IsNullable.MinimumWidth = 6;
-            this.IsNullable.Name = "IsNullable";
             // 
             // tbNameSpace
             // 
@@ -401,6 +350,74 @@ namespace Tools.zhong
             this.btnRequired.UseVisualStyleBackColor = true;
             this.btnRequired.Click += new System.EventHandler(this.btnRequired_Click);
             // 
+            // TableName
+            // 
+            this.TableName.DataPropertyName = "TableName";
+            this.TableName.HeaderText = "对象名称";
+            this.TableName.MinimumWidth = 6;
+            this.TableName.Name = "TableName";
+            this.TableName.Visible = false;
+            // 
+            // DataLength
+            // 
+            this.DataLength.DataPropertyName = "DataLength";
+            this.DataLength.HeaderText = "数据长度";
+            this.DataLength.MinimumWidth = 6;
+            this.DataLength.Name = "DataLength";
+            this.DataLength.Visible = false;
+            // 
+            // TableComment
+            // 
+            this.TableComment.DataPropertyName = "TableComment";
+            this.TableComment.HeaderText = "对象描述";
+            this.TableComment.MinimumWidth = 6;
+            this.TableComment.Name = "TableComment";
+            this.TableComment.Visible = false;
+            // 
+            // FieldName
+            // 
+            this.FieldName.DataPropertyName = "FieldName";
+            this.FieldName.HeaderText = "字段名称";
+            this.FieldName.MinimumWidth = 6;
+            this.FieldName.Name = "FieldName";
+            // 
+            // FieldRemarks
+            // 
+            this.FieldRemarks.DataPropertyName = "FieldRemarks";
+            this.FieldRemarks.HeaderText = "字段描述";
+            this.FieldRemarks.MinimumWidth = 6;
+            this.FieldRemarks.Name = "FieldRemarks";
+            // 
+            // DataType
+            // 
+            this.DataType.DataPropertyName = "DataType";
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            this.DataType.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataType.HeaderText = "字段类型";
+            this.DataType.Items.AddRange(new object[] {
+            "string",
+            "date",
+            "int",
+            "long",
+            "decimal",
+            "char"});
+            this.DataType.MinimumWidth = 6;
+            this.DataType.Name = "DataType";
+            this.DataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IsNullable
+            // 
+            this.IsNullable.DataPropertyName = "IsNullable";
+            this.IsNullable.HeaderText = "可否为空";
+            this.IsNullable.Items.AddRange(new object[] {
+            "True",
+            "False"});
+            this.IsNullable.MinimumWidth = 6;
+            this.IsNullable.Name = "IsNullable";
+            this.IsNullable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IsNullable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // ModelGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -453,13 +470,6 @@ namespace Tools.zhong
         private System.Windows.Forms.TextBox tbNameSpace;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPreCreate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TableName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TableComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FieldName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FieldRemarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsNullable;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox cbSplitChar;
         private System.Windows.Forms.CheckBox cbFullProp;
@@ -474,5 +484,12 @@ namespace Tools.zhong
         private System.Windows.Forms.ComboBox cbCol;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnRequired;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TableName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TableComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FieldName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FieldRemarks;
+        private System.Windows.Forms.DataGridViewComboBoxColumn DataType;
+        private System.Windows.Forms.DataGridViewComboBoxColumn IsNullable;
     }
 }
