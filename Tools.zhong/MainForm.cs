@@ -51,6 +51,8 @@ namespace Tools.zhong
         /// 标记是否加载的视图
         /// </summary>
         public bool ViewFlag { get; set; }
+
+        private string _DefaultSplitChar;
         #endregion
 
         public MainForm()
@@ -114,6 +116,11 @@ namespace Tools.zhong
             string[] dbTypes = Enum.GetNames(typeof(DataBaseType));
             cbDBType.Items.Clear();
             cbDBType.DataSource = dbTypes;
+
+            dtPicker.Value = DateTime.Now.Date;
+
+            cbSplitChar.SelectedIndex = 0;
+            cbSplitChar_SelectedIndexChanged(null, null);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -798,6 +805,70 @@ namespace Tools.zhong
             //txtTempl.Text = lastText;
         }
 
+        /// <summary>
+        /// 以逗号分隔，并合并为一行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmToOneDHLine_Click(object sender, EventArgs e)
+        {
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim());
+            txtTempl.Text = string.Join(",", inputTexts);
+        }
+
+        /// <summary>
+        /// 首字母大写
+        /// </summary>
+        private void tsmFirstUpper_Click(object sender, EventArgs e)
+        {
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
+                ?.Select(i => i.Trim())
+                ?.Select(i => string.Concat(i.Substring(0, 1).ToUpper(), i.Substring(1)));
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
+        }
+
+        /// <summary>
+        /// 全部大写
+        /// </summary>
+        private void tsmToUpper_Click(object sender, EventArgs e)
+        {
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim()?.ToUpper());
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
+        }
+
+        /// <summary>
+        /// 首字母小写
+        /// </summary>
+        private void tsmFirstLower_Click(object sender, EventArgs e)
+        {
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
+                ?.Select(i => i.Trim())
+                ?.Select(i => string.Concat(i.Substring(0, 1).ToLower(), i.Substring(1)));
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
+        }
+
+        /// <summary>
+        /// 全部小写
+        /// </summary>
+        private void tsmToLower_Click(object sender, EventArgs e)
+        {
+            lastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim()?.ToLower());
+            txtTempl.Text = string.Join(",", inputTexts);
+        }
+
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
@@ -1145,6 +1216,48 @@ namespace Tools.zhong
             }
             txtOutput.Text = sbResult.ToString();
             tabControl1.SelectedIndex = 4;
+        }
+
+        //private void tbDateFormat_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (string.IsNullOrWhiteSpace(tbDateFormat.Text))
+        //    {
+        //        return;
+        //    }
+        //    dtPicker.CustomFormat = tbDateFormat.Text.Trim();
+        //}
+
+        private void btnOrlToDate_Click(object sender, EventArgs e)
+        {
+            string templ = "to_date('{0}'','yyyy-mm-dd hh24:mi:ss')";
+            tbToDateOutput.Text = string.Format(templ, dtPicker.Text);
+        }
+
+        private void btnMinHour_Click(object sender, EventArgs e)
+        {
+            var curDate = dtPicker.Value;
+            dtPicker.Value = new DateTime(curDate.Year, curDate.Month, curDate.Day, 0, 0, 0);
+        }
+
+        private void btnMaxHour_Click(object sender, EventArgs e)
+        {
+            var curDate = dtPicker.Value;
+            dtPicker.Value = new DateTime(curDate.Year, curDate.Month, curDate.Day, 23, 59, 59);
+        }
+
+        private void cbSplitChar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbSplitChar.Text)
+            {
+                case "回车换行": _DefaultSplitChar = System.Environment.NewLine; break;
+                case "逗号": _DefaultSplitChar = ","; break;
+                case "空格": _DefaultSplitChar = " "; break;
+                case "Tab": _DefaultSplitChar = "\t"; break;
+                case "单引号": _DefaultSplitChar = "\'"; break;
+                case "双引号": _DefaultSplitChar = "\""; break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Tools.zhong
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmToOneDHLine = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,8 +125,21 @@ namespace Tools.zhong
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnMaxHour = new System.Windows.Forms.Button();
+            this.btnMinHour = new System.Windows.Forms.Button();
+            this.tbToDateOutput = new System.Windows.Forms.TextBox();
+            this.dtPicker = new System.Windows.Forms.DateTimePicker();
+            this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmFirstUpper = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmToUpper = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmToFirstLower = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmToLower = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbSplitChar = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -138,6 +152,7 @@ namespace Tools.zhong
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -151,6 +166,7 @@ namespace Tools.zhong
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(-3, 5);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
@@ -160,6 +176,8 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cbSplitChar);
+            this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.tbRegex);
             this.tabPage1.Controls.Add(this.btnRegexMatch);
             this.tabPage1.Controls.Add(this.label11);
@@ -212,7 +230,7 @@ namespace Tools.zhong
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(401, 234);
+            this.label11.Location = new System.Drawing.Point(382, 234);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(15, 15);
             this.label11.TabIndex = 23;
@@ -223,7 +241,7 @@ namespace Tools.zhong
             this.btnImportFromInput.AutoEllipsis = true;
             this.btnImportFromInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnImportFromInput.ForeColor = System.Drawing.Color.Blue;
-            this.btnImportFromInput.Location = new System.Drawing.Point(431, 227);
+            this.btnImportFromInput.Location = new System.Drawing.Point(403, 227);
             this.btnImportFromInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImportFromInput.Name = "btnImportFromInput";
             this.btnImportFromInput.Size = new System.Drawing.Size(117, 29);
@@ -294,7 +312,7 @@ namespace Tools.zhong
             this.btnRemoveAll.AutoEllipsis = true;
             this.btnRemoveAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveAll.Location = new System.Drawing.Point(713, 227);
+            this.btnRemoveAll.Location = new System.Drawing.Point(679, 227);
             this.btnRemoveAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveAll.Name = "btnRemoveAll";
             this.btnRemoveAll.Size = new System.Drawing.Size(100, 29);
@@ -323,7 +341,7 @@ namespace Tools.zhong
             this.btnRemoveCol.AutoEllipsis = true;
             this.btnRemoveCol.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRemoveCol.ForeColor = System.Drawing.Color.Blue;
-            this.btnRemoveCol.Location = new System.Drawing.Point(638, 227);
+            this.btnRemoveCol.Location = new System.Drawing.Point(606, 227);
             this.btnRemoveCol.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRemoveCol.Name = "btnRemoveCol";
             this.btnRemoveCol.Size = new System.Drawing.Size(67, 29);
@@ -351,6 +369,7 @@ namespace Tools.zhong
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmKg2Dh,
             this.tsmDh2Hh,
+            this.tsmToOneDHLine,
             this.toolStripSeparator2,
             this.tsmAddDyh,
             this.tsmAddSyh,
@@ -368,10 +387,15 @@ namespace Tools.zhong
             this.toolStripSeparator5,
             this.tsmCustomLine,
             this.tsmTrim,
+            this.toolStripSeparator7,
+            this.tsmRedo,
             this.toolStripSeparator6,
-            this.tsmRedo});
+            this.tsmFirstUpper,
+            this.tsmToFirstLower,
+            this.tsmToUpper,
+            this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 400);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 526);
             // 
             // tsmKg2Dh
             // 
@@ -386,6 +410,13 @@ namespace Tools.zhong
             this.tsmDh2Hh.Size = new System.Drawing.Size(243, 24);
             this.tsmDh2Hh.Text = "逗号>换行";
             this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
+            // 
+            // tsmToOneDHLine
+            // 
+            this.tsmToOneDHLine.Name = "tsmToOneDHLine";
+            this.tsmToOneDHLine.Size = new System.Drawing.Size(243, 24);
+            this.tsmToOneDHLine.Text = "逗号分隔合并行";
+            this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
             // 
             // toolStripSeparator2
             // 
@@ -556,7 +587,7 @@ namespace Tools.zhong
             this.btnCustom.AutoEllipsis = true;
             this.btnCustom.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCustom.ForeColor = System.Drawing.Color.Blue;
-            this.btnCustom.Location = new System.Drawing.Point(556, 227);
+            this.btnCustom.Location = new System.Drawing.Point(526, 227);
             this.btnCustom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCustom.Name = "btnCustom";
             this.btnCustom.Size = new System.Drawing.Size(74, 29);
@@ -713,7 +744,7 @@ namespace Tools.zhong
             this.lblTableInfo.ForeColor = System.Drawing.Color.Blue;
             this.lblTableInfo.Location = new System.Drawing.Point(5, 579);
             this.lblTableInfo.Name = "lblTableInfo";
-            this.lblTableInfo.Size = new System.Drawing.Size(1128, 23);
+            this.lblTableInfo.Size = new System.Drawing.Size(1069, 23);
             this.lblTableInfo.TabIndex = 31;
             this.lblTableInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -988,7 +1019,7 @@ namespace Tools.zhong
             this.txtOuput3.Multiline = true;
             this.txtOuput3.Name = "txtOuput3";
             this.txtOuput3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOuput3.Size = new System.Drawing.Size(1069, 306);
+            this.txtOuput3.Size = new System.Drawing.Size(1069, 282);
             this.txtOuput3.TabIndex = 3;
             // 
             // label2
@@ -1257,10 +1288,136 @@ namespace Tools.zhong
             this.txtOutput.Size = new System.Drawing.Size(1064, 561);
             this.txtOutput.TabIndex = 5;
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.btnMaxHour);
+            this.tabPage6.Controls.Add(this.btnMinHour);
+            this.tabPage6.Controls.Add(this.tbToDateOutput);
+            this.tabPage6.Controls.Add(this.dtPicker);
+            this.tabPage6.Controls.Add(this.btnOrlToDate);
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1077, 605);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "其他辅助工具";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // btnMaxHour
+            // 
+            this.btnMaxHour.Location = new System.Drawing.Point(293, 22);
+            this.btnMaxHour.Name = "btnMaxHour";
+            this.btnMaxHour.Size = new System.Drawing.Size(70, 28);
+            this.btnMaxHour.TabIndex = 5;
+            this.btnMaxHour.Text = "24点";
+            this.btnMaxHour.UseVisualStyleBackColor = true;
+            this.btnMaxHour.Click += new System.EventHandler(this.btnMaxHour_Click);
+            // 
+            // btnMinHour
+            // 
+            this.btnMinHour.Location = new System.Drawing.Point(217, 22);
+            this.btnMinHour.Name = "btnMinHour";
+            this.btnMinHour.Size = new System.Drawing.Size(70, 28);
+            this.btnMinHour.TabIndex = 4;
+            this.btnMinHour.Text = "0点";
+            this.btnMinHour.UseVisualStyleBackColor = true;
+            this.btnMinHour.Click += new System.EventHandler(this.btnMinHour_Click);
+            // 
+            // tbToDateOutput
+            // 
+            this.tbToDateOutput.Location = new System.Drawing.Point(535, 22);
+            this.tbToDateOutput.Name = "tbToDateOutput";
+            this.tbToDateOutput.Size = new System.Drawing.Size(533, 25);
+            this.tbToDateOutput.TabIndex = 3;
+            // 
+            // dtPicker
+            // 
+            this.dtPicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtPicker.Location = new System.Drawing.Point(11, 22);
+            this.dtPicker.Name = "dtPicker";
+            this.dtPicker.Size = new System.Drawing.Size(200, 25);
+            this.dtPicker.TabIndex = 1;
+            // 
+            // btnOrlToDate
+            // 
+            this.btnOrlToDate.Location = new System.Drawing.Point(369, 22);
+            this.btnOrlToDate.Name = "btnOrlToDate";
+            this.btnOrlToDate.Size = new System.Drawing.Size(160, 28);
+            this.btnOrlToDate.TabIndex = 0;
+            this.btnOrlToDate.Text = "Oracle SQL ToDate";
+            this.btnOrlToDate.UseVisualStyleBackColor = true;
+            this.btnOrlToDate.Click += new System.EventHandler(this.btnOrlToDate_Click);
+            // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmFirstUpper
+            // 
+            this.tsmFirstUpper.Name = "tsmFirstUpper";
+            this.tsmFirstUpper.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Up)));
+            this.tsmFirstUpper.Size = new System.Drawing.Size(243, 24);
+            this.tsmFirstUpper.Text = "首字母大写";
+            this.tsmFirstUpper.Click += new System.EventHandler(this.tsmFirstUpper_Click);
+            // 
+            // tsmToUpper
+            // 
+            this.tsmToUpper.Name = "tsmToUpper";
+            this.tsmToUpper.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+            this.tsmToUpper.Size = new System.Drawing.Size(243, 24);
+            this.tsmToUpper.Text = "全部大写";
+            this.tsmToUpper.Click += new System.EventHandler(this.tsmToUpper_Click);
+            // 
+            // tsmToFirstLower
+            // 
+            this.tsmToFirstLower.Name = "tsmToFirstLower";
+            this.tsmToFirstLower.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Down)));
+            this.tsmToFirstLower.Size = new System.Drawing.Size(243, 24);
+            this.tsmToFirstLower.Text = "首字母小写";
+            this.tsmToFirstLower.Click += new System.EventHandler(this.tsmFirstLower_Click);
+            // 
+            // tsmToLower
+            // 
+            this.tsmToLower.Name = "tsmToLower";
+            this.tsmToLower.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+            this.tsmToLower.Size = new System.Drawing.Size(243, 24);
+            this.tsmToLower.Text = "全部小写";
+            this.tsmToLower.Click += new System.EventHandler(this.tsmToLower_Click);
+            // 
+            // cbSplitChar
+            // 
+            this.cbSplitChar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbSplitChar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSplitChar.FormattingEnabled = true;
+            this.cbSplitChar.Items.AddRange(new object[] {
+            "回车换行",
+            "逗号",
+            "空格",
+            "Tab",
+            "单引号",
+            "双引号"});
+            this.cbSplitChar.Location = new System.Drawing.Point(850, 229);
+            this.cbSplitChar.Name = "cbSplitChar";
+            this.cbSplitChar.Size = new System.Drawing.Size(94, 23);
+            this.cbSplitChar.TabIndex = 40;
+            this.cbSplitChar.SelectedIndexChanged += new System.EventHandler(this.cbSplitChar_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(785, 234);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 15);
+            this.label12.TabIndex = 39;
+            this.label12.Text = "分隔符：";
             // 
             // MainForm
             // 
@@ -1293,6 +1450,8 @@ namespace Tools.zhong
             this.tabPage5.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -1395,6 +1554,20 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnCreateModelFromDBScript;
         private System.Windows.Forms.TextBox tbRegex;
         private System.Windows.Forms.Button btnRegexMatch;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.DateTimePicker dtPicker;
+        private System.Windows.Forms.Button btnOrlToDate;
+        private System.Windows.Forms.TextBox tbToDateOutput;
+        private System.Windows.Forms.Button btnMaxHour;
+        private System.Windows.Forms.Button btnMinHour;
+        private System.Windows.Forms.ToolStripMenuItem tsmToOneDHLine;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem tsmFirstUpper;
+        private System.Windows.Forms.ToolStripMenuItem tsmToUpper;
+        private System.Windows.Forms.ToolStripMenuItem tsmToFirstLower;
+        private System.Windows.Forms.ToolStripMenuItem tsmToLower;
+        private System.Windows.Forms.ComboBox cbSplitChar;
+        private System.Windows.Forms.Label label12;
     }
 }
 

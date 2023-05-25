@@ -29,7 +29,7 @@ namespace Tools.zhong
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -60,7 +60,7 @@ namespace Tools.zhong
             this.FieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FieldRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.IsNullable = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.IsNullable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,6 +139,7 @@ namespace Tools.zhong
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -391,8 +392,8 @@ namespace Tools.zhong
             // DataType
             // 
             this.DataType.DataPropertyName = "DataType";
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            this.DataType.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.DataType.DefaultCellStyle = dataGridViewCellStyle2;
             this.DataType.HeaderText = "字段类型";
             this.DataType.Items.AddRange(new object[] {
             "string",
@@ -409,14 +410,13 @@ namespace Tools.zhong
             // IsNullable
             // 
             this.IsNullable.DataPropertyName = "IsNullable";
+            this.IsNullable.FalseValue = "false";
             this.IsNullable.HeaderText = "可否为空";
-            this.IsNullable.Items.AddRange(new object[] {
-            "True",
-            "False"});
             this.IsNullable.MinimumWidth = 6;
             this.IsNullable.Name = "IsNullable";
             this.IsNullable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.IsNullable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.IsNullable.TrueValue = "true";
             // 
             // ModelGeneratorForm
             // 
@@ -490,6 +490,6 @@ namespace Tools.zhong
         private System.Windows.Forms.DataGridViewTextBoxColumn FieldName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FieldRemarks;
         private System.Windows.Forms.DataGridViewComboBoxColumn DataType;
-        private System.Windows.Forms.DataGridViewComboBoxColumn IsNullable;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsNullable;
     }
 }

@@ -16,6 +16,8 @@ namespace Tools.zhong.UtilHelper
         private static readonly string DATABASE_TITLE_SUFFIX = "数据库设计文档";
         private static readonly string[] TABLE_FIELDS = new string[] { "字段名称", "字段描述",
             "字段类型", "字段长度", "数据精度", "小数位数", "是否可空" };
+        private static readonly string[] TABLE_FIELDS_EXT = new string[] { "字段名称", "字段描述",
+            "字段类型", "字段长度", "是否可空" };
 
         public static DocX CreateDocx(string fileName)
         {
@@ -240,6 +242,93 @@ namespace Tools.zhong.UtilHelper
             //docx.AddListItem(numberedList, "Yellow", 1);
             //docx.InsertList(numberedList);
         }
+
+        private static void WriteDocxSingleTableExt(DocX docx, List<TableColumnModel> listData)
+        {
+            // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
+            if (listData == null || listData.Count == 0)
+            {
+                return;
+            }
+            var p = docx.Paragraphs.FirstOrDefault(i => i.Text == listData[0].TableName);
+            if (p != null)
+            {
+                if (!string.IsNullOrWhiteSpace(listData[0].TableComment) && p.NextParagraph != null)
+                {
+                    p.NextParagraph.Remove(false);
+                }
+                p.Remove(false);
+            }
+            p = docx.InsertParagraph(listData[0].TableName, false)
+                .Font(new Xceed.Document.NET.Font("等线 Light (中文标题)"))
+                .FontSize(14)
+                .Color(Color.FromArgb(46, 116, 181))
+                .Bold()
+                .SpacingBefore(10)
+                .Heading(HeadingType.Heading1);
+            p.Alignment = Alignment.left;
+            p.ListItemType = ListItemType.Numbered;
+
+            if (!string.IsNullOrWhiteSpace(listData[0].TableComment))
+            {
+                var pComment = p.InsertParagraphAfterSelf(listData[0].TableComment)
+                    .Font(new Xceed.Document.NET.Font("宋体")).Color(Color.Black)
+                    .SpacingAfter(0);
+                pComment.Alignment = Alignment.left;
+                p = pComment;
+            }
+
+            var table = docx.Tables.FirstOrDefault(i => i.TableCaption == listData[0].TableName);
+            if (table != null)
+            {
+                table.Remove();
+            }
+
+            //表字段表格         
+            var tableFontSize = 10.5;
+            var columnWidths = new float[] { 0.17f, 0.18f, 0.17f, 0.12f, 0.12f, 0.12f, 0.12f };
+            table = p.InsertTableAfterSelf(1 + listData.Count, TABLE_FIELDS_EXT.Length);
+            //table = listItem.InsertTableAfterSelf(1 + listData.Count, TABLE_FIELDS_EXT.Length);
+            table.SetWidthsPercentage(columnWidths);
+            table.AutoFit = AutoFit.Window;
+
+            table.TableCaption = listData[0].TableName;
+            table.TableDescription = listData[0].TableComment;
+            table.Design = TableDesign.TableGrid;
+            table.Alignment = Alignment.left;
+            for (int i = 0; i < TABLE_FIELDS_EXT.Length; i++)
+            {
+                table.Rows[0].Cells[i].Paragraphs[0].Append(TABLE_FIELDS_EXT[i]).FontSize(tableFontSize);//.Bold(true);
+            }
+
+            //添加表格数据
+            for (int i = 0; i < listData.Count; i++)
+            {
+                table.Rows[i + 1].Cells[0].Paragraphs[0].Append(listData[i].FieldName).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[1].Paragraphs[0].Append(listData[i].FieldRemarks).FontSize(tableFontSize);
+                table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].DataType).FontSize(tableFontSize);
+                if (listData[i].DataType?.ToUpper().Contains("char") ?? false)
+                {
+                    table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataLength?.ToString()).FontSize(tableFontSize);
+                }
+                table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
+            }
+
+            //var numberedList = docx.AddList("Berries", 0, ListItemType.Numbered, 1);
+            //// Add Sub-items(level 1) to the preceding ListItem.
+            //docx.AddListItem(numberedList, "Strawberries", 1);
+            //docx.AddListItem(numberedList, "Blueberries", 1);
+            //docx.AddListItem(numberedList, "Raspberries", 1);
+            ////docxn item (level 0)
+            //docx.AddListItem(numberedList, "Banana", 0);
+            //docx.AddListItem(numberedList, "Apple", 0);
+
+            //docx.AddListItem(numberedList, "Red", 1);
+            //docx.AddListItem(numberedList, "Green", 1);
+            //docx.AddListItem(numberedList, "Yellow", 1);
+            //docx.InsertList(numberedList);
+        }
+
 
         private static void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists)
         {
