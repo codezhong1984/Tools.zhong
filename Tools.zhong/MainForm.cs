@@ -623,7 +623,7 @@ namespace Tools.zhong
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(System.Environment.NewLine, "");
+            templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
             if (inputTexts.Length == 0)
@@ -638,21 +638,21 @@ namespace Tools.zhong
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(System.Environment.NewLine, "");
+            templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             if (inputTexts.Length == 0)
             {
                 return;
             }
             inputTexts = inputTexts.ToList().Select(i => i.Trim('\'')).ToArray();
-            txtTempl.Text = string.Join(",", inputTexts);
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
         }
 
         private void tsmAddSyh_Click(object sender, EventArgs e)
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(System.Environment.NewLine, "");
+            templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
             if (inputTexts.Length == 0)
@@ -707,14 +707,14 @@ namespace Tools.zhong
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(System.Environment.NewLine, "");
+            templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             if (inputTexts.Length == 0)
             {
                 return;
             }
             inputTexts = inputTexts.ToList().Select(i => i.Trim('\"')).ToArray();
-            txtTempl.Text = string.Join(",", inputTexts);
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
         }
 
         private void tsmKg2Dh_Click(object sender, EventArgs e)
@@ -763,9 +763,9 @@ namespace Tools.zhong
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim());
-            txtTempl.Text = string.Join("," + System.Environment.NewLine, inputTexts);
+            txtTempl.Text = string.Join("," + _DefaultSplitChar, inputTexts);
             //tabControl1.SelectedIndex = 1;
         }
 
@@ -773,9 +773,9 @@ namespace Tools.zhong
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim().TrimEnd(','));
-            txtTempl.Text = string.Join(System.Environment.NewLine, inputTexts);
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
             //tabControl1.SelectedIndex = 1;
         }
 
@@ -794,9 +794,9 @@ namespace Tools.zhong
         {
             lastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim().TrimEnd(','));
-            txtTempl.Text = string.Join(System.Environment.NewLine, inputTexts);
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
             //tabControl1.SelectedIndex = 1;
         }
 
@@ -1059,7 +1059,7 @@ namespace Tools.zhong
                         data = DbObjectHelper.GetColumnsForMySQL(dataBaseName, txtTableName3.Text.Trim());
                     }
                     dataBaseName = txtDocxTitle.Text.Trim().Length > 0 ? txtDocxTitle.Text.Trim() : dataBaseName;
-                    DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data);
+                    DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data,cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -1110,7 +1110,7 @@ namespace Tools.zhong
                         }
                     }
 
-                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists);
+                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists, cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -1160,7 +1160,7 @@ namespace Tools.zhong
                         }
                     }
 
-                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists);
+                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists, cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";

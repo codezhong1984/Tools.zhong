@@ -29,7 +29,7 @@ namespace Tools.zhong.UtilHelper
             return DocX.Load(fileName);
         }
 
-        public static void GenerateDocxByTable(string fileName, string dbName, List<TableColumnModel> listData)
+        public static void GenerateDocxByTable(string fileName, string dbName, List<TableColumnModel> listData, bool hideNumberCol)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Tools.zhong.UtilHelper
                 {
                     using (var docx = LoadDocx(fileName))
                     {
-                        WriteDocxSingleTable(docx, listData);
+                        WriteDocxSingleTable(docx, listData, hideNumberCol);
                         docx.Save();
                     }
                 }
@@ -47,7 +47,7 @@ namespace Tools.zhong.UtilHelper
                     using (var docx = CreateDocx(fileName))
                     {
                         WriteDocxTitle(docx, dbName + DATABASE_TITLE_SUFFIX);
-                        WriteDocxSingleTable(docx, listData);
+                        WriteDocxSingleTable(docx, listData, hideNumberCol);
                         docx.Save();
                     }
                 }
@@ -58,7 +58,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        public static void GenerateDocxByTables(string fileName, string docTitle, List<List<TableColumnModel>> lists)
+        public static void GenerateDocxByTables(string fileName, string docTitle, List<List<TableColumnModel>> lists, bool hideNumberCol)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Tools.zhong.UtilHelper
                 {
                     using (var docx = LoadDocx(fileName))
                     {
-                        WriteDocxTables(docx, lists);
+                        WriteDocxTables(docx, lists, hideNumberCol);
                         docx.Save();
                     }
                 }
@@ -76,7 +76,7 @@ namespace Tools.zhong.UtilHelper
                     using (var docx = CreateDocx(fileName))
                     {
                         WriteDocxTitle(docx, docTitle);
-                        WriteDocxTables(docx, lists);
+                        WriteDocxTables(docx, lists, hideNumberCol);
                         docx.Save();
                     }
                 }
@@ -158,7 +158,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData)
+        private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData, bool hideNumberCol)
         {
             // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
             if (listData == null || listData.Count == 0)
@@ -202,7 +202,13 @@ namespace Tools.zhong.UtilHelper
             //表字段表格         
             var tableFontSize = 10.5;
             var columnWidths = new float[] { 0.17f, 0.18f, 0.17f, 0.12f, 0.12f, 0.12f, 0.12f };
-            table = p.InsertTableAfterSelf(1 + listData.Count, TABLE_FIELDS.Length);
+            var tableFields = hideNumberCol ? TABLE_FIELDS_EXT : TABLE_FIELDS;
+
+            if (hideNumberCol)
+            {
+                columnWidths = new float[] { 0.17f, 0.19f, 0.16f, 0.12f, 0.12f };
+            }
+            table = p.InsertTableAfterSelf(1 + listData.Count, tableFields.Length);
             //table = listItem.InsertTableAfterSelf(1 + listData.Count, TABLE_FIELDS.Length);
             table.SetWidthsPercentage(columnWidths);
             table.AutoFit = AutoFit.Window;
@@ -211,9 +217,12 @@ namespace Tools.zhong.UtilHelper
             table.TableDescription = listData[0].TableComment;
             table.Design = TableDesign.TableGrid;
             table.Alignment = Alignment.left;
-            for (int i = 0; i < TABLE_FIELDS.Length; i++)
+
+            for (int i = 0; i < tableFields.Length; i++)
             {
-                table.Rows[0].Cells[i].Paragraphs[0].Append(TABLE_FIELDS[i]).FontSize(tableFontSize);//.Bold(true);
+                var tRow = table.Rows[0].Cells[i].Paragraphs[0]
+                    .Append(tableFields[i]).FontSize(tableFontSize);//.Bold(true);
+                //tRow.Alignment = Alignment.center;
             }
 
             //添加表格数据
@@ -221,11 +230,29 @@ namespace Tools.zhong.UtilHelper
             {
                 table.Rows[i + 1].Cells[0].Paragraphs[0].Append(listData[i].FieldName).FontSize(tableFontSize);
                 table.Rows[i + 1].Cells[1].Paragraphs[0].Append(listData[i].FieldRemarks).FontSize(tableFontSize);
-                table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].DataType).FontSize(tableFontSize);
-                table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataLength?.ToString()).FontSize(tableFontSize);
-                table.Rows[i + 1].Cells[4].Paragraphs[0].Append(listData[i].DataPrecision?.ToString()).FontSize(tableFontSize);
-                table.Rows[i + 1].Cells[5].Paragraphs[0].Append(listData[i].DataScale?.ToString()).FontSize(tableFontSize);
-                table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
+
+                if (!hideNumberCol)
+                {
+                    table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].DataType).FontSize(tableFontSize);
+                    table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataLength?.ToString()).FontSize(tableFontSize);
+                    table.Rows[i + 1].Cells[4].Paragraphs[0].Append(listData[i].DataPrecision?.ToString()).FontSize(tableFontSize);
+                    table.Rows[i + 1].Cells[5].Paragraphs[0].Append(listData[i].DataScale?.ToString()).FontSize(tableFontSize);
+                    table.Rows[i + 1].Cells[6].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(listData[i].DataPrecision?.ToString()))
+                    {
+                        var cellVal = string.Format("{0}({1},{2})", listData[i].DataType, listData[i].DataPrecision, listData[i].DataScale);
+                        table.Rows[i + 1].Cells[2].Paragraphs[0].Append(cellVal).FontSize(tableFontSize);
+                    }
+                    else
+                    {
+                        table.Rows[i + 1].Cells[2].Paragraphs[0].Append(listData[i].DataType?.ToString()).FontSize(tableFontSize);
+                        table.Rows[i + 1].Cells[3].Paragraphs[0].Append(listData[i].DataLength?.ToString()).FontSize(tableFontSize);
+                    }
+                    table.Rows[i + 1].Cells[4].Paragraphs[0].Append(listData[i].IsNullable ? "Y" : "N").FontSize(tableFontSize);
+                }
             }
 
             //var numberedList = docx.AddList("Berries", 0, ListItemType.Numbered, 1);
@@ -330,7 +357,7 @@ namespace Tools.zhong.UtilHelper
         }
 
 
-        private static void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists)
+        private static void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists, bool hideNumberCol)
         {
             if (lists == null || lists.Count == 0)
             {
@@ -338,7 +365,7 @@ namespace Tools.zhong.UtilHelper
             }
             foreach (var listItem in lists)
             {
-                WriteDocxSingleTable(document, listItem);
+                WriteDocxSingleTable(document, listItem, hideNumberCol);
             }
         }
     }
