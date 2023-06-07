@@ -239,6 +239,8 @@ namespace Tools.zhong
             txtOuput3.Text = "";
         }
 
+        #region 生成脚本
+
         private void btnCreateSelect_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
@@ -446,6 +448,131 @@ namespace Tools.zhong
 
             txtOuput3.Text = outText;
         }
+
+        private void btnMerge_Click(object sender, EventArgs e)
+        {
+            txtOuput3.Text = "";
+            string inputText = txtInput3.Text.Trim();
+            if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
+            {
+                inputText = inputText.Replace(System.Environment.NewLine, ",");
+            }
+            string tableName = txtTableName3.Text.Trim();
+            string key = txtKey3.Text.Trim();
+            int rowsPerCount = int.Parse(txtPerColNum.Text.Trim());
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                MessageBox.Show("表名未填写！");
+                txtTableName3.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                MessageBox.Show("主键未填写！");
+                txtKey3.Focus();
+                return;
+            }
+
+            var _MergeSQLTEMPL = "MERGE INTO {#TABLE_NAME} TDESC {#LINE_SPLIT}USING ({#LINE_SPLIT}SELECT {#TSRC_FIELDS}{#LINE_SPLIT}FROM DUAL{#LINE_SPLIT}) TSRC {#LINE_SPLIT}" +
+                                 "ON ({#ON_FIELDS}){#LINE_SPLIT}WHEN NOT MATCHED  THEN {#LINE_SPLIT}INSERT({#INSERT_FIELDS}) {#LINE_SPLIT}VALUES ({#INSERT_VALUES_FIELDS}){#LINE_SPLIT}WHEN MATCHED  THEN {#LINE_SPLIT}UPDATE SET {#UPDATE_FIELDS}";
+
+
+            string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
+
+            StringBuilder TSRC_FIELDS = new StringBuilder();          
+            for (int i = 0; i < inputVals.Length; i++)
+            {
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                TSRC_FIELDS.Append(string.Concat(i == 0 ? "" : " ,", $":{inputItem} {inputItem}",
+                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "" : ""));
+            }
+
+            StringBuilder ON_FIELDS = new StringBuilder();
+            string[] keys = key.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                var inputItem = keys[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                ON_FIELDS.Append(string.Concat(i == 0 ? "" : " AND ",$"TDESC.{inputItem}=TSRC.{inputItem}"));
+            }
+
+
+            StringBuilder INSERT_FIELDS = new StringBuilder();          
+            for (int i = 0; i < inputVals.Length; i++)
+            {
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                INSERT_FIELDS.Append(string.Concat(i == 0 ? "" : " ,", $"{inputItem}",
+                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "" : ""));
+            }
+
+            StringBuilder INSERT_VALUES_FIELDS = new StringBuilder();
+            for (int i = 0; i < inputVals.Length; i++)
+            {
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                INSERT_VALUES_FIELDS.Append(string.Concat(i == 0 ? "" : " ,", $"TSRC.{inputItem}",
+                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "" : ""));
+            }
+
+            StringBuilder UPDATE_FIELDS = new StringBuilder();
+            for (int i = 0; i < inputVals.Length; i++)
+            {
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                UPDATE_FIELDS.Append(string.Concat(i == 0 ? "" : " ,", $"TDESC.{inputItem} = TSRC .{inputItem}",
+                    (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 ? System.Environment.NewLine + "" : ""));
+            }
+
+            var outText = _MergeSQLTEMPL.Replace("{#TABLE_NAME}", tableName)
+                .Replace("{#TSRC_FIELDS}", TSRC_FIELDS.ToString())
+                .Replace("{#ON_FIELDS}", ON_FIELDS.ToString())
+                .Replace("{#INSERT_FIELDS}", INSERT_FIELDS.ToString())
+                .Replace("{#INSERT_VALUES_FIELDS}", INSERT_VALUES_FIELDS.ToString())
+                .Replace("{#UPDATE_FIELDS}", UPDATE_FIELDS.ToString())
+                .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
+
+            txtOuput3.Text = outText;
+        }
+        #endregion
 
         private void txtPerColNum_TextChanged(object sender, EventArgs e)
         {
@@ -1229,7 +1356,7 @@ namespace Tools.zhong
 
         private void btnOrlToDate_Click(object sender, EventArgs e)
         {
-            string templ = "to_date('{0}'','yyyy-mm-dd hh24:mi:ss')";
+            string templ = "to_date('{0}','yyyy-mm-dd hh24:mi:ss')";
             tbToDateOutput.Text = string.Format(templ, dtPicker.Text);
         }
 
