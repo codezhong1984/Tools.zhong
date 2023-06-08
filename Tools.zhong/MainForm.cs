@@ -35,8 +35,29 @@ namespace Tools.zhong
 
         private DataTable dt;
 
-        private string lastText;
-
+        private int _HistoryIndex = -1;
+        private List<string> _ListHistoryList = new List<string>();
+        public string _LastText
+        {
+            set
+            {
+                if (_ListHistoryList != null && _ListHistoryList.Count > 0
+                    && _ListHistoryList.Contains(value))
+                {
+                    return;
+                }
+                _HistoryIndex++;
+                _ListHistoryList.Add(value);
+            }
+            get
+            {
+                if (_HistoryIndex < 0)
+                {
+                    return "";
+                }
+                return _ListHistoryList[_HistoryIndex];
+            }
+        }
         private DbTableForm subForm;
 
         private ModelGeneratorForm mgForm;
@@ -480,7 +501,7 @@ namespace Tools.zhong
             string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
 
-            StringBuilder TSRC_FIELDS = new StringBuilder();          
+            StringBuilder TSRC_FIELDS = new StringBuilder();
             for (int i = 0; i < inputVals.Length; i++)
             {
                 var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
@@ -510,11 +531,11 @@ namespace Tools.zhong
                 {
                     continue;
                 }
-                ON_FIELDS.Append(string.Concat(i == 0 ? "" : " AND ",$"TDESC.{inputItem}=TSRC.{inputItem}"));
+                ON_FIELDS.Append(string.Concat(i == 0 ? "" : " AND ", $"TDESC.{inputItem}=TSRC.{inputItem}"));
             }
 
 
-            StringBuilder INSERT_FIELDS = new StringBuilder();          
+            StringBuilder INSERT_FIELDS = new StringBuilder();
             for (int i = 0; i < inputVals.Length; i++)
             {
                 var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
@@ -748,7 +769,7 @@ namespace Tools.zhong
 
         private void tsmAddDyh_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -763,7 +784,7 @@ namespace Tools.zhong
 
         private void tsmDelDyh_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -777,7 +798,7 @@ namespace Tools.zhong
 
         private void tsmAddSyh_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -791,7 +812,7 @@ namespace Tools.zhong
 
         private void tsmDyhzy_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             txtTempl.Text = "\'" + ReplaceSpecialCharSQL(templ) + "\'";
         }
@@ -811,7 +832,7 @@ namespace Tools.zhong
 
         private void tsmSyhZy_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             txtTempl.Text = "\"" + ReplaceSpecialChar(templ) + "\"";
         }
@@ -832,7 +853,7 @@ namespace Tools.zhong
 
         private void tsmDelSyh_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(_DefaultSplitChar, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -846,7 +867,7 @@ namespace Tools.zhong
 
         private void tsmKg2Dh_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, " ").Replace("\t", " ");
             var inputTexts = templ.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -855,7 +876,7 @@ namespace Tools.zhong
 
         private void tsmDh2Hh_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -866,7 +887,7 @@ namespace Tools.zhong
 
         private void tsmReplaceLine_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
@@ -877,7 +898,7 @@ namespace Tools.zhong
 
         private void tsmNewLine2DyhIn_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, ",");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
@@ -888,7 +909,7 @@ namespace Tools.zhong
 
         private void tsmAddComma_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim());
@@ -898,7 +919,7 @@ namespace Tools.zhong
 
         private void tsmDelComma_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim().TrimEnd(','));
@@ -908,7 +929,7 @@ namespace Tools.zhong
 
         private void tsmCustomLine_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             PerNewLineForm frm = new PerNewLineForm(txtTempl.Text.Trim());
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -919,7 +940,7 @@ namespace Tools.zhong
 
         private void tsmTrim_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim().TrimEnd(','));
@@ -927,9 +948,27 @@ namespace Tools.zhong
             //tabControl1.SelectedIndex = 1;
         }
 
+        private void tsmUndo_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            if (_HistoryIndex < 0)
+            {
+                return;
+            }
+            _HistoryIndex--;
+            txtTempl.Text = _HistoryIndex >= 0 ? _ListHistoryList[_HistoryIndex] : "";
+        }
+
         private void tsmRedo_Click(object sender, EventArgs e)
         {
-            //txtTempl.Text = lastText;
+            _HistoryIndex++;
+            txtTempl.Text = _HistoryIndex >= 0 ? _ListHistoryList[_HistoryIndex] : "";
+        }
+
+        private void tsmClearHis_Click(object sender, EventArgs e)
+        {
+            _HistoryIndex = -1;
+            _ListHistoryList.Clear();
         }
 
         /// <summary>
@@ -939,11 +978,11 @@ namespace Tools.zhong
         /// <param name="e"></param>
         private void tsmToOneDHLine_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(i => i.Trim());
-            txtTempl.Text = string.Join(",", inputTexts);
+                .Select(i => i.EndsWith(",") ? i.Trim() : i.Trim() + ",");
+            txtTempl.Text = string.Join("", inputTexts);
         }
 
         /// <summary>
@@ -951,7 +990,7 @@ namespace Tools.zhong
         /// </summary>
         private void tsmFirstUpper_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 ?.Select(i => i.Trim())
@@ -964,7 +1003,7 @@ namespace Tools.zhong
         /// </summary>
         private void tsmToUpper_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim()?.ToUpper());
@@ -976,7 +1015,7 @@ namespace Tools.zhong
         /// </summary>
         private void tsmFirstLower_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 ?.Select(i => i.Trim())
@@ -989,7 +1028,7 @@ namespace Tools.zhong
         /// </summary>
         private void tsmToLower_Click(object sender, EventArgs e)
         {
-            lastText = txtTempl.Text;
+            _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim()?.ToLower());
@@ -1186,7 +1225,7 @@ namespace Tools.zhong
                         data = DbObjectHelper.GetColumnsForMySQL(dataBaseName, txtTableName3.Text.Trim());
                     }
                     dataBaseName = txtDocxTitle.Text.Trim().Length > 0 ? txtDocxTitle.Text.Trim() : dataBaseName;
-                    DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data,cbHideNumberCol.Checked);
+                    DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data, cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -1386,5 +1425,6 @@ namespace Tools.zhong
                     break;
             }
         }
+
     }
 }

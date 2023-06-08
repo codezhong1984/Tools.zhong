@@ -68,7 +68,7 @@ namespace Tools.zhong
             this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTrim = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmRedo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmUndo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmFirstUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmToFirstLower = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,6 +143,8 @@ namespace Tools.zhong
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tsmRedo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmClearHis = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -420,14 +422,16 @@ namespace Tools.zhong
             this.tsmCustomLine,
             this.tsmTrim,
             this.toolStripSeparator7,
+            this.tsmUndo,
             this.tsmRedo,
+            this.tsmClearHis,
             this.toolStripSeparator6,
             this.tsmFirstUpper,
             this.tsmToFirstLower,
             this.tsmToUpper,
             this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 526);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 602);
             // 
             // tsmKg2Dh
             // 
@@ -564,14 +568,13 @@ namespace Tools.zhong
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(240, 6);
             // 
-            // tsmRedo
+            // tsmUndo
             // 
-            this.tsmRedo.Name = "tsmRedo";
-            this.tsmRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.tsmRedo.Size = new System.Drawing.Size(243, 24);
-            this.tsmRedo.Text = "撤销";
-            this.tsmRedo.Visible = false;
-            this.tsmRedo.Click += new System.EventHandler(this.tsmRedo_Click);
+            this.tsmUndo.Name = "tsmUndo";
+            this.tsmUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.tsmUndo.Size = new System.Drawing.Size(243, 24);
+            this.tsmUndo.Text = "撤销";
+            this.tsmUndo.Click += new System.EventHandler(this.tsmUndo_Click);
             // 
             // toolStripSeparator6
             // 
@@ -723,11 +726,11 @@ namespace Tools.zhong
             // 
             // cbHideNumberCol
             // 
-            this.cbHideNumberCol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbHideNumberCol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbHideNumberCol.AutoSize = true;
             this.cbHideNumberCol.Checked = true;
             this.cbHideNumberCol.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbHideNumberCol.Location = new System.Drawing.Point(947, 260);
+            this.cbHideNumberCol.Location = new System.Drawing.Point(955, 262);
             this.cbHideNumberCol.Name = "cbHideNumberCol";
             this.cbHideNumberCol.Size = new System.Drawing.Size(104, 19);
             this.cbHideNumberCol.TabIndex = 39;
@@ -1447,6 +1450,21 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
+            // tsmRedo
+            // 
+            this.tsmRedo.Name = "tsmRedo";
+            this.tsmRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.tsmRedo.Size = new System.Drawing.Size(243, 24);
+            this.tsmRedo.Text = "重做";
+            this.tsmRedo.Click += new System.EventHandler(this.tsmRedo_Click);
+            // 
+            // tsmClearHis
+            // 
+            this.tsmClearHis.Name = "tsmClearHis";
+            this.tsmClearHis.Size = new System.Drawing.Size(243, 24);
+            this.tsmClearHis.Text = "清空历史记录";
+            this.tsmClearHis.Click += new System.EventHandler(this.tsmClearHis_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1561,7 +1579,7 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnUpdateConfig;
         private System.Windows.Forms.ToolStripMenuItem tsmTrim;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem tsmRedo;
+        private System.Windows.Forms.ToolStripMenuItem tsmUndo;
         private System.Windows.Forms.Button btnImportFromInput;
         private System.Windows.Forms.Button btnExportData;
         private System.Windows.Forms.Button btnCreateDicAllDB;
@@ -1600,6 +1618,8 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.CheckBox cbHideNumberCol;
         private System.Windows.Forms.Button btnMerge;
+        private System.Windows.Forms.ToolStripMenuItem tsmRedo;
+        private System.Windows.Forms.ToolStripMenuItem tsmClearHis;
     }
 }
 
