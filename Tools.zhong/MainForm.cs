@@ -15,6 +15,8 @@ using Tools.zhong.Model;
 using DBHepler;
 
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Tools.zhong
 {
@@ -1107,7 +1109,7 @@ namespace Tools.zhong
                 foreach (var textItem in inputTexts)
                 {
                     var drNew = dt.NewRow();
-                    var colItem = textItem.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();
+                    var colItem = textItem.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim())?.ToList();
                     for (int i = 0; i < colItem.Count(); i++)
                     {
                         if (!dt.Columns.Contains($"col{i}"))
@@ -1123,7 +1125,6 @@ namespace Tools.zhong
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         /// <summary>
@@ -1426,5 +1427,118 @@ namespace Tools.zhong
             }
         }
 
+        /// <summary>
+        /// 提取JSON字段
+        /// </summary>
+        private void btnJsonField_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var resultList = new List<string>();
+                var json = txtTempl.Text.Trim();
+                var list = JsonConvert.DeserializeObject(json) as JToken;
+                var listdata = new List<JToken>();
+                var listResult = new List<string>();
+                foreach (var item in list.Children())
+                {
+                    switch (item.Type)
+                    {
+                        case JTokenType.Object:
+                            ChildrenTokens(item, listdata);
+                            break;
+                        case JTokenType.Property:
+                            listdata.Add(item);
+                            break;
+                        default:
+                            throw new Exception($"暂未适配该类型");
+                    }
+                }
+                //遍历JProperty
+                foreach (var item in listdata)
+                {
+                    var jProperty = item.ToObject<JProperty>();
+                    string propName = jProperty.Name;
+                    //JToken value = jProperty.Value;
+                    listResult.Add(propName);
+                }
+
+                txtOutput.Text = string.Join(System.Environment.NewLine, listResult);
+                tabControl1.SelectedIndex = 4;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ChildrenTokens(JToken jObject, List<JToken> jTokens)
+        {
+            if (jTokens == null) throw new Exception("接收对象不能为空");
+
+            var childrens = jObject.Children();
+            foreach (var item in childrens)
+            {
+                switch (item.Type)
+                {
+                    case JTokenType.Object:
+                        ChildrenTokens(item, jTokens);
+                        break;
+                    case JTokenType.Property:
+                        jTokens.Add(item);
+                        break;
+                    default:
+                        throw new Exception($"暂未适配该类型");
+                }
+            }
+        }
+
+        private void btnImportSingleCol_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var templ = txtTempl.Text.Trim();
+                var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(i => i.Trim()).ToList();
+                if (dt.Rows.Count == 0)
+                {
+                    if (dt.Columns.Count==0)
+                    {
+                        dt.Columns.Add("col0");
+                    }
+                    foreach (var textItem in inputTexts)
+                    {
+                        var drNew = dt.NewRow();
+                        drNew[$"col0"] = textItem.Trim();
+                        dt.Rows.Add(drNew);
+                    }
+                }
+                else
+                {
+                    int index = 0;
+                    var colCount = dt.Columns.Count;
+                    dt.Columns.Add($"col{colCount}");
+                    foreach (var textItem in inputTexts)
+                    {
+                        DataRow drRow;
+                        if (index >= dt.Rows.Count)
+                        {
+                            drRow = dt.NewRow();
+                            drRow[$"col{colCount}"] = textItem.Trim();
+                            dt.Rows.Add(drRow);
+                        }
+                        else
+                        {
+                            drRow = dt.Rows[index];
+                            drRow[$"col{colCount}"] = textItem.Trim();
+                        }                        
+                        index++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
