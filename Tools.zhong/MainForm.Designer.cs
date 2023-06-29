@@ -147,6 +147,9 @@ namespace Tools.zhong
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tsmiStD = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDtS = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -442,6 +445,9 @@ namespace Tools.zhong
             this.tsmAddSyh,
             this.tsmNewLine2DyhIn,
             this.toolStripSeparator4,
+            this.tsmiDtS,
+            this.tsmiStD,
+            this.toolStripSeparator8,
             this.tsmDyhzy,
             this.tsmSyhZy,
             this.toolStripSeparator1,
@@ -464,7 +470,7 @@ namespace Tools.zhong
             this.tsmToUpper,
             this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 574);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 656);
             // 
             // tsmKg2Dh
             // 
@@ -1498,6 +1504,25 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
+            // tsmiStD
+            // 
+            this.tsmiStD.Name = "tsmiStD";
+            this.tsmiStD.Size = new System.Drawing.Size(243, 24);
+            this.tsmiStD.Text = "双引号>单引号";
+            this.tsmiStD.Click += new System.EventHandler(this.tsmiStD_Click);
+            // 
+            // tsmiDtS
+            // 
+            this.tsmiDtS.Name = "tsmiDtS";
+            this.tsmiDtS.Size = new System.Drawing.Size(243, 24);
+            this.tsmiDtS.Text = "单引号>双引号";
+            this.tsmiDtS.Click += new System.EventHandler(this.tsmiDtS_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(240, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1655,6 +1680,9 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmClearHis;
         private System.Windows.Forms.Button btnJsonField;
         private System.Windows.Forms.Button btnImportSingleCol;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDtS;
+        private System.Windows.Forms.ToolStripMenuItem tsmiStD;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
 

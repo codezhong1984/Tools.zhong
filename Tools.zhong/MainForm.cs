@@ -1540,5 +1540,21 @@ namespace Tools.zhong
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void tsmiDtS_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace("'", "\"");
+            txtTempl.Text = templ;
+        }
+
+        private void tsmiStD_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace("\"", "'");
+            txtTempl.Text = templ;
+        }
     }
 }
