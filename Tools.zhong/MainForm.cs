@@ -1368,13 +1368,13 @@ namespace Tools.zhong
 
         private void btnRegexMatch_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbRegex.Text))
+            if (string.IsNullOrWhiteSpace(cbRegex.Text))
             {
                 MessageBox.Show("正则表达式不能为空");
-                tbRegex.Focus();
+                cbRegex.Focus();
                 return;
             }
-            var regex = new Regex(tbRegex.Text);
+            var regex = new Regex(cbRegex.Text);
             var matches = regex.Matches(txtTempl.Text);
             var sbResult = new StringBuilder();
             foreach (Match item in matches)
@@ -1502,7 +1502,7 @@ namespace Tools.zhong
                     .Select(i => i.Trim()).ToList();
                 if (dt.Rows.Count == 0)
                 {
-                    if (dt.Columns.Count==0)
+                    if (dt.Columns.Count == 0)
                     {
                         dt.Columns.Add("col0");
                     }
@@ -1531,7 +1531,7 @@ namespace Tools.zhong
                         {
                             drRow = dt.Rows[index];
                             drRow[$"col{colCount}"] = textItem.Trim();
-                        }                        
+                        }
                         index++;
                     }
                 }
@@ -1560,13 +1560,13 @@ namespace Tools.zhong
 
         private void btnRegexImport_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbRegex.Text))
+            if (string.IsNullOrWhiteSpace(cbRegex.Text))
             {
                 MessageBox.Show("正则表达式不能为空");
-                tbRegex.Focus();
+                cbRegex.Focus();
                 return;
             }
-            var regex = new Regex(tbRegex.Text);
+            var regex = new Regex(cbRegex.Text);
             var matches = regex.Matches(txtTempl.Text);
             var sbResult = new StringBuilder();
             dt = new DataTable();
@@ -1577,15 +1577,48 @@ namespace Tools.zhong
                 foreach (Group groupItem in item.Groups)
                 {
                     gTotal++;
-                    if (dt.Columns.Count< gTotal)
+                    if (dt.Columns.Count < gTotal)
                     {
-                        dt.Columns.Add($"col{gTotal-1}");
-                    }                 
-                    drNew[gTotal - 1] = groupItem.Value;                    
+                        dt.Columns.Add($"col{gTotal - 1}");
+                    }
+                    drNew[gTotal - 1] = groupItem.Value;
                 }
                 dt.Rows.Add(drNew);
             }
             dataGridView1.DataSource = dt;
+        }
+
+        private void tsmReplace_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rpForm = new ReplaceForm();
+                if (rpForm.ShowDialog() == DialogResult.OK)
+                {
+                    var newText = rpForm.NewText;
+                    var oldText = rpForm.OldText;
+                    if (string.IsNullOrWhiteSpace(oldText))
+                    {
+                        return;
+                    }
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow drItem in dt.Rows)
+                        {
+                            for (int i = 0; i < dt.Columns.Count; i++)
+                            {
+                                var nVal = drItem[i]?.ToString().Replace(oldText, newText);
+                                drItem[i] = nVal;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

@@ -32,11 +32,12 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cbRegex = new System.Windows.Forms.ComboBox();
+            this.btnRegexImport = new System.Windows.Forms.Button();
             this.btnImportSingleCol = new System.Windows.Forms.Button();
             this.btnJsonField = new System.Windows.Forms.Button();
             this.cbSplitChar = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbRegex = new System.Windows.Forms.TextBox();
             this.btnRegexMatch = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.btnImportFromInput = new System.Windows.Forms.Button();
@@ -149,8 +150,9 @@ namespace Tools.zhong
             this.dtPicker = new System.Windows.Forms.DateTimePicker();
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.cmsDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRegexImport = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -165,6 +167,7 @@ namespace Tools.zhong
             this.tabPage5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.cmsDataGridView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,12 +191,12 @@ namespace Tools.zhong
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cbRegex);
             this.tabPage1.Controls.Add(this.btnRegexImport);
             this.tabPage1.Controls.Add(this.btnImportSingleCol);
             this.tabPage1.Controls.Add(this.btnJsonField);
             this.tabPage1.Controls.Add(this.cbSplitChar);
             this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Controls.Add(this.tbRegex);
             this.tabPage1.Controls.Add(this.btnRegexMatch);
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.btnImportFromInput);
@@ -217,6 +220,32 @@ namespace Tools.zhong
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cbRegex
+            // 
+            this.cbRegex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbRegex.FormattingEnabled = true;
+            this.cbRegex.Items.AddRange(new object[] {
+            "(\\w+)\\s+=\\s+",
+            "\\\"(\\w*)\\\"\\s*:\\s*\\\"*(\\w*|null)\\\"*"});
+            this.cbRegex.Location = new System.Drawing.Point(312, 9);
+            this.cbRegex.Name = "cbRegex";
+            this.cbRegex.Size = new System.Drawing.Size(311, 23);
+            this.cbRegex.TabIndex = 44;
+            // 
+            // btnRegexImport
+            // 
+            this.btnRegexImport.AutoEllipsis = true;
+            this.btnRegexImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRegexImport.ForeColor = System.Drawing.Color.Blue;
+            this.btnRegexImport.Location = new System.Drawing.Point(574, 227);
+            this.btnRegexImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRegexImport.Name = "btnRegexImport";
+            this.btnRegexImport.Size = new System.Drawing.Size(92, 29);
+            this.btnRegexImport.TabIndex = 43;
+            this.btnRegexImport.Text = "正则导入";
+            this.btnRegexImport.UseVisualStyleBackColor = true;
+            this.btnRegexImport.Click += new System.EventHandler(this.btnRegexImport_Click);
             // 
             // btnImportSingleCol
             // 
@@ -275,15 +304,6 @@ namespace Tools.zhong
             this.label12.Size = new System.Drawing.Size(67, 15);
             this.label12.TabIndex = 39;
             this.label12.Text = "分隔符：";
-            // 
-            // tbRegex
-            // 
-            this.tbRegex.Location = new System.Drawing.Point(413, 6);
-            this.tbRegex.MaxLength = 1000;
-            this.tbRegex.Name = "tbRegex";
-            this.tbRegex.Size = new System.Drawing.Size(216, 25);
-            this.tbRegex.TabIndex = 25;
-            this.tbRegex.Text = "(\\w+)\\s+=\\s+";
             // 
             // btnRegexMatch
             // 
@@ -707,6 +727,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ContextMenuStrip = this.cmsDataGridView;
             this.dataGridView1.Location = new System.Drawing.Point(7, 300);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
@@ -1526,19 +1547,20 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // btnRegexImport
+            // cmsDataGridView
             // 
-            this.btnRegexImport.AutoEllipsis = true;
-            this.btnRegexImport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRegexImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnRegexImport.Location = new System.Drawing.Point(574, 227);
-            this.btnRegexImport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnRegexImport.Name = "btnRegexImport";
-            this.btnRegexImport.Size = new System.Drawing.Size(92, 29);
-            this.btnRegexImport.TabIndex = 43;
-            this.btnRegexImport.Text = "正则导入";
-            this.btnRegexImport.UseVisualStyleBackColor = true;
-            this.btnRegexImport.Click += new System.EventHandler(this.btnRegexImport_Click);
+            this.cmsDataGridView.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmReplace});
+            this.cmsDataGridView.Name = "cmsDataGridView";
+            this.cmsDataGridView.Size = new System.Drawing.Size(139, 28);
+            // 
+            // tsmReplace
+            // 
+            this.tsmReplace.Name = "tsmReplace";
+            this.tsmReplace.Size = new System.Drawing.Size(210, 24);
+            this.tsmReplace.Text = "替换文本";
+            this.tsmReplace.Click += new System.EventHandler(this.tsmReplace_Click);
             // 
             // MainForm
             // 
@@ -1574,6 +1596,7 @@ namespace Tools.zhong
             this.tabPage2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.cmsDataGridView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -1672,7 +1695,6 @@ namespace Tools.zhong
         private System.Windows.Forms.ComboBox cbLikeType;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnCreateModelFromDBScript;
-        private System.Windows.Forms.TextBox tbRegex;
         private System.Windows.Forms.Button btnRegexMatch;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.DateTimePicker dtPicker;
@@ -1701,6 +1723,9 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmiStD;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.Button btnRegexImport;
+        private System.Windows.Forms.ComboBox cbRegex;
+        private System.Windows.Forms.ContextMenuStrip cmsDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem tsmReplace;
     }
 }
 
