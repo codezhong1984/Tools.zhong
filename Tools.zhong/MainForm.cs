@@ -1422,6 +1422,7 @@ namespace Tools.zhong
                 case "Tab": _DefaultSplitChar = "\t"; break;
                 case "单引号": _DefaultSplitChar = "\'"; break;
                 case "双引号": _DefaultSplitChar = "\""; break;
+                case "冒号": _DefaultSplitChar = ":"; break;
                 default:
                     break;
             }
@@ -1555,6 +1556,36 @@ namespace Tools.zhong
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace("\"", "'");
             txtTempl.Text = templ;
+        }
+
+        private void btnRegexImport_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbRegex.Text))
+            {
+                MessageBox.Show("正则表达式不能为空");
+                tbRegex.Focus();
+                return;
+            }
+            var regex = new Regex(tbRegex.Text);
+            var matches = regex.Matches(txtTempl.Text);
+            var sbResult = new StringBuilder();
+            dt = new DataTable();
+            foreach (Match item in matches)
+            {
+                int gTotal = 0;
+                DataRow drNew = dt.NewRow();
+                foreach (Group groupItem in item.Groups)
+                {
+                    gTotal++;
+                    if (dt.Columns.Count< gTotal)
+                    {
+                        dt.Columns.Add($"col{gTotal-1}");
+                    }                 
+                    drNew[gTotal - 1] = groupItem.Value;                    
+                }
+                dt.Rows.Add(drNew);
+            }
+            dataGridView1.DataSource = dt;
         }
     }
 }
