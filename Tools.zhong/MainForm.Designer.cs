@@ -829,10 +829,10 @@ namespace Tools.zhong
             this.btnReCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReCreate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnReCreate.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnReCreate.Location = new System.Drawing.Point(463, 257);
+            this.btnReCreate.Location = new System.Drawing.Point(453, 257);
             this.btnReCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnReCreate.Name = "btnReCreate";
-            this.btnReCreate.Size = new System.Drawing.Size(100, 31);
+            this.btnReCreate.Size = new System.Drawing.Size(111, 31);
             this.btnReCreate.TabIndex = 41;
             this.btnReCreate.Text = "RECREATE";
             this.btnReCreate.UseVisualStyleBackColor = true;
@@ -843,7 +843,7 @@ namespace Tools.zhong
             this.btnMerge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMerge.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnMerge.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnMerge.Location = new System.Drawing.Point(372, 257);
+            this.btnMerge.Location = new System.Drawing.Point(364, 257);
             this.btnMerge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMerge.Name = "btnMerge";
             this.btnMerge.Size = new System.Drawing.Size(84, 31);
@@ -1186,7 +1186,7 @@ namespace Tools.zhong
             this.btnCreateDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateDelete.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateDelete.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDelete.Location = new System.Drawing.Point(281, 257);
+            this.btnCreateDelete.Location = new System.Drawing.Point(275, 257);
             this.btnCreateDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateDelete.Name = "btnCreateDelete";
             this.btnCreateDelete.Size = new System.Drawing.Size(84, 31);
@@ -1200,7 +1200,7 @@ namespace Tools.zhong
             this.btnCreateUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateUpdate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateUpdate.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateUpdate.Location = new System.Drawing.Point(190, 257);
+            this.btnCreateUpdate.Location = new System.Drawing.Point(186, 257);
             this.btnCreateUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateUpdate.Name = "btnCreateUpdate";
             this.btnCreateUpdate.Size = new System.Drawing.Size(84, 31);
@@ -1260,7 +1260,7 @@ namespace Tools.zhong
             this.btnCreateInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateInsert.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateInsert.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateInsert.Location = new System.Drawing.Point(99, 257);
+            this.btnCreateInsert.Location = new System.Drawing.Point(97, 257);
             this.btnCreateInsert.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateInsert.Name = "btnCreateInsert";
             this.btnCreateInsert.Size = new System.Drawing.Size(84, 31);
