@@ -32,6 +32,8 @@ namespace Tools.zhong
 
         private const string DELETE_TEMPLATE = @"DELETE FROM {#TABLE_NAME} WHERE {#KEYPARAMS}";
 
+        private const string RECREATE_TEMPLATE = @"CREATE TABLE {#TABLE_NAME}{#DATE} AS SELECT * FROM {#TABLE_NAME};{#LINE_SPLIT}{#LINE_SPLIT}INSERT INTO {#TABLE_NAME}{#LINE_SPLIT}({#COLUMNS}){#LINE_SPLIT}SELECT {#COLUMNS} {#LINE_SPLIT}FROM {#TABLE_NAME}{#DATE};";
+
         //SQL脚本参数前辍
         private string SQL_PARAM_PREFIX = "@";
 
@@ -591,6 +593,56 @@ namespace Tools.zhong
                 .Replace("{#INSERT_FIELDS}", INSERT_FIELDS.ToString())
                 .Replace("{#INSERT_VALUES_FIELDS}", INSERT_VALUES_FIELDS.ToString())
                 .Replace("{#UPDATE_FIELDS}", UPDATE_FIELDS.ToString())
+                .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
+
+            txtOuput3.Text = outText;
+        }
+
+        private void btnReCreate_Click(object sender, EventArgs e)
+        {
+            txtOuput3.Text = "";
+            string inputText = txtInput3.Text.Trim();
+            if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
+            {
+                inputText = inputText.Replace(System.Environment.NewLine, ",");
+            }
+            string tableName = txtTableName3.Text.Trim();
+            string key = txtKey3.Text.Trim();
+            int rowsPerCount = int.Parse(txtPerColNum.Text.Trim());
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                MessageBox.Show("表名未填写！");
+                txtTableName3.Focus();
+                return;
+            }
+            StringBuilder sbColumns = new StringBuilder();
+            StringBuilder sbInsertParamColumns = new StringBuilder();
+
+            string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
+            for (int i = 0; i < inputVals.Length; i++)
+            {
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                var newLineFlag = (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 && rowsPerCount != inputVals.Length;
+                sbColumns.Append(string.Concat(i == 0 ? " " : " ,",
+                    inputItem, newLineFlag ? System.Environment.NewLine : ""));
+
+                sbInsertParamColumns.Append(string.Concat(i == 0 ? "" : ",", SQL_PARAM_PREFIX, inputItem.TrimStart(),
+                    newLineFlag ? System.Environment.NewLine : ""));
+            }
+
+            var outText = RECREATE_TEMPLATE
+                .Replace("{#DATE}", DateTime.Now.ToString("MMdd"))
+                .Replace("{#TABLE_NAME}", tableName)
+                .Replace("{#COLUMNS}", sbColumns.ToString())
                 .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
 
             txtOuput3.Text = outText;

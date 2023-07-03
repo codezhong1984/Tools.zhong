@@ -84,9 +84,12 @@ namespace Tools.zhong
             this.tsmToLower = new System.Windows.Forms.ToolStripMenuItem();
             this.txtTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cmsDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnReCreate = new System.Windows.Forms.Button();
             this.btnMerge = new System.Windows.Forms.Button();
             this.cbHideNumberCol = new System.Windows.Forms.CheckBox();
             this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
@@ -150,13 +153,12 @@ namespace Tools.zhong
             this.dtPicker = new System.Windows.Forms.DateTimePicker();
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.cmsDataGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.cmsDataGridView.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -167,7 +169,6 @@ namespace Tools.zhong
             this.tabPage5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.cmsDataGridView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -736,6 +737,21 @@ namespace Tools.zhong
             this.dataGridView1.Size = new System.Drawing.Size(1062, 301);
             this.dataGridView1.TabIndex = 11;
             // 
+            // cmsDataGridView
+            // 
+            this.cmsDataGridView.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmReplace});
+            this.cmsDataGridView.Name = "cmsDataGridView";
+            this.cmsDataGridView.Size = new System.Drawing.Size(139, 28);
+            // 
+            // tsmReplace
+            // 
+            this.tsmReplace.Name = "tsmReplace";
+            this.tsmReplace.Size = new System.Drawing.Size(138, 24);
+            this.tsmReplace.Text = "替换文本";
+            this.tsmReplace.Click += new System.EventHandler(this.tsmReplace_Click);
+            // 
             // btnOutput
             // 
             this.btnOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -767,6 +783,7 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnReCreate);
             this.tabPage3.Controls.Add(this.btnMerge);
             this.tabPage3.Controls.Add(this.cbHideNumberCol);
             this.tabPage3.Controls.Add(this.btnCreateModelFromDBScript);
@@ -807,12 +824,26 @@ namespace Tools.zhong
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnReCreate
+            // 
+            this.btnReCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReCreate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnReCreate.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnReCreate.Location = new System.Drawing.Point(463, 257);
+            this.btnReCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnReCreate.Name = "btnReCreate";
+            this.btnReCreate.Size = new System.Drawing.Size(100, 31);
+            this.btnReCreate.TabIndex = 41;
+            this.btnReCreate.Text = "RECREATE";
+            this.btnReCreate.UseVisualStyleBackColor = true;
+            this.btnReCreate.Click += new System.EventHandler(this.btnReCreate_Click);
+            // 
             // btnMerge
             // 
             this.btnMerge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMerge.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnMerge.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnMerge.Location = new System.Drawing.Point(392, 257);
+            this.btnMerge.Location = new System.Drawing.Point(372, 257);
             this.btnMerge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMerge.Name = "btnMerge";
             this.btnMerge.Size = new System.Drawing.Size(84, 31);
@@ -1005,10 +1036,10 @@ namespace Tools.zhong
             this.btnExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportData.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportData.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnExportData.Location = new System.Drawing.Point(817, 257);
+            this.btnExportData.Location = new System.Drawing.Point(839, 257);
             this.btnExportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportData.Name = "btnExportData";
-            this.btnExportData.Size = new System.Drawing.Size(114, 31);
+            this.btnExportData.Size = new System.Drawing.Size(97, 31);
             this.btnExportData.TabIndex = 24;
             this.btnExportData.Text = "导出数据";
             this.btnExportData.UseVisualStyleBackColor = true;
@@ -1032,7 +1063,7 @@ namespace Tools.zhong
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(586, 266);
+            this.label10.Location = new System.Drawing.Point(651, 265);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(37, 15);
             this.label10.TabIndex = 23;
@@ -1043,7 +1074,7 @@ namespace Tools.zhong
             this.btnDefaultNewLine3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDefaultNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDefaultNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnDefaultNewLine3.Location = new System.Drawing.Point(637, 257);
+            this.btnDefaultNewLine3.Location = new System.Drawing.Point(693, 257);
             this.btnDefaultNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDefaultNewLine3.Name = "btnDefaultNewLine3";
             this.btnDefaultNewLine3.Size = new System.Drawing.Size(59, 31);
@@ -1057,7 +1088,7 @@ namespace Tools.zhong
             this.btnNoNewLine3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNoNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNoNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnNoNewLine3.Location = new System.Drawing.Point(701, 257);
+            this.btnNoNewLine3.Location = new System.Drawing.Point(757, 257);
             this.btnNoNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNoNewLine3.Name = "btnNoNewLine3";
             this.btnNoNewLine3.Size = new System.Drawing.Size(76, 31);
@@ -1117,7 +1148,7 @@ namespace Tools.zhong
             // 
             this.txtPerColNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtPerColNum.Enabled = false;
-            this.txtPerColNum.Location = new System.Drawing.Point(539, 261);
+            this.txtPerColNum.Location = new System.Drawing.Point(606, 261);
             this.txtPerColNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPerColNum.Name = "txtPerColNum";
             this.txtPerColNum.Size = new System.Drawing.Size(40, 25);
@@ -1130,7 +1161,7 @@ namespace Tools.zhong
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(496, 265);
+            this.label3.Location = new System.Drawing.Point(565, 265);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 13;
@@ -1155,7 +1186,7 @@ namespace Tools.zhong
             this.btnCreateDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateDelete.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateDelete.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateDelete.Location = new System.Drawing.Point(296, 257);
+            this.btnCreateDelete.Location = new System.Drawing.Point(281, 257);
             this.btnCreateDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateDelete.Name = "btnCreateDelete";
             this.btnCreateDelete.Size = new System.Drawing.Size(84, 31);
@@ -1169,7 +1200,7 @@ namespace Tools.zhong
             this.btnCreateUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateUpdate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateUpdate.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateUpdate.Location = new System.Drawing.Point(200, 257);
+            this.btnCreateUpdate.Location = new System.Drawing.Point(190, 257);
             this.btnCreateUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateUpdate.Name = "btnCreateUpdate";
             this.btnCreateUpdate.Size = new System.Drawing.Size(84, 31);
@@ -1229,7 +1260,7 @@ namespace Tools.zhong
             this.btnCreateInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateInsert.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreateInsert.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateInsert.Location = new System.Drawing.Point(104, 257);
+            this.btnCreateInsert.Location = new System.Drawing.Point(99, 257);
             this.btnCreateInsert.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCreateInsert.Name = "btnCreateInsert";
             this.btnCreateInsert.Size = new System.Drawing.Size(84, 31);
@@ -1547,21 +1578,6 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
-            // cmsDataGridView
-            // 
-            this.cmsDataGridView.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmsDataGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmReplace});
-            this.cmsDataGridView.Name = "cmsDataGridView";
-            this.cmsDataGridView.Size = new System.Drawing.Size(139, 28);
-            // 
-            // tsmReplace
-            // 
-            this.tsmReplace.Name = "tsmReplace";
-            this.tsmReplace.Size = new System.Drawing.Size(210, 24);
-            this.tsmReplace.Text = "替换文本";
-            this.tsmReplace.Click += new System.EventHandler(this.tsmReplace_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1580,6 +1596,7 @@ namespace Tools.zhong
             this.tabPage1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.cmsDataGridView.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -1596,7 +1613,6 @@ namespace Tools.zhong
             this.tabPage2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            this.cmsDataGridView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -1726,6 +1742,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ComboBox cbRegex;
         private System.Windows.Forms.ContextMenuStrip cmsDataGridView;
         private System.Windows.Forms.ToolStripMenuItem tsmReplace;
+        private System.Windows.Forms.Button btnReCreate;
     }
 }
 
