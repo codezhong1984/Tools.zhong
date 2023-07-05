@@ -155,6 +155,10 @@ namespace Tools.zhong
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmUpperToLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmLineToUpper = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmBlankToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -486,6 +490,10 @@ namespace Tools.zhong
             this.tsmCustomLine,
             this.tsmTrim,
             this.toolStripSeparator7,
+            this.tsmBlankToUpper,
+            this.tsmLineToUpper,
+            this.tsmUpperToLine,
+            this.toolStripSeparator9,
             this.tsmUndo,
             this.tsmRedo,
             this.tsmClearHis,
@@ -495,7 +503,7 @@ namespace Tools.zhong
             this.tsmToUpper,
             this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 628);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 734);
             // 
             // tsmKg2Dh
             // 
@@ -1594,6 +1602,32 @@ namespace Tools.zhong
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
             // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(240, 6);
+            // 
+            // tsmUpperToLine
+            // 
+            this.tsmUpperToLine.Name = "tsmUpperToLine";
+            this.tsmUpperToLine.Size = new System.Drawing.Size(243, 24);
+            this.tsmUpperToLine.Text = "大写字母换横线";
+            this.tsmUpperToLine.Click += new System.EventHandler(this.tsmUpperToLine_Click);
+            // 
+            // tsmLineToUpper
+            // 
+            this.tsmLineToUpper.Name = "tsmLineToUpper";
+            this.tsmLineToUpper.Size = new System.Drawing.Size(243, 24);
+            this.tsmLineToUpper.Text = "横线换大写字母";
+            this.tsmLineToUpper.Click += new System.EventHandler(this.tsmLineToUpper_Click);
+            // 
+            // tsmBlankToUpper
+            // 
+            this.tsmBlankToUpper.Name = "tsmBlankToUpper";
+            this.tsmBlankToUpper.Size = new System.Drawing.Size(243, 24);
+            this.tsmBlankToUpper.Text = "单词中间空格换大写字母";
+            this.tsmBlankToUpper.Click += new System.EventHandler(this.tsmBlankToUpper_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1760,6 +1794,10 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnReCreate;
         private System.Windows.Forms.Button btnPage;
         private System.Windows.Forms.CheckedListBox cblTableLists;
+        private System.Windows.Forms.ToolStripMenuItem tsmLineToUpper;
+        private System.Windows.Forms.ToolStripMenuItem tsmUpperToLine;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem tsmBlankToUpper;
     }
 }
 

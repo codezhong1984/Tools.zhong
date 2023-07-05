@@ -1165,6 +1165,95 @@ namespace Tools.zhong
             txtTempl.Text = string.Join(",", inputTexts);
         }
 
+        /// <summary>
+        /// 横线换大写字母
+        /// </summary>
+        private void tsmLineToUpper_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _LastText = txtTempl.Text;
+                var templ = txtTempl.Text.Trim();
+                var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
+                var resultList = new List<string>();
+                foreach (var item in inputTexts)
+                {
+                    var subItems = item.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)
+                                 .Select(k => k.Substring(0, 1).ToUpper() + k.Substring(1));
+                    resultList.Add(string.Join("", subItems));
+                }
+                txtTempl.Text = string.Join(_DefaultSplitChar, resultList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 大写字母换横线
+        /// </summary>
+        private void tsmUpperToLine_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _LastText = txtTempl.Text;
+                var templ = txtTempl.Text.Trim();
+                var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
+                var resultList = new List<string>();
+                foreach (var item in inputTexts)
+                {
+                    //typeIDS -> type_ID  PIDGid-->PID_Gid
+                    var charArr = item.ToCharArray();
+                    var lastUpIndex = 0;
+                    var itemList = new List<string>();
+                    for (int i = 1; i < charArr.Length; i++)
+                    {
+                        if (charArr[i - 1].IsBetween('a', 'z') && charArr[i].IsBetween('A', 'Z'))
+                        {
+                            itemList.Add(item.Substring(lastUpIndex, i));
+                            lastUpIndex = i;
+                        }
+                    }
+                    if (lastUpIndex >= 0)
+                    {
+                        itemList.Add(item.Substring(lastUpIndex));
+                    }
+                    resultList.Add(string.Join("_", itemList));
+                }
+                txtTempl.Text = string.Join(_DefaultSplitChar, resultList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        ///单词中间空格换大写字母
+        /// </summary>
+        private void tsmBlankToUpper_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _LastText = txtTempl.Text;
+                var templ = txtTempl.Text.Trim();
+                var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
+                var resultList = new List<string>();
+                foreach (var item in inputTexts)
+                {
+                    var subItems = item.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries)
+                                 .Select(k => k.Substring(0, 1).ToUpper() + k.Substring(1));
+                    resultList.Add(string.Join("", subItems));
+                }
+                txtTempl.Text = string.Join(_DefaultSplitChar, resultList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
