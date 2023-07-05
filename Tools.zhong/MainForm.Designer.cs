@@ -89,14 +89,15 @@ namespace Tools.zhong
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtInput3 = new System.Windows.Forms.TextBox();
+            this.cblTableLists = new System.Windows.Forms.CheckedListBox();
+            this.btnPage = new System.Windows.Forms.Button();
             this.btnReCreate = new System.Windows.Forms.Button();
             this.btnMerge = new System.Windows.Forms.Button();
             this.cbHideNumberCol = new System.Windows.Forms.CheckBox();
             this.btnCreateModelFromDBScript = new System.Windows.Forms.Button();
             this.cbLikeType = new System.Windows.Forms.ComboBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtInput3 = new System.Windows.Forms.TextBox();
-            this.cblTableLists = new System.Windows.Forms.CheckedListBox();
             this.btnLoadView = new System.Windows.Forms.Button();
             this.txtDocxTitle = new System.Windows.Forms.TextBox();
             this.txtTableFilter = new System.Windows.Forms.TextBox();
@@ -783,12 +784,13 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.splitContainer1);
+            this.tabPage3.Controls.Add(this.btnPage);
             this.tabPage3.Controls.Add(this.btnReCreate);
             this.tabPage3.Controls.Add(this.btnMerge);
             this.tabPage3.Controls.Add(this.cbHideNumberCol);
             this.tabPage3.Controls.Add(this.btnCreateModelFromDBScript);
             this.tabPage3.Controls.Add(this.cbLikeType);
-            this.tabPage3.Controls.Add(this.splitContainer1);
             this.tabPage3.Controls.Add(this.btnLoadView);
             this.tabPage3.Controls.Add(this.txtDocxTitle);
             this.tabPage3.Controls.Add(this.txtTableFilter);
@@ -823,71 +825,6 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btnReCreate
-            // 
-            this.btnReCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReCreate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReCreate.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnReCreate.Location = new System.Drawing.Point(453, 257);
-            this.btnReCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnReCreate.Name = "btnReCreate";
-            this.btnReCreate.Size = new System.Drawing.Size(111, 31);
-            this.btnReCreate.TabIndex = 41;
-            this.btnReCreate.Text = "RECREATE";
-            this.btnReCreate.UseVisualStyleBackColor = true;
-            this.btnReCreate.Click += new System.EventHandler(this.btnReCreate_Click);
-            // 
-            // btnMerge
-            // 
-            this.btnMerge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnMerge.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMerge.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnMerge.Location = new System.Drawing.Point(364, 257);
-            this.btnMerge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnMerge.Name = "btnMerge";
-            this.btnMerge.Size = new System.Drawing.Size(84, 31);
-            this.btnMerge.TabIndex = 40;
-            this.btnMerge.Text = "MERGE";
-            this.btnMerge.UseVisualStyleBackColor = true;
-            this.btnMerge.Click += new System.EventHandler(this.btnMerge_Click);
-            // 
-            // cbHideNumberCol
-            // 
-            this.cbHideNumberCol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbHideNumberCol.AutoSize = true;
-            this.cbHideNumberCol.Checked = true;
-            this.cbHideNumberCol.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbHideNumberCol.Location = new System.Drawing.Point(955, 262);
-            this.cbHideNumberCol.Name = "cbHideNumberCol";
-            this.cbHideNumberCol.Size = new System.Drawing.Size(104, 19);
-            this.cbHideNumberCol.TabIndex = 39;
-            this.cbHideNumberCol.Text = "隐藏精度列";
-            this.cbHideNumberCol.UseVisualStyleBackColor = true;
-            // 
-            // btnCreateModelFromDBScript
-            // 
-            this.btnCreateModelFromDBScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateModelFromDBScript.AutoEllipsis = true;
-            this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCreateModelFromDBScript.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(888, 129);
-            this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
-            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(176, 29);
-            this.btnCreateModelFromDBScript.TabIndex = 38;
-            this.btnCreateModelFromDBScript.Text = "库表生成实体类";
-            this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
-            this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
-            // 
-            // cbLikeType
-            // 
-            this.cbLikeType.FormattingEnabled = true;
-            this.cbLikeType.Location = new System.Drawing.Point(627, 8);
-            this.cbLikeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbLikeType.Name = "cbLikeType";
-            this.cbLikeType.Size = new System.Drawing.Size(101, 23);
-            this.cbLikeType.TabIndex = 37;
             // 
             // splitContainer1
             // 
@@ -927,7 +864,86 @@ namespace Tools.zhong
             this.cblTableLists.Margin = new System.Windows.Forms.Padding(0);
             this.cblTableLists.Name = "cblTableLists";
             this.cblTableLists.Size = new System.Drawing.Size(353, 208);
-            this.cblTableLists.TabIndex = 27;
+            this.cblTableLists.TabIndex = 28;
+            // 
+            // btnPage
+            // 
+            this.btnPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPage.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPage.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPage.Location = new System.Drawing.Point(567, 257);
+            this.btnPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnPage.Name = "btnPage";
+            this.btnPage.Size = new System.Drawing.Size(86, 31);
+            this.btnPage.TabIndex = 42;
+            this.btnPage.Text = "PAGE";
+            this.btnPage.UseVisualStyleBackColor = true;
+            this.btnPage.Click += new System.EventHandler(this.btnPage_Click);
+            // 
+            // btnReCreate
+            // 
+            this.btnReCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReCreate.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnReCreate.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnReCreate.Location = new System.Drawing.Point(453, 257);
+            this.btnReCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnReCreate.Name = "btnReCreate";
+            this.btnReCreate.Size = new System.Drawing.Size(111, 31);
+            this.btnReCreate.TabIndex = 41;
+            this.btnReCreate.Text = "RECREATE";
+            this.btnReCreate.UseVisualStyleBackColor = true;
+            this.btnReCreate.Click += new System.EventHandler(this.btnReCreate_Click);
+            // 
+            // btnMerge
+            // 
+            this.btnMerge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnMerge.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMerge.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMerge.Location = new System.Drawing.Point(364, 257);
+            this.btnMerge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMerge.Name = "btnMerge";
+            this.btnMerge.Size = new System.Drawing.Size(86, 31);
+            this.btnMerge.TabIndex = 40;
+            this.btnMerge.Text = "MERGE";
+            this.btnMerge.UseVisualStyleBackColor = true;
+            this.btnMerge.Click += new System.EventHandler(this.btnMerge_Click);
+            // 
+            // cbHideNumberCol
+            // 
+            this.cbHideNumberCol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbHideNumberCol.AutoSize = true;
+            this.cbHideNumberCol.Checked = true;
+            this.cbHideNumberCol.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbHideNumberCol.Location = new System.Drawing.Point(922, 264);
+            this.cbHideNumberCol.Name = "cbHideNumberCol";
+            this.cbHideNumberCol.Size = new System.Drawing.Size(104, 19);
+            this.cbHideNumberCol.TabIndex = 39;
+            this.cbHideNumberCol.Text = "隐藏精度列";
+            this.cbHideNumberCol.UseVisualStyleBackColor = true;
+            // 
+            // btnCreateModelFromDBScript
+            // 
+            this.btnCreateModelFromDBScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateModelFromDBScript.AutoEllipsis = true;
+            this.btnCreateModelFromDBScript.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCreateModelFromDBScript.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCreateModelFromDBScript.Location = new System.Drawing.Point(888, 129);
+            this.btnCreateModelFromDBScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCreateModelFromDBScript.Name = "btnCreateModelFromDBScript";
+            this.btnCreateModelFromDBScript.Size = new System.Drawing.Size(176, 29);
+            this.btnCreateModelFromDBScript.TabIndex = 38;
+            this.btnCreateModelFromDBScript.Text = "库表生成实体类";
+            this.btnCreateModelFromDBScript.UseVisualStyleBackColor = true;
+            this.btnCreateModelFromDBScript.Click += new System.EventHandler(this.btnCreateModelFromDBScript_Click);
+            // 
+            // cbLikeType
+            // 
+            this.cbLikeType.FormattingEnabled = true;
+            this.cbLikeType.Location = new System.Drawing.Point(627, 8);
+            this.cbLikeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbLikeType.Name = "cbLikeType";
+            this.cbLikeType.Size = new System.Drawing.Size(101, 23);
+            this.cbLikeType.TabIndex = 37;
             // 
             // btnLoadView
             // 
@@ -1033,15 +1049,15 @@ namespace Tools.zhong
             // 
             // btnExportData
             // 
-            this.btnExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExportData.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportData.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnExportData.Location = new System.Drawing.Point(839, 257);
+            this.btnExportData.Location = new System.Drawing.Point(364, 292);
             this.btnExportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportData.Name = "btnExportData";
-            this.btnExportData.Size = new System.Drawing.Size(97, 31);
+            this.btnExportData.Size = new System.Drawing.Size(124, 31);
             this.btnExportData.TabIndex = 24;
-            this.btnExportData.Text = "导出数据";
+            this.btnExportData.Text = "EXPORT DATA";
             this.btnExportData.UseVisualStyleBackColor = true;
             this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click);
             // 
@@ -1063,7 +1079,7 @@ namespace Tools.zhong
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(651, 265);
+            this.label10.Location = new System.Drawing.Point(191, 300);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(37, 15);
             this.label10.TabIndex = 23;
@@ -1074,12 +1090,12 @@ namespace Tools.zhong
             this.btnDefaultNewLine3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDefaultNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDefaultNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnDefaultNewLine3.Location = new System.Drawing.Point(693, 257);
+            this.btnDefaultNewLine3.Location = new System.Drawing.Point(8, 292);
             this.btnDefaultNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDefaultNewLine3.Name = "btnDefaultNewLine3";
-            this.btnDefaultNewLine3.Size = new System.Drawing.Size(59, 31);
+            this.btnDefaultNewLine3.Size = new System.Drawing.Size(86, 31);
             this.btnDefaultNewLine3.TabIndex = 22;
-            this.btnDefaultNewLine3.Text = "设置";
+            this.btnDefaultNewLine3.Text = "SET";
             this.btnDefaultNewLine3.UseVisualStyleBackColor = true;
             this.btnDefaultNewLine3.Click += new System.EventHandler(this.btnDefaultNewLine3_Click);
             // 
@@ -1088,12 +1104,12 @@ namespace Tools.zhong
             this.btnNoNewLine3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNoNewLine3.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNoNewLine3.ForeColor = System.Drawing.Color.Black;
-            this.btnNoNewLine3.Location = new System.Drawing.Point(757, 257);
+            this.btnNoNewLine3.Location = new System.Drawing.Point(275, 291);
             this.btnNoNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNoNewLine3.Name = "btnNoNewLine3";
-            this.btnNoNewLine3.Size = new System.Drawing.Size(76, 31);
+            this.btnNoNewLine3.Size = new System.Drawing.Size(86, 31);
             this.btnNoNewLine3.TabIndex = 21;
-            this.btnNoNewLine3.Text = "默认";
+            this.btnNoNewLine3.Text = "DEAULT";
             this.btnNoNewLine3.UseVisualStyleBackColor = true;
             this.btnNoNewLine3.Click += new System.EventHandler(this.btnNoNewLine3_Click);
             // 
@@ -1148,7 +1164,7 @@ namespace Tools.zhong
             // 
             this.txtPerColNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtPerColNum.Enabled = false;
-            this.txtPerColNum.Location = new System.Drawing.Point(606, 261);
+            this.txtPerColNum.Location = new System.Drawing.Point(147, 296);
             this.txtPerColNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPerColNum.Name = "txtPerColNum";
             this.txtPerColNum.Size = new System.Drawing.Size(40, 25);
@@ -1161,7 +1177,7 @@ namespace Tools.zhong
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(565, 265);
+            this.label3.Location = new System.Drawing.Point(104, 300);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 13;
@@ -1214,12 +1230,12 @@ namespace Tools.zhong
             this.txtOuput3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOuput3.ContextMenuStrip = this.contextMenuStrip2;
-            this.txtOuput3.Location = new System.Drawing.Point(5, 295);
+            this.txtOuput3.Location = new System.Drawing.Point(5, 327);
             this.txtOuput3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOuput3.Multiline = true;
             this.txtOuput3.Name = "txtOuput3";
             this.txtOuput3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOuput3.Size = new System.Drawing.Size(1069, 282);
+            this.txtOuput3.Size = new System.Drawing.Size(1069, 275);
             this.txtOuput3.TabIndex = 3;
             // 
             // contextMenuStrip2
@@ -1706,7 +1722,6 @@ namespace Tools.zhong
         private System.Windows.Forms.TextBox txtTableFilter;
         private System.Windows.Forms.TextBox txtDocxTitle;
         private System.Windows.Forms.Button btnLoadView;
-        private System.Windows.Forms.CheckedListBox cblTableLists;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ComboBox cbLikeType;
         private System.Windows.Forms.Label label11;
@@ -1743,6 +1758,8 @@ namespace Tools.zhong
         private System.Windows.Forms.ContextMenuStrip cmsDataGridView;
         private System.Windows.Forms.ToolStripMenuItem tsmReplace;
         private System.Windows.Forms.Button btnReCreate;
+        private System.Windows.Forms.Button btnPage;
+        private System.Windows.Forms.CheckedListBox cblTableLists;
     }
 }
 

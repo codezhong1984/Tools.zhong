@@ -34,6 +34,14 @@ namespace Tools.zhong
 
         private const string RECREATE_TEMPLATE = @"CREATE TABLE {#TABLE_NAME}{#DATE} AS SELECT * FROM {#TABLE_NAME};{#LINE_SPLIT}{#LINE_SPLIT}--NOTE:RECREATE TABLE SCRIPT{#LINE_SPLIT}{#LINE_SPLIT}INSERT INTO {#TABLE_NAME}{#LINE_SPLIT}({#COLUMNS}){#LINE_SPLIT}SELECT {#COLUMNS} {#LINE_SPLIT}FROM {#TABLE_NAME}{#DATE};";
 
+        private const string ORACLE11_PAGE_TEMPLATE = "SELECT * {#LINE_SPLIT}FROM (\tSELECT rnt.*,ROWNUM RN{#LINE_SPLIT}\t\tFROM (\tSELECT {#COLUMNS} {#LINE_SPLIT}\t\t\t\tFROM {#TABLE_NAME}{#LINE_SPLIT}\t\t\t\tORDER BY {#KEYPARAMS}) rnt{#LINE_SPLIT}\t\tWHERE ROWNUM <= 10){#LINE_SPLIT}WHERE RN >= 0;";
+
+        private const string ORACLE12_PAGE_TEMPLATE = "SELECT {#COLUMNS}{#LINE_SPLIT}FROM {#TABLE_NAME}{#LINE_SPLIT}ORDER BY {#KEYPARAMS}{#LINE_SPLIT}OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY";
+
+        private const string SQLSERVER_PAGE_TEMPLATE = "SELECT {#COLUMNS}{#LINE_SPLIT}FROM {#TABLE_NAME}{#LINE_SPLIT}ORDER BY {#KEYPARAMS}{#LINE_SPLIT}OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY";
+
+        private const string MYSQL_PAGE_TEMPLATE = "SELECT {#COLUMNS}{#LINE_SPLIT}FROM {#TABLE_NAME}{#LINE_SPLIT}ORDER BY {#KEYPARAMS}{#LINE_SPLIT}LIMIT 0,10";
+
         //SQL脚本参数前辍
         private string SQL_PARAM_PREFIX = "@";
 
@@ -643,6 +651,74 @@ namespace Tools.zhong
                 .Replace("{#DATE}", DateTime.Now.ToString("MMdd"))
                 .Replace("{#TABLE_NAME}", tableName)
                 .Replace("{#COLUMNS}", sbColumns.ToString())
+                .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
+
+            txtOuput3.Text = outText;
+        }
+
+        private void btnPage_Click(object sender, EventArgs e)
+        {
+            string sqlTemplate = string.Empty;
+            var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+            if (dbType == DataBaseType.MySQL)
+            {
+                sqlTemplate = MYSQL_PAGE_TEMPLATE;
+            }
+            else if (dbType == DataBaseType.SQLSERVER)
+            {
+                sqlTemplate = SQLSERVER_PAGE_TEMPLATE;
+            }
+            else if (dbType == DataBaseType.ORACLE)
+            {
+                string oraVer = ConfigHelper.GetValue("ORACLE_VERSION");
+                if (!string.IsNullOrWhiteSpace(oraVer) && oraVer.Length > 2 && Convert.ToInt32(oraVer.Substring(0, 2)) > 11)
+                {
+                    sqlTemplate = ORACLE12_PAGE_TEMPLATE;
+                }
+                else
+                {
+                    sqlTemplate = ORACLE11_PAGE_TEMPLATE;
+                }
+            }
+
+            txtOuput3.Text = "";
+            string inputText = txtInput3.Text.Trim();
+            if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
+            {
+                inputText = inputText.Replace(System.Environment.NewLine, ",");
+            }
+            string tableName = txtTableName3.Text.Trim();
+            string key = txtKey3.Text.Trim();
+            int rowsPerCount = int.Parse(txtPerColNum.Text.Trim());
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                MessageBox.Show("表名未填写！");
+                txtTableName3.Focus();
+                return;
+            }
+            StringBuilder sbColumns = new StringBuilder();
+            string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
+            for (int i = 0; i < inputVals.Length; i++)
+            {
+                var inputItem = inputVals[i].Replace(System.Environment.NewLine, "")
+                    .Replace(",", "")
+                    .Replace("，", "")
+                    .Replace(";", "")
+                    .Trim();
+                if (string.IsNullOrWhiteSpace(inputItem))
+                {
+                    continue;
+                }
+                var newLineFlag = (i + 1) % rowsPerCount == 0 && rowsPerCount != -1 && rowsPerCount != inputVals.Length;
+                sbColumns.Append(string.Concat(i == 0 ? " " : " ,",
+                    inputItem, newLineFlag ? System.Environment.NewLine : ""));
+            }
+
+            var outText = sqlTemplate
+                .Replace("{#TABLE_NAME}", tableName)
+                .Replace("{#COLUMNS}", sbColumns.ToString())
+                .Replace("{#KEYPARAMS}", txtKey3.Text.Trim())
                 .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
 
             txtOuput3.Text = outText;
@@ -1670,7 +1746,7 @@ namespace Tools.zhong
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
     }
 }
