@@ -170,6 +170,7 @@ namespace Tools.zhong
         {
             dt = new DataTable();
             dataGridView1.DataSource = dt;
+            lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
         }
 
         private void btnRemoveCol_Click(object sender, EventArgs e)
@@ -178,6 +179,7 @@ namespace Tools.zhong
             {
                 dt.Columns.RemoveAt(dt.Columns.Count - 1);
             }
+            lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -1342,6 +1344,7 @@ namespace Tools.zhong
             {
                 MessageBox.Show(ex.Message);
             }
+            lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
         }
 
         /// <summary>
@@ -1757,6 +1760,7 @@ namespace Tools.zhong
             {
                 MessageBox.Show(ex.Message);
             }
+            lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
         }
 
         private void tsmiDtS_Click(object sender, EventArgs e)
@@ -1836,6 +1840,15 @@ namespace Tools.zhong
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Rows == null)
+            {
+                return;
+            }
+            lblCurRow.Text = $"当前第 {e.RowIndex + 1} 行";
         }
     }
 }
