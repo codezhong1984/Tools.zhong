@@ -1633,17 +1633,17 @@ namespace Tools.zhong
             "yyyy/MM/dd",
             "yyyy-MM-dd",
             "hh24:mm:ss"});
-            this.cbToDateFormat.Location = new System.Drawing.Point(319, 24);
+            this.cbToDateFormat.Location = new System.Drawing.Point(319, 25);
             this.cbToDateFormat.Name = "cbToDateFormat";
             this.cbToDateFormat.Size = new System.Drawing.Size(161, 23);
             this.cbToDateFormat.TabIndex = 8;
             // 
             // btnMaxHour
             // 
-            this.btnMaxHour.Location = new System.Drawing.Point(267, 22);
+            this.btnMaxHour.Location = new System.Drawing.Point(263, 22);
             this.btnMaxHour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMaxHour.Name = "btnMaxHour";
-            this.btnMaxHour.Size = new System.Drawing.Size(46, 28);
+            this.btnMaxHour.Size = new System.Drawing.Size(54, 28);
             this.btnMaxHour.TabIndex = 5;
             this.btnMaxHour.Text = "24点";
             this.btnMaxHour.UseVisualStyleBackColor = true;
@@ -1651,7 +1651,7 @@ namespace Tools.zhong
             // 
             // btnMinHour
             // 
-            this.btnMinHour.Location = new System.Drawing.Point(217, 22);
+            this.btnMinHour.Location = new System.Drawing.Point(213, 22);
             this.btnMinHour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinHour.Name = "btnMinHour";
             this.btnMinHour.Size = new System.Drawing.Size(44, 28);
@@ -1674,7 +1674,7 @@ namespace Tools.zhong
             // 
             this.dtPicker.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtPicker.Location = new System.Drawing.Point(11, 22);
+            this.dtPicker.Location = new System.Drawing.Point(11, 24);
             this.dtPicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtPicker.Name = "dtPicker";
             this.dtPicker.Size = new System.Drawing.Size(200, 25);
