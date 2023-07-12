@@ -32,7 +32,7 @@ namespace Tools.zhong
 
         private const string DELETE_TEMPLATE = @"DELETE FROM {#TABLE_NAME} WHERE {#KEYPARAMS}";
 
-        private const string RECREATE_TEMPLATE = @"CREATE TABLE {#TABLE_NAME}{#DATE} AS SELECT * FROM {#TABLE_NAME};{#LINE_SPLIT}{#LINE_SPLIT}--NOTE:RECREATE TABLE SCRIPT{#LINE_SPLIT}{#LINE_SPLIT}INSERT INTO {#TABLE_NAME}{#LINE_SPLIT}({#COLUMNS}){#LINE_SPLIT}SELECT {#COLUMNS} {#LINE_SPLIT}FROM {#TABLE_NAME}{#DATE};";
+        private const string RECREATE_TEMPLATE = @"CREATE TABLE {#TABLE_NAME}{#DATE} AS SELECT * FROM {#TABLE_NAME};{#LINE_SPLIT}{#LINE_SPLIT}--NOTE:RECREATE TABLE SCRIPT{#LINE_SPLIT}{#LINE_SPLIT}INSERT INTO {#TABLE_NAME}{#LINE_SPLIT}({#COLUMNS}){#LINE_SPLIT}SELECT {#COLUMNS} {#LINE_SPLIT}FROM {#TABLE_NAME}{#DATE};{#LINE_SPLIT}{#LINE_SPLIT}---DROP TABLE {#TABLE_NAME}{#DATE};{#LINE_SPLIT}";
 
         private const string ORACLE11_PAGE_TEMPLATE = "SELECT * {#LINE_SPLIT}FROM (\tSELECT rnt.*,ROWNUM RN{#LINE_SPLIT}\t\tFROM (\tSELECT {#COLUMNS} {#LINE_SPLIT}\t\t\t\tFROM {#TABLE_NAME}{#LINE_SPLIT}\t\t\t\tORDER BY {#KEYPARAMS}) rnt{#LINE_SPLIT}\t\tWHERE ROWNUM <= 10){#LINE_SPLIT}WHERE RN >= 0;";
 
@@ -154,6 +154,8 @@ namespace Tools.zhong
 
             cbSplitChar.SelectedIndex = 0;
             cbSplitChar_SelectedIndexChanged(null, null);
+
+            cbToDateFormat.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -811,7 +813,7 @@ namespace Tools.zhong
             if (txtOuput3.SelectedText != "")
             {
                 Clipboard.SetDataObject(txtOuput3.SelectedText);
-                MessageBox.Show("复制成功");
+                //MessageBox.Show("复制成功");
             }
         }
 
@@ -1616,8 +1618,13 @@ namespace Tools.zhong
 
         private void btnOrlToDate_Click(object sender, EventArgs e)
         {
-            string templ = "to_date('{0}','yyyy-mm-dd hh24:mi:ss')";
-            tbToDateOutput.Text = string.Format(templ, dtPicker.Text);
+            if (cbToDateFormat.Text == "")
+            {
+                return;
+            }
+            string templ = "to_date('{0}','{1}')";
+            string dval = dtPicker.Value.ToString(cbToDateFormat.Text.Replace("hh24", "HH"));
+            tbToDateOutput.Text = string.Format(templ, dval, cbToDateFormat.Text);
         }
 
         private void btnMinHour_Click(object sender, EventArgs e)

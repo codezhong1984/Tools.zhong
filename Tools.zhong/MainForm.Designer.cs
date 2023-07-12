@@ -154,6 +154,7 @@ namespace Tools.zhong
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.cbToDateFormat = new System.Windows.Forms.ComboBox();
             this.btnMaxHour = new System.Windows.Forms.Button();
             this.btnMinHour = new System.Windows.Forms.Button();
             this.tbToDateOutput = new System.Windows.Forms.TextBox();
@@ -161,6 +162,7 @@ namespace Tools.zhong
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1125,6 +1127,7 @@ namespace Tools.zhong
             this.btnExportData.Size = new System.Drawing.Size(124, 31);
             this.btnExportData.TabIndex = 24;
             this.btnExportData.Text = "EXPORT DATA";
+            this.toolTip1.SetToolTip(this.btnExportData, "Input SQL in top left inputTextBox!");
             this.btnExportData.UseVisualStyleBackColor = true;
             this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click);
             // 
@@ -1184,7 +1187,7 @@ namespace Tools.zhong
             // 
             this.txtTableName3.FormattingEnabled = true;
             this.txtTableName3.Location = new System.Drawing.Point(264, 8);
-            this.txtTableName3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTableName3.Margin = new System.Windows.Forms.Padding(4);
             this.txtTableName3.Name = "txtTableName3";
             this.txtTableName3.Size = new System.Drawing.Size(185, 23);
             this.txtTableName3.TabIndex = 20;
@@ -1606,6 +1609,7 @@ namespace Tools.zhong
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.cbToDateFormat);
             this.tabPage6.Controls.Add(this.btnMaxHour);
             this.tabPage6.Controls.Add(this.btnMinHour);
             this.tabPage6.Controls.Add(this.tbToDateOutput);
@@ -1620,12 +1624,26 @@ namespace Tools.zhong
             this.tabPage6.Text = "其他辅助工具";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // cbToDateFormat
+            // 
+            this.cbToDateFormat.FormattingEnabled = true;
+            this.cbToDateFormat.Items.AddRange(new object[] {
+            "yyyy/MM/dd hh24:mm:ss",
+            "yyyy-MM-dd hh24:mm:ss",
+            "yyyy/MM/dd",
+            "yyyy-MM-dd",
+            "hh24:mm:ss"});
+            this.cbToDateFormat.Location = new System.Drawing.Point(319, 24);
+            this.cbToDateFormat.Name = "cbToDateFormat";
+            this.cbToDateFormat.Size = new System.Drawing.Size(161, 23);
+            this.cbToDateFormat.TabIndex = 8;
+            // 
             // btnMaxHour
             // 
-            this.btnMaxHour.Location = new System.Drawing.Point(293, 22);
+            this.btnMaxHour.Location = new System.Drawing.Point(267, 22);
             this.btnMaxHour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMaxHour.Name = "btnMaxHour";
-            this.btnMaxHour.Size = new System.Drawing.Size(69, 28);
+            this.btnMaxHour.Size = new System.Drawing.Size(46, 28);
             this.btnMaxHour.TabIndex = 5;
             this.btnMaxHour.Text = "24点";
             this.btnMaxHour.UseVisualStyleBackColor = true;
@@ -1636,7 +1654,7 @@ namespace Tools.zhong
             this.btnMinHour.Location = new System.Drawing.Point(217, 22);
             this.btnMinHour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinHour.Name = "btnMinHour";
-            this.btnMinHour.Size = new System.Drawing.Size(69, 28);
+            this.btnMinHour.Size = new System.Drawing.Size(44, 28);
             this.btnMinHour.TabIndex = 4;
             this.btnMinHour.Text = "0点";
             this.btnMinHour.UseVisualStyleBackColor = true;
@@ -1644,10 +1662,12 @@ namespace Tools.zhong
             // 
             // tbToDateOutput
             // 
-            this.tbToDateOutput.Location = new System.Drawing.Point(535, 22);
+            this.tbToDateOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbToDateOutput.Location = new System.Drawing.Point(616, 23);
             this.tbToDateOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbToDateOutput.Name = "tbToDateOutput";
-            this.tbToDateOutput.Size = new System.Drawing.Size(533, 25);
+            this.tbToDateOutput.Size = new System.Drawing.Size(441, 25);
             this.tbToDateOutput.TabIndex = 3;
             // 
             // dtPicker
@@ -1662,12 +1682,12 @@ namespace Tools.zhong
             // 
             // btnOrlToDate
             // 
-            this.btnOrlToDate.Location = new System.Drawing.Point(369, 22);
+            this.btnOrlToDate.Location = new System.Drawing.Point(486, 22);
             this.btnOrlToDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOrlToDate.Name = "btnOrlToDate";
-            this.btnOrlToDate.Size = new System.Drawing.Size(160, 28);
+            this.btnOrlToDate.Size = new System.Drawing.Size(124, 28);
             this.btnOrlToDate.TabIndex = 0;
-            this.btnOrlToDate.Text = "Oracle SQL ToDate";
+            this.btnOrlToDate.Text = "Oracle ToDate";
             this.btnOrlToDate.UseVisualStyleBackColor = true;
             this.btnOrlToDate.Click += new System.EventHandler(this.btnOrlToDate_Click);
             // 
@@ -1675,6 +1695,11 @@ namespace Tools.zhong
             // 
             this.saveFileDialog1.Filter = "All files(*.docx)|*.docx\";";
             this.saveFileDialog1.Title = "保存文件";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
             // MainForm
             // 
@@ -1848,6 +1873,8 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmBlankToUpper;
         private System.Windows.Forms.Label lblCurRow;
         private System.Windows.Forms.Label lblTotalRows;
+        private System.Windows.Forms.ComboBox cbToDateFormat;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
