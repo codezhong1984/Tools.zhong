@@ -35,69 +35,72 @@ namespace Tools.zhong
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            BackgroundWorker bw = sender as BackgroundWorker;
-            int[] args = (int[])e.Argument;
-            int pageSize = args[0];
-            int totalCount = args[1];
-            int doneCount = args[2];
+            try
+            {
+                BackgroundWorker bw = sender as BackgroundWorker;
+                int[] args = (int[])e.Argument;
+                int pageSize = args[0];
+                int totalCount = args[1];
+                int doneCount = args[2];
 
-            string sqlTemplate = @"select * 
+                string sqlTemplate = @"select * 
                         from(select a.*, rownum rindex from {0} a #FILTER order by 1) t
                         where t.rindex > {1} and t.rindex <= {2}";
 
-            sqlTemplate = sqlTemplate.Replace("#FILTER", !string.IsNullOrWhiteSpace(txtFilter.Text) ? "where " + txtFilter.Text : "");
+                sqlTemplate = sqlTemplate.Replace("#FILTER", !string.IsNullOrWhiteSpace(txtFilter.Text) ? "where " + txtFilter.Text : "");
 
-
-            while (doneCount <= totalCount)
-            {
-                if (bw.CancellationPending)
+                while (doneCount <= totalCount)
                 {
-                    e.Cancel = true;
-                    return;
-                }
-                //查询
-                var sql = string.Format(sqlTemplate, tbSrcTableName.Text, doneCount, pageSize + doneCount);
-
-                var dbType = _DataBaseType;
-                if (dbType == DataBaseType.ORACLE)
-                {
-                    //查询数据
-                    DataTable dt = OracleHelper.GetDataTable(_SourceConnectionString, sql);
-                    if (dt != null && dt.Rows.Count > 0)
+                    if (bw.CancellationPending)
                     {
-                        dt.Columns.Remove("rindex");
-                        //导入数据
-                        OracleHelper.BatchInsertDataTable(_DescConnectionString, tbDescTableName.Text.Trim(), dt, 10 * 60);
+                        e.Cancel = true;
+                        return;
                     }
-                }
-                else if (dbType == DataBaseType.MySQL)
-                {
-                    //查询数据
-                    DataTable dt = MySQLHelper.GetDataTable(_SourceConnectionString, sql);
-                    if (dt != null && dt.Rows.Count > 0)
+                    //查询
+                    var sql = string.Format(sqlTemplate, tbSrcTableName.Text, doneCount, pageSize + doneCount);
+
+                    var dbType = _DataBaseType;
+                    if (dbType == DataBaseType.ORACLE)
                     {
-                        dt.Columns.Remove("rindex");
-                        //导入数据
-                        MySQLHelper.BatchInsertDataTable(_DescConnectionString, tbDescTableName.Text.Trim(), dt);
+                        //查询数据
+                        DataTable dt = OracleHelper.GetDataTable(_SourceConnectionString, sql);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            dt.Columns.Remove("rindex");
+                            //导入数据
+                            OracleHelper.BatchInsertDataTable(_DescConnectionString, tbDescTableName.Text.Trim(), dt, 10 * 60);
+                        }
                     }
-                }
-                else if (dbType == DataBaseType.SQLSERVER)
-                {
-                    //查询数据
-                    DataTable dt = SQLHelper.GetDataTable(_SourceConnectionString, sql);
-                    if (dt != null && dt.Rows.Count > 0)
+                    else if (dbType == DataBaseType.MySQL)
                     {
-                        dt.Columns.Remove("rindex");
-                        //导入数据
-                        SQLHelper.BatchInsertDataTable(_DescConnectionString, tbDescTableName.Text.Trim(), dt, 10 * 60);
+                        //查询数据
+                        DataTable dt = MySQLHelper.GetDataTable(_SourceConnectionString, sql);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            dt.Columns.Remove("rindex");
+                            //导入数据
+                            MySQLHelper.BatchInsertDataTable(_DescConnectionString, tbDescTableName.Text.Trim(), dt);
+                        }
                     }
+                    else if (dbType == DataBaseType.SQLSERVER)
+                    {
+                        //查询数据
+                        DataTable dt = SQLHelper.GetDataTable(_SourceConnectionString, sql);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            dt.Columns.Remove("rindex");
+                            //导入数据
+                            SQLHelper.BatchInsertDataTable(_DescConnectionString, tbDescTableName.Text.Trim(), dt, 10 * 60);
+                        }
+                    }
+                    doneCount += pageSize;
+                    bw.ReportProgress(doneCount);
                 }
-
-
-
-                doneCount += pageSize;
-                bw.ReportProgress(doneCount);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message+$" 详细信息：{ex.StackTrace}");
+            }          
 
         }
 

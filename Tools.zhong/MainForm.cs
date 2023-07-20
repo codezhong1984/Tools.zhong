@@ -156,6 +156,7 @@ namespace Tools.zhong
             cbSplitChar_SelectedIndexChanged(null, null);
 
             cbToDateFormat.SelectedIndex = 0;
+            cbToolFormat.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1862,6 +1863,38 @@ namespace Tools.zhong
         {
             DBTransferDataForm frm = new DBTransferDataForm();
             frm.Show();
+        }
+
+        private void btnToolConvertTo_Click(object sender, EventArgs e)
+        {
+            if (cbToolFormat.Text == "NumberFormat")
+            {
+                double d = 0.0;
+                if (double.TryParse(txtToolFormatInput.Text, out d))
+                {
+                    txtToolFormatOutput.Text = d.ToString(txtToolFormat.Text.Trim());
+                }
+                else
+                {
+                    txtToolFormatOutput.Text = "Format Faild.";
+                }
+            }
+            else if (cbToolFormat.Text == "DateFormat")
+            {
+                DateTime d = DateTime.Now;
+                if (DateTime.TryParse(txtToolFormatInput.Text, out d))
+                {
+                    txtToolFormatOutput.Text = d.ToString(txtToolFormat.Text.Trim());
+                }
+                else
+                {
+                    txtToolFormatOutput.Text = "Format Faild.";
+                }
+            }
+            else
+            {
+                txtToolFormatOutput.Text = string.Format(txtToolFormat.Text.Trim(), txtToolFormatInput.Text.Trim());
+            }
         }
     }
 }

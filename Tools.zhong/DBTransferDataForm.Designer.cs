@@ -388,6 +388,7 @@ namespace Tools.zhong
             this.Name = "DBTransferDataForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "数据库导入工具";
             this.Load += new System.EventHandler(this.DBTransferDataForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tbPerRows)).EndInit();
             this.ResumeLayout(false);
