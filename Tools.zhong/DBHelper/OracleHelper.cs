@@ -469,5 +469,71 @@ namespace DBHepler
             }
         }
         #endregion
+
+        public static object GetSingle(string connectionString, string cmdText, params Oracle.ManagedDataAccess.Client.OracleParameter[] commandParameters)
+        {
+            using (var conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = cmdText;
+                    cmd.Parameters.Clear();
+                    return  cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public static DataTable GetDataTable(string connectionString, string cmdText, params Oracle.ManagedDataAccess.Client.OracleParameter[] commandParameters)
+        {
+            using (var conn = new OracleConnection(connectionString))
+            {
+                using (OracleCommand cmd = conn.CreateCommand())
+                {
+                    DataTable table = null;
+                    cmd.CommandText = cmdText;
+                    OracleDataAdapter adapter = new OracleDataAdapter();
+                    adapter.TableMappings.Add("", "");
+                    adapter.SelectCommand = cmd;
+                    table = new DataTable();
+                    adapter.Fill(table);
+                    cmd.Parameters.Clear();
+                    return table;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 使用BulkCopy来批量添加数据
+        /// </summary>
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="targetTableName">目标数据库的数据表名称</param>
+        /// <param name="batchSize">每个批处理中的行数。 在每个批处理结束时，批处理中的行将发送到服务器，默认全部提交。</param>
+        /// <param name="timeout"> 超时之前可用于完成操作的秒数。</param>
+        public static void BatchInsertDataTable(string connectionString, string targetTableName, DataTable dtData, int? timeout = null, int? batchSize = null)
+        {
+            using (var conn = new Oracle.ManagedDataAccess.Client.OracleConnection(connectionString))
+            {
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
+                using (Oracle.ManagedDataAccess.Client.OracleBulkCopy bulkCopy = new Oracle.ManagedDataAccess.Client.OracleBulkCopy(conn))
+                {
+                    bulkCopy.BulkCopyOptions = Oracle.ManagedDataAccess.Client.OracleBulkCopyOptions.UseInternalTransaction;
+                    bulkCopy.DestinationTableName = targetTableName;
+
+                    if (timeout.HasValue)
+                    {
+                        bulkCopy.BulkCopyTimeout = timeout.Value;
+                    }
+                    if (batchSize.HasValue)
+                    {
+                        bulkCopy.BatchSize = batchSize.Value;
+                    }
+                    bulkCopy.WriteToServer(dtData);
+                }
+            };
+        }
     }
 }

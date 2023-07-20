@@ -432,5 +432,71 @@ namespace DBHepler
                     cmd.Parameters.Add(parm);
             }
         }
+
+
+        public static object GetSingle(string connectionString, string cmdText, params SqlParameter[] commandParameters)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = cmdText;
+                    cmd.Parameters.Clear();
+                    return cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public static DataTable GetDataTable(string connectionString, string cmdText, params SqlParameter[] commandParameters)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    DataTable table = null;
+                    cmd.CommandText = cmdText;
+                    var adapter = new SqlDataAdapter();
+                    adapter.TableMappings.Add("", "");
+                    adapter.SelectCommand = cmd;
+                    table = new DataTable();
+                    adapter.Fill(table);
+                    cmd.Parameters.Clear();
+                    return table;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 使用BulkCopy来批量添加数据
+        /// </summary>
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="targetTableName">目标数据库的数据表名称</param>
+        /// <param name="batchSize">每个批处理中的行数。 在每个批处理结束时，批处理中的行将发送到服务器，默认全部提交。</param>
+        /// <param name="timeout"> 超时之前可用于完成操作的秒数。</param>
+        public static void BatchInsertDataTable(string connectionString, string targetTableName, DataTable dtData, int? timeout = null, int? batchSize = null)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
+                using (var bulkCopy = new SqlBulkCopy(conn))
+                {
+                    bulkCopy.DestinationTableName = targetTableName;
+
+                    if (timeout.HasValue)
+                    {
+                        bulkCopy.BulkCopyTimeout = timeout.Value;
+                    }
+                    if (batchSize.HasValue)
+                    {
+                        bulkCopy.BatchSize = batchSize.Value;
+                    }
+                    bulkCopy.WriteToServer(dtData);
+                }
+            };
+        }
     }
 }

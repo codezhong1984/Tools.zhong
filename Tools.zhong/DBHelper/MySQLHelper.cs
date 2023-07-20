@@ -4,6 +4,8 @@ using System.Data;
 using System.Collections;
 using System.Configuration;
 using System.Data.Common;
+using System.Text;
+using System.IO;
 
 namespace DBHepler
 {
@@ -455,6 +457,105 @@ namespace DBHepler
                 foreach (MySqlParameter parm in cmdParms)
                     cmd.Parameters.Add(parm);
             }
+        }
+
+        public static object GetSingle(string connectionString, string cmdText, params MySqlParameter[] commandParameters)
+        {
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                using (MySqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = cmdText;
+                    cmd.Parameters.Clear();
+                    return cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public static DataTable GetDataTable(string connectionString, string cmdText, params MySqlParameter[] commandParameters)
+        {
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = conn.CreateCommand())
+                {
+                    DataTable table = null;
+                    cmd.CommandText = cmdText;
+                    var adapter = new MySqlDataAdapter();
+                    adapter.TableMappings.Add("", "");
+                    adapter.SelectCommand = cmd;
+                    table = new DataTable();
+                    adapter.Fill(table);
+                    cmd.Parameters.Clear();
+                    return table;
+                }
+            }
+        }
+
+        ///大批量数据插入,返回成功插入行数
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="table">数据表</param>
+        /// <returns>返回成功插入行数</returns>
+        public static int BatchInsertDataTable(string connectionString, string targetTableName, DataTable dtData)
+        {
+            int insertCount = 0;
+            string tmpPath = Path.GetTempFileName();
+            string csv = DataTableToCsv(dtData);
+            File.WriteAllText(tmpPath, csv);
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    //tran = conn.BeginTransaction();
+                    MySqlBulkLoader bulk = new MySqlBulkLoader(conn)
+                    {
+                        FieldTerminator = ",",
+                        FieldQuotationCharacter = '"',
+                        EscapeCharacter = '"',
+                        LineTerminator = "\r\n",
+                        FileName = tmpPath,
+                        NumberOfLinesToSkip = 0,
+                        TableName = targetTableName,                       
+                    };
+                    insertCount = bulk.Load();
+                }
+                catch (MySqlException ex)
+                {
+                    throw ex;
+                }
+            }
+            File.Delete(tmpPath);
+            return insertCount;
+        }
+
+        ///将DataTable转换为标准的CSV
+        /// </summary>
+        /// <param name="table">数据表</param>
+        /// <returns>返回标准的CSV</returns>
+        private static string DataTableToCsv(DataTable table)
+        {
+            //以半角逗号（即,）作分隔符，列为空也要表达其存在。
+            //列内容如存在半角逗号（即,）则用半角引号（即""）将该字段值包含起来。
+            //列内容如存在半角引号（即"）则应替换成半角双引号（""）转义，并用半角引号（即""）将该字段值包含起来。
+            StringBuilder sb = new StringBuilder();
+            DataColumn colum;
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < table.Columns.Count; i++)
+                {
+                    colum = table.Columns[i];
+                    if (i != 0) sb.Append(",");
+                    if (colum.DataType == typeof(string) && row[colum].ToString().Contains(","))
+                    {
+                        sb.Append("\"" + row[colum].ToString().Replace("\"", "\"\"") + "\"");
+                    }
+                    else sb.Append(row[colum].ToString());
+                }
+                sb.AppendLine();
+            }
+            return sb.ToString();
         }
     }
 }

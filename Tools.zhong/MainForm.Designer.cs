@@ -95,6 +95,7 @@ namespace Tools.zhong
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnDBTransferData = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtInput3 = new System.Windows.Forms.TextBox();
             this.cblTableLists = new System.Windows.Forms.CheckedListBox();
@@ -851,6 +852,7 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnDBTransferData);
             this.tabPage3.Controls.Add(this.splitContainer1);
             this.tabPage3.Controls.Add(this.btnPage);
             this.tabPage3.Controls.Add(this.btnReCreate);
@@ -892,6 +894,20 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnDBTransferData
+            // 
+            this.btnDBTransferData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDBTransferData.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDBTransferData.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDBTransferData.Location = new System.Drawing.Point(888, 253);
+            this.btnDBTransferData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDBTransferData.Name = "btnDBTransferData";
+            this.btnDBTransferData.Size = new System.Drawing.Size(176, 31);
+            this.btnDBTransferData.TabIndex = 43;
+            this.btnDBTransferData.Text = "数据导入（库->库）";
+            this.btnDBTransferData.UseVisualStyleBackColor = true;
+            this.btnDBTransferData.Click += new System.EventHandler(this.btnDBTransferData_Click);
             // 
             // splitContainer1
             // 
@@ -982,7 +998,7 @@ namespace Tools.zhong
             this.cbHideNumberCol.AutoSize = true;
             this.cbHideNumberCol.Checked = true;
             this.cbHideNumberCol.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbHideNumberCol.Location = new System.Drawing.Point(922, 265);
+            this.cbHideNumberCol.Location = new System.Drawing.Point(966, 299);
             this.cbHideNumberCol.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbHideNumberCol.Name = "cbHideNumberCol";
             this.cbHideNumberCol.Size = new System.Drawing.Size(104, 19);
@@ -1628,11 +1644,12 @@ namespace Tools.zhong
             // 
             this.cbToDateFormat.FormattingEnabled = true;
             this.cbToDateFormat.Items.AddRange(new object[] {
-            "yyyy/MM/dd hh24:mm:ss",
-            "yyyy-MM-dd hh24:mm:ss",
+            "yyyy/MM/dd hh24:mi:ss",
+            "yyyy-MM-dd hh24:mi:ss",
             "yyyy/MM/dd",
             "yyyy-MM-dd",
-            "hh24:mm:ss"});
+            "hh24:mi:ss",
+            "hh24:mi"});
             this.cbToDateFormat.Location = new System.Drawing.Point(319, 25);
             this.cbToDateFormat.Name = "cbToDateFormat";
             this.cbToDateFormat.Size = new System.Drawing.Size(161, 23);
@@ -1875,6 +1892,7 @@ namespace Tools.zhong
         private System.Windows.Forms.Label lblTotalRows;
         private System.Windows.Forms.ComboBox cbToDateFormat;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnDBTransferData;
     }
 }
 

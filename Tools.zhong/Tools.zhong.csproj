@@ -13,6 +13,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +55,9 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\..\..\PanelTracking\PTS.APILog.Tool\packages\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -79,6 +84,12 @@
     <Compile Include="DBHelper\OracleHelper.cs" />
     <Compile Include="DBHelper\MySQLHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
+    <Compile Include="DBTransferDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBTransferDataForm.Designer.cs">
+      <DependentUpon>DBTransferDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\CodeGenerateOption.cs" />
     <Compile Include="Model\DataBaseType.cs" />
     <Compile Include="Model\EnumColumnModel.cs" />
@@ -145,6 +156,9 @@
     <Compile Include="UtilHelper\ObjectUtil.cs" />
     <Compile Include="UtilHelper\ReflectUtil.cs" />
     <Compile Include="UtilHelper\StringUtil.cs" />
+    <EmbeddedResource Include="DBTransferDataForm.resx">
+      <DependentUpon>DBTransferDataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OracleQueryHelperForm.resx">
       <DependentUpon>OracleQueryHelperForm.cs</DependentUpon>
     </EmbeddedResource>

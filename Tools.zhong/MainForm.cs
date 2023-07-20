@@ -1623,7 +1623,7 @@ namespace Tools.zhong
                 return;
             }
             string templ = "to_date('{0}','{1}')";
-            string dval = dtPicker.Value.ToString(cbToDateFormat.Text.Replace("hh24", "HH"));
+            string dval = dtPicker.Value.ToString(cbToDateFormat.Text.Replace("hh24", "HH").Replace("mi", "mm"));
             tbToDateOutput.Text = string.Format(templ, dval, cbToDateFormat.Text);
         }
 
@@ -1856,6 +1856,12 @@ namespace Tools.zhong
                 return;
             }
             lblCurRow.Text = $"当前第 {e.RowIndex + 1} 行";
+        }
+
+        private void btnDBTransferData_Click(object sender, EventArgs e)
+        {
+            DBTransferDataForm frm = new DBTransferDataForm();
+            frm.Show();
         }
     }
 }
