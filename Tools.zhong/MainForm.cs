@@ -1815,6 +1815,7 @@ namespace Tools.zhong
                 dt.Rows.Add(drNew);
             }
             dataGridView1.DataSource = dt;
+            lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
         }
 
         private void tsmReplace_Click(object sender, EventArgs e)
