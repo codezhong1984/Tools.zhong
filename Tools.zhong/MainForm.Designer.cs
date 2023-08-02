@@ -155,6 +155,11 @@ namespace Tools.zhong
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.cbToolFormat = new System.Windows.Forms.ComboBox();
+            this.txtToolFormatOutput = new System.Windows.Forms.TextBox();
+            this.btnToolConvertTo = new System.Windows.Forms.Button();
+            this.txtToolFormat = new System.Windows.Forms.TextBox();
+            this.txtToolFormatInput = new System.Windows.Forms.TextBox();
             this.cbToDateFormat = new System.Windows.Forms.ComboBox();
             this.btnMaxHour = new System.Windows.Forms.Button();
             this.btnMinHour = new System.Windows.Forms.Button();
@@ -164,11 +169,7 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtToolFormatInput = new System.Windows.Forms.TextBox();
-            this.txtToolFormat = new System.Windows.Forms.TextBox();
-            this.txtToolFormatOutput = new System.Windows.Forms.TextBox();
-            this.btnToolConvertTo = new System.Windows.Forms.Button();
-            this.cbToolFormat = new System.Windows.Forms.ComboBox();
+            this.tsmToCamel = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -530,6 +531,7 @@ namespace Tools.zhong
             this.tsmBlankToUpper,
             this.tsmLineToUpper,
             this.tsmUpperToLine,
+            this.tsmToCamel,
             this.toolStripSeparator9,
             this.tsmUndo,
             this.tsmRedo,
@@ -540,7 +542,7 @@ namespace Tools.zhong
             this.tsmToUpper,
             this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 706);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 758);
             // 
             // tsmKg2Dh
             // 
@@ -1650,6 +1652,56 @@ namespace Tools.zhong
             this.tabPage6.Text = "其他辅助工具";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // cbToolFormat
+            // 
+            this.cbToolFormat.FormattingEnabled = true;
+            this.cbToolFormat.Items.AddRange(new object[] {
+            "NumberFormat",
+            "DateFormat",
+            "StringFormat"});
+            this.cbToolFormat.Location = new System.Drawing.Point(213, 70);
+            this.cbToolFormat.Name = "cbToolFormat";
+            this.cbToolFormat.Size = new System.Drawing.Size(146, 23);
+            this.cbToolFormat.TabIndex = 14;
+            // 
+            // txtToolFormatOutput
+            // 
+            this.txtToolFormatOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtToolFormatOutput.Location = new System.Drawing.Point(616, 70);
+            this.txtToolFormatOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtToolFormatOutput.Name = "txtToolFormatOutput";
+            this.txtToolFormatOutput.Size = new System.Drawing.Size(441, 25);
+            this.txtToolFormatOutput.TabIndex = 12;
+            // 
+            // btnToolConvertTo
+            // 
+            this.btnToolConvertTo.Location = new System.Drawing.Point(486, 70);
+            this.btnToolConvertTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnToolConvertTo.Name = "btnToolConvertTo";
+            this.btnToolConvertTo.Size = new System.Drawing.Size(124, 28);
+            this.btnToolConvertTo.TabIndex = 11;
+            this.btnToolConvertTo.Text = "Format To";
+            this.btnToolConvertTo.UseVisualStyleBackColor = true;
+            this.btnToolConvertTo.Click += new System.EventHandler(this.btnToolConvertTo_Click);
+            // 
+            // txtToolFormat
+            // 
+            this.txtToolFormat.Location = new System.Drawing.Point(365, 70);
+            this.txtToolFormat.Name = "txtToolFormat";
+            this.txtToolFormat.Size = new System.Drawing.Size(115, 25);
+            this.txtToolFormat.TabIndex = 10;
+            this.txtToolFormat.Text = "#.##%";
+            this.txtToolFormat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtToolFormatInput
+            // 
+            this.txtToolFormatInput.Location = new System.Drawing.Point(11, 70);
+            this.txtToolFormatInput.Name = "txtToolFormatInput";
+            this.txtToolFormatInput.Size = new System.Drawing.Size(200, 25);
+            this.txtToolFormatInput.TabIndex = 9;
+            this.txtToolFormatInput.Text = "0.1535";
+            // 
             // cbToDateFormat
             // 
             this.cbToDateFormat.FormattingEnabled = true;
@@ -1728,55 +1780,12 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
-            // txtToolFormatInput
+            // tsmToCamel
             // 
-            this.txtToolFormatInput.Location = new System.Drawing.Point(11, 70);
-            this.txtToolFormatInput.Name = "txtToolFormatInput";
-            this.txtToolFormatInput.Size = new System.Drawing.Size(200, 25);
-            this.txtToolFormatInput.TabIndex = 9;
-            this.txtToolFormatInput.Text = "0.1535";
-            // 
-            // txtToolFormat
-            // 
-            this.txtToolFormat.Location = new System.Drawing.Point(365, 70);
-            this.txtToolFormat.Name = "txtToolFormat";
-            this.txtToolFormat.Size = new System.Drawing.Size(115, 25);
-            this.txtToolFormat.TabIndex = 10;
-            this.txtToolFormat.Text = "#.##%";
-            this.txtToolFormat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtToolFormatOutput
-            // 
-            this.txtToolFormatOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtToolFormatOutput.Location = new System.Drawing.Point(616, 70);
-            this.txtToolFormatOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtToolFormatOutput.Name = "txtToolFormatOutput";
-            this.txtToolFormatOutput.Size = new System.Drawing.Size(441, 25);
-            this.txtToolFormatOutput.TabIndex = 12;
-            // 
-            // btnToolConvertTo
-            // 
-            this.btnToolConvertTo.Location = new System.Drawing.Point(486, 70);
-            this.btnToolConvertTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnToolConvertTo.Name = "btnToolConvertTo";
-            this.btnToolConvertTo.Size = new System.Drawing.Size(124, 28);
-            this.btnToolConvertTo.TabIndex = 11;
-            this.btnToolConvertTo.Text = "Format To";
-            this.btnToolConvertTo.UseVisualStyleBackColor = true;
-            this.btnToolConvertTo.Click += new System.EventHandler(this.btnToolConvertTo_Click);
-            // 
-            // cbToolFormat
-            // 
-            this.cbToolFormat.FormattingEnabled = true;
-            this.cbToolFormat.Items.AddRange(new object[] {
-            "NumberFormat",
-            "DateFormat",
-            "StringFormat"});
-            this.cbToolFormat.Location = new System.Drawing.Point(213, 70);
-            this.cbToolFormat.Name = "cbToolFormat";
-            this.cbToolFormat.Size = new System.Drawing.Size(146, 23);
-            this.cbToolFormat.TabIndex = 14;
+            this.tsmToCamel.Name = "tsmToCamel";
+            this.tsmToCamel.Size = new System.Drawing.Size(243, 24);
+            this.tsmToCamel.Text = "ToCamel";
+            this.tsmToCamel.Click += new System.EventHandler(this.tsmToCamel_Click);
             // 
             // MainForm
             // 
@@ -1958,6 +1967,7 @@ namespace Tools.zhong
         private System.Windows.Forms.TextBox txtToolFormat;
         private System.Windows.Forms.TextBox txtToolFormatInput;
         private System.Windows.Forms.ComboBox cbToolFormat;
+        private System.Windows.Forms.ToolStripMenuItem tsmToCamel;
     }
 }
 
