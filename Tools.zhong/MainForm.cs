@@ -1312,18 +1312,45 @@ namespace Tools.zhong
         #region 加密解密
         private void btnEncode_Click(object sender, EventArgs e)
         {
-            txtOutput4.Text = cbEncodeType.SelectedIndex == 0
-                ? DESUtil.DESEncrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
-                : Base64Util.EncodeBase64(txtInput4.Text.Trim());
+            try
+            {
+                //DES  BASE64     MD5
+                if (cbEncodeType.Text == "DES")
+                {
+                    txtOutput4.Text = DESUtil.DESEncrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim());
+                }
+                else if (cbEncodeType.Text == "BASE64")
+                {
+                    txtOutput4.Text = Base64Util.EncodeBase64(txtInput4.Text.Trim());
+                }
+                else if (cbEncodeType.Text == "MD5")
+                {
+                    txtOutput4.Text = MD5Util.Encrypt(txtInput4.Text.Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnDecode_Click(object sender, EventArgs e)
         {
             try
             {
-                txtOutput4.Text = cbEncodeType.SelectedIndex == 0
-               ? DESUtil.DESDecrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim())
-               : Base64Util.DecodeBase64(txtInput4.Text.Trim());
+                //DES  BASE64     MD5
+                if (cbEncodeType.Text == "DES")
+                {
+                    txtOutput4.Text = DESUtil.DESDecrypt(txtInput4.Text.Trim(), txtKey4.Text.Trim());
+                }
+                else if (cbEncodeType.Text == "BASE64")
+                {
+                    txtOutput4.Text = Base64Util.DecodeBase64(txtInput4.Text.Trim());
+                }
+                else if (cbEncodeType.Text == "MD5")
+                {
+                    MessageBox.Show("MD5 does not support decode");
+                }
             }
             catch (Exception ex)
             {

@@ -79,6 +79,7 @@ namespace Tools.zhong
             this.tsmBlankToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmLineToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmUpperToLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmToCamel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmUndo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmRedo = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,7 +170,6 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tsmToCamel = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -542,7 +542,7 @@ namespace Tools.zhong
             this.tsmToUpper,
             this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 758);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 730);
             // 
             // tsmKg2Dh
             // 
@@ -718,6 +718,13 @@ namespace Tools.zhong
             this.tsmUpperToLine.Size = new System.Drawing.Size(243, 24);
             this.tsmUpperToLine.Text = "大写字母换横线";
             this.tsmUpperToLine.Click += new System.EventHandler(this.tsmUpperToLine_Click);
+            // 
+            // tsmToCamel
+            // 
+            this.tsmToCamel.Name = "tsmToCamel";
+            this.tsmToCamel.Size = new System.Drawing.Size(243, 24);
+            this.tsmToCamel.Text = "ToCamel";
+            this.tsmToCamel.Click += new System.EventHandler(this.tsmToCamel_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1417,7 +1424,8 @@ namespace Tools.zhong
             this.cbEncodeType.FormattingEnabled = true;
             this.cbEncodeType.Items.AddRange(new object[] {
             "DES",
-            "BASE64"});
+            "BASE64",
+            "MD5"});
             this.cbEncodeType.Location = new System.Drawing.Point(296, 188);
             this.cbEncodeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbEncodeType.Name = "cbEncodeType";
@@ -1779,13 +1787,6 @@ namespace Tools.zhong
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
-            // 
-            // tsmToCamel
-            // 
-            this.tsmToCamel.Name = "tsmToCamel";
-            this.tsmToCamel.Size = new System.Drawing.Size(243, 24);
-            this.tsmToCamel.Text = "ToCamel";
-            this.tsmToCamel.Click += new System.EventHandler(this.tsmToCamel_Click);
             // 
             // MainForm
             // 
