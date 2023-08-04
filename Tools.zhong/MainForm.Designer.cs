@@ -170,6 +170,7 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnClearInput = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -242,7 +243,6 @@ namespace Tools.zhong
             // 
             // lblCurRow
             // 
-            this.lblCurRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCurRow.AutoSize = true;
             this.lblCurRow.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lblCurRow.Location = new System.Drawing.Point(101, 276);
@@ -253,7 +253,6 @@ namespace Tools.zhong
             // 
             // lblTotalRows
             // 
-            this.lblTotalRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalRows.AutoSize = true;
             this.lblTotalRows.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lblTotalRows.Location = new System.Drawing.Point(12, 276);
@@ -1387,6 +1386,7 @@ namespace Tools.zhong
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btnClearInput);
             this.tabPage4.Controls.Add(this.txtInput4);
             this.tabPage4.Controls.Add(this.cbEncodeType);
             this.tabPage4.Controls.Add(this.label9);
@@ -1425,7 +1425,8 @@ namespace Tools.zhong
             this.cbEncodeType.Items.AddRange(new object[] {
             "DES",
             "BASE64",
-            "MD5"});
+            "MD5",
+            "URL"});
             this.cbEncodeType.Location = new System.Drawing.Point(296, 188);
             this.cbEncodeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbEncodeType.Name = "cbEncodeType";
@@ -1483,7 +1484,7 @@ namespace Tools.zhong
             this.btnDecode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDecode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDecode.ForeColor = System.Drawing.Color.Blue;
-            this.btnDecode.Location = new System.Drawing.Point(985, 184);
+            this.btnDecode.Location = new System.Drawing.Point(881, 189);
             this.btnDecode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDecode.Name = "btnDecode";
             this.btnDecode.Size = new System.Drawing.Size(75, 25);
@@ -1497,7 +1498,7 @@ namespace Tools.zhong
             this.btnEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEncode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEncode.ForeColor = System.Drawing.Color.Blue;
-            this.btnEncode.Location = new System.Drawing.Point(893, 186);
+            this.btnEncode.Location = new System.Drawing.Point(786, 189);
             this.btnEncode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEncode.Name = "btnEncode";
             this.btnEncode.Size = new System.Drawing.Size(75, 25);
@@ -1563,6 +1564,7 @@ namespace Tools.zhong
             // 
             // btnCopyToInput
             // 
+            this.btnCopyToInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopyToInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCopyToInput.ForeColor = System.Drawing.Color.Blue;
             this.btnCopyToInput.Location = new System.Drawing.Point(821, 5);
@@ -1576,6 +1578,7 @@ namespace Tools.zhong
             // 
             // btnOpenPath2
             // 
+            this.btnOpenPath2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenPath2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpenPath2.ForeColor = System.Drawing.Color.Blue;
             this.btnOpenPath2.Location = new System.Drawing.Point(564, 6);
@@ -1589,6 +1592,7 @@ namespace Tools.zhong
             // 
             // btnExportToFile2
             // 
+            this.btnExportToFile2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportToFile2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportToFile2.ForeColor = System.Drawing.Color.Blue;
             this.btnExportToFile2.Location = new System.Drawing.Point(703, 5);
@@ -1602,6 +1606,7 @@ namespace Tools.zhong
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Blue;
             this.button1.Location = new System.Drawing.Point(949, 5);
@@ -1788,6 +1793,20 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
+            // btnClearInput
+            // 
+            this.btnClearInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearInput.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnClearInput.ForeColor = System.Drawing.Color.Blue;
+            this.btnClearInput.Location = new System.Drawing.Point(976, 189);
+            this.btnClearInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnClearInput.Name = "btnClearInput";
+            this.btnClearInput.Size = new System.Drawing.Size(75, 25);
+            this.btnClearInput.TabIndex = 11;
+            this.btnClearInput.Text = "清空";
+            this.btnClearInput.UseVisualStyleBackColor = true;
+            this.btnClearInput.Click += new System.EventHandler(this.btnClearInput_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1969,6 +1988,7 @@ namespace Tools.zhong
         private System.Windows.Forms.TextBox txtToolFormatInput;
         private System.Windows.Forms.ComboBox cbToolFormat;
         private System.Windows.Forms.ToolStripMenuItem tsmToCamel;
+        private System.Windows.Forms.Button btnClearInput;
     }
 }
 

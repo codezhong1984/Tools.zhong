@@ -1327,6 +1327,18 @@ namespace Tools.zhong
                 {
                     txtOutput4.Text = MD5Util.Encrypt(txtInput4.Text.Trim());
                 }
+                else if (cbEncodeType.Text == "URL")
+                {
+                    string input = txtInput4.Text.Trim();
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        txtOutput4.Text = "";
+                        return;
+                    }
+                    string[] inputItems = input.SplitNoEmpty("/");
+                    inputItems = inputItems.Select(i => URLUtil.Encrypt(i)).ToArray();
+                    txtOutput4.Text = string.Join("/", inputItems);
+                }
             }
             catch (Exception ex)
             {
@@ -1350,6 +1362,10 @@ namespace Tools.zhong
                 else if (cbEncodeType.Text == "MD5")
                 {
                     MessageBox.Show("MD5 does not support decode");
+                }
+                else if (cbEncodeType.Text == "URL")
+                {
+                    txtOutput4.Text = URLUtil.Decrypt(txtInput4.Text.Trim());
                 }
             }
             catch (Exception ex)
@@ -1948,6 +1964,12 @@ namespace Tools.zhong
             {
                 txtToolFormatOutput.Text = string.Format(txtToolFormat.Text.Trim(), txtToolFormatInput.Text.Trim());
             }
+        }
+
+        private void btnClearInput_Click(object sender, EventArgs e)
+        {
+            txtInput4.Clear();
+            txtOutput4.Clear();
         }
     }
 }
