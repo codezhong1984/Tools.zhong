@@ -728,6 +728,36 @@ namespace Tools.zhong
 
             txtOuput3.Text = outText;
         }
+
+        private void btnSqlFields_Click(object sender, EventArgs e)
+        {
+            dt = new DataTable();
+            string tableName = txtTableName3.Text.Trim();
+            var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+            string dataBaseName = DbObjectHelper.GetDataBaseName(dbType);
+            List<TableColumnModel> list = null;
+            if (dbType == DataBaseType.ORACLE)
+            {
+                list = DbObjectHelper.GetColumnsForOracle(tableName);
+            }
+            else if (dbType == DataBaseType.SQLSERVER)
+            {
+                list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+            }
+            else if (dbType == DataBaseType.MySQL)
+            {
+                list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
+            }
+
+            if (list != null)
+            {
+                dt = list.ToDataTable();
+                dt.Columns.Remove("TableComment");
+            }
+
+            dataGridView1.DataSource = dt;
+            tabControl1.SelectedIndex = 0;
+        }
         #endregion
 
         private void txtPerColNum_TextChanged(object sender, EventArgs e)
@@ -1533,6 +1563,10 @@ namespace Tools.zhong
         /// </summary>
         private void btnCreateDicAllDB_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("确认要导出所有表到Word文档吗？", "系统提醒", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            {
+                return;
+            }
             try
             {
                 saveFileDialog1.Filter = "Word(*.docx)|*.docx";
