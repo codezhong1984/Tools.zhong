@@ -752,7 +752,10 @@ namespace Tools.zhong
             if (list != null)
             {
                 dt = list.ToDataTable();
-                dt.Columns.Remove("TableComment");
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dt.Columns.Remove("TableComment");
+                }
             }
 
             dataGridView1.DataSource = dt;
@@ -1424,7 +1427,7 @@ namespace Tools.zhong
             try
             {
                 var templ = txtTempl.Text.Trim();
-                var inputTexts = templ.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(i => i.Trim()).ToList();
                 foreach (var textItem in inputTexts)
                 {
