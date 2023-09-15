@@ -2008,5 +2008,30 @@ namespace Tools.zhong
             txtInput4.Clear();
             txtOutput4.Clear();
         }
+
+        /// <summary>
+        /// 根据模板生成文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOutputFiles_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //var diaFile = new FilesByTemplateForm("", "", "");
+                var diaFile = new FilesByTemplateForm("C_TnOwner_T", "TnOwner", "func");
+                if (diaFile.ShowDialog() == DialogResult.OK)
+                {
+                    var templModel = diaFile.FileTemplateModel;
+                    var generator = new FileTemplateGenerator(dt);
+                    generator.GenerFiles(templModel);
+                    MessageBox.Show("Successful!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
