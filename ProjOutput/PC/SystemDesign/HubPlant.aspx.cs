@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace PanelTracking.PC.SystemDesign
 {
-    public partial class Add%C% : System.Web.UI.Page
+    public partial class HubPlant : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +36,7 @@ namespace PanelTracking.PC.SystemDesign
                 InitPageData(Language);
             }
         }
+
         /// <summary>
         /// 初始化页面语言
         /// </summary>
@@ -44,12 +45,10 @@ namespace PanelTracking.PC.SystemDesign
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Language);
             if (Language != "ZH-CN")
             {
-                h3ViewHistory.InnerHtml = Resources.Client.%C%Configure;
-                requestinfo.InnerHtml = " <i class=\"myicon-apply1\"></i>Add";
-%LP%				
-	span$1.InnerHtml = Resources.Client.%C%_$1;
-%ELP%				
-                btnAdd.InnerHtml = "<i class=\"myicon-login1\"></i>" + Resources.Client.Save;
+                h3ViewHistory.InnerHtml = Resources.Client.HubPlant_Title;
+                //btnQuery.Value = Resources.Client.Query;
+                btnAdd.Value = Resources.Client.Create;
+                btnDel.Value = Resources.Client.Delete;
             }
         }
     }

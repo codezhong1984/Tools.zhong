@@ -10,11 +10,11 @@ namespace PanelTracking.Applications_Local.Models
     /// </summary>
     public class %C%Class
     {
-%LP%
+%SECTION%
         /// <summary>
-        /// 
-        /// </summary>
-        public $4 $1 { get; set; }
-%ELP%
+        /// %C%
+        /// </summary>	
+        public $5 $1 { get; set; }
+%END_SECTION%
     }
 }

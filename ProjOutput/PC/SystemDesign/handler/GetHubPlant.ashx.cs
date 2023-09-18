@@ -17,12 +17,12 @@ using System.Web.Script.Serialization;
 namespace PanelTracking.PC.SystemDesign.handler
 {
     /// <summary>
-    /// Get%C%的摘要说明
+    /// GetHubPlant的摘要说明
     /// </summary>
-    public class Get%C% : IHttpHandler
+    public class GetHubPlant : IHttpHandler
     {
 
-        %C%BLL bll = new %C%BLL();
+        HubPlantBLL bll = new HubPlantBLL();
         public void ProcessRequest(HttpContext context)
         {
             Comm.CultureInfo(context);//初始化语言
@@ -50,7 +50,7 @@ namespace PanelTracking.PC.SystemDesign.handler
         }
 
         /// <summary>
-        /// 获取%FDES%
+        /// 获取列表数据
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -68,9 +68,14 @@ namespace PanelTracking.PC.SystemDesign.handler
             strBuilder.Append(" <thead>");
             strBuilder.Append(" <tr>");
             strBuilder.AppendFormat("<th class=\"w80 clearpad\" style=\"height:40px;\"><label class=\"label-check\"><input type=\"checkbox\" id=\"checkAll\" name=\"checkAll\"/><span class=\"table-checkbox\"></span></label></th>");
-%LP%
-            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.%C%_$1);
-%ELP%
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_GID);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_COMPANY);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_PLANT);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_PLANT_NAME);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_SAP_CLIENT);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_NOTE);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_CREATE_DATE);
+            strBuilder.AppendFormat("<th>{0}</th>", Resources.Client.HubPlant_UPDATE_DATE);
             strBuilder.AppendFormat("<th class=\"w80 clearpad\">{0}</th>", Resources.Client.Operate);
             strBuilder.AppendFormat("</tr></thead>");
             strBuilder.Append("<tbody>");
@@ -92,10 +97,15 @@ namespace PanelTracking.PC.SystemDesign.handler
             {
                 strBuilder.Append("<tr>");
                 strBuilder.AppendFormat("<td class=\"clearpad \"><label class=\"label-check\"><input type=\"checkbox\"  name=\"select_item\"  id=\"select_item\" value=\"{0}\"/><span class=\"table-checkbox\"></span></label></td>", dt.Rows[i]["GID"]);
-%LP%
-                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["$1"]);
-%ELP%
-                strBuilder.AppendFormat("<td class=\"clearpad\"><button type=\"button\" class=\"btn btnQuery fl ml10\" id=\"btnUpd\" onclick=\"javascript:window.location.href='Update%C%.aspx?id={0}'\">{1}</button ></td>", dt.Rows[i]["GID"], Resources.Client.Edit);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["GID"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["COMPANY"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["PLANT"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["PLANT_NAME"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["SAP_CLIENT"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["NOTE"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["CREATE_DATE"]);
+                strBuilder.AppendFormat("<td>{0}</td>", dt.Rows[i]["UPDATE_DATE"]);
+                strBuilder.AppendFormat("<td class=\"clearpad\"><button type=\"button\" class=\"btn btnQuery fl ml10\" id=\"btnUpd\" onclick=\"javascript:window.location.href='UpdateHubPlant.aspx?id={0}'\">{1}</button ></td>", dt.Rows[i]["GID"], Resources.Client.Edit);
                 strBuilder.Append("</tr>");
             }
             strBuilder.Append("</tbody>");
@@ -106,7 +116,7 @@ namespace PanelTracking.PC.SystemDesign.handler
         }
 
         /// <summary>
-        /// 删除%FDES%
+        /// 删除数据
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -128,31 +138,41 @@ namespace PanelTracking.PC.SystemDesign.handler
             return msg;
         }
         // <summary>
-        // 新增%FDES%
+        // 新增
         // </summary>
         // <param name = "context" ></ param >
         // <returns></returns >
         public string Add(HttpContext context)
         {
             string msg = "";
-%LP%
-            string $1 = context.Request.Params["$1"].ToString();
-%ELP%
+            string GID = context.Request.Params["GID"].ToString();
+            string COMPANY = context.Request.Params["COMPANY"].ToString();
+            string PLANT = context.Request.Params["PLANT"].ToString();
+            string PLANT_NAME = context.Request.Params["PLANT_NAME"].ToString();
+            string SAP_CLIENT = context.Request.Params["SAP_CLIENT"].ToString();
+            string NOTE = context.Request.Params["NOTE"].ToString();
+            string CREATE_DATE = context.Request.Params["CREATE_DATE"].ToString();
+            string UPDATE_DATE = context.Request.Params["UPDATE_DATE"].ToString();
             string Gid = Guid.NewGuid().ToString();
             string GidNew = Gid.Replace("-", "");
             string createEmp = HttpUtility.UrlDecode(context.Request.Cookies["Login"].Values["LoginName"].ToString(), Encoding.GetEncoding("UTF-8"));
-            %C%Class %C% = new %C%Class
+            HubPlantClass HubPlant = new HubPlantClass
             {
 
                 GID = GidNew,
-%LP%
-                $1= $1,
-%ELP%
+                GID= GID,
+                COMPANY= COMPANY,
+                PLANT= PLANT,
+                PLANT_NAME= PLANT_NAME,
+                SAP_CLIENT= SAP_CLIENT,
+                NOTE= NOTE,
+                CREATE_DATE= CREATE_DATE,
+                UPDATE_DATE= UPDATE_DATE,
                 OWNER = owner,
                 CREATE_DATE = DateTime.Now,
                 CREATE_BY = createEmp,
             };
-            if (bll.Add(%C%, null))
+            if (bll.Add(HubPlant, null))
             {
                 msg = "Success";
             }
@@ -163,7 +183,7 @@ namespace PanelTracking.PC.SystemDesign.handler
             return msg;
         }
         /// <summary>
-        /// 获取%FDES%修改初始化数据
+        /// 修改时获取物流时间
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -171,30 +191,40 @@ namespace PanelTracking.PC.SystemDesign.handler
         {
             string id = context.Request.Params["id"].ToString();
             string language = context.Request.Cookies["Login"].Values["LoginLanguage"].ToString();
-            %C%Class %C% = bll.GetSingle(id);
+            HubPlantClass HubPlant = bll.GetSingle(id);
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-            return jsSerializer.Serialize(%C%);
+            return jsSerializer.Serialize(HubPlant);
         }
         /// <summary>
-        /// 修改%FDES%
+        /// 修改物流时间
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
         public string Update(HttpContext context)
         {
             string msg = "";
-%LP%
-            string $1 = context.Request.Params["$1"].ToString();
-%ELP%
+            string GID = context.Request.Params["GID"].ToString();
+            string COMPANY = context.Request.Params["COMPANY"].ToString();
+            string PLANT = context.Request.Params["PLANT"].ToString();
+            string PLANT_NAME = context.Request.Params["PLANT_NAME"].ToString();
+            string SAP_CLIENT = context.Request.Params["SAP_CLIENT"].ToString();
+            string NOTE = context.Request.Params["NOTE"].ToString();
+            string CREATE_DATE = context.Request.Params["CREATE_DATE"].ToString();
+            string UPDATE_DATE = context.Request.Params["UPDATE_DATE"].ToString();
             string Gid = context.Request.Params["gid"].ToString();
             string updateEmp = HttpUtility.UrlDecode(context.Request.Cookies["Login"].Values["LoginName"].ToString(), Encoding.GetEncoding("UTF-8"));
-            %C%Class %C% = new %C%Class
+            HubPlantClass HubPlant = new HubPlantClass
             {
-%LP%
-                $1= $1,
-%ELP%
+                GID= GID,
+                COMPANY= COMPANY,
+                PLANT= PLANT,
+                PLANT_NAME= PLANT_NAME,
+                SAP_CLIENT= SAP_CLIENT,
+                NOTE= NOTE,
+                CREATE_DATE= CREATE_DATE,
+                UPDATE_DATE= UPDATE_DATE,
             };
-            if (bll.Update(%C%, null))
+            if (bll.Update(HubPlant, null))
             {
                 msg = "Success";
             }

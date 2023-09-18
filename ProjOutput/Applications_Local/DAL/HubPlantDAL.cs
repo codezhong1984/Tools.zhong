@@ -10,22 +10,27 @@ using PanelTracking.Common;
 
 namespace PanelTracking.Applications_Local.DAL
 {
-    public class %C%DAL
+    public class HubPlantDAL
     {
         /// <summary>
         /// 添加
         /// </summary>
-        public bool Add(%C%Class model, OracleTransaction tran)
+        public bool Add(HubPlantClass model, OracleTransaction tran)
         {
             bool Add = false;
-            string sql = @"INSERT INTO %T%
-                        ( %LP%$1%SPT%,%ESPT%%ELP%)
+            string sql = @"INSERT INTO C_HUB_PLANT_T
+                        ( GID,COMPANY,PLANT,PLANT_NAME,SAP_CLIENT,NOTE,CREATE_DATE,UPDATE_DATE)
                         VALUES
-                        (%LP%:$1%SPT%,%ESPT%%ELP%)";
+                        (:GID,:COMPANY,:PLANT,:PLANT_NAME,:SAP_CLIENT,:NOTE,:CREATE_DATE,:UPDATE_DATE)";
             OracleParameter[] par = new OracleParameter[] {
-%LP%                
-				new OracleParameter(":$1",OracleType.$4,$2) { Value= Comm.ToDBValue(model.$1) },
-%ELP%
+                				new OracleParameter(":GID",OracleType.VARCHAR2,50) { Value= Comm.ToDBValue(model.GID) },
+                				new OracleParameter(":COMPANY",OracleType.VARCHAR2,25) { Value= Comm.ToDBValue(model.COMPANY) },
+                				new OracleParameter(":PLANT",OracleType.VARCHAR2,4) { Value= Comm.ToDBValue(model.PLANT) },
+                				new OracleParameter(":PLANT_NAME",OracleType.VARCHAR2,50) { Value= Comm.ToDBValue(model.PLANT_NAME) },
+                				new OracleParameter(":SAP_CLIENT",OracleType.VARCHAR2,20) { Value= Comm.ToDBValue(model.SAP_CLIENT) },
+                				new OracleParameter(":NOTE",OracleType.VARCHAR2,200) { Value= Comm.ToDBValue(model.NOTE) },
+                				new OracleParameter(":CREATE_DATE",OracleType.DATE,7) { Value= Comm.ToDBValue(model.CREATE_DATE) },
+                				new OracleParameter(":UPDATE_DATE",OracleType.DATE,7) { Value= Comm.ToDBValue(model.UPDATE_DATE) },
             };
             try
             {
@@ -46,7 +51,7 @@ namespace PanelTracking.Applications_Local.DAL
         public bool Delete(string gid, OracleTransaction tran)
         {
             bool resultFlag = false;
-            string sql = @"DELETE FROM %T% WHERE GID = :GID";
+            string sql = @"DELETE FROM C_HUB_PLANT_T WHERE GID = :GID";
             OracleParameter[] par = new OracleParameter[] {
 				new OracleParameter(":GID",OracleType.VarChar,50)
             };
@@ -66,16 +71,21 @@ namespace PanelTracking.Applications_Local.DAL
         /// <summary>
         /// 修改
         /// </summary>
-        public bool Update(%C%Class model, OracleTransaction tran)
+        public bool Update(HubPlantClass model, OracleTransaction tran)
         {
             bool Upd = false;
-            string sql = @"UPDATE %T%
-                        SET %LP%$1 = :$1%SPT%,%ESPT%%ELP%
+            string sql = @"UPDATE C_HUB_PLANT_T
+                        SET GID = :GID,COMPANY = :COMPANY,PLANT = :PLANT,PLANT_NAME = :PLANT_NAME,SAP_CLIENT = :SAP_CLIENT,NOTE = :NOTE,CREATE_DATE = :CREATE_DATE,UPDATE_DATE = :UPDATE_DATE
                         WHERE GID = :GID";
             OracleParameter[] par = new OracleParameter[] {
-%LP%                
-			new OracleParameter(":$1",OracleType.$4,$2) { Value= Comm.ToDBValue(model.$1) },
-%ELP%
+                			new OracleParameter(":GID",OracleType.VARCHAR2,50) { Value= Comm.ToDBValue(model.GID) },
+                			new OracleParameter(":COMPANY",OracleType.VARCHAR2,25) { Value= Comm.ToDBValue(model.COMPANY) },
+                			new OracleParameter(":PLANT",OracleType.VARCHAR2,4) { Value= Comm.ToDBValue(model.PLANT) },
+                			new OracleParameter(":PLANT_NAME",OracleType.VARCHAR2,50) { Value= Comm.ToDBValue(model.PLANT_NAME) },
+                			new OracleParameter(":SAP_CLIENT",OracleType.VARCHAR2,20) { Value= Comm.ToDBValue(model.SAP_CLIENT) },
+                			new OracleParameter(":NOTE",OracleType.VARCHAR2,200) { Value= Comm.ToDBValue(model.NOTE) },
+                			new OracleParameter(":CREATE_DATE",OracleType.DATE,7) { Value= Comm.ToDBValue(model.CREATE_DATE) },
+                			new OracleParameter(":UPDATE_DATE",OracleType.DATE,7) { Value= Comm.ToDBValue(model.UPDATE_DATE) },
             };
             try
             {
@@ -95,8 +105,8 @@ namespace PanelTracking.Applications_Local.DAL
         public DataTable GetDataTable(string sqlWhere, int PageIndex, int PageSize, ref int totalCount)
         {
             DataTable dt = null;
-            string sql = @"SELECT %LP%$1%SPT%,%ESPT%%ELP%
-                          FROM %T%";
+            string sql = @"SELECT GID,COMPANY,PLANT,PLANT_NAME,SAP_CLIENT,NOTE,CREATE_DATE,UPDATE_DATE
+                          FROM C_HUB_PLANT_T";
             try
             {
                 dt = OracleHelper.ExecuteDataTablePaging(PageIndex, PageSize, true, ref totalCount, null, sql, null);
@@ -112,25 +122,31 @@ namespace PanelTracking.Applications_Local.DAL
         /// <summary>
         /// 获取单条站点映射
         /// </summary>
-        public %C%Class GetSingle(string gid)
+        public HubPlantClass GetSingle(string gid)
         {
-            string sql = @"select %LP%$1%SPT%,%ESPT%%ELP% 
-                           from %T% a 
+            string sql = @"select GID,COMPANY,PLANT,PLANT_NAME,SAP_CLIENT,NOTE,CREATE_DATE,UPDATE_DATE 
+                           from C_HUB_PLANT_T a 
                            where a.gid=:GID";
 
             OracleParameter[] par = new OracleParameter[]{
                 new OracleParameter(":GID",OracleType.VarChar,50)
             };
             par[0].Value = gid;
-            %C%Class model = new %C%Class();
+            HubPlantClass model = new HubPlantClass();
             try
             {
                 var dt = OracleHelper.ExecuteDataTable(sql, par);
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     var dataRow = dt.Rows[0];
-                    %LP%model.$1 = dataRow.Field<$4>("$1");%SPT%
-					%ESPT%%ELP% 
+                    model.GID = dataRow.Field<VARCHAR2>("GID");
+					model.COMPANY = dataRow.Field<VARCHAR2>("COMPANY");
+					model.PLANT = dataRow.Field<VARCHAR2>("PLANT");
+					model.PLANT_NAME = dataRow.Field<VARCHAR2>("PLANT_NAME");
+					model.SAP_CLIENT = dataRow.Field<VARCHAR2>("SAP_CLIENT");
+					model.NOTE = dataRow.Field<VARCHAR2>("NOTE");
+					model.CREATE_DATE = dataRow.Field<DATE>("CREATE_DATE");
+					model.UPDATE_DATE = dataRow.Field<DATE>("UPDATE_DATE"); 
                 }
             }
             catch (Exception ex)

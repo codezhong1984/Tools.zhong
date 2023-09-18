@@ -32,14 +32,14 @@
                                         <i class="myicon-apply1"></i>新增</h4>
                                 </div>
                                 <div class="message-content clear">
-%LP%
+%SECTION%
                                     <div class="messagebox">
                                         <span class="message-title fl w160" runat="server" id="span$1">$3:</span>
                                         <div class="messagebox-input fl mr10">
                                             <input class="input-text" type="text" name="txt$1" id="txt$1" runat="server" value="" />
                                         </div>
                                     </div>
-%LP%									
+%END_SECTION%									
                                     <div class="messagebox disblock hauto wp45 clear mb5">
                                         <span class="message-title messagebox-textarea fl w160" runat="server" id="SpanID">&nbsp;</span>
                                         <div class="messagebox-input fl">

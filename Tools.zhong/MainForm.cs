@@ -756,6 +756,13 @@ namespace Tools.zhong
                 {
                     dt.Columns.Remove("TableComment");
                 }
+
+                dt.Columns.Add("CodeType");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dr["CodeType"] = DbObjectHelper.ChangeToCsharpType(dr.Field<string>("DataType"));
+                }
+                dt.Columns["CodeType"].SetOrdinal(5);
             }
 
             dataGridView1.DataSource = dt;
@@ -2018,8 +2025,16 @@ namespace Tools.zhong
         {
             try
             {
-                //var diaFile = new FilesByTemplateForm("", "", "");
-                var diaFile = new FilesByTemplateForm("C_TnOwner_T", "TnOwner", "func");
+                string tableName = string.Empty;
+                string className = string.Empty;
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    tableName = dt.Rows[0][0]?.ToString();
+                    var classNameSplit = tableName.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)
+                                 .Select(k => k.Substring(0, 1).ToUpper() + k.Substring(1).ToLower());
+                    className = string.Join("", classNameSplit);
+                }
+                var diaFile = new FilesByTemplateForm(tableName, className, "");
                 if (diaFile.ShowDialog() == DialogResult.OK)
                 {
                     var templModel = diaFile.FileTemplateModel;

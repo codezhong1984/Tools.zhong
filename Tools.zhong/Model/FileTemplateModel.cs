@@ -47,7 +47,7 @@ namespace Tools.zhong.Model
         /// <summary>
         /// 功能描述名指令：%FDES%
         /// </summary>
-        public const string FUNC_DESC_CODE = "%C%";
+        public const string FUNC_DESC_CODE = "%FDES%";
 
         /// <summary>
         /// 循环开始指令：%LP%
@@ -58,6 +58,31 @@ namespace Tools.zhong.Model
         /// 循环结束指令：%ELP%
         /// </summary>
         public const string LOOP_END_CODE = "%ELP%";
+
+        /// <summary>
+        /// 循环分隔符指令：%SLP%
+        /// </summary>
+        public const string SPT_START_CODE = "%SPT%";
+
+        /// <summary>
+        ///  循环分隔符结束指令：%ESLP%
+        /// </summary>
+        public const string SPT_END_CODE = "%ESLP%";
+
+        /// <summary>
+        /// 代码段
+        /// </summary>
+        public const string SECTION = "%SECTION%";
+
+        /// <summary>
+        /// 代码段结束
+        /// </summary>
+        public const string END_SECTION = "%END_SECTION%";
+
+        /// <summary>
+        /// 循环分隔符
+        /// </summary>
+        public string SPLIT_CODE { get; set; } = System.Environment.NewLine;
 
         #endregion
     }
