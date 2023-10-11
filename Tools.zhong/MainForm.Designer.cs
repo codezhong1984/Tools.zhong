@@ -32,6 +32,7 @@ namespace Tools.zhong
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnOutputFiles = new System.Windows.Forms.Button();
             this.lblCurRow = new System.Windows.Forms.Label();
             this.lblTotalRows = new System.Windows.Forms.Label();
             this.cbRegex = new System.Windows.Forms.ComboBox();
@@ -55,6 +56,7 @@ namespace Tools.zhong
             this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmToOneDHLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSplitInsertString = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,7 +174,6 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnOutputFiles = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -243,6 +244,21 @@ namespace Tools.zhong
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "代码生成主功能";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnOutputFiles
+            // 
+            this.btnOutputFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOutputFiles.AutoEllipsis = true;
+            this.btnOutputFiles.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOutputFiles.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnOutputFiles.Location = new System.Drawing.Point(934, 260);
+            this.btnOutputFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOutputFiles.Name = "btnOutputFiles";
+            this.btnOutputFiles.Size = new System.Drawing.Size(122, 29);
+            this.btnOutputFiles.TabIndex = 47;
+            this.btnOutputFiles.Text = "模板生成文件";
+            this.btnOutputFiles.UseVisualStyleBackColor = true;
+            this.btnOutputFiles.Click += new System.EventHandler(this.btnOutputFiles_Click);
             // 
             // lblCurRow
             // 
@@ -509,6 +525,7 @@ namespace Tools.zhong
             this.tsmKg2Dh,
             this.tsmDh2Hh,
             this.tsmToOneDHLine,
+            this.tsmSplitInsertString,
             this.toolStripSeparator2,
             this.tsmAddDyh,
             this.tsmAddSyh,
@@ -544,7 +561,7 @@ namespace Tools.zhong
             this.tsmToUpper,
             this.tsmToLower});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 730);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 782);
             // 
             // tsmKg2Dh
             // 
@@ -566,6 +583,13 @@ namespace Tools.zhong
             this.tsmToOneDHLine.Size = new System.Drawing.Size(243, 24);
             this.tsmToOneDHLine.Text = "逗号分隔合并行";
             this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
+            // 
+            // tsmSplitInsertString
+            // 
+            this.tsmSplitInsertString.Name = "tsmSplitInsertString";
+            this.tsmSplitInsertString.Size = new System.Drawing.Size(258, 24);
+            this.tsmSplitInsertString.Text = "添加字符串（指定分隔符）";
+            this.tsmSplitInsertString.Click += new System.EventHandler(this.tsmSplitInsertString_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1826,21 +1850,6 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
-            // btnOutputFiles
-            // 
-            this.btnOutputFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOutputFiles.AutoEllipsis = true;
-            this.btnOutputFiles.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOutputFiles.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnOutputFiles.Location = new System.Drawing.Point(934, 260);
-            this.btnOutputFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnOutputFiles.Name = "btnOutputFiles";
-            this.btnOutputFiles.Size = new System.Drawing.Size(122, 29);
-            this.btnOutputFiles.TabIndex = 47;
-            this.btnOutputFiles.Text = "模板生成文件";
-            this.btnOutputFiles.UseVisualStyleBackColor = true;
-            this.btnOutputFiles.Click += new System.EventHandler(this.btnOutputFiles_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -2025,6 +2034,7 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnClearInput;
         private System.Windows.Forms.Button btnSqlFields;
         private System.Windows.Forms.Button btnOutputFiles;
+        private System.Windows.Forms.ToolStripMenuItem tsmSplitInsertString;
     }
 }
 

@@ -196,11 +196,11 @@ namespace Tools.zhong
             // 
             // folderBrowserDialog1
             // 
-            this.folderBrowserDialog1.SelectedPath = "E:\\myProjects\\Tools.zhong\\ProjTempl";
+            this.folderBrowserDialog1.SelectedPath = "E:\\myProjects\\Tools.zhong(codeTempl)\\ProjTempl";
             // 
             // folderBrowserDialog2
             // 
-            this.folderBrowserDialog2.SelectedPath = "E:\\myProjects\\Tools.zhong\\ProjOutput";
+            this.folderBrowserDialog2.SelectedPath = "E:\\myProjects\\Tools.zhong(codeTempl)\\ProjOutput";
             // 
             // label5
             // 

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using Tools.zhong.Component;
 using Tools.zhong.Model;
 using Tools.zhong.UtilHelper;
 
@@ -182,9 +183,7 @@ namespace Tools.zhong
             txtSrcConn.Text = _SourceConnectionString;
             txtDescConn.Text = _DescConnectionString;
             //加载数据库类型
-            string[] dbTypes = Enum.GetNames(typeof(DataBaseType));
-            cbDBType.Items.Clear();
-            cbDBType.DataSource = dbTypes;
+            ComboBoxHelper.BindDBTypeComboBox(cbDBType);
         }
 
         private void btnSaveSrcConn_Click(object sender, EventArgs e)

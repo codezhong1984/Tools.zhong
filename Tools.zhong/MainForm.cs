@@ -17,6 +17,7 @@ using DBHepler;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Tools.zhong.Component;
 
 namespace Tools.zhong
 {
@@ -138,17 +139,11 @@ namespace Tools.zhong
             saveFileDialog1.InitialDirectory = string.IsNullOrWhiteSpace(saveDefaultPath) ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop) : saveDefaultPath;
             cbEncodeType.SelectedIndex = 0;
 
-            cbLikeType.Items.Add(new ListItem("LIKE", "LIKE"));
-            cbLikeType.Items.Add(new ListItem("NOT LIKE", "NOT LIKE"));
-            cbLikeType.Items.Add(new ListItem("=", "="));
-            cbLikeType.DisplayMember = "Text";
-            cbLikeType.ValueMember = "Value";
-            cbLikeType.SelectedIndex = 0;
-
+            //加载匹配符
+            ComboBoxHelper.BindLikeTypeComboBox(cbLikeType);
             //加载数据库类型
-            string[] dbTypes = Enum.GetNames(typeof(DataBaseType));
-            cbDBType.Items.Clear();
-            cbDBType.DataSource = dbTypes;
+            ComboBoxHelper.BindDBTypeComboBox(cbDBType);
+            ComboBoxHelper.BindSplitCharComboBox(cbSplitChar);
 
             dtPicker.Value = DateTime.Now.Date;
 
@@ -940,7 +935,7 @@ namespace Tools.zhong
 
         #endregion
 
-        #region 快捷替换操作
+        #region 下拉菜单操作事件
 
         private void tsmAddDyh_Click(object sender, EventArgs e)
         {
@@ -1156,7 +1151,7 @@ namespace Tools.zhong
             _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
             var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(i => i.EndsWith(",") ? i.Trim() : i.Trim() + ",");
+                .Select(i => i.Trim(',').Trim() + ",");
             txtTempl.Text = string.Join("", inputTexts);
         }
 
@@ -1324,6 +1319,81 @@ namespace Tools.zhong
             }
         }
 
+        private void tsmiDtS_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace("'", "\"");
+            txtTempl.Text = templ;
+        }
+
+        private void tsmiStD_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace("\"", "'");
+            txtTempl.Text = templ;
+        }
+
+        private void tsmReplace_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rpForm = new ReplaceForm();
+                if (rpForm.ShowDialog() == DialogResult.OK)
+                {
+                    var newText = rpForm.NewText;
+                    var oldText = rpForm.OldText;
+                    if (string.IsNullOrWhiteSpace(oldText))
+                    {
+                        return;
+                    }
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow drItem in dt.Rows)
+                        {
+                            for (int i = 0; i < dt.Columns.Count; i++)
+                            {
+                                var nVal = drItem[i]?.ToString().Replace(oldText, newText);
+                                drItem[i] = nVal;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        private void tsmSplitInsertString_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dialogForm = new InsertStringForm();
+                if (dialogForm.ShowDialog() == DialogResult.OK)
+                {
+                    var splitChar = dialogForm.SplitChar;
+                    var insertString = dialogForm.PrefixString;
+                    var position = dialogForm.Position;
+                    _LastText = txtTempl.Text;
+                    var templ = txtTempl.Text.Trim();
+                    var inputTexts = templ.Split(new string[] { splitChar }, StringSplitOptions.RemoveEmptyEntries);
+                    var resultList = new List<string>();
+                    foreach (var item in inputTexts)
+                    {
+                        var result = position == "B" ? string.Concat(insertString, item) : string.Concat(item, insertString);
+                        resultList.Add(result);
+                    }
+                    txtTempl.Text = string.Join(splitChar, resultList);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
@@ -1754,18 +1824,7 @@ namespace Tools.zhong
 
         private void cbSplitChar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (cbSplitChar.Text)
-            {
-                case "回车换行": _DefaultSplitChar = System.Environment.NewLine; break;
-                case "逗号": _DefaultSplitChar = ","; break;
-                case "空格": _DefaultSplitChar = " "; break;
-                case "Tab": _DefaultSplitChar = "\t"; break;
-                case "单引号": _DefaultSplitChar = "\'"; break;
-                case "双引号": _DefaultSplitChar = "\""; break;
-                case "冒号": _DefaultSplitChar = ":"; break;
-                default:
-                    break;
-            }
+            _DefaultSplitChar = cbSplitChar.SelectedValue.ToString();
         }
 
         /// <summary>
@@ -1883,22 +1942,6 @@ namespace Tools.zhong
             lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
         }
 
-        private void tsmiDtS_Click(object sender, EventArgs e)
-        {
-            _LastText = txtTempl.Text;
-            var templ = txtTempl.Text.Trim();
-            templ = templ.Replace("'", "\"");
-            txtTempl.Text = templ;
-        }
-
-        private void tsmiStD_Click(object sender, EventArgs e)
-        {
-            _LastText = txtTempl.Text;
-            var templ = txtTempl.Text.Trim();
-            templ = templ.Replace("\"", "'");
-            txtTempl.Text = templ;
-        }
-
         private void btnRegexImport_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(cbRegex.Text))
@@ -1928,39 +1971,6 @@ namespace Tools.zhong
             }
             dataGridView1.DataSource = dt;
             lblTotalRows.Text = $"共 {(dt != null ? dt.Rows.Count : 0)} 行 |";
-        }
-
-        private void tsmReplace_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var rpForm = new ReplaceForm();
-                if (rpForm.ShowDialog() == DialogResult.OK)
-                {
-                    var newText = rpForm.NewText;
-                    var oldText = rpForm.OldText;
-                    if (string.IsNullOrWhiteSpace(oldText))
-                    {
-                        return;
-                    }
-                    if (dt != null && dt.Rows.Count > 0)
-                    {
-                        foreach (DataRow drItem in dt.Rows)
-                        {
-                            for (int i = 0; i < dt.Columns.Count; i++)
-                            {
-                                var nVal = drItem[i]?.ToString().Replace(oldText, newText);
-                                drItem[i] = nVal;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -2048,5 +2058,6 @@ namespace Tools.zhong
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

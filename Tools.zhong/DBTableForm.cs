@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tools.zhong.Component;
 using Tools.zhong.Model;
 using Tools.zhong.UtilHelper;
 
@@ -215,18 +216,11 @@ namespace Tools.zhong
         {
             tbNameSpace.Text = ConfigHelper.GetValue("NameSpace");
             folderBrowserDialog1.SelectedPath = AppDomain.CurrentDomain.BaseDirectory;
-            //加载数据库类型
-            var dbTypes = Enum.GetNames(typeof(DataBaseType)).ToList<string>();
-            //dbTypes.Insert(0, "请选择");
-            cbDBType.DataSource = dbTypes;
-            cbDBType.SelectedIndex = 0;
 
-            cbLikeType.Items.Add(new ListItem("LIKE", "LIKE"));
-            cbLikeType.Items.Add(new ListItem("NOT LIKE", "NOT LIKE"));
-            cbLikeType.Items.Add(new ListItem("=", "="));
-            cbLikeType.DisplayMember = "Text";
-            cbLikeType.ValueMember = "Value";
-            cbLikeType.SelectedIndex = 0;
+            //加载匹配符
+            ComboBoxHelper.BindLikeTypeComboBox(cbLikeType);
+            //加载数据库类型
+            ComboBoxHelper.BindDBTypeComboBox(cbDBType);
 
             tbFilter.Text = FilterText;
             cbLikeType.Text = LikeType;
