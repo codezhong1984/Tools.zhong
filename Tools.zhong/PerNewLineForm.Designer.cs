@@ -110,10 +110,11 @@ namespace Tools.zhong
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PerNewLineForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "PerNewLineForm";
+            this.Text = "定制化换行";
             this.ResumeLayout(false);
             this.PerformLayout();
 

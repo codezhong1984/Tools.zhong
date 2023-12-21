@@ -66,6 +66,7 @@ namespace Tools.zhong
             // 
             // cbSplitChar
             // 
+            this.cbSplitChar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSplitChar.FormattingEnabled = true;
             this.cbSplitChar.Items.AddRange(new object[] {
             ",",
@@ -89,6 +90,7 @@ namespace Tools.zhong
             // 
             // cbBeforeOrAfter
             // 
+            this.cbBeforeOrAfter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBeforeOrAfter.FormattingEnabled = true;
             this.cbBeforeOrAfter.Location = new System.Drawing.Point(70, 64);
             this.cbBeforeOrAfter.Name = "cbBeforeOrAfter";
@@ -122,6 +124,7 @@ namespace Tools.zhong
             this.MinimizeBox = false;
             this.Name = "InsertStringForm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "设置按分隔符添加字符串";
             this.Load += new System.EventHandler(this.InsertStringForm_Load);

@@ -98,7 +98,7 @@ namespace Tools.zhong
 
         private void btnOutput_Click(object sender, EventArgs e)
         {
-            var templ = txtTempl.Text.Trim();
+            var templ = txtTempl.Text;
             StringBuilder sbOutput = new StringBuilder();
             foreach (DataRow item in dt.Rows)
             {
@@ -1062,7 +1062,7 @@ namespace Tools.zhong
             var templ = txtTempl.Text.Trim();
             templ = templ.Replace(System.Environment.NewLine, "");
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(i => i.Trim());
+                .Select(i => i);
             txtTempl.Text = string.Join(",", inputTexts);
             //tabControl1.SelectedIndex = 1;
         }

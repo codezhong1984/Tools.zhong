@@ -179,6 +179,7 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -527,6 +528,9 @@ namespace Tools.zhong
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmReplaceLine,
+            this.tsmTrim,
+            this.toolStripSeparator11,
             this.tsmKg2Dh,
             this.tsmDh2Hh,
             this.toolStripSeparator10,
@@ -546,12 +550,10 @@ namespace Tools.zhong
             this.tsmDelDyh,
             this.tsmDelSyh,
             this.toolStripSeparator3,
-            this.tsmReplaceLine,
             this.tsmAddComma,
             this.tsmDelComma,
             this.toolStripSeparator5,
             this.tsmCustomLine,
-            this.tsmTrim,
             this.toolStripSeparator7,
             this.tsmBlankToUpper,
             this.tsmLineToUpper,
@@ -571,7 +573,7 @@ namespace Tools.zhong
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
             this.contextMenuStrip1.ShowItemToolTips = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 760);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 794);
             // 
             // tsmKg2Dh
             // 
@@ -698,7 +700,7 @@ namespace Tools.zhong
             // 
             this.tsmReplaceLine.Name = "tsmReplaceLine";
             this.tsmReplaceLine.Size = new System.Drawing.Size(233, 24);
-            this.tsmReplaceLine.Text = "去除回车换行";
+            this.tsmReplaceLine.Text = "删除回车换行";
             this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
             // 
             // tsmAddComma
@@ -731,7 +733,7 @@ namespace Tools.zhong
             // 
             this.tsmTrim.Name = "tsmTrim";
             this.tsmTrim.Size = new System.Drawing.Size(233, 24);
-            this.tsmTrim.Text = "去除首尾空格";
+            this.tsmTrim.Text = "删除首尾空格";
             this.tsmTrim.Click += new System.EventHandler(this.tsmTrim_Click);
             // 
             // toolStripSeparator7
@@ -1912,6 +1914,11 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -2102,6 +2109,7 @@ namespace Tools.zhong
         private System.Windows.Forms.Label lblOtherMsg;
         private System.Windows.Forms.Button btnNovelTool;
         private System.Windows.Forms.Button btnFtpTool;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
     }
 }
 
