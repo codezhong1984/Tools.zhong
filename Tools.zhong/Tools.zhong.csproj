@@ -104,6 +104,7 @@
     <Compile Include="FilesByTemplateForm.Designer.cs">
       <DependentUpon>FilesByTemplateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AppConfigModel.cs" />
     <Compile Include="Model\FTPFileModel.cs" />
     <Compile Include="SFTPToolForm.cs">
       <SubType>Form</SubType>
@@ -243,6 +244,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="ParamConfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -45,7 +45,6 @@ namespace Tools.zhong
             this.label5 = new System.Windows.Forms.Label();
             this.btnDownLoad = new System.Windows.Forms.Button();
             this.btnTestConnect = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cbFTPType = new System.Windows.Forms.ComboBox();
@@ -53,10 +52,11 @@ namespace Tools.zhong
             this.lblResult = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +77,7 @@ namespace Tools.zhong
             this.btnUpload.BackColor = System.Drawing.SystemColors.Control;
             this.btnUpload.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUpload.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnUpload.Location = new System.Drawing.Point(275, 288);
+            this.btnUpload.Location = new System.Drawing.Point(282, 288);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(91, 27);
             this.btnUpload.TabIndex = 2;
@@ -91,7 +91,7 @@ namespace Tools.zhong
             this.btnView.BackColor = System.Drawing.SystemColors.Control;
             this.btnView.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnView.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnView.Location = new System.Drawing.Point(160, 288);
+            this.btnView.Location = new System.Drawing.Point(167, 288);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(91, 27);
             this.btnView.TabIndex = 3;
@@ -105,7 +105,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHost.Location = new System.Drawing.Point(116, 53);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(624, 25);
+            this.txtHost.Size = new System.Drawing.Size(638, 25);
             this.txtHost.TabIndex = 4;
             this.txtHost.Text = "HQASFTP.TPV-TECH.COM";
             // 
@@ -115,7 +115,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPort.Location = new System.Drawing.Point(116, 92);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(624, 25);
+            this.txtPort.Size = new System.Drawing.Size(638, 25);
             this.txtPort.TabIndex = 6;
             this.txtPort.Text = "22";
             // 
@@ -136,7 +136,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUserName.Location = new System.Drawing.Point(116, 131);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(624, 25);
+            this.txtUserName.Size = new System.Drawing.Size(638, 25);
             this.txtUserName.TabIndex = 8;
             this.txtUserName.Text = "Hub_Manage";
             // 
@@ -158,7 +158,7 @@ namespace Tools.zhong
             this.txtPassword.Location = new System.Drawing.Point(116, 170);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(624, 25);
+            this.txtPassword.Size = new System.Drawing.Size(638, 25);
             this.txtPassword.TabIndex = 10;
             // 
             // label4
@@ -178,7 +178,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRemoteFolder.Location = new System.Drawing.Point(116, 209);
             this.txtRemoteFolder.Name = "txtRemoteFolder";
-            this.txtRemoteFolder.Size = new System.Drawing.Size(624, 25);
+            this.txtRemoteFolder.Size = new System.Drawing.Size(638, 25);
             this.txtRemoteFolder.TabIndex = 12;
             this.txtRemoteFolder.Text = "\\PTSOUTS";
             // 
@@ -199,7 +199,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLoacalFolder.Location = new System.Drawing.Point(116, 248);
             this.txtLoacalFolder.Name = "txtLoacalFolder";
-            this.txtLoacalFolder.Size = new System.Drawing.Size(558, 25);
+            this.txtLoacalFolder.Size = new System.Drawing.Size(572, 25);
             this.txtLoacalFolder.TabIndex = 14;
             this.txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\test.data";
             // 
@@ -220,7 +220,7 @@ namespace Tools.zhong
             this.btnDownLoad.BackColor = System.Drawing.SystemColors.Control;
             this.btnDownLoad.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDownLoad.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDownLoad.Location = new System.Drawing.Point(390, 288);
+            this.btnDownLoad.Location = new System.Drawing.Point(397, 288);
             this.btnDownLoad.Name = "btnDownLoad";
             this.btnDownLoad.Size = new System.Drawing.Size(91, 27);
             this.btnDownLoad.TabIndex = 15;
@@ -234,7 +234,7 @@ namespace Tools.zhong
             this.btnTestConnect.BackColor = System.Drawing.SystemColors.Control;
             this.btnTestConnect.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTestConnect.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTestConnect.Location = new System.Drawing.Point(45, 288);
+            this.btnTestConnect.Location = new System.Drawing.Point(52, 288);
             this.btnTestConnect.Name = "btnTestConnect";
             this.btnTestConnect.Size = new System.Drawing.Size(91, 27);
             this.btnTestConnect.TabIndex = 16;
@@ -242,38 +242,13 @@ namespace Tools.zhong
             this.btnTestConnect.UseVisualStyleBackColor = false;
             this.btnTestConnect.Click += new System.EventHandler(this.btnTestConnect_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.ColumnHeadersHeight = 29;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
-            this.dataGridView1.Location = new System.Drawing.Point(4, 345);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(761, 370);
-            this.dataGridView1.TabIndex = 17;
-            // 
             // btnClose
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnClose.BackColor = System.Drawing.SystemColors.Control;
             this.btnClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClose.Location = new System.Drawing.Point(657, 288);
+            this.btnClose.Location = new System.Drawing.Point(664, 288);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(91, 27);
             this.btnClose.TabIndex = 18;
@@ -303,14 +278,14 @@ namespace Tools.zhong
             "FTP"});
             this.cbFTPType.Location = new System.Drawing.Point(118, 16);
             this.cbFTPType.Name = "cbFTPType";
-            this.cbFTPType.Size = new System.Drawing.Size(621, 23);
+            this.cbFTPType.Size = new System.Drawing.Size(635, 23);
             this.cbFTPType.TabIndex = 21;
             this.cbFTPType.SelectedIndexChanged += new System.EventHandler(this.cbFTPType_SelectedIndexChanged);
             // 
             // btnChoose
             // 
             this.btnChoose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChoose.Location = new System.Drawing.Point(680, 247);
+            this.btnChoose.Location = new System.Drawing.Point(694, 247);
             this.btnChoose.Name = "btnChoose";
             this.btnChoose.Size = new System.Drawing.Size(59, 29);
             this.btnChoose.TabIndex = 22;
@@ -340,7 +315,7 @@ namespace Tools.zhong
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDelete.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelete.Location = new System.Drawing.Point(505, 288);
+            this.btnDelete.Location = new System.Drawing.Point(512, 288);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(128, 27);
             this.btnDelete.TabIndex = 24;
@@ -348,11 +323,36 @@ namespace Tools.zhong
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.ColumnHeadersHeight = 29;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column4,
+            this.Column3});
+            this.dataGridView1.Location = new System.Drawing.Point(9, 341);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 27;
+            this.dataGridView1.Size = new System.Drawing.Size(761, 353);
+            this.dataGridView1.TabIndex = 25;
+            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "FileName";
             this.Column1.HeaderText = "文件名";
-            this.Column1.MinimumWidth = 6;
+            this.Column1.MinimumWidth = 100;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
@@ -360,38 +360,38 @@ namespace Tools.zhong
             // 
             this.Column2.DataPropertyName = "FileSize";
             this.Column2.HeaderText = "文件大小(B)";
-            this.Column2.MinimumWidth = 6;
+            this.Column2.MinimumWidth = 100;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "LastWriteTimeUTC";
-            this.Column3.HeaderText = "最后修改时间（UTC)";
-            this.Column3.MinimumWidth = 250;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.DataPropertyName = "LastWriteTime";
-            this.Column4.HeaderText = "最后修改时间";
-            this.Column4.MinimumWidth = 190;
+            this.Column4.HeaderText = "修改时间";
+            this.Column4.MinimumWidth = 100;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "LastWriteTimeUTC";
+            this.Column3.HeaderText = "修改时间UTC";
+            this.Column3.MinimumWidth = 100;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // SFTPToolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(768, 720);
+            this.ClientSize = new System.Drawing.Size(782, 703);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.btnChoose);
             this.Controls.Add(this.cbFTPType);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnTestConnect);
             this.Controls.Add(this.btnDownLoad);
             this.Controls.Add(this.txtLoacalFolder);
@@ -437,7 +437,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnDownLoad;
         private System.Windows.Forms.Button btnTestConnect;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbFTPType;
@@ -445,9 +444,10 @@ namespace Tools.zhong
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

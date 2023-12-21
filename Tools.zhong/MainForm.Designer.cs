@@ -161,6 +161,7 @@ namespace Tools.zhong
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnFtpTool = new System.Windows.Forms.Button();
             this.btnNovelTool = new System.Windows.Forms.Button();
             this.lblOtherMsg = new System.Windows.Forms.Label();
             this.txtInputDateText = new System.Windows.Forms.TextBox();
@@ -178,7 +179,6 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnFtpTool = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -907,6 +907,7 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.txtPerColNum);
             this.tabPage3.Controls.Add(this.btnSqlFields);
             this.tabPage3.Controls.Add(this.btnDBTransferData);
             this.tabPage3.Controls.Add(this.splitContainer1);
@@ -934,7 +935,6 @@ namespace Tools.zhong
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.txtKey3);
             this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Controls.Add(this.txtPerColNum);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.btnCreateSelect);
             this.tabPage3.Controls.Add(this.btnCreateDelete);
@@ -1250,7 +1250,7 @@ namespace Tools.zhong
             this.btnDefaultNewLine3.Location = new System.Drawing.Point(187, 292);
             this.btnDefaultNewLine3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDefaultNewLine3.Name = "btnDefaultNewLine3";
-            this.btnDefaultNewLine3.Size = new System.Drawing.Size(46, 31);
+            this.btnDefaultNewLine3.Size = new System.Drawing.Size(53, 31);
             this.btnDefaultNewLine3.TabIndex = 22;
             this.btnDefaultNewLine3.Text = "SET";
             this.btnDefaultNewLine3.UseVisualStyleBackColor = true;
@@ -1334,7 +1334,7 @@ namespace Tools.zhong
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(235, 300);
+            this.label3.Location = new System.Drawing.Point(241, 300);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 13;
@@ -1741,6 +1741,17 @@ namespace Tools.zhong
             this.tabPage6.Text = "其他辅助工具";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // btnFtpTool
+            // 
+            this.btnFtpTool.Location = new System.Drawing.Point(151, 121);
+            this.btnFtpTool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFtpTool.Name = "btnFtpTool";
+            this.btnFtpTool.Size = new System.Drawing.Size(124, 28);
+            this.btnFtpTool.TabIndex = 18;
+            this.btnFtpTool.Text = "FTPTool";
+            this.btnFtpTool.UseVisualStyleBackColor = true;
+            this.btnFtpTool.Click += new System.EventHandler(this.btnFtpTool_Click);
+            // 
             // btnNovelTool
             // 
             this.btnNovelTool.Location = new System.Drawing.Point(11, 121);
@@ -1898,17 +1909,6 @@ namespace Tools.zhong
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
-            // 
-            // btnFtpTool
-            // 
-            this.btnFtpTool.Location = new System.Drawing.Point(151, 121);
-            this.btnFtpTool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnFtpTool.Name = "btnFtpTool";
-            this.btnFtpTool.Size = new System.Drawing.Size(124, 28);
-            this.btnFtpTool.TabIndex = 18;
-            this.btnFtpTool.Text = "FTPTool";
-            this.btnFtpTool.UseVisualStyleBackColor = true;
-            this.btnFtpTool.Click += new System.EventHandler(this.btnFtpTool_Click);
             // 
             // MainForm
             // 

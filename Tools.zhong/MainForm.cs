@@ -749,6 +749,7 @@ namespace Tools.zhong
                 dt = list.ToDataTable();
                 if (dt != null && dt.Rows.Count > 0)
                 {
+                    dt.Columns.Remove("TableName");
                     dt.Columns.Remove("TableComment");
                 }
 
