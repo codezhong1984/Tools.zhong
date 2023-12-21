@@ -531,7 +531,7 @@ namespace Tools.zhong
 
             StringBuilder ON_FIELDS = new StringBuilder();
             string[] keys = key.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
+            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).Select(i=>i.Trim()).ToArray();
             for (int i = 0; i < keys.Length; i++)
             {
                 var inputItem = keys[i].Replace(System.Environment.NewLine, "")
@@ -587,7 +587,7 @@ namespace Tools.zhong
                     .Replace("，", "")
                     .Replace(";", "")
                     .Trim();
-                if (string.IsNullOrWhiteSpace(inputItem))
+                if (string.IsNullOrWhiteSpace(inputItem) || keys.Contains(inputItem))
                 {
                     continue;
                 }
@@ -600,7 +600,7 @@ namespace Tools.zhong
                 .Replace("{#ON_FIELDS}", ON_FIELDS.ToString())
                 .Replace("{#INSERT_FIELDS}", INSERT_FIELDS.ToString())
                 .Replace("{#INSERT_VALUES_FIELDS}", INSERT_VALUES_FIELDS.ToString())
-                .Replace("{#UPDATE_FIELDS}", UPDATE_FIELDS.ToString())
+                .Replace("{#UPDATE_FIELDS}", UPDATE_FIELDS.ToString().Trim().Trim(','))
                 .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
 
             txtOuput3.Text = outText;
@@ -1801,7 +1801,7 @@ namespace Tools.zhong
 
         private void btnOrlToDate_Click(object sender, EventArgs e)
         {
-            if (cbToDateFormat.Text == "")
+            if (txtInputDateText.Text == "")
             {
                 return;
             }
@@ -1814,12 +1814,14 @@ namespace Tools.zhong
         {
             var curDate = dtPicker.Value;
             dtPicker.Value = new DateTime(curDate.Year, curDate.Month, curDate.Day, 0, 0, 0);
+            txtInputDateText.Text = dtPicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void btnMaxHour_Click(object sender, EventArgs e)
         {
             var curDate = dtPicker.Value;
             dtPicker.Value = new DateTime(curDate.Year, curDate.Month, curDate.Day, 23, 59, 59);
+            txtInputDateText.Text = dtPicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void cbSplitChar_SelectedIndexChanged(object sender, EventArgs e)
@@ -2059,5 +2061,41 @@ namespace Tools.zhong
             }
         }
 
+        private void dtPicker_ValueChanged(object sender, EventArgs e)
+        {
+            txtInputDateText.Text = dtPicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private void txtInputDateText_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime dt;
+                if (!DateTime.TryParse(txtInputDateText.Text, out dt))
+                {
+                    lblOtherMsg.Text = "日期格式不正确！";
+                    return;
+                }
+                lblOtherMsg.Text = "";
+                dtPicker.Value = dt;
+            }
+            catch (Exception ex)
+            {
+                lblOtherMsg.Text = ex.Message;
+            }
+           
+        }
+
+        private void btnNovelTool_Click(object sender, EventArgs e)
+        {
+            var frm = new NovelToolForm();
+            frm.Show();
+        }
+
+        private void btnFtpTool_Click(object sender, EventArgs e)
+        {
+            var frm = new SFTPToolForm();
+            frm.Show();
+        }
     }
 }

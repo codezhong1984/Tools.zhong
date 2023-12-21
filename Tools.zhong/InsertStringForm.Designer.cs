@@ -121,6 +121,7 @@ namespace Tools.zhong
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InsertStringForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "设置按分隔符添加字符串";
             this.Load += new System.EventHandler(this.InsertStringForm_Load);

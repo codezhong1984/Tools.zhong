@@ -58,6 +58,12 @@
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>..\..\..\PanelTracking\PTS.APILog.Tool\packages\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet.Async, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Renci.SshNet.Async.1.4.0\lib\net40\Renci.SshNet.Async.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -97,6 +103,19 @@
     </Compile>
     <Compile Include="FilesByTemplateForm.Designer.cs">
       <DependentUpon>FilesByTemplateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FTPFileModel.cs" />
+    <Compile Include="SFTPToolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SFTPToolForm.Designer.cs">
+      <DependentUpon>SFTPToolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NovelToolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NovelToolForm.Designer.cs">
+      <DependentUpon>NovelToolForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\CodeGenerateOption.cs" />
     <Compile Include="Model\DataBaseType.cs" />
@@ -164,6 +183,7 @@
     <Compile Include="UtilHelper\Base64Util.cs" />
     <Compile Include="UtilHelper\ConfigHelper.cs" />
     <Compile Include="UtilHelper\FileTemplateGenerator.cs" />
+    <Compile Include="UtilHelper\SFTPHelper.cs" />
     <Compile Include="UtilHelper\URLUtil.cs" />
     <Compile Include="UtilHelper\MD5Util.cs" />
     <Compile Include="UtilHelper\DESUtil.cs" />
@@ -179,6 +199,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FilesByTemplateForm.resx">
       <DependentUpon>FilesByTemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SFTPToolForm.resx">
+      <DependentUpon>SFTPToolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NovelToolForm.resx">
+      <DependentUpon>NovelToolForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OracleQueryHelperForm.resx">
       <DependentUpon>OracleQueryHelperForm.cs</DependentUpon>
