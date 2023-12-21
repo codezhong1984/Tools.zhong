@@ -1743,7 +1743,9 @@ namespace Tools.zhong
             // 
             // btnFtpTool
             // 
-            this.btnFtpTool.Location = new System.Drawing.Point(151, 121);
+            this.btnFtpTool.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnFtpTool.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnFtpTool.Location = new System.Drawing.Point(13, 112);
             this.btnFtpTool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFtpTool.Name = "btnFtpTool";
             this.btnFtpTool.Size = new System.Drawing.Size(124, 28);
@@ -1754,7 +1756,7 @@ namespace Tools.zhong
             // 
             // btnNovelTool
             // 
-            this.btnNovelTool.Location = new System.Drawing.Point(11, 121);
+            this.btnNovelTool.Location = new System.Drawing.Point(143, 112);
             this.btnNovelTool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNovelTool.Name = "btnNovelTool";
             this.btnNovelTool.Size = new System.Drawing.Size(124, 28);
