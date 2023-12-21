@@ -27,7 +27,7 @@ namespace Tools.zhong
         {
             if (!string.IsNullOrWhiteSpace(inputText))
             {
-                var inputVals = inputText.Split(new string[] { cbChar.Text }, StringSplitOptions.RemoveEmptyEntries);
+                var inputVals = inputText.Split(new string[] { cbChar.Text }, StringSplitOptions.None);
                 int.TryParse(txtCols.Text.Trim(), out int perCol);
                 perCol = perCol == 0 ? -1 : perCol;
                 if (perCol == -1)
@@ -38,8 +38,13 @@ namespace Tools.zhong
                 StringBuilder sbResult = new StringBuilder();
                 for (int i = 0; i < inputVals.Length; i++)
                 {
+                    if (cbTrimEmptyLine.Checked && string.IsNullOrWhiteSpace(inputVals[i]))
+                    {
+                        continue;
+                    }
+                    var splitChar = cbReserveSplitChar.Checked ? cbChar.Text : "";
                     sbResult.Append(inputVals[i]);
-                    sbResult.Append((i + 1) % perCol == 0 && perCol != inputVals.Length - 1 ? cbChar.Text+Environment.NewLine : cbChar.Text);
+                    sbResult.Append((i + 1) % perCol == 0 && perCol != inputVals.Length - 1 ? splitChar + Environment.NewLine : splitChar);
                 }
                 this.inputText = sbResult.ToString();
             }
