@@ -15,7 +15,16 @@ namespace Tools.zhong
     {
         public string SplitChar { get; set; }
 
-        public string PrefixString { get; set; }
+        public string PrefixString { get; set; }      
+        
+        public bool TrimBlankFlag 
+        {
+            get { return cbReserveSplitChar.Checked; } 
+        }
+        public bool TrimEmptyLineFlag
+        {
+            get { return cbTrimEmptyLine.Checked; }
+        }
 
         public string Position { get; set; }
 

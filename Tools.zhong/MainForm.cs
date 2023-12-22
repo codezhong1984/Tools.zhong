@@ -531,7 +531,7 @@ namespace Tools.zhong
 
             StringBuilder ON_FIELDS = new StringBuilder();
             string[] keys = key.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).Select(i=>i.Trim()).ToArray();
+            keys = keys.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).Select(i => i.Trim()).ToArray();
             for (int i = 0; i < keys.Length; i++)
             {
                 var inputItem = keys[i].Replace(System.Environment.NewLine, "")
@@ -1378,9 +1378,14 @@ namespace Tools.zhong
                     var splitChar = dialogForm.SplitChar;
                     var insertString = dialogForm.PrefixString;
                     var position = dialogForm.Position;
+                    var trimBlankFlag = dialogForm.TrimBlankFlag;
+                    var trimEmptyLineFlag = dialogForm.TrimEmptyLineFlag;
+
                     _LastText = txtTempl.Text;
-                    var templ = txtTempl.Text.Trim();
-                    var inputTexts = templ.Split(new string[] { splitChar }, StringSplitOptions.RemoveEmptyEntries);
+                    var templ = trimBlankFlag ? txtTempl.Text.Trim() : txtTempl.Text;
+                    string[] inputTexts = null;
+                    inputTexts = templ.Split(new string[] { splitChar }, trimEmptyLineFlag ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
+
                     var resultList = new List<string>();
                     foreach (var item in inputTexts)
                     {
@@ -2084,7 +2089,7 @@ namespace Tools.zhong
             {
                 lblOtherMsg.Text = ex.Message;
             }
-           
+
         }
 
         private void btnNovelTool_Click(object sender, EventArgs e)

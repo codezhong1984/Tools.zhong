@@ -36,6 +36,8 @@ namespace Tools.zhong
             this.btnOk = new System.Windows.Forms.Button();
             this.cbBeforeOrAfter = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbTrimEmptyLine = new System.Windows.Forms.CheckBox();
+            this.cbReserveSplitChar = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +51,7 @@ namespace Tools.zhong
             // 
             // txtInsertString
             // 
-            this.txtInsertString.Location = new System.Drawing.Point(15, 121);
+            this.txtInsertString.Location = new System.Drawing.Point(17, 166);
             this.txtInsertString.Multiline = true;
             this.txtInsertString.Name = "txtInsertString";
             this.txtInsertString.Size = new System.Drawing.Size(286, 72);
@@ -58,7 +60,7 @@ namespace Tools.zhong
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 102);
+            this.label2.Location = new System.Drawing.Point(14, 147);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 15);
             this.label2.TabIndex = 3;
@@ -80,7 +82,7 @@ namespace Tools.zhong
             // 
             this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.ForeColor = System.Drawing.Color.Blue;
-            this.btnOk.Location = new System.Drawing.Point(213, 203);
+            this.btnOk.Location = new System.Drawing.Point(215, 248);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(86, 33);
             this.btnOk.TabIndex = 6;
@@ -106,11 +108,39 @@ namespace Tools.zhong
             this.label3.TabIndex = 7;
             this.label3.Text = "位置：";
             // 
+            // cbTrimEmptyLine
+            // 
+            this.cbTrimEmptyLine.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbTrimEmptyLine.AutoSize = true;
+            this.cbTrimEmptyLine.Checked = true;
+            this.cbTrimEmptyLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbTrimEmptyLine.Location = new System.Drawing.Point(197, 108);
+            this.cbTrimEmptyLine.Name = "cbTrimEmptyLine";
+            this.cbTrimEmptyLine.Size = new System.Drawing.Size(104, 19);
+            this.cbTrimEmptyLine.TabIndex = 10;
+            this.cbTrimEmptyLine.Text = "去除空白行";
+            this.cbTrimEmptyLine.UseVisualStyleBackColor = true;
+            // 
+            // cbReserveSplitChar
+            // 
+            this.cbReserveSplitChar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbReserveSplitChar.AutoSize = true;
+            this.cbReserveSplitChar.Checked = true;
+            this.cbReserveSplitChar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbReserveSplitChar.Location = new System.Drawing.Point(17, 108);
+            this.cbReserveSplitChar.Name = "cbReserveSplitChar";
+            this.cbReserveSplitChar.Size = new System.Drawing.Size(119, 19);
+            this.cbReserveSplitChar.TabIndex = 9;
+            this.cbReserveSplitChar.Text = "去除首尾空格";
+            this.cbReserveSplitChar.UseVisualStyleBackColor = true;
+            // 
             // InsertStringForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 244);
+            this.ClientSize = new System.Drawing.Size(313, 285);
+            this.Controls.Add(this.cbTrimEmptyLine);
+            this.Controls.Add(this.cbReserveSplitChar);
             this.Controls.Add(this.cbBeforeOrAfter);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnOk);
@@ -141,5 +171,7 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.ComboBox cbBeforeOrAfter;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox cbTrimEmptyLine;
+        private System.Windows.Forms.CheckBox cbReserveSplitChar;
     }
 }

@@ -53,6 +53,9 @@ namespace Tools.zhong
             this.btnRemoveCol = new System.Windows.Forms.Button();
             this.txtTempl = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTrim = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -72,13 +75,10 @@ namespace Tools.zhong
             this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAddComma = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelComma = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmTrim = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmBlankToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmLineToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmUpperToLine = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +99,8 @@ namespace Tools.zhong
             this.btnOutput = new System.Windows.Forms.Button();
             this.btnCustom = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblTableInfo = new System.Windows.Forms.Label();
+            this.txtPerColNum = new System.Windows.Forms.TextBox();
             this.btnSqlFields = new System.Windows.Forms.Button();
             this.btnDBTransferData = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -113,7 +115,6 @@ namespace Tools.zhong
             this.btnLoadView = new System.Windows.Forms.Button();
             this.txtDocxTitle = new System.Windows.Forms.TextBox();
             this.txtTableFilter = new System.Windows.Forms.TextBox();
-            this.lblTableInfo = new System.Windows.Forms.Label();
             this.btnCancelSelectAll = new System.Windows.Forms.Button();
             this.btnSelectAll = new System.Windows.Forms.Button();
             this.btnExportDocxTables = new System.Windows.Forms.Button();
@@ -128,7 +129,6 @@ namespace Tools.zhong
             this.label5 = new System.Windows.Forms.Label();
             this.txtKey3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtPerColNum = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnCreateSelect = new System.Windows.Forms.Button();
             this.btnCreateDelete = new System.Windows.Forms.Button();
@@ -179,7 +179,6 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -535,6 +534,7 @@ namespace Tools.zhong
             this.tsmDh2Hh,
             this.toolStripSeparator10,
             this.tsmToOneDHLine,
+            this.tsmCustomLine,
             this.tsmSplitInsertString,
             this.toolStripSeparator2,
             this.tsmAddDyh,
@@ -553,8 +553,6 @@ namespace Tools.zhong
             this.tsmAddComma,
             this.tsmDelComma,
             this.toolStripSeparator5,
-            this.tsmCustomLine,
-            this.toolStripSeparator7,
             this.tsmBlankToUpper,
             this.tsmLineToUpper,
             this.tsmUpperToLine,
@@ -573,7 +571,26 @@ namespace Tools.zhong
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
             this.contextMenuStrip1.ShowItemToolTips = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 794);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 788);
+            // 
+            // tsmReplaceLine
+            // 
+            this.tsmReplaceLine.Name = "tsmReplaceLine";
+            this.tsmReplaceLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmReplaceLine.Text = "删除回车换行";
+            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
+            // 
+            // tsmTrim
+            // 
+            this.tsmTrim.Name = "tsmTrim";
+            this.tsmTrim.Size = new System.Drawing.Size(233, 24);
+            this.tsmTrim.Text = "删除首尾空格";
+            this.tsmTrim.Click += new System.EventHandler(this.tsmTrim_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
             // 
             // tsmKg2Dh
             // 
@@ -696,13 +713,6 @@ namespace Tools.zhong
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(230, 6);
             // 
-            // tsmReplaceLine
-            // 
-            this.tsmReplaceLine.Name = "tsmReplaceLine";
-            this.tsmReplaceLine.Size = new System.Drawing.Size(233, 24);
-            this.tsmReplaceLine.Text = "删除回车换行";
-            this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
-            // 
             // tsmAddComma
             // 
             this.tsmAddComma.Name = "tsmAddComma";
@@ -728,18 +738,6 @@ namespace Tools.zhong
             this.tsmCustomLine.Size = new System.Drawing.Size(233, 24);
             this.tsmCustomLine.Text = "定制化换行";
             this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
-            // 
-            // tsmTrim
-            // 
-            this.tsmTrim.Name = "tsmTrim";
-            this.tsmTrim.Size = new System.Drawing.Size(233, 24);
-            this.tsmTrim.Text = "删除首尾空格";
-            this.tsmTrim.Click += new System.EventHandler(this.tsmTrim_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(230, 6);
             // 
             // tsmBlankToUpper
             // 
@@ -909,6 +907,7 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lblTableInfo);
             this.tabPage3.Controls.Add(this.txtPerColNum);
             this.tabPage3.Controls.Add(this.btnSqlFields);
             this.tabPage3.Controls.Add(this.btnDBTransferData);
@@ -922,7 +921,6 @@ namespace Tools.zhong
             this.tabPage3.Controls.Add(this.btnLoadView);
             this.tabPage3.Controls.Add(this.txtDocxTitle);
             this.tabPage3.Controls.Add(this.txtTableFilter);
-            this.tabPage3.Controls.Add(this.lblTableInfo);
             this.tabPage3.Controls.Add(this.btnCancelSelectAll);
             this.tabPage3.Controls.Add(this.btnSelectAll);
             this.tabPage3.Controls.Add(this.btnExportDocxTables);
@@ -952,6 +950,29 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SQL辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lblTableInfo
+            // 
+            this.lblTableInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTableInfo.ForeColor = System.Drawing.Color.Blue;
+            this.lblTableInfo.Location = new System.Drawing.Point(5, 579);
+            this.lblTableInfo.Name = "lblTableInfo";
+            this.lblTableInfo.Size = new System.Drawing.Size(1069, 22);
+            this.lblTableInfo.TabIndex = 31;
+            this.lblTableInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtPerColNum
+            // 
+            this.txtPerColNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtPerColNum.Enabled = false;
+            this.txtPerColNum.Location = new System.Drawing.Point(278, 296);
+            this.txtPerColNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPerColNum.Name = "txtPerColNum";
+            this.txtPerColNum.Size = new System.Drawing.Size(40, 25);
+            this.txtPerColNum.TabIndex = 12;
+            this.txtPerColNum.Text = "-1";
+            this.txtPerColNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPerColNum.TextChanged += new System.EventHandler(this.txtPerColNum_TextChanged);
             // 
             // btnSqlFields
             // 
@@ -1139,16 +1160,6 @@ namespace Tools.zhong
             this.txtTableFilter.Size = new System.Drawing.Size(137, 25);
             this.txtTableFilter.TabIndex = 33;
             // 
-            // lblTableInfo
-            // 
-            this.lblTableInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTableInfo.ForeColor = System.Drawing.Color.Blue;
-            this.lblTableInfo.Location = new System.Drawing.Point(5, 579);
-            this.lblTableInfo.Name = "lblTableInfo";
-            this.lblTableInfo.Size = new System.Drawing.Size(1069, 22);
-            this.lblTableInfo.TabIndex = 31;
-            this.lblTableInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // btnCancelSelectAll
             // 
             this.btnCancelSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1319,19 +1330,6 @@ namespace Tools.zhong
             this.label4.TabIndex = 14;
             this.label4.Text = "主键：";
             // 
-            // txtPerColNum
-            // 
-            this.txtPerColNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtPerColNum.Enabled = false;
-            this.txtPerColNum.Location = new System.Drawing.Point(278, 296);
-            this.txtPerColNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPerColNum.Name = "txtPerColNum";
-            this.txtPerColNum.Size = new System.Drawing.Size(40, 25);
-            this.txtPerColNum.TabIndex = 12;
-            this.txtPerColNum.Text = "-1";
-            this.txtPerColNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPerColNum.TextChanged += new System.EventHandler(this.txtPerColNum_TextChanged);
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1394,7 +1392,7 @@ namespace Tools.zhong
             this.txtOuput3.Multiline = true;
             this.txtOuput3.Name = "txtOuput3";
             this.txtOuput3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOuput3.Size = new System.Drawing.Size(1069, 275);
+            this.txtOuput3.Size = new System.Drawing.Size(1069, 247);
             this.txtOuput3.TabIndex = 3;
             // 
             // contextMenuStrip2
@@ -1914,11 +1912,6 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -2059,7 +2052,6 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnMaxHour;
         private System.Windows.Forms.Button btnMinHour;
         private System.Windows.Forms.ToolStripMenuItem tsmToOneDHLine;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsmFirstUpper;
         private System.Windows.Forms.ToolStripMenuItem tsmToUpper;
         private System.Windows.Forms.ToolStripMenuItem tsmToFirstLower;
