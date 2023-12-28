@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Tools.zhong.Model;
 
 namespace Tools.zhong.UtilHelper
@@ -35,11 +36,12 @@ namespace Tools.zhong.UtilHelper
         {
             this.sftp = new SftpClient(host, port, username, password);
         }
+
         /// <summary>
         /// 连接sftp服务器
         /// </summary>
         /// <returns>连接状态</returns>
-		public bool Connect()
+        public bool Connect()
         {
             bool result;
             try
@@ -57,10 +59,11 @@ namespace Tools.zhong.UtilHelper
             }
             return result;
         }
+
         /// <summary>
         /// 断开连接
         /// </summary>
-		public void Disconnect()
+        public void Disconnect()
         {
             try
             {
@@ -239,6 +242,54 @@ namespace Tools.zhong.UtilHelper
                 this.Disconnect();
             }
             return result;
+        }
+
+        /// <summary>
+        /// 获取ftp服务器上指定路径上的文件目录
+        /// </summary>
+        public TreeNode GetTreeViewNode(string remotePath)
+        {
+            try
+            {
+                Connect();
+                var result = GetTreeViewNodeItem(remotePath);
+                Disconnect();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("SFTP目录列表获取失败，原因：{0}", ex.Message));
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// 获取ftp服务器上指定路径上的文件目录
+        /// </summary>
+        private TreeNode GetTreeViewNodeItem(string remotePath)
+        {
+            var treeViewNode = new TreeNode();
+            treeViewNode.Text = System.IO.Path.GetFileName(remotePath);
+            treeViewNode.Name = treeViewNode.Text;
+            treeViewNode.ToolTipText = remotePath;
+            IEnumerable<SftpFile> enumerable = this.sftp.ListDirectory(remotePath, null);
+            if (enumerable == null || enumerable.Count() == 0)
+            {
+                return treeViewNode;
+            }
+            foreach (SftpFile current in enumerable)
+            {
+                if (!current.IsDirectory)
+                {
+                    continue;
+                }
+                var childNode = GetTreeViewNodeItem(current.FullName);
+                treeViewNode.Nodes.Add(childNode);
+            }
+            return treeViewNode;
         }
 
         /// <summary>

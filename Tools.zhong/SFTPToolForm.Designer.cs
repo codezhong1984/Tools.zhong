@@ -31,7 +31,6 @@ namespace Tools.zhong
         {
             this.label1 = new System.Windows.Forms.Label();
             this.btnUpload = new System.Windows.Forms.Button();
-            this.btnView = new System.Windows.Forms.Button();
             this.txtHost = new System.Windows.Forms.TextBox();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.lbPort = new System.Windows.Forms.Label();
@@ -57,6 +56,8 @@ namespace Tools.zhong
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.treeViewFTPFolder = new System.Windows.Forms.TreeView();
+            this.btnLoadFTPFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +78,7 @@ namespace Tools.zhong
             this.btnUpload.BackColor = System.Drawing.SystemColors.Control;
             this.btnUpload.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUpload.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnUpload.Location = new System.Drawing.Point(282, 288);
+            this.btnUpload.Location = new System.Drawing.Point(282, 283);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(91, 27);
             this.btnUpload.TabIndex = 2;
@@ -85,27 +86,13 @@ namespace Tools.zhong
             this.btnUpload.UseVisualStyleBackColor = false;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
-            // btnView
-            // 
-            this.btnView.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnView.BackColor = System.Drawing.SystemColors.Control;
-            this.btnView.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnView.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnView.Location = new System.Drawing.Point(167, 288);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(91, 27);
-            this.btnView.TabIndex = 3;
-            this.btnView.Text = "查看文件";
-            this.btnView.UseVisualStyleBackColor = false;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
-            // 
             // txtHost
             // 
             this.txtHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHost.Location = new System.Drawing.Point(116, 53);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(638, 25);
+            this.txtHost.Size = new System.Drawing.Size(788, 25);
             this.txtHost.TabIndex = 4;
             this.txtHost.Text = "HQASFTP.TPV-TECH.COM";
             // 
@@ -115,7 +102,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPort.Location = new System.Drawing.Point(116, 92);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(638, 25);
+            this.txtPort.Size = new System.Drawing.Size(788, 25);
             this.txtPort.TabIndex = 6;
             this.txtPort.Text = "22";
             // 
@@ -136,7 +123,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUserName.Location = new System.Drawing.Point(116, 131);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(638, 25);
+            this.txtUserName.Size = new System.Drawing.Size(788, 25);
             this.txtUserName.TabIndex = 8;
             this.txtUserName.Text = "Hub_Manage";
             // 
@@ -158,7 +145,7 @@ namespace Tools.zhong
             this.txtPassword.Location = new System.Drawing.Point(116, 170);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(638, 25);
+            this.txtPassword.Size = new System.Drawing.Size(787, 25);
             this.txtPassword.TabIndex = 10;
             // 
             // label4
@@ -178,7 +165,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRemoteFolder.Location = new System.Drawing.Point(116, 209);
             this.txtRemoteFolder.Name = "txtRemoteFolder";
-            this.txtRemoteFolder.Size = new System.Drawing.Size(638, 25);
+            this.txtRemoteFolder.Size = new System.Drawing.Size(714, 25);
             this.txtRemoteFolder.TabIndex = 12;
             this.txtRemoteFolder.Text = "\\PTSOUTS";
             // 
@@ -199,7 +186,7 @@ namespace Tools.zhong
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLoacalFolder.Location = new System.Drawing.Point(116, 248);
             this.txtLoacalFolder.Name = "txtLoacalFolder";
-            this.txtLoacalFolder.Size = new System.Drawing.Size(572, 25);
+            this.txtLoacalFolder.Size = new System.Drawing.Size(714, 25);
             this.txtLoacalFolder.TabIndex = 14;
             this.txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\test.data";
             // 
@@ -220,7 +207,7 @@ namespace Tools.zhong
             this.btnDownLoad.BackColor = System.Drawing.SystemColors.Control;
             this.btnDownLoad.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDownLoad.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDownLoad.Location = new System.Drawing.Point(397, 288);
+            this.btnDownLoad.Location = new System.Drawing.Point(422, 283);
             this.btnDownLoad.Name = "btnDownLoad";
             this.btnDownLoad.Size = new System.Drawing.Size(91, 27);
             this.btnDownLoad.TabIndex = 15;
@@ -234,7 +221,7 @@ namespace Tools.zhong
             this.btnTestConnect.BackColor = System.Drawing.SystemColors.Control;
             this.btnTestConnect.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTestConnect.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTestConnect.Location = new System.Drawing.Point(52, 288);
+            this.btnTestConnect.Location = new System.Drawing.Point(142, 283);
             this.btnTestConnect.Name = "btnTestConnect";
             this.btnTestConnect.Size = new System.Drawing.Size(91, 27);
             this.btnTestConnect.TabIndex = 16;
@@ -248,9 +235,9 @@ namespace Tools.zhong
             this.btnClose.BackColor = System.Drawing.SystemColors.Control;
             this.btnClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClose.Location = new System.Drawing.Point(664, 288);
+            this.btnClose.Location = new System.Drawing.Point(739, 283);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(91, 27);
+            this.btnClose.Size = new System.Drawing.Size(69, 27);
             this.btnClose.TabIndex = 18;
             this.btnClose.Text = "退 出";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -278,16 +265,16 @@ namespace Tools.zhong
             "FTP"});
             this.cbFTPType.Location = new System.Drawing.Point(118, 16);
             this.cbFTPType.Name = "cbFTPType";
-            this.cbFTPType.Size = new System.Drawing.Size(635, 23);
+            this.cbFTPType.Size = new System.Drawing.Size(785, 23);
             this.cbFTPType.TabIndex = 21;
             this.cbFTPType.SelectedIndexChanged += new System.EventHandler(this.cbFTPType_SelectedIndexChanged);
             // 
             // btnChoose
             // 
             this.btnChoose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChoose.Location = new System.Drawing.Point(694, 247);
+            this.btnChoose.Location = new System.Drawing.Point(831, 245);
             this.btnChoose.Name = "btnChoose";
-            this.btnChoose.Size = new System.Drawing.Size(59, 29);
+            this.btnChoose.Size = new System.Drawing.Size(74, 29);
             this.btnChoose.TabIndex = 22;
             this.btnChoose.Text = "...";
             this.btnChoose.UseVisualStyleBackColor = true;
@@ -295,11 +282,10 @@ namespace Tools.zhong
             // 
             // lblResult
             // 
-            this.lblResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblResult.AutoSize = true;
             this.lblResult.ForeColor = System.Drawing.Color.Red;
-            this.lblResult.Location = new System.Drawing.Point(6, 322);
+            this.lblResult.Location = new System.Drawing.Point(12, 679);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(55, 15);
             this.lblResult.TabIndex = 23;
@@ -315,7 +301,7 @@ namespace Tools.zhong
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDelete.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelete.Location = new System.Drawing.Point(512, 288);
+            this.btnDelete.Location = new System.Drawing.Point(562, 283);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(128, 27);
             this.btnDelete.TabIndex = 24;
@@ -338,14 +324,14 @@ namespace Tools.zhong
             this.Column2,
             this.Column4,
             this.Column3});
-            this.dataGridView1.Location = new System.Drawing.Point(9, 341);
+            this.dataGridView1.Location = new System.Drawing.Point(187, 319);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(761, 353);
+            this.dataGridView1.Size = new System.Drawing.Size(733, 350);
             this.dataGridView1.TabIndex = 25;
             // 
             // Column1
@@ -380,11 +366,39 @@ namespace Tools.zhong
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
+            // treeViewFTPFolder
+            // 
+            this.treeViewFTPFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewFTPFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.treeViewFTPFolder.FullRowSelect = true;
+            this.treeViewFTPFolder.Location = new System.Drawing.Point(10, 319);
+            this.treeViewFTPFolder.Name = "treeViewFTPFolder";
+            this.treeViewFTPFolder.ShowNodeToolTips = true;
+            this.treeViewFTPFolder.Size = new System.Drawing.Size(171, 350);
+            this.treeViewFTPFolder.TabIndex = 26;
+            this.treeViewFTPFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFTPFolder_AfterSelect);
+            // 
+            // btnLoadFTPFolder
+            // 
+            this.btnLoadFTPFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadFTPFolder.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLoadFTPFolder.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnLoadFTPFolder.Location = new System.Drawing.Point(831, 207);
+            this.btnLoadFTPFolder.Name = "btnLoadFTPFolder";
+            this.btnLoadFTPFolder.Size = new System.Drawing.Size(74, 29);
+            this.btnLoadFTPFolder.TabIndex = 27;
+            this.btnLoadFTPFolder.Text = "加载";
+            this.btnLoadFTPFolder.UseVisualStyleBackColor = true;
+            this.btnLoadFTPFolder.Click += new System.EventHandler(this.btnLoadFTPFolder_Click);
+            // 
             // SFTPToolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 703);
+            this.ClientSize = new System.Drawing.Size(932, 703);
+            this.Controls.Add(this.btnLoadFTPFolder);
+            this.Controls.Add(this.treeViewFTPFolder);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblResult);
@@ -405,13 +419,12 @@ namespace Tools.zhong
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.lbPort);
             this.Controls.Add(this.txtHost);
-            this.Controls.Add(this.btnView);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.label1);
             this.Name = "SFTPToolForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SFTP TOOL";
+            this.Text = "FTP TOOL";
             this.Load += new System.EventHandler(this.SFTPToolForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -423,7 +436,6 @@ namespace Tools.zhong
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnUpload;
-        private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.TextBox txtHost;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label lbPort;
@@ -449,5 +461,7 @@ namespace Tools.zhong
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.TreeView treeViewFTPFolder;
+        private System.Windows.Forms.Button btnLoadFTPFolder;
     }
 }

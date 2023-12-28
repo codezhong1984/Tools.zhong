@@ -184,6 +184,7 @@
     <Compile Include="UtilHelper\Base64Util.cs" />
     <Compile Include="UtilHelper\ConfigHelper.cs" />
     <Compile Include="UtilHelper\FileTemplateGenerator.cs" />
+    <Compile Include="UtilHelper\FTPHelper.cs" />
     <Compile Include="UtilHelper\SFTPHelper.cs" />
     <Compile Include="UtilHelper\URLUtil.cs" />
     <Compile Include="UtilHelper\MD5Util.cs" />
