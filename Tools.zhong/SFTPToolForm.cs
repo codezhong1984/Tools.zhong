@@ -39,6 +39,15 @@ namespace Tools.zhong
                         lblResult.Text = "连接成功";
                     }
                 }
+                else if (ftpType == FTP_TYPE.FTP)
+                {
+                    var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                        , txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    if (helper.Connect())
+                    {
+                        lblResult.Text = "连接成功";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -68,6 +77,13 @@ namespace Tools.zhong
                     var txtFileName = System.IO.Path.GetFileName(txtLoacalFolder.Text);
 
                     helper.Put(txtLoacalFolder.Text, txtRemoteFolder.Text + "\\" + txtFileName);
+                    lblResult.Text = "上传成功！";
+                }
+                else if (ftpType == FTP_TYPE.FTP)
+                {
+                    var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                        , txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    helper.Put(txtRemoteFolder.Text.Trim(), new string[] { txtLoacalFolder.Text.Trim() });
                     lblResult.Text = "上传成功！";
                 }
             }
@@ -114,6 +130,13 @@ namespace Tools.zhong
 
                     lblResult.Text = $"共下载{list.Count}个文件";
                 }
+                else if (ftpType == FTP_TYPE.FTP)
+                {
+                    var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                        , txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    var fileCount = helper.GetFiles(remotePath, txtLocal);
+                    lblResult.Text = $"共下载{fileCount}个文件";
+                }
             }
             catch (Exception ex)
             {
@@ -135,6 +158,14 @@ namespace Tools.zhong
                     var helper = new SFTPHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
                         , txtUserName.Text.Trim(), txtPassword.Text.Trim());
                     var list = helper.GetFileList(txtRemoteFolder.Text);
+                    dataGridView1.DataSource = list;
+                    lblResult.Text = $"共获取{list.Count}个文件";
+                } 
+                else if (ftpType == FTP_TYPE.FTP)
+                {
+                    var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                         , txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    var list = helper.ListFiles(txtRemoteFolder.Text);
                     dataGridView1.DataSource = list;
                     lblResult.Text = $"共获取{list.Count}个文件";
                 }
@@ -169,6 +200,9 @@ namespace Tools.zhong
             {
                 InitSFTPParamValue();
             }
+            txtPassword.Text = "";
+            dataGridView1.DataSource = null;
+            treeViewFTPFolder.Nodes.Clear();
         }
 
         private void SFTPToolForm_Load(object sender, EventArgs e)
@@ -196,6 +230,13 @@ namespace Tools.zhong
                         helper.Delete(txtRemoteFolder.Text.Trim());
                         lblResult.Text = $"删除成功";
                     }
+                    else if (ftpType == FTP_TYPE.FTP)
+                    {
+                        var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                             , txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                        helper.Delete(txtRemoteFolder.Text);
+                        lblResult.Text = $"删除成功";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -209,16 +250,37 @@ namespace Tools.zhong
             if (txtRemoteFolder.Text.Trim().Length == 0)
             {
                 lblResult.Text = "远程目录未指定！";
+                txtRemoteFolder.Focus();
+                return;
+            }
+            if (txtUserName.Text.Trim().Length == 0)
+            {
+                lblResult.Text = "用户名未填写！";
+                txtUserName.Focus();
+                return;
+            }
+            if (txtPassword.Text.Trim().Length == 0)
+            {
+                lblResult.Text = "密码未填写！";
+                txtPassword.Focus();
                 return;
             }
             try
             {
-
                 if (ftpType == FTP_TYPE.SFTP)
                 {
                     var helper = new SFTPHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
                         , txtUserName.Text.Trim(), txtPassword.Text.Trim());
 
+                    var treeNode = helper.GetTreeViewNode(txtRemoteFolder.Text.Trim());
+                    treeViewFTPFolder.Nodes.Clear();
+                    treeNode.Expand();
+                    treeViewFTPFolder.Nodes.Add(treeNode);
+                }
+                else if (ftpType == FTP_TYPE.FTP)
+                {
+                    var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                         , txtUserName.Text.Trim(), txtPassword.Text.Trim());
                     var treeNode = helper.GetTreeViewNode(txtRemoteFolder.Text.Trim());
                     treeViewFTPFolder.Nodes.Clear();
                     treeNode.Expand();
@@ -247,6 +309,14 @@ namespace Tools.zhong
                     dataGridView1.DataSource = list;
                     lblResult.Text = $"共获取{list.Count}个文件";
                 }
+                else if (ftpType == FTP_TYPE.FTP)
+                {
+                    var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
+                         , txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    var list = helper.ListFiles(treeViewFTPFolder.SelectedNode.ToolTipText);
+                    dataGridView1.DataSource = list;
+                    lblResult.Text = $"共获取{list.Count}个文件";
+                }
             }
             catch (Exception ex)
             {
@@ -260,16 +330,16 @@ namespace Tools.zhong
             txtPort.Text = "22";
             txtUserName.Text = "Hub_Manage";
             txtRemoteFolder.Text = "\\PTSOUTS";
-            txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\test.data";
+            txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\";
         }
 
         private void InitFTPParamValue()
         {
             txtHost.Text = "172.20.32.49";
-            txtPort.Text = "22";
+            txtPort.Text = "21";
             txtUserName.Text = "SAP_PTS";
             txtRemoteFolder.Text = "\\";
-            txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\test.data";
+            txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\";
         }
     }
 }

@@ -245,6 +245,30 @@ namespace Tools.zhong.UtilHelper
         }
 
         /// <summary>
+        /// ftp服务器端文件移动
+        /// </summary>
+        /// <param name="oldRemotePath">原来服务器上路径</param>
+        /// <param name="newRemotePath">移动后服务器上新路径</param>
+		public void Move(string oldRemotePath, string newRemotePath)
+        {
+            try
+            {
+                this.Connect();
+                this.sftp.RenameFile(oldRemotePath, newRemotePath);
+                this.Disconnect();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("SFTP文件移动失败，原因：{0}", ex.Message));
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+
+        /// <summary>
         /// 获取ftp服务器上指定路径上的文件目录
         /// </summary>
         public TreeNode GetTreeViewNode(string remotePath)
@@ -290,29 +314,6 @@ namespace Tools.zhong.UtilHelper
                 treeViewNode.Nodes.Add(childNode);
             }
             return treeViewNode;
-        }
-
-        /// <summary>
-        /// ftp服务器端文件移动
-        /// </summary>
-        /// <param name="oldRemotePath">原来服务器上路径</param>
-        /// <param name="newRemotePath">移动后服务器上新路径</param>
-		public void Move(string oldRemotePath, string newRemotePath)
-        {
-            try
-            {
-                this.Connect();
-                this.sftp.RenameFile(oldRemotePath, newRemotePath);
-                this.Disconnect();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(string.Format("SFTP文件移动失败，原因：{0}", ex.Message));
-            }
-            finally
-            {
-                this.Disconnect();
-            }
         }
     }
 }
