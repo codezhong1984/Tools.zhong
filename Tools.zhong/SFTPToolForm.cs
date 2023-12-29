@@ -160,7 +160,7 @@ namespace Tools.zhong
                     var list = helper.GetFileList(txtRemoteFolder.Text);
                     dataGridView1.DataSource = list;
                     lblResult.Text = $"共获取{list.Count}个文件";
-                } 
+                }
                 else if (ftpType == FTP_TYPE.FTP)
                 {
                     var helper = new FtpHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
@@ -340,6 +340,16 @@ namespace Tools.zhong
             txtUserName.Text = "SAP_PTS";
             txtRemoteFolder.Text = "\\";
             txtLoacalFolder.Text = "D:\\Hub\\SFTP(CSDB)\\";
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (treeViewFTPFolder.Nodes.Count > 0 && treeViewFTPFolder.SelectedNode == null)
+            {
+                treeViewFTPFolder.SelectedNode = treeViewFTPFolder.Nodes[0];
+            }
+            treeViewFTPFolder_AfterSelect(null, null);
+            lblResult.Text = "数据已刷新！";
         }
     }
 }

@@ -58,6 +58,7 @@ namespace Tools.zhong
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.treeViewFTPFolder = new System.Windows.Forms.TreeView();
             this.btnLoadFTPFolder = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +79,7 @@ namespace Tools.zhong
             this.btnUpload.BackColor = System.Drawing.SystemColors.Control;
             this.btnUpload.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnUpload.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnUpload.Location = new System.Drawing.Point(282, 283);
+            this.btnUpload.Location = new System.Drawing.Point(324, 283);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(91, 27);
             this.btnUpload.TabIndex = 2;
@@ -207,7 +208,7 @@ namespace Tools.zhong
             this.btnDownLoad.BackColor = System.Drawing.SystemColors.Control;
             this.btnDownLoad.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDownLoad.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDownLoad.Location = new System.Drawing.Point(422, 283);
+            this.btnDownLoad.Location = new System.Drawing.Point(449, 283);
             this.btnDownLoad.Name = "btnDownLoad";
             this.btnDownLoad.Size = new System.Drawing.Size(91, 27);
             this.btnDownLoad.TabIndex = 15;
@@ -221,7 +222,7 @@ namespace Tools.zhong
             this.btnTestConnect.BackColor = System.Drawing.SystemColors.Control;
             this.btnTestConnect.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTestConnect.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnTestConnect.Location = new System.Drawing.Point(142, 283);
+            this.btnTestConnect.Location = new System.Drawing.Point(199, 283);
             this.btnTestConnect.Name = "btnTestConnect";
             this.btnTestConnect.Size = new System.Drawing.Size(91, 27);
             this.btnTestConnect.TabIndex = 16;
@@ -235,7 +236,7 @@ namespace Tools.zhong
             this.btnClose.BackColor = System.Drawing.SystemColors.Control;
             this.btnClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnClose.Location = new System.Drawing.Point(739, 283);
+            this.btnClose.Location = new System.Drawing.Point(736, 283);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(69, 27);
             this.btnClose.TabIndex = 18;
@@ -301,7 +302,7 @@ namespace Tools.zhong
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnDelete.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnDelete.Location = new System.Drawing.Point(562, 283);
+            this.btnDelete.Location = new System.Drawing.Point(574, 283);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(128, 27);
             this.btnDelete.TabIndex = 24;
@@ -392,11 +393,26 @@ namespace Tools.zhong
             this.btnLoadFTPFolder.UseVisualStyleBackColor = true;
             this.btnLoadFTPFolder.Click += new System.EventHandler(this.btnLoadFTPFolder_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.Control;
+            this.btnRefresh.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRefresh.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnRefresh.Location = new System.Drawing.Point(96, 283);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(69, 27);
+            this.btnRefresh.TabIndex = 28;
+            this.btnRefresh.Text = "刷新";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // SFTPToolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(932, 703);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnLoadFTPFolder);
             this.Controls.Add(this.treeViewFTPFolder);
             this.Controls.Add(this.dataGridView1);
@@ -463,5 +479,6 @@ namespace Tools.zhong
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.TreeView treeViewFTPFolder;
         private System.Windows.Forms.Button btnLoadFTPFolder;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
