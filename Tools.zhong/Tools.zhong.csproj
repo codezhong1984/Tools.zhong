@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Tack de Thumb.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentFTP, Version=39.4.0.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentFTP.39.4.0\lib\net45\FluentFTP.dll</HintPath>
@@ -73,6 +76,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -95,30 +99,36 @@
     <Compile Include="DBHelper\OracleHelper.cs" />
     <Compile Include="DBHelper\MySQLHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
-    <Compile Include="DBTransferDataForm.cs">
+    <Compile Include="FunctionForm\DBTransferDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DBTransferDataForm.Designer.cs">
+    <Compile Include="FunctionForm\DBTransferDataForm.Designer.cs">
       <DependentUpon>DBTransferDataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FilesByTemplateForm.cs">
+    <Compile Include="FunctionForm\FilesByTemplateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FilesByTemplateForm.Designer.cs">
+    <Compile Include="FunctionForm\FilesByTemplateForm.Designer.cs">
       <DependentUpon>FilesByTemplateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\AppConfigModel.cs" />
     <Compile Include="Model\FTPFileModel.cs" />
-    <Compile Include="SFTPToolForm.cs">
+    <Compile Include="ToolForm\JsonToolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SFTPToolForm.Designer.cs">
+    <Compile Include="ToolForm\JsonToolForm.Designer.cs">
+      <DependentUpon>JsonToolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForm\SFTPToolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForm\SFTPToolForm.Designer.cs">
       <DependentUpon>SFTPToolForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NovelToolForm.cs">
+    <Compile Include="ToolForm\NovelToolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NovelToolForm.Designer.cs">
+    <Compile Include="ToolForm\NovelToolForm.Designer.cs">
       <DependentUpon>NovelToolForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\CodeGenerateOption.cs" />
@@ -128,28 +138,28 @@
     <Compile Include="Model\ListItem.cs" />
     <Compile Include="Model\TableColumnModel.cs" />
     <Compile Include="Model\TableModel.cs" />
-    <Compile Include="OracleQueryHelperForm.cs">
+    <Compile Include="FunctionForm\OracleQueryHelperForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OracleQueryHelperForm.Designer.cs">
+    <Compile Include="FunctionForm\OracleQueryHelperForm.Designer.cs">
       <DependentUpon>OracleQueryHelperForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBTableForm.cs">
+    <Compile Include="FunctionForm\DBTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DBTableForm.Designer.cs">
+    <Compile Include="FunctionForm\DBTableForm.Designer.cs">
       <DependentUpon>DBTableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModelGeneratorForm.cs">
+    <Compile Include="FunctionForm\ModelGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModelGeneratorForm.Designer.cs">
+    <Compile Include="FunctionForm\ModelGeneratorForm.Designer.cs">
       <DependentUpon>ModelGeneratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportForm.cs">
+    <Compile Include="FunctionForm\ImportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportForm.Designer.cs">
+    <Compile Include="FunctionForm\ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -158,28 +168,28 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InsertStringForm.cs">
+    <Compile Include="FunctionForm\InsertStringForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InsertStringForm.Designer.cs">
+    <Compile Include="FunctionForm\InsertStringForm.Designer.cs">
       <DependentUpon>InsertStringForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReplaceForm.cs">
+    <Compile Include="FunctionForm\ReplaceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReplaceForm.Designer.cs">
+    <Compile Include="FunctionForm\ReplaceForm.Designer.cs">
       <DependentUpon>ReplaceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateAppkeyForm.cs">
+    <Compile Include="FunctionForm\UpdateAppkeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateAppkeyForm.Designer.cs">
+    <Compile Include="FunctionForm\UpdateAppkeyForm.Designer.cs">
       <DependentUpon>UpdateAppkeyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PerNewLineForm.cs">
+    <Compile Include="FunctionForm\PerNewLineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PerNewLineForm.Designer.cs">
+    <Compile Include="FunctionForm\PerNewLineForm.Designer.cs">
       <DependentUpon>PerNewLineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -199,43 +209,47 @@
     <Compile Include="UtilHelper\ObjectUtil.cs" />
     <Compile Include="UtilHelper\ReflectUtil.cs" />
     <Compile Include="UtilHelper\StringUtil.cs" />
-    <EmbeddedResource Include="DBTransferDataForm.resx">
+    <Content Include="Tack de Thumb.ico" />
+    <EmbeddedResource Include="FunctionForm\DBTransferDataForm.resx">
       <DependentUpon>DBTransferDataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FilesByTemplateForm.resx">
+    <EmbeddedResource Include="FunctionForm\FilesByTemplateForm.resx">
       <DependentUpon>FilesByTemplateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SFTPToolForm.resx">
+    <EmbeddedResource Include="ToolForm\JsonToolForm.resx">
+      <DependentUpon>JsonToolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForm\SFTPToolForm.resx">
       <DependentUpon>SFTPToolForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NovelToolForm.resx">
+    <EmbeddedResource Include="ToolForm\NovelToolForm.resx">
       <DependentUpon>NovelToolForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OracleQueryHelperForm.resx">
+    <EmbeddedResource Include="FunctionForm\OracleQueryHelperForm.resx">
       <DependentUpon>OracleQueryHelperForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DBTableForm.resx">
+    <EmbeddedResource Include="FunctionForm\DBTableForm.resx">
       <DependentUpon>DBTableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModelGeneratorForm.resx">
+    <EmbeddedResource Include="FunctionForm\ModelGeneratorForm.resx">
       <DependentUpon>ModelGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportForm.resx">
+    <EmbeddedResource Include="FunctionForm\ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InsertStringForm.resx">
+    <EmbeddedResource Include="FunctionForm\InsertStringForm.resx">
       <DependentUpon>InsertStringForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReplaceForm.resx">
+    <EmbeddedResource Include="FunctionForm\ReplaceForm.resx">
       <DependentUpon>ReplaceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateAppkeyForm.resx">
+    <EmbeddedResource Include="FunctionForm\UpdateAppkeyForm.resx">
       <DependentUpon>UpdateAppkeyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PerNewLineForm.resx">
+    <EmbeddedResource Include="FunctionForm\PerNewLineForm.resx">
       <DependentUpon>PerNewLineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

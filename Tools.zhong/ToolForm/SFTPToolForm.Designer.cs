@@ -29,6 +29,7 @@ namespace Tools.zhong
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SFTPToolForm));
             this.label1 = new System.Windows.Forms.Label();
             this.btnUpload = new System.Windows.Forms.Button();
             this.txtHost = new System.Windows.Forms.TextBox();
@@ -437,8 +438,8 @@ namespace Tools.zhong
             this.Controls.Add(this.txtHost);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SFTPToolForm";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FTP TOOL";
             this.Load += new System.EventHandler(this.SFTPToolForm_Load);

@@ -29,6 +29,7 @@ namespace Tools.zhong
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NovelToolForm));
             this.btnReadOrginalFile = new System.Windows.Forms.Button();
             this.btnOutDir = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -163,6 +164,7 @@ namespace Tools.zhong
             this.Controls.Add(this.btnReadOrginalFile);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NovelToolForm";

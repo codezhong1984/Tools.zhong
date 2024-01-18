@@ -2103,5 +2103,11 @@ namespace Tools.zhong
             var frm = new SFTPToolForm();
             frm.Show();
         }
+
+        private void btnJsonTool_Click(object sender, EventArgs e)
+        {
+            var frm = new JsonToolForm();
+            frm.Show();
+        }
     }
 }

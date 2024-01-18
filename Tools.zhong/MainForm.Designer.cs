@@ -30,6 +30,7 @@ namespace Tools.zhong
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnOutputFiles = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@ namespace Tools.zhong
             this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmToOneDHLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSplitInsertString = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,7 +80,6 @@ namespace Tools.zhong
             this.tsmAddComma = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelComma = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmBlankToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmLineToUpper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmUpperToLine = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,6 +179,7 @@ namespace Tools.zhong
             this.btnOrlToDate = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnJsonTool = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -571,7 +573,7 @@ namespace Tools.zhong
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
             this.contextMenuStrip1.ShowItemToolTips = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 788);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 760);
             // 
             // tsmReplaceLine
             // 
@@ -617,6 +619,13 @@ namespace Tools.zhong
             this.tsmToOneDHLine.Size = new System.Drawing.Size(233, 24);
             this.tsmToOneDHLine.Text = "逗号分隔合并行";
             this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
+            // 
+            // tsmCustomLine
+            // 
+            this.tsmCustomLine.Name = "tsmCustomLine";
+            this.tsmCustomLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmCustomLine.Text = "定制化换行";
+            this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
             // 
             // tsmSplitInsertString
             // 
@@ -731,13 +740,6 @@ namespace Tools.zhong
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmCustomLine
-            // 
-            this.tsmCustomLine.Name = "tsmCustomLine";
-            this.tsmCustomLine.Size = new System.Drawing.Size(233, 24);
-            this.tsmCustomLine.Text = "定制化换行";
-            this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
             // 
             // tsmBlankToUpper
             // 
@@ -1717,6 +1719,7 @@ namespace Tools.zhong
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.btnJsonTool);
             this.tabPage6.Controls.Add(this.btnFtpTool);
             this.tabPage6.Controls.Add(this.btnNovelTool);
             this.tabPage6.Controls.Add(this.lblOtherMsg);
@@ -1912,15 +1915,26 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
+            // btnJsonTool
+            // 
+            this.btnJsonTool.Location = new System.Drawing.Point(273, 112);
+            this.btnJsonTool.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnJsonTool.Name = "btnJsonTool";
+            this.btnJsonTool.Size = new System.Drawing.Size(124, 28);
+            this.btnJsonTool.TabIndex = 19;
+            this.btnJsonTool.Text = "JsonTool";
+            this.btnJsonTool.UseVisualStyleBackColor = true;
+            this.btnJsonTool.Click += new System.EventHandler(this.btnJsonTool_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 645);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "代码生成辅助工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -2102,6 +2116,7 @@ namespace Tools.zhong
         private System.Windows.Forms.Button btnNovelTool;
         private System.Windows.Forms.Button btnFtpTool;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.Button btnJsonTool;
     }
 }
 
