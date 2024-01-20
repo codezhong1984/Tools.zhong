@@ -154,27 +154,22 @@ namespace Tools.zhong.UtilHelper
                 return string.Empty;
             }
             StringBuilder sbResult = new StringBuilder();
+            sbResult.AppendLine("using System;");
+            if (option.AddDisplayName || option.MapperTableName)
+            {
+                sbResult.AppendLine("using System.ComponentModel;");
+                sbResult.AppendLine("using System.Collections.Generic;");
+            }
+            if (option.MapperTableName)
+            {
+                sbResult.AppendLine("using System.ComponentModel.DataAnnotations;");
+                sbResult.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
+            }
+            sbResult.AppendLine();
+            sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(option.NameSpace) ? "DBModel" : option.NameSpace)}");
+            sbResult.AppendLine("{");
             foreach (var classItem in listClass)
             {
-                sbResult.AppendLine("using System;");
-                if (option.AddDisplayName || option.MapperTableName)
-                {
-                    sbResult.AppendLine("using System.ComponentModel;");
-                }
-                if (option.MapperTableName)
-                {
-                    sbResult.AppendLine("using System.ComponentModel.DataAnnotations;");
-                    sbResult.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
-                }
-                sbResult.AppendLine();
-                sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(option.NameSpace) ? "DBModel" : option.NameSpace)}");
-                sbResult.AppendLine("{");
-
-                if (!string.IsNullOrWhiteSpace(option.EnumCode))
-                {
-                    sbResult.AppendLine(option.EnumCode);
-                }
-
                 sbResult.AppendLine("    /// <summary>");
                 sbResult.AppendLine("    /// " + (string.IsNullOrWhiteSpace(classItem.Description) ? classItem.Path : classItem.Description));
                 sbResult.AppendLine("    /// 创建于 " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -252,9 +247,8 @@ namespace Tools.zhong.UtilHelper
                     sbResult.AppendLine(fieldCode.ToString());
                 }
                 sbResult.AppendLine("    }");
-                sbResult.AppendLine("}");
             }
-
+            sbResult.AppendLine("}");
             return sbResult.ToString();
         }
 
