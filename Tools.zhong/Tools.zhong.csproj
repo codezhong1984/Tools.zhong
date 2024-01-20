@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Model\AppConfigModel.cs" />
     <Compile Include="Model\FTPFileModel.cs" />
+    <Compile Include="Model\ClassModel.cs" />
     <Compile Include="ToolForm\JsonToolForm.cs">
       <SubType>Form</SubType>
     </Compile>

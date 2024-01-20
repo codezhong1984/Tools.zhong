@@ -109,13 +109,13 @@ namespace Tools.zhong.UtilHelper
                           + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
                           + " { get => _" + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + "; set => _"
                           + (option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName)) + " = value; }");
-                    }                      
+                    }
 
                     fieldCode.AppendLine($"        private {dataType}{(item.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
                            + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
                            + $" _{(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))}; ");
                 }
-              
+
                 else
                 {
                     if (option.TrimProp && dataType.ToLower() == "string")
@@ -136,13 +136,124 @@ namespace Tools.zhong.UtilHelper
                            + $"{(item.DataType == "enum" ? ToUperFirstChar(listColumns[0].TableName) + "_" + ToUperFirstChar(item.FieldName) : "")}"
                            + $" {(option.Underline ? ReplaceUnderline(item.FieldName) : ToUperFirstChar(item.FieldName))} "
                            + "{ get; set; }");
-                    }                  
+                    }
                 }
 
                 sbResult.AppendLine(fieldCode.ToString());
             }
             sbResult.AppendLine("    }");
             sbResult.AppendLine("}");
+
+            return sbResult.ToString();
+        }
+
+        public static string GenerateCode(List<ClassModel> listClass, CodeGenerateOption option)
+        {
+            if (listClass == null || listClass.Count == 0)
+            {
+                return string.Empty;
+            }
+            StringBuilder sbResult = new StringBuilder();
+            foreach (var classItem in listClass)
+            {
+                sbResult.AppendLine("using System;");
+                if (option.AddDisplayName || option.MapperTableName)
+                {
+                    sbResult.AppendLine("using System.ComponentModel;");
+                }
+                if (option.MapperTableName)
+                {
+                    sbResult.AppendLine("using System.ComponentModel.DataAnnotations;");
+                    sbResult.AppendLine("using System.ComponentModel.DataAnnotations.Schema;");
+                }
+                sbResult.AppendLine();
+                sbResult.AppendLine($"namespace {(string.IsNullOrWhiteSpace(option.NameSpace) ? "DBModel" : option.NameSpace)}");
+                sbResult.AppendLine("{");
+
+                if (!string.IsNullOrWhiteSpace(option.EnumCode))
+                {
+                    sbResult.AppendLine(option.EnumCode);
+                }
+
+                sbResult.AppendLine("    /// <summary>");
+                sbResult.AppendLine("    /// " + (string.IsNullOrWhiteSpace(classItem.Description) ? classItem.Path : classItem.Description));
+                sbResult.AppendLine("    /// 创建于 " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                sbResult.AppendLine("    /// </summary>");
+                if (option.MapperTableName)
+                {
+                    sbResult.AppendLine("    [Table(\"" + ToUperFirstChar(classItem.Name) + "\")]");
+                }
+                sbResult.AppendLine("    public class " + ToUperFirstChar(classItem.Name));
+                sbResult.AppendLine("    {");
+
+                int i = 0;
+                foreach (var fieldItem in classItem.listFields)
+                {
+                    string dataType = fieldItem.TypeName;
+                    sbResult.AppendLine("        /// <summary>");
+                    sbResult.AppendLine("        /// " + fieldItem.FieldRemarks?.Replace("\\n", ""));
+                    sbResult.AppendLine("        /// </summary>");
+
+                    if (option.Required && !fieldItem.IsNullable)
+                    {
+                        sbResult.AppendLine("        [Required]");
+                    }
+                    if (option.AddDisplayName)
+                    {
+                        sbResult.AppendLine("        [DisplayName(\"" + fieldItem.FieldRemarks + "\")]");
+                    }
+                    if (option.MapperTableName && i == 1)
+                    {
+                        sbResult.AppendLine("        [Key]");
+                    }
+
+                    var fieldCode = new StringBuilder();
+                    if (option.FullPropFlag)
+                    {
+                        if (option.TrimProp && dataType.ToLower() == "string")
+                        {
+                            fieldCode.AppendLine($"        public {dataType}{(fieldItem.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                                   + $" {(option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name))} "
+                                   + " { get => _" + (option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name)) + "; set => _"
+                                   + (option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name)) + " = value?.Trim(); }");
+                        }
+                        else
+                        {
+                            fieldCode.AppendLine($"        public {dataType}{(fieldItem.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                              + $" {(option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name))} "
+                              + " { get => _" + (option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name)) + "; set => _"
+                              + (option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name)) + " = value; }");
+                        }
+
+                        fieldCode.AppendLine($"        private {dataType}{(fieldItem.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                               + $" _{(option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name))}; ");
+                    }
+
+                    else
+                    {
+                        if (option.TrimProp && dataType.ToLower() == "string")
+                        {
+                            fieldCode.AppendLine($"        public {dataType}{(fieldItem.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                                   + $" {(option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name))} "
+                                   + " { get => _" + (option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name)) + "; set => _"
+                                   + (option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name)) + " = value?.Trim(); }");
+
+                            fieldCode.AppendLine($"        private {dataType}{(fieldItem.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                                   + $" _{(option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name))}; ");
+                        }
+                        else
+                        {
+                            fieldCode.AppendLine($"        public {dataType}{(fieldItem.IsNullable && !IsNullableType(dataType) ? "?" : "")}"
+                               + $" {(option.Underline ? ReplaceUnderline(fieldItem.Name) : ToUperFirstChar(fieldItem.Name))} "
+                               + "{ get; set; }");
+                        }
+                    }
+
+                    sbResult.AppendLine(fieldCode.ToString());
+                }
+                sbResult.AppendLine("    }");
+                sbResult.AppendLine("}");
+            }
 
             return sbResult.ToString();
         }
