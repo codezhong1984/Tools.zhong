@@ -301,12 +301,14 @@ namespace Tools.zhong
                 {
                     return;
                 }
+                txtRemoteFolder.Text = treeViewFTPFolder.SelectedNode.ToolTipText;
                 if (ftpType == FTP_TYPE.SFTP)
                 {
                     var helper = new SFTPHelper(txtHost.Text.Trim(), int.Parse(txtPort.Text.Trim())
                         , txtUserName.Text.Trim(), txtPassword.Text.Trim());
                     var list = helper.GetFileList(treeViewFTPFolder.SelectedNode.ToolTipText);
                     dataGridView1.DataSource = list;
+
                     lblResult.Text = $"共获取{list.Count}个文件";
                 }
                 else if (ftpType == FTP_TYPE.FTP)
@@ -350,6 +352,16 @@ namespace Tools.zhong
             }
             treeViewFTPFolder_AfterSelect(null, null);
             lblResult.Text = "数据已刷新！";
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.SelectedRows == null)
+            {
+                return;
+            }
+            var fileName = dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+            txtRemoteFolder.Text = $"{treeViewFTPFolder.SelectedNode.ToolTipText}/{fileName}";
         }
     }
 }
