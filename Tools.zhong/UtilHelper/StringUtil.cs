@@ -425,8 +425,11 @@ namespace Tools.zhong.UtilHelper
         {
             if (string.IsNullOrEmpty(s)) return s;
             if (string.IsNullOrEmpty(startString)) return s;
-            var result = s.StartsWith(startString) ? s.Substring(startString.Length - 1) : s;
-            return result;
+            while (s.StartsWith(startString))
+            {
+                s = s.Substring(startString.Length);
+            }
+            return s;
         }
 
         /// <summary>
@@ -436,8 +439,11 @@ namespace Tools.zhong.UtilHelper
         {
             if (string.IsNullOrEmpty(s)) return s;
             if (string.IsNullOrEmpty(endString)) return s;
-            var result = s.EndsWith(endString) ? s.Substring(0, s.Length - endString.Length) : s;
-            return result;
+            while (s.EndsWith(endString))
+            {
+                s = s.Substring(0, s.Length - endString.Length);
+            }
+            return s;
         }
 
         /// <summary>
