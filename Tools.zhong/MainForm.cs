@@ -2197,6 +2197,7 @@ namespace Tools.zhong
             var values = txtTempl.Text.SplitIncludeEmptry(_DefaultSplitChar);
             if (values == null)
             {
+                lblSummary.Text = $"记录：0 | 重复项：0";
                 return;
             }
             //var rptCount = values.GroupBy(i => i).Where(g => g.Count() > 1).Count();

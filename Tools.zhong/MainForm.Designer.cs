@@ -70,6 +70,7 @@ namespace Tools.zhong
             this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmNewLine2DyhIn = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSqlinRollback = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDtS = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiStD = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,7 +185,6 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tsmSqlinRollback = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -261,12 +261,12 @@ namespace Tools.zhong
             // 
             this.lblSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSummary.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lblSummary.Location = new System.Drawing.Point(6, 213);
+            this.lblSummary.Location = new System.Drawing.Point(5, 39);
             this.lblSummary.Name = "lblSummary";
             this.lblSummary.Size = new System.Drawing.Size(1061, 15);
             this.lblSummary.TabIndex = 48;
             this.lblSummary.Text = "记录：0  |  重复项：0";
-            this.lblSummary.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSummary.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnOutputFiles
             // 
@@ -532,13 +532,13 @@ namespace Tools.zhong
             this.txtTempl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTempl.ContextMenuStrip = this.contextMenuStrip1;
-            this.txtTempl.Location = new System.Drawing.Point(5, 41);
+            this.txtTempl.Location = new System.Drawing.Point(5, 58);
             this.txtTempl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTempl.MaxLength = 0;
             this.txtTempl.Multiline = true;
             this.txtTempl.Name = "txtTempl";
             this.txtTempl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempl.Size = new System.Drawing.Size(1062, 168);
+            this.txtTempl.Size = new System.Drawing.Size(1062, 165);
             this.txtTempl.TabIndex = 7;
             this.txtTempl.TextChanged += new System.EventHandler(this.txtTempl_TextChanged);
             // 
@@ -593,7 +593,7 @@ namespace Tools.zhong
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
             this.contextMenuStrip1.ShowItemToolTips = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 860);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 832);
             // 
             // tsmReplaceLine
             // 
@@ -693,6 +693,13 @@ namespace Tools.zhong
             this.tsmNewLine2DyhIn.Size = new System.Drawing.Size(233, 24);
             this.tsmNewLine2DyhIn.Text = "SQLIN";
             this.tsmNewLine2DyhIn.Click += new System.EventHandler(this.tsmNewLine2DyhIn_Click);
+            // 
+            // tsmSqlinRollback
+            // 
+            this.tsmSqlinRollback.Name = "tsmSqlinRollback";
+            this.tsmSqlinRollback.Size = new System.Drawing.Size(233, 24);
+            this.tsmSqlinRollback.Text = "SQLIN恢复";
+            this.tsmSqlinRollback.Click += new System.EventHandler(this.tsmSqlinRollback_Click);
             // 
             // toolStripSeparator4
             // 
@@ -1961,13 +1968,6 @@ namespace Tools.zhong
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
-            // 
-            // tsmSqlinRollback
-            // 
-            this.tsmSqlinRollback.Name = "tsmSqlinRollback";
-            this.tsmSqlinRollback.Size = new System.Drawing.Size(233, 24);
-            this.tsmSqlinRollback.Text = "SQLIN恢复";
-            this.tsmSqlinRollback.Click += new System.EventHandler(this.tsmSqlinRollback_Click);
             // 
             // MainForm
             // 
