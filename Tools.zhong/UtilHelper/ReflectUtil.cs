@@ -297,7 +297,7 @@ namespace Tools.zhong.UtilHelper
                 //propertyInfo.SetValue(modelObj, null, null);
             }
         }
-        
+
         /// <summary>
         /// 设置对象的属性值 
         /// </summary>
@@ -335,7 +335,7 @@ namespace Tools.zhong.UtilHelper
         public static PropertyInfo GetPropertyInfo<T>(T modelObj, string propertyName)
         {
             PropertyInfo[] properties = modelObj.GetType().GetProperties();
-            var piItem = properties.FirstOrDefault<PropertyInfo>(i => i.Name.IsIgnoreCaseEqualTo(propertyName));
+            var piItem = properties.FirstOrDefault<PropertyInfo>(i => i.Name.EqualToIgnoreCase(propertyName));
             return piItem;
         }
 

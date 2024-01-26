@@ -76,7 +76,7 @@ namespace Tools.zhong
         private ModelGeneratorForm mgForm;
 
         //    txtOutput.Text = subForm.CodeText;
-        //    tabControl1.SelectedIndex = 4;
+        //    tabControl1.SelectedIndex = 1;
 
         public TextBox TextOutPut => txtOutput;
         public TabControl TabControl => tabControl1;
@@ -113,7 +113,7 @@ namespace Tools.zhong
             }
 
             txtOutput.Text = sbOutput.ToString();
-            tabControl1.SelectedIndex = 4;
+            tabControl1.SelectedIndex = 1;
         }
 
         private void btnAddColumn_Click(object sender, EventArgs e)
@@ -914,7 +914,7 @@ namespace Tools.zhong
             templ = templ.Replace(System.Environment.NewLine, " ").Replace("\t", " ");
             var inputTexts = templ.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             txtOutput.Text = string.Join(",\t", inputTexts);
-            tabControl1.SelectedIndex = 4;
+            tabControl1.SelectedIndex = 1;
         }
 
         private void btnCommaToBlank_Click(object sender, EventArgs e)
@@ -1067,6 +1067,9 @@ namespace Tools.zhong
             //tabControl1.SelectedIndex = 1;
         }
 
+        /// <summary>
+        /// SQLIN
+        /// </summary>
         private void tsmNewLine2DyhIn_Click(object sender, EventArgs e)
         {
             _LastText = txtTempl.Text;
@@ -1075,6 +1078,20 @@ namespace Tools.zhong
             var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(i => i.Trim());
             txtTempl.Text = "'" + string.Join("','", inputTexts) + "'";
+            //tabControl1.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// SQLIN ROLLBACK
+        /// </summary>
+        private void tsmSqlinRollback_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            templ = templ.Replace(System.Environment.NewLine, ",");
+            var inputTexts = templ.Split(new string[] { "','" }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(i => i.Trim('\''));
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
             //tabControl1.SelectedIndex = 1;
         }
 
@@ -1368,6 +1385,44 @@ namespace Tools.zhong
             }
 
         }
+        private void tsmSplitTrimString_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dialogForm = new TrimStringForm();
+                if (dialogForm.ShowDialog() == DialogResult.OK)
+                {
+                    var splitChar = dialogForm.SplitChar;
+                    var trimString = dialogForm.TrimString;
+                    var position = dialogForm.Position;
+                    var trimBlankFlag = dialogForm.TrimBlankFlag;
+                    var trimEmptyLineFlag = dialogForm.TrimEmptyLineFlag;
+
+                    _LastText = txtTempl.Text;
+                    var templ = trimBlankFlag ? txtTempl.Text.Trim() : txtTempl.Text;
+                    string[] inputTexts = null;
+                    inputTexts = templ.Split(new string[] { splitChar }, trimEmptyLineFlag ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
+
+                    var resultList = new List<string>();
+                    foreach (var item in inputTexts)
+                    {
+                        var result = item;
+                        if (trimEmptyLineFlag)
+                        {
+                            result = result.Trim();
+                        }
+                        result = position == "B" ? result.TrimStartString(trimString) : result.TrimEndString(trimString);
+                        resultList.Add(result);
+                    }
+                    txtTempl.Text = string.Join(splitChar, resultList);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void tsmSplitInsertString_Click(object sender, EventArgs e)
         {
             try
@@ -1400,6 +1455,20 @@ namespace Tools.zhong
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void tsmTrimRepeat_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var values = templ.SplitIncludeEmptry(_DefaultSplitChar);
+            if (values == null)
+            {
+                return;
+            }
+            var groupValues = values.GroupBy(i => i).Select(g => g.Key);
+            txtTempl.Text = string.Join(_DefaultSplitChar, groupValues);
+        }
+
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
@@ -1790,10 +1859,23 @@ namespace Tools.zhong
             var sbResult = new StringBuilder();
             foreach (Match item in matches)
             {
-                sbResult.AppendLine(item.Groups.Count > 1 ? item.Groups[1].Value : item.Value);
+                if (item.Groups.Count == 0)
+                {
+                    continue;
+                }
+                var i = 0;
+                foreach (Group groupItem in item.Groups)
+                {
+                    if (i == 0)
+                    {
+                        i++;
+                        continue;
+                    }
+                    sbResult.AppendLine(groupItem.Value);
+                }
             }
             txtOutput.Text = sbResult.ToString();
-            tabControl1.SelectedIndex = 4;
+            tabControl1.SelectedIndex = 1;
         }
 
         //private void tbDateFormat_TextChanged(object sender, EventArgs e)
@@ -1871,7 +1953,7 @@ namespace Tools.zhong
                 }
 
                 txtOutput.Text = string.Join(System.Environment.NewLine, listResult);
-                tabControl1.SelectedIndex = 4;
+                tabControl1.SelectedIndex = 1;
             }
             catch (Exception ex)
             {
@@ -2109,5 +2191,18 @@ namespace Tools.zhong
             var frm = new JsonToolForm();
             frm.Show();
         }
+
+        private void txtTempl_TextChanged(object sender, EventArgs e)
+        {
+            var values = txtTempl.Text.SplitIncludeEmptry(_DefaultSplitChar);
+            if (values == null)
+            {
+                return;
+            }
+            //var rptCount = values.GroupBy(i => i).Where(g => g.Count() > 1).Count();
+            var rptCount = values.GroupBy(i => i).Count();
+            lblSummary.Text = $"记录：{values.Length} | 重复项：{values.Length - rptCount}";
+        }
+
     }
 }

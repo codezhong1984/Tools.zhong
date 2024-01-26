@@ -11,11 +11,11 @@ using Tools.zhong.Component;
 
 namespace Tools.zhong
 {
-    public partial class InsertStringForm : Form
+    public partial class TrimStringForm : Form
     {
         public string SplitChar { get; set; }
 
-        public string PrefixString { get; set; }      
+        public string TrimString { get; set; }      
         
         public bool TrimBlankFlag 
         {
@@ -28,7 +28,7 @@ namespace Tools.zhong
 
         public string Position { get; set; }
 
-        public InsertStringForm()
+        public TrimStringForm()
         {
             InitializeComponent();
         }
@@ -36,7 +36,7 @@ namespace Tools.zhong
         private void btnOk_Click(object sender, EventArgs e)
         {
             SplitChar = cbSplitChar.SelectedValue.ToString();
-            PrefixString = txtInsertString.Text;
+            TrimString = txtInsertString.Text;
             Position = cbBeforeOrAfter.SelectedValue.ToString();
             this.DialogResult = DialogResult.OK;
         }

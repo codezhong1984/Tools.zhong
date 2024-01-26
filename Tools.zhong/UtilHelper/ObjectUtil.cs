@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Tools.zhong.UtilHelper
 {
@@ -685,6 +686,124 @@ namespace Tools.zhong.UtilHelper
             if (value is string && type == typeof(Version)) return new Version(value as string);
             if (!(value is IConvertible)) return value;
             return Convert.ChangeType(value, type);
+        }
+
+
+        /// <summary>
+        /// 对一个类增加一个属性，返回一个动态对象
+        /// </summary>
+        public static object ConcatProperty<T>(T model, IDictionary<string, object> appendFields) where T : class
+        {
+            if (appendFields == null || appendFields.Count == 0)
+            {
+                return model;
+            }
+
+            dynamic retObj = new System.Dynamic.ExpandoObject();
+            if (model != null)
+            {
+                foreach (PropertyInfo piItem in typeof(T).GetProperties())
+                {
+                    if (!piItem.PropertyType.IsGenericType && piItem.PropertyType != typeof(string))
+                    {
+                        continue;
+                    }
+                    (retObj as ICollection<KeyValuePair<string, object>>)
+                        .Add(new KeyValuePair<string, object>(piItem.Name, piItem.GetValue(model)));
+                }
+            }
+            foreach (var item in appendFields)
+            {
+                (retObj as ICollection<KeyValuePair<string, object>>)
+                    .Add(new KeyValuePair<string, object>(item.Key, item.Value));
+            }
+
+            return retObj;
+        }
+
+        /// <summary>
+        /// 映射对象
+        /// </summary>
+        public static Tout MappingObject<Tin, Tout>(Tin input)
+        {
+            Tout result = Activator.CreateInstance<Tout>();
+            var propsIn = typeof(Tin).GetProperties();
+            var propsOut = typeof(Tout).GetProperties();
+            try
+            {
+                foreach (PropertyInfo pOut in propsOut)
+                {
+                    var pIn = propsIn.FirstOrDefault(i => i.Name == pOut.Name);
+                    if (pIn != null)
+                    {
+                        pOut.SetValue(result, pIn.GetValue(input, null), null);
+                    }
+                }
+            }
+            catch
+            {
+                return default(Tout);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 复制对象
+        /// </summary>
+        public static T CopyObject<T>(T input)
+        {
+            T result = Activator.CreateInstance<T>();
+            var props = typeof(T).GetProperties();
+            try
+            {
+                foreach (PropertyInfo pItem in props)
+                {
+
+                    pItem.SetValue(result, pItem.GetValue(input, null), null);
+                }
+            }
+            catch
+            {
+                return default(T);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 利用反射来判断对象是否包含某个属性
+        /// </summary>
+        public static bool ContainProperty(object instance, string propertyName)
+        {
+            if (instance != null && !string.IsNullOrEmpty(propertyName))
+            {
+                PropertyInfo _findedPropertyInfo = instance.GetType().GetProperty(propertyName);
+                return (_findedPropertyInfo != null);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 利用反射来判断对象是否包含某个属性
+        /// </summary>
+        /// <param name="instance">object</param>
+        /// <param name="propertyName">需要判断的属性</param>
+        /// <returns>是否包含</returns>
+        public static List<T> AddRange<T>(List<T> srcList, List<T> newList)
+        {
+            if (srcList == null && newList == null)
+            {
+                return null;
+            }
+            else if (srcList != null && newList == null)
+            {
+                return srcList;
+            }
+            else if (srcList == null && newList != null)
+            {
+                return newList;
+            }
+            srcList.AddRange(newList);
+            return srcList;
         }
     }
 }

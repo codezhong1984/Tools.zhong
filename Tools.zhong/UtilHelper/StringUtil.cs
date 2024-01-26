@@ -53,7 +53,7 @@ namespace Tools.zhong.UtilHelper
         /// <summary>
         /// 比较两个字符串在忽略大小写的情况下是否相等
         /// </summary>
-        public static bool IsIgnoreCaseEqualTo(this string value, string compareTo)
+        public static bool EqualToIgnoreCase(this string value, string compareTo)
         {
             return string.Compare(value, compareTo, StringComparison.OrdinalIgnoreCase) == 0;
         }
@@ -296,7 +296,7 @@ namespace Tools.zhong.UtilHelper
         /// <param name="input"></param>
         /// <param name="quotStr"></param>
         /// <returns></returns>
-        public static string BeIncluded(this string input, string quotStr)
+        public static string QuotaBy(this string input, string quotStr)
         {
             return string.Format("{1}{0}{1}", ObjectUtil.NullToEmpty(input), ObjectUtil.NullToEmpty(quotStr));
         }
@@ -307,7 +307,7 @@ namespace Tools.zhong.UtilHelper
         /// <param name="input"></param>
         /// <param name="quotStr"></param>
         /// <returns></returns>
-        public static string BeIncludedByTag(this string input, string tagName)
+        public static string QuotaByTag(this string input, string tagName)
         {
             return string.Format("<{1}>{0}</{1}>", ObjectUtil.NullToEmpty(input), ObjectUtil.NullToEmpty(tagName));
         }
@@ -416,6 +416,67 @@ namespace Tools.zhong.UtilHelper
             }
 
             return budgetName;
+        }
+
+        /// <summary>
+        /// 去除开始字符串
+        /// </summary>
+        public static string TrimStartString(this string s, string startString)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            if (string.IsNullOrEmpty(startString)) return s;
+            var result = s.StartsWith(startString) ? s.Substring(startString.Length - 1) : s;
+            return result;
+        }
+
+        /// <summary>
+        /// 去除结尾字符串
+        /// </summary>
+        public static string TrimEndString(this string s, string endString)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            if (string.IsNullOrEmpty(endString)) return s;
+            var result = s.EndsWith(endString) ? s.Substring(0, s.Length - endString.Length) : s;
+            return result;
+        }
+
+        /// <summary>
+        /// 判断字段串指定位置字符是不是字母
+        /// </summary>
+        public static bool IsLetter(this string s, int index)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            if (index < 0 || s.Length - 1 < index)
+            {
+                return false;
+            }
+            return Char.IsLetter(s.ToArray()[index]);
+        }
+
+        /// <summary>
+        /// 判断字段串指定位置字符是不是字母或数字
+        /// </summary>
+        public static bool IsLetterOrDigit(this string s, int index)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            if (index < 0 || s.Length - 1 < index)
+            {
+                return false;
+            }
+            return Char.IsLetterOrDigit(s.ToArray()[index]);
+        }
+
+        /// <summary>
+        /// 判断字段串指定位置字符是不是数字
+        /// </summary>
+        public static bool IsDigit(this string s, int index)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            if (index < 0 || s.Length - 1 < index)
+            {
+                return false;
+            }
+            return Char.IsDigit(s.ToArray()[index]);
         }
     }
 }

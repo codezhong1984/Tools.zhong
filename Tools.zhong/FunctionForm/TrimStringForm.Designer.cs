@@ -1,7 +1,7 @@
 ﻿
 namespace Tools.zhong
 {
-    partial class InsertStringForm
+    partial class TrimStringForm
     {
         /// <summary>
         /// Required designer variable.
@@ -62,9 +62,9 @@ namespace Tools.zhong
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(14, 147);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 15);
+            this.label2.Size = new System.Drawing.Size(127, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "添加字符串：";
+            this.label2.Text = "需去除的字符串：";
             // 
             // cbSplitChar
             // 
@@ -134,7 +134,7 @@ namespace Tools.zhong
             this.cbReserveSplitChar.Text = "去除首尾空格";
             this.cbReserveSplitChar.UseVisualStyleBackColor = true;
             // 
-            // InsertStringForm
+            // TrimStringForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,11 +152,11 @@ namespace Tools.zhong
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "InsertStringForm";
+            this.Name = "TrimStringForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "添加字符串设置";
+            this.Text = "删除字符串设置";
             this.Load += new System.EventHandler(this.InsertStringForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

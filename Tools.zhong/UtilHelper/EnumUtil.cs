@@ -45,7 +45,7 @@ namespace Tools.zhong.UtilHelper
                 {
                     MemberInfo member = type.GetMember(item)[0];
                     var dispAttr = member.GetCustomAttribute(typeof(DisplayAttribute), false) as DisplayAttribute;
-                    if (dispAttr != null && dispAttr.Name.IsIgnoreCaseEqualTo(displayName))
+                    if (dispAttr != null && dispAttr.Name.EqualToIgnoreCase(displayName))
                     {
                         return Enum.Parse(type, item);
                     }
