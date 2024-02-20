@@ -146,10 +146,9 @@ namespace Tools.zhong
                         {
                             sbCodes.AppendLine();
                             sbCodes.AppendLine($"//**************************** {item}  *******************************");
-                            sbCodes.AppendLine();
                         }
                         var codeOracle = GetCodeForOracle(item);
-                        sbCodes.AppendLine(codeOracle);
+                        sbCodes.Append(codeOracle);
                     }
 
                     this.CodeText = sbCodes.ToString();
@@ -162,10 +161,9 @@ namespace Tools.zhong
                         {
                             sbCodes.AppendLine();
                             sbCodes.AppendLine($"//**************************** {item}  *******************************");
-                            sbCodes.AppendLine();
                         }
                         var codeSqlServer = GetCodeForSqlServer(item, DisplayView);
-                        sbCodes.AppendLine(codeSqlServer);
+                        sbCodes.Append(codeSqlServer);
                     }
 
                     this.CodeText = sbCodes.ToString();
@@ -178,11 +176,10 @@ namespace Tools.zhong
                         {
                             sbCodes.AppendLine();
                             sbCodes.AppendLine($"//**************************** {item}  *******************************");
-                            sbCodes.AppendLine();
                         }
 
                         var codeMySQL = GetCodeForMySQL(item);
-                        sbCodes.AppendLine(codeMySQL);
+                        sbCodes.Append(codeMySQL);
                     }
 
                     this.CodeText = sbCodes.ToString();
@@ -196,7 +193,7 @@ namespace Tools.zhong
             }
             //this.DialogResult = DialogResult.OK;
             this.mainFrm.TextOutPut.Text = this.CodeText;
-            this.mainFrm.TabControl.SelectedIndex = 4;
+            this.mainFrm.TabControl.SelectedIndex = 1;
             this.mainFrm.BringToFront();
         }
 

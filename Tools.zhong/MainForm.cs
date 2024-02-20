@@ -1442,12 +1442,22 @@ namespace Tools.zhong
                     inputTexts = templ.Split(new string[] { splitChar }, trimEmptyLineFlag ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
 
                     var resultList = new List<string>();
-                    foreach (var item in inputTexts)
+                    for (int i = 0; i < inputTexts.Length; i++)
                     {
-                        var result = position == "B" ? string.Concat(insertString, item) : string.Concat(item, insertString);
+                        var item = inputTexts[i];
+                        var result = string.Empty;
+                        if (i == inputTexts.Length - 1)
+                        {
+                            result = position == "B" ? string.Concat(insertString, item) : string.Concat(item);
+                        }
+                        else
+                        {
+                            result = position == "B" ? string.Concat(insertString, item, splitChar) : string.Concat(item, splitChar, insertString);
+                        }
                         resultList.Add(result);
                     }
-                    txtTempl.Text = string.Join(splitChar, resultList);
+                    var resultText = string.Join("", resultList);
+                    txtTempl.Text = resultText;
                 }
             }
             catch (Exception ex)
