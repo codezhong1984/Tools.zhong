@@ -1479,6 +1479,26 @@ namespace Tools.zhong
             txtTempl.Text = string.Join(_DefaultSplitChar, groupValues);
         }
 
+        private void tsmStringBuilder_Click(object sender, EventArgs e)
+        {
+            _LastText = txtTempl.Text;
+            var templ = txtTempl.Text.Trim();
+            var values = templ.SplitIncludeEmptry(_DefaultSplitChar);
+            if (values == null)
+            {
+                return;
+            }
+            var listResult = new List<string>();
+            listResult.Add("var sbText = new StringBuilder();");
+            foreach (var item in values)
+            {
+                var itemText = item;
+                itemText = itemText.Replace("\"", "\\\"");
+                listResult.Add($"sbText.AppendLine(\"{itemText}\");");
+            }
+            listResult.Add("var sbResult = sbText.ToString();");
+            txtTempl.Text = string.Join(System.Environment.NewLine, listResult);
+        }
         #endregion
 
         private void btnCreateModelByInput_Click(object sender, EventArgs e)
@@ -2214,6 +2234,5 @@ namespace Tools.zhong
             var rptCount = values.GroupBy(i => i).Count();
             lblSummary.Text = $"记录：{values.Length} | 重复项：{values.Length - rptCount}";
         }
-
     }
 }

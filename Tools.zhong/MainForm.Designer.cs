@@ -185,6 +185,7 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tsmStringBuilder = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -566,6 +567,7 @@ namespace Tools.zhong
             this.tsmiDtS,
             this.tsmiStD,
             this.toolStripSeparator8,
+            this.tsmStringBuilder,
             this.tsmDyhzy,
             this.tsmSyhZy,
             this.toolStripSeparator1,
@@ -593,7 +595,7 @@ namespace Tools.zhong
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
             this.contextMenuStrip1.ShowItemToolTips = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 832);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 884);
             // 
             // tsmReplaceLine
             // 
@@ -1969,6 +1971,13 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
+            // tsmStringBuilder
+            // 
+            this.tsmStringBuilder.Name = "tsmStringBuilder";
+            this.tsmStringBuilder.Size = new System.Drawing.Size(233, 24);
+            this.tsmStringBuilder.Text = "生成StringBuilder";
+            this.tsmStringBuilder.Click += new System.EventHandler(this.tsmStringBuilder_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -2164,6 +2173,7 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmTrimRepeat;
         private System.Windows.Forms.ToolStripMenuItem tsmTrimString;
         private System.Windows.Forms.ToolStripMenuItem tsmSqlinRollback;
+        private System.Windows.Forms.ToolStripMenuItem tsmStringBuilder;
     }
 }
 
