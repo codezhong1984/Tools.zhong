@@ -444,6 +444,24 @@ namespace Tools.zhong.UtilHelper
                 s = s.Substring(0, s.Length - endString.Length);
             }
             return s;
+        }  
+        
+        /// <summary>
+        /// 去除字符串
+        /// </summary>
+        public static string TrimString(this string s, string trimString)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            if (string.IsNullOrEmpty(trimString)) return s;
+            while (s.EndsWith(trimString))
+            {
+                s = s.Substring(0, s.Length - trimString.Length);
+            }
+            while (s.StartsWith(trimString))
+            {
+                s = s.Substring(trimString.Length);
+            }
+            return s;
         }
 
         /// <summary>

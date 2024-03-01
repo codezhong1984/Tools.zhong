@@ -942,14 +942,13 @@ namespace Tools.zhong
         {
             _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(_DefaultSplitChar, "");
-            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
             if (inputTexts.Length == 0)
             {
                 return;
             }
-            txtTempl.Text = "'" + string.Join("','", inputTexts) + "'";
+            txtTempl.Text = "'" + string.Join("'" + _DefaultSplitChar + "'", inputTexts) + "'";
             //tabControl1.SelectedIndex = 1;
         }
 
@@ -957,8 +956,7 @@ namespace Tools.zhong
         {
             _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(_DefaultSplitChar, "");
-            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
             if (inputTexts.Length == 0)
             {
                 return;
@@ -971,21 +969,26 @@ namespace Tools.zhong
         {
             _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            templ = templ.Replace(_DefaultSplitChar, "");
-            var inputTexts = templ.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
             inputTexts = inputTexts.ToList().Select(i => i.Trim()).ToArray();
             if (inputTexts.Length == 0)
             {
                 return;
             }
-            txtTempl.Text = "\"" + string.Join("\",\"", inputTexts) + "\"";
+            txtTempl.Text = "\"" + string.Join("\"" + _DefaultSplitChar + "\"", inputTexts) + "\"";
         }
 
         private void tsmDyhzy_Click(object sender, EventArgs e)
         {
             _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            txtTempl.Text = "\'" + ReplaceSpecialCharSQL(templ) + "\'";
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
+            inputTexts = inputTexts.ToList().Select(i => ReplaceSpecialCharSQL(i.Trim())).ToArray();
+            if (inputTexts.Length == 0)
+            {
+                return;
+            }
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
         }
         private string ReplaceSpecialCharSQL(string srcString, char replaceChar = '\'')
         {
@@ -993,11 +996,8 @@ namespace Tools.zhong
             {
                 return srcString;
             }
-            char[] specialChars = new char[] { '\'', '\"' };
-            foreach (var item in specialChars)
-            {
-                srcString = srcString.Replace(item.ToString(), replaceChar.ToString() + item);
-            }
+            srcString = srcString.Replace("\'", "\'\'");
+            srcString = srcString.Replace("\"", "\'\'\'\'");
             return srcString;
         }
 
@@ -1005,7 +1005,13 @@ namespace Tools.zhong
         {
             _LastText = txtTempl.Text;
             var templ = txtTempl.Text.Trim();
-            txtTempl.Text = "\"" + ReplaceSpecialChar(templ) + "\"";
+            var inputTexts = templ.Split(new string[] { _DefaultSplitChar }, StringSplitOptions.RemoveEmptyEntries);
+            inputTexts = inputTexts.ToList().Select(i => ReplaceSpecialChar(i.Trim())).ToArray();
+            if (inputTexts.Length == 0)
+            {
+                return;
+            }
+            txtTempl.Text = string.Join(_DefaultSplitChar, inputTexts);
         }
 
         private string ReplaceSpecialChar(string srcString, char replaceChar = '\\')
@@ -1014,7 +1020,7 @@ namespace Tools.zhong
             {
                 return srcString;
             }
-            char[] specialChars = new char[] { '\'', '\"', '\\' };
+            char[] specialChars = new char[] { '\\', '\'', '\"' };
             foreach (var item in specialChars)
             {
                 srcString = srcString.Replace(item.ToString(), replaceChar.ToString() + item);
@@ -1392,6 +1398,7 @@ namespace Tools.zhong
                 var dialogForm = new TrimStringForm();
                 if (dialogForm.ShowDialog() == DialogResult.OK)
                 {
+                    _LastText = txtTempl.Text;
                     var splitChar = dialogForm.SplitChar;
                     var trimString = dialogForm.TrimString;
                     var position = dialogForm.Position;
@@ -1411,7 +1418,20 @@ namespace Tools.zhong
                         {
                             result = result.Trim();
                         }
-                        result = position == "B" ? result.TrimStartString(trimString) : result.TrimEndString(trimString);
+                        switch (position)
+                        {
+                            case OperatePosition.Before:
+                                result = result.TrimStartString(trimString);
+                                break;
+                            case OperatePosition.After:
+                                result = result.TrimEndString(trimString);
+                                break;
+                            case OperatePosition.Include:
+                                result = result.TrimString(trimString);
+                                break;
+                            default:
+                                break;
+                        }
                         resultList.Add(result);
                     }
                     txtTempl.Text = string.Join(splitChar, resultList);
@@ -1430,6 +1450,7 @@ namespace Tools.zhong
                 var dialogForm = new InsertStringForm();
                 if (dialogForm.ShowDialog() == DialogResult.OK)
                 {
+                    _LastText = txtTempl.Text;
                     var splitChar = dialogForm.SplitChar;
                     var insertString = dialogForm.PrefixString;
                     var position = dialogForm.Position;
@@ -1446,17 +1467,74 @@ namespace Tools.zhong
                     {
                         var item = inputTexts[i];
                         var result = string.Empty;
-                        if (i == inputTexts.Length - 1)
+                        switch (position)
                         {
-                            result = position == "B" ? string.Concat(insertString, item) : string.Concat(item);
+                            case OperatePosition.Before:
+                                result = string.Concat(insertString, item);
+                                break;
+                            case OperatePosition.After:
+                                result = string.Concat(item, insertString);
+                                break;
+                            case OperatePosition.Include:
+                                result = string.Concat(insertString, item, insertString);
+                                break;
+                            default:
+                                break;
                         }
-                        else
-                        {
-                            result = position == "B" ? string.Concat(insertString, item, splitChar) : string.Concat(item, splitChar, insertString);
-                        }
+                        //if (i == 0)
+                        //{
+                        //    switch (position)
+                        //    {
+                        //        case OperatePosition.Before:
+                        //            result = string.Concat(insertString, item);
+                        //            break;
+                        //        case OperatePosition.After:
+                        //            result = string.Concat(item, insertString);
+                        //            break;
+                        //        case OperatePosition.Include:
+                        //            result = string.Concat(insertString, item, insertString);
+                        //            break;
+                        //        default:
+                        //            break;
+                        //    }
+                        //}
+                        //else if (i == inputTexts.Length - 1)
+                        //{
+                        //    switch (position)
+                        //    {
+                        //        case OperatePosition.Before:
+                        //            result = string.Concat(insertString, item);
+                        //            break;
+                        //        case OperatePosition.After:
+                        //            result = string.Concat(item);
+                        //            break;
+                        //        case OperatePosition.Include:
+                        //            result = string.Concat(insertString, item);
+                        //            break;
+                        //        default:
+                        //            break;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    switch (position)
+                        //    {
+                        //        case OperatePosition.Before:
+                        //            result = string.Concat(insertString, item, splitChar);
+                        //            break;
+                        //        case OperatePosition.After:
+                        //            result = string.Concat(item, splitChar, insertString);
+                        //            break;
+                        //        case OperatePosition.Include:
+                        //            result = string.Concat(splitChar, insertString, item, insertString, splitChar);
+                        //            break;
+                        //        default:
+                        //            break;
+                        //    }
+                        //}
                         resultList.Add(result);
                     }
-                    var resultText = string.Join("", resultList);
+                    var resultText = string.Join(splitChar, resultList);
                     txtTempl.Text = resultText;
                 }
             }

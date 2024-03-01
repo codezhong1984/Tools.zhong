@@ -75,6 +75,7 @@ namespace Tools.zhong
             this.tsmiDtS = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiStD = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmStringBuilder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDyhzy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSyhZy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -185,7 +186,6 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tsmStringBuilder = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -550,17 +550,15 @@ namespace Tools.zhong
             this.tsmReplaceLine,
             this.tsmTrim,
             this.toolStripSeparator11,
-            this.tsmKg2Dh,
-            this.tsmDh2Hh,
             this.tsmToOneDHLine,
+            this.tsmDh2Hh,
+            this.tsmKg2Dh,
             this.toolStripSeparator10,
             this.tsmCustomLine,
             this.tsmTrimRepeat,
-            this.tsmTrimString,
             this.tsmSplitInsertString,
+            this.tsmTrimString,
             this.toolStripSeparator2,
-            this.tsmAddDyh,
-            this.tsmAddSyh,
             this.tsmNewLine2DyhIn,
             this.tsmSqlinRollback,
             this.toolStripSeparator4,
@@ -571,6 +569,8 @@ namespace Tools.zhong
             this.tsmDyhzy,
             this.tsmSyhZy,
             this.toolStripSeparator1,
+            this.tsmAddDyh,
+            this.tsmAddSyh,
             this.tsmDelDyh,
             this.tsmDelSyh,
             this.toolStripSeparator3,
@@ -594,8 +594,8 @@ namespace Tools.zhong
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.ShowItemToolTips = false;
             this.contextMenuStrip1.Size = new System.Drawing.Size(234, 884);
+            this.toolTip1.SetToolTip(this.contextMenuStrip1, "\r\n");
             // 
             // tsmReplaceLine
             // 
@@ -635,6 +635,7 @@ namespace Tools.zhong
             this.tsmToOneDHLine.Name = "tsmToOneDHLine";
             this.tsmToOneDHLine.Size = new System.Drawing.Size(233, 24);
             this.tsmToOneDHLine.Text = "逗号合并";
+            this.tsmToOneDHLine.ToolTipText = "分隔符替换为逗号合并，示例：aaa\\r\\nbbb->aaa,bbb";
             this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
             // 
             // toolStripSeparator10
@@ -677,16 +678,20 @@ namespace Tools.zhong
             // 
             // tsmAddDyh
             // 
+            this.tsmAddDyh.AutoToolTip = true;
             this.tsmAddDyh.Name = "tsmAddDyh";
             this.tsmAddDyh.Size = new System.Drawing.Size(233, 24);
-            this.tsmAddDyh.Text = "添加单引号（逗号结尾）";
+            this.tsmAddDyh.Text = "添加单引号";
+            this.tsmAddDyh.ToolTipText = "按指定的分隔符分隔，每个子项添加单引号包括起来。如：a,b ->‘a’,‘b’";
             this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
             // 
             // tsmAddSyh
             // 
+            this.tsmAddSyh.AutoToolTip = true;
             this.tsmAddSyh.Name = "tsmAddSyh";
             this.tsmAddSyh.Size = new System.Drawing.Size(233, 24);
-            this.tsmAddSyh.Text = "添加双引号（逗号结尾）";
+            this.tsmAddSyh.Text = "添加双引号";
+            this.tsmAddSyh.ToolTipText = "按指定的分隔符分隔，每个子项添加双引号包括起来。如：a,b ->\"a\",\"b\"";
             this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
             // 
             // tsmNewLine2DyhIn
@@ -727,18 +732,27 @@ namespace Tools.zhong
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(230, 6);
             // 
+            // tsmStringBuilder
+            // 
+            this.tsmStringBuilder.Name = "tsmStringBuilder";
+            this.tsmStringBuilder.Size = new System.Drawing.Size(233, 24);
+            this.tsmStringBuilder.Text = "生成StringBuilder";
+            this.tsmStringBuilder.Click += new System.EventHandler(this.tsmStringBuilder_Click);
+            // 
             // tsmDyhzy
             // 
             this.tsmDyhzy.Name = "tsmDyhzy";
             this.tsmDyhzy.Size = new System.Drawing.Size(233, 24);
-            this.tsmDyhzy.Text = "添加单引号(\'转义SQL)";
+            this.tsmDyhzy.Text = "SQL转义(逗号）";
+            this.tsmDyhzy.ToolTipText = "示例：Hello\" World, Zhang\'S > Hello\'\'\'\' World, Zhang\'\'S";
             this.tsmDyhzy.Click += new System.EventHandler(this.tsmDyhzy_Click);
             // 
             // tsmSyhZy
             // 
             this.tsmSyhZy.Name = "tsmSyhZy";
             this.tsmSyhZy.Size = new System.Drawing.Size(233, 24);
-            this.tsmSyhZy.Text = "添加双引号（\\转义C#)";
+            this.tsmSyhZy.Text = "代码转义(\\)";
+            this.tsmSyhZy.ToolTipText = "示例：Hello\" World, Zhang\'S > Hello\'\'\'\' World, Zhang\'\'S";
             this.tsmSyhZy.Click += new System.EventHandler(this.tsmSyhZy_Click);
             // 
             // toolStripSeparator1
@@ -1970,13 +1984,6 @@ namespace Tools.zhong
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
-            // 
-            // tsmStringBuilder
-            // 
-            this.tsmStringBuilder.Name = "tsmStringBuilder";
-            this.tsmStringBuilder.Size = new System.Drawing.Size(233, 24);
-            this.tsmStringBuilder.Text = "生成StringBuilder";
-            this.tsmStringBuilder.Click += new System.EventHandler(this.tsmStringBuilder_Click);
             // 
             // MainForm
             // 

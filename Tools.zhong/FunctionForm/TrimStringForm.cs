@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tools.zhong.Component;
+using Tools.zhong.Model;
 
 namespace Tools.zhong
 {
@@ -15,18 +16,18 @@ namespace Tools.zhong
     {
         public string SplitChar { get; set; }
 
-        public string TrimString { get; set; }      
-        
-        public bool TrimBlankFlag 
+        public string TrimString { get; set; }
+
+        public bool TrimBlankFlag
         {
-            get { return cbReserveSplitChar.Checked; } 
+            get { return cbReserveSplitChar.Checked; }
         }
         public bool TrimEmptyLineFlag
         {
             get { return cbTrimEmptyLine.Checked; }
         }
 
-        public string Position { get; set; }
+        public OperatePosition Position { get; set; }
 
         public TrimStringForm()
         {
@@ -37,13 +38,13 @@ namespace Tools.zhong
         {
             SplitChar = cbSplitChar.SelectedValue.ToString();
             TrimString = txtInsertString.Text;
-            Position = cbBeforeOrAfter.SelectedValue.ToString();
+            Position = (OperatePosition)Enum.Parse(typeof(OperatePosition), cbBeforeOrAfter.SelectedValue.ToString());
             this.DialogResult = DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void InsertStringForm_Load(object sender, EventArgs e)
@@ -52,8 +53,9 @@ namespace Tools.zhong
             //cbSplitChar.SelectedIndex = 1;
 
             var positionOptions = new List<dynamic>();
-            positionOptions.Add(new { Text = "分隔符前", Value = "B" });
-            positionOptions.Add(new { Text = "分隔符后", Value = "A" });
+            positionOptions.Add(new { Text = "分隔符前", Value = OperatePosition.Before.ToString() });
+            positionOptions.Add(new { Text = "分隔符后", Value = OperatePosition.After.ToString() });
+            positionOptions.Add(new { Text = "分隔符前后", Value = OperatePosition.Include.ToString() });
             cbBeforeOrAfter.DataSource = positionOptions;
             cbBeforeOrAfter.DisplayMember = "Text";
             cbBeforeOrAfter.ValueMember = "Value";

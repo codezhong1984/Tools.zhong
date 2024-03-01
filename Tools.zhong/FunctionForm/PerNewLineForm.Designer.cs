@@ -42,8 +42,8 @@ namespace Tools.zhong
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.ForeColor = System.Drawing.Color.Blue;
+            this.btnCancel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.ForeColor = System.Drawing.Color.Black;
             this.btnCancel.Location = new System.Drawing.Point(54, 200);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 33);
@@ -92,7 +92,7 @@ namespace Tools.zhong
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOk.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.ForeColor = System.Drawing.Color.Blue;
             this.btnOk.Location = new System.Drawing.Point(186, 200);
             this.btnOk.Name = "btnOk";
