@@ -1414,7 +1414,7 @@ namespace Tools.zhong
                     foreach (var item in inputTexts)
                     {
                         var result = item;
-                        if (trimEmptyLineFlag)
+                        if (trimBlankFlag)
                         {
                             result = result.Trim();
                         }
@@ -1466,72 +1466,31 @@ namespace Tools.zhong
                     for (int i = 0; i < inputTexts.Length; i++)
                     {
                         var item = inputTexts[i];
+                        var prefixBlank = "";
+                        var suffixBlank = "";
                         var result = string.Empty;
+                        if (!trimBlankFlag)
+                        {
+                            Match match = Regex.Match(item, @"^\s*");
+                            prefixBlank = match.Value;
+                            match = Regex.Match(item, @"\s*$");
+                            suffixBlank = match.Value;
+                        }
+                        item = item.Trim();
                         switch (position)
                         {
                             case OperatePosition.Before:
-                                result = string.Concat(insertString, item);
+                                result = string.Concat(prefixBlank, insertString, item, suffixBlank);
                                 break;
                             case OperatePosition.After:
-                                result = string.Concat(item, insertString);
+                                result = string.Concat(prefixBlank, item, insertString, suffixBlank);
                                 break;
                             case OperatePosition.Include:
-                                result = string.Concat(insertString, item, insertString);
+                                result = string.Concat(prefixBlank, insertString, item, insertString, suffixBlank);
                                 break;
                             default:
                                 break;
                         }
-                        //if (i == 0)
-                        //{
-                        //    switch (position)
-                        //    {
-                        //        case OperatePosition.Before:
-                        //            result = string.Concat(insertString, item);
-                        //            break;
-                        //        case OperatePosition.After:
-                        //            result = string.Concat(item, insertString);
-                        //            break;
-                        //        case OperatePosition.Include:
-                        //            result = string.Concat(insertString, item, insertString);
-                        //            break;
-                        //        default:
-                        //            break;
-                        //    }
-                        //}
-                        //else if (i == inputTexts.Length - 1)
-                        //{
-                        //    switch (position)
-                        //    {
-                        //        case OperatePosition.Before:
-                        //            result = string.Concat(insertString, item);
-                        //            break;
-                        //        case OperatePosition.After:
-                        //            result = string.Concat(item);
-                        //            break;
-                        //        case OperatePosition.Include:
-                        //            result = string.Concat(insertString, item);
-                        //            break;
-                        //        default:
-                        //            break;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    switch (position)
-                        //    {
-                        //        case OperatePosition.Before:
-                        //            result = string.Concat(insertString, item, splitChar);
-                        //            break;
-                        //        case OperatePosition.After:
-                        //            result = string.Concat(item, splitChar, insertString);
-                        //            break;
-                        //        case OperatePosition.Include:
-                        //            result = string.Concat(splitChar, insertString, item, insertString, splitChar);
-                        //            break;
-                        //        default:
-                        //            break;
-                        //    }
-                        //}
                         resultList.Add(result);
                     }
                     var resultText = string.Join(splitChar, resultList);

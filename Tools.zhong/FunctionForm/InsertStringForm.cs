@@ -53,9 +53,9 @@ namespace Tools.zhong
             //cbSplitChar.SelectedIndex = 1;
 
             var positionOptions = new List<dynamic>();
-            positionOptions.Add(new { Text = "分隔符前", Value = OperatePosition.Before.ToString()});
-            positionOptions.Add(new { Text = "分隔符后", Value = OperatePosition.After.ToString() });
-            positionOptions.Add(new { Text = "分隔符前后", Value = OperatePosition.Include.ToString() });
+            positionOptions.Add(new { Text = "分隔项前", Value = OperatePosition.Before.ToString()});
+            positionOptions.Add(new { Text = "分隔项后", Value = OperatePosition.After.ToString() });
+            positionOptions.Add(new { Text = "分隔项前后", Value = OperatePosition.Include.ToString() });
             cbBeforeOrAfter.DataSource = positionOptions;
             cbBeforeOrAfter.DisplayMember = "Text";
             cbBeforeOrAfter.ValueMember = "Value";

@@ -58,17 +58,15 @@ namespace Tools.zhong
             this.tsmReplaceLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTrim = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmToOneDHLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDh2Hh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmKg2Dh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmCustomLine = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTrimRepeat = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmTrimString = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSplitInsertString = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTrimString = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmNewLine2DyhIn = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSqlinRollback = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,6 +77,8 @@ namespace Tools.zhong
             this.tsmDyhzy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSyhZy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmAddDyh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmAddSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelDyh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDelSyh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -260,7 +260,8 @@ namespace Tools.zhong
             // 
             // lblSummary
             // 
-            this.lblSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSummary.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lblSummary.Location = new System.Drawing.Point(5, 39);
             this.lblSummary.Name = "lblSummary";
@@ -594,7 +595,7 @@ namespace Tools.zhong
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 884);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 856);
             this.toolTip1.SetToolTip(this.contextMenuStrip1, "\r\n");
             // 
             // tsmReplaceLine
@@ -616,12 +617,13 @@ namespace Tools.zhong
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
             // 
-            // tsmKg2Dh
+            // tsmToOneDHLine
             // 
-            this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(233, 24);
-            this.tsmKg2Dh.Text = "空格>逗号";
-            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
+            this.tsmToOneDHLine.Name = "tsmToOneDHLine";
+            this.tsmToOneDHLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmToOneDHLine.Text = "逗号合并";
+            this.tsmToOneDHLine.ToolTipText = "分隔符替换为逗号合并，示例：aaa\\r\\nbbb->aaa,bbb";
+            this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
             // 
             // tsmDh2Hh
             // 
@@ -630,13 +632,12 @@ namespace Tools.zhong
             this.tsmDh2Hh.Text = "逗号>换行";
             this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
             // 
-            // tsmToOneDHLine
+            // tsmKg2Dh
             // 
-            this.tsmToOneDHLine.Name = "tsmToOneDHLine";
-            this.tsmToOneDHLine.Size = new System.Drawing.Size(233, 24);
-            this.tsmToOneDHLine.Text = "逗号合并";
-            this.tsmToOneDHLine.ToolTipText = "分隔符替换为逗号合并，示例：aaa\\r\\nbbb->aaa,bbb";
-            this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
+            this.tsmKg2Dh.Name = "tsmKg2Dh";
+            this.tsmKg2Dh.Size = new System.Drawing.Size(233, 24);
+            this.tsmKg2Dh.Text = "空格>逗号";
+            this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
             // 
             // toolStripSeparator10
             // 
@@ -657,13 +658,6 @@ namespace Tools.zhong
             this.tsmTrimRepeat.Text = "去除重复项";
             this.tsmTrimRepeat.Click += new System.EventHandler(this.tsmTrimRepeat_Click);
             // 
-            // tsmTrimString
-            // 
-            this.tsmTrimString.Name = "tsmTrimString";
-            this.tsmTrimString.Size = new System.Drawing.Size(233, 24);
-            this.tsmTrimString.Text = "删除字符串（指定分隔符）";
-            this.tsmTrimString.Click += new System.EventHandler(this.tsmSplitTrimString_Click);
-            // 
             // tsmSplitInsertString
             // 
             this.tsmSplitInsertString.Name = "tsmSplitInsertString";
@@ -671,28 +665,17 @@ namespace Tools.zhong
             this.tsmSplitInsertString.Text = "添加字符串（指定分隔符）";
             this.tsmSplitInsertString.Click += new System.EventHandler(this.tsmSplitInsertString_Click);
             // 
+            // tsmTrimString
+            // 
+            this.tsmTrimString.Name = "tsmTrimString";
+            this.tsmTrimString.Size = new System.Drawing.Size(233, 24);
+            this.tsmTrimString.Text = "删除字符串（指定分隔符）";
+            this.tsmTrimString.Click += new System.EventHandler(this.tsmSplitTrimString_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmAddDyh
-            // 
-            this.tsmAddDyh.AutoToolTip = true;
-            this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(233, 24);
-            this.tsmAddDyh.Text = "添加单引号";
-            this.tsmAddDyh.ToolTipText = "按指定的分隔符分隔，每个子项添加单引号包括起来。如：a,b ->‘a’,‘b’";
-            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
-            // 
-            // tsmAddSyh
-            // 
-            this.tsmAddSyh.AutoToolTip = true;
-            this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(233, 24);
-            this.tsmAddSyh.Text = "添加双引号";
-            this.tsmAddSyh.ToolTipText = "按指定的分隔符分隔，每个子项添加双引号包括起来。如：a,b ->\"a\",\"b\"";
-            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
             // 
             // tsmNewLine2DyhIn
             // 
@@ -759,6 +742,24 @@ namespace Tools.zhong
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(230, 6);
+            // 
+            // tsmAddDyh
+            // 
+            this.tsmAddDyh.AutoToolTip = true;
+            this.tsmAddDyh.Name = "tsmAddDyh";
+            this.tsmAddDyh.Size = new System.Drawing.Size(233, 24);
+            this.tsmAddDyh.Text = "添加单引号";
+            this.tsmAddDyh.ToolTipText = "按指定的分隔符分隔，每个子项添加单引号包括起来。如：a,b ->‘a’,‘b’";
+            this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
+            // 
+            // tsmAddSyh
+            // 
+            this.tsmAddSyh.AutoToolTip = true;
+            this.tsmAddSyh.Name = "tsmAddSyh";
+            this.tsmAddSyh.Size = new System.Drawing.Size(233, 24);
+            this.tsmAddSyh.Text = "添加双引号";
+            this.tsmAddSyh.ToolTipText = "按指定的分隔符分隔，每个子项添加双引号包括起来。如：a,b ->\"a\",\"b\"";
+            this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
             // 
             // tsmDelDyh
             // 
