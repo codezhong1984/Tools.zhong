@@ -57,5 +57,22 @@ namespace Tools.zhong.UtilHelper
             };
             return enumVal;
         }
+
+        /// <summary>
+        /// 转换为枚举对象
+        /// </summary>
+        public static T ToEnum<T>(object value, bool ignoreCase = true) where T : struct
+        {
+            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
+            {
+                return default(T);
+            }
+            T returnObj = default(T);
+            if (Enum.TryParse(value.ToString(), ignoreCase, out returnObj))
+            {
+                return returnObj;
+            }
+            return default(T);
+        }
     }
 }

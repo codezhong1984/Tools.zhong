@@ -135,7 +135,7 @@ namespace Tools.zhong
                 cbDBType.SelectedIndex = 0;
             }
 
-            var saveDefaultPath = ConfigHelper.GetValue("SaveDefaultPath");
+            var saveDefaultPath = ConfigHelper.GetConfigValue("SaveDefaultPath");
             saveFileDialog1.InitialDirectory = string.IsNullOrWhiteSpace(saveDefaultPath) ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop) : saveDefaultPath;
             cbEncodeType.SelectedIndex = 0;
 
@@ -670,7 +670,7 @@ namespace Tools.zhong
             }
             else if (dbType == DataBaseType.ORACLE)
             {
-                string oraVer = ConfigHelper.GetValue("ORACLE_VERSION");
+                string oraVer = ConfigHelper.GetConfigValue("ORACLE_VERSION");
                 if (!string.IsNullOrWhiteSpace(oraVer) && oraVer.Length > 2 && Convert.ToInt32(oraVer.Substring(0, 2)) > 11)
                 {
                     sqlTemplate = ORACLE12_PAGE_TEMPLATE;

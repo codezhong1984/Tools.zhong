@@ -111,7 +111,7 @@ namespace Tools.zhong
             {
                 if (string.IsNullOrWhiteSpace(tbNameSpace.Text))
                 {
-                    ConfigHelper.SetValue("NameSpace", tbNameSpace.Text.Trim());
+                    ConfigHelper.SetConfigValue("NameSpace", tbNameSpace.Text.Trim());
                 }
 
                 //if (cbDBType.SelectedIndex <= 0)
@@ -211,7 +211,7 @@ namespace Tools.zhong
 
         private void DBTaleForm_Load(object sender, EventArgs e)
         {
-            tbNameSpace.Text = ConfigHelper.GetValue("NameSpace");
+            tbNameSpace.Text = ConfigHelper.GetConfigValue("NameSpace");
             folderBrowserDialog1.SelectedPath = AppDomain.CurrentDomain.BaseDirectory;
 
             //加载匹配符

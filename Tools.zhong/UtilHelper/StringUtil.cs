@@ -72,6 +72,31 @@ namespace Tools.zhong.UtilHelper
         }
 
         /// <summary>
+        /// 字符串中包含数组中的其中一项，即返回true,否则返回false
+        /// </summary>
+        /// <param name="arrary">包含项</param>
+        /// <returns></returns>
+        public static bool ContainsIgnoreCase(this string value, string[] arrary)
+        {
+            if (arrary == null && value == null)
+            {
+                return true;
+            }
+            if (arrary == null)
+            {
+                return false;
+            }
+            foreach (var item in arrary)
+            {
+                if (value.ContainsIgnoreCase(item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// value做为拼接符拼接字符串数组
         /// </summary>
         public static string ConcatArrayString(this string value, params string[] arrString)
@@ -389,36 +414,6 @@ namespace Tools.zhong.UtilHelper
         }
 
         /// <summary>
-        /// 根据
-        /// </summary>
-        /// <param name="budgetCode"></param>
-        /// <returns></returns>
-        public static string GetBudgetName(string budgetCode)
-        {
-            string budgetName = "";
-
-            switch (budgetCode)
-            {
-                case "BMYS":
-                    budgetName = "部门费用预算";
-                    break;
-                case "GKYS":
-                    budgetName = "归口管理费用预算";
-                    break;
-                case "ZXYS":
-                    budgetName = "专项费用预算";
-                    break;
-                case "XMYS":
-                    budgetName = "项目费用预算";
-                    break;
-                case "":
-                    break;
-            }
-
-            return budgetName;
-        }
-
-        /// <summary>
         /// 去除开始字符串
         /// </summary>
         public static string TrimStartString(this string s, string startString)
@@ -444,8 +439,8 @@ namespace Tools.zhong.UtilHelper
                 s = s.Substring(0, s.Length - endString.Length);
             }
             return s;
-        }  
-        
+        }
+
         /// <summary>
         /// 去除字符串
         /// </summary>
@@ -501,6 +496,43 @@ namespace Tools.zhong.UtilHelper
                 return false;
             }
             return Char.IsDigit(s.ToArray()[index]);
+        }
+
+        /// <summary>
+        /// 向左补位，若字符长度本身大于指定长度，则返回字符本身。
+        /// </summary>
+        public static string PadLeftExt(this string input, int totalWidth, char padChar)
+        {
+            if (string.IsNullOrWhiteSpace(input) || input.Length >= totalWidth)
+            {
+                return input;
+            }
+            return input.PadLeft(totalWidth, padChar);
+        }
+
+        /// <summary>
+        /// 向右补位，若字符长度本身大于指定长度，则返回字符本身。
+        /// </summary>
+        public static string PadRightExt(this string input, int totalWidth, char padChar)
+        {
+            if (string.IsNullOrWhiteSpace(input) || input.Length >= totalWidth)
+            {
+                return input;
+            }
+            return input.PadRight(totalWidth, padChar);
+        }
+
+        /// <summary>
+        /// 转换为SQL In格式
+        /// </summary>
+        public static string ToSQLIn(this string val, string splitString = ",")
+        {
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                return "''";
+            }
+            var inItems = val.Split(new string[] { splitString }, StringSplitOptions.RemoveEmptyEntries);
+            return $"'{string.Join("','", inItems)}'";
         }
     }
 }

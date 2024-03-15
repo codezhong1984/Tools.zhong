@@ -28,7 +28,7 @@ namespace Tools.zhong.UtilHelper
         TimeSpan
     }
 
-    public class ObjectUtil
+    public static class ObjectUtil
     {
         #region Object Convert Util
 
@@ -47,104 +47,113 @@ namespace Tools.zhong.UtilHelper
         }
 
         #region 判断类型
-        public static bool isDateTime(object obj)
+        public static bool isDateTime<T>(T obj)
         {
-            DateTime returnValue;
-            return !IsNullOrEmpty(obj) && DateTime.TryParse(obj.ToString(), out returnValue);
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is object)
+            {
+                var result = DateTime.Now;
+                return DateTime.TryParse(obj.ToString(), out result);
+            }
+            return typeof(T) == typeof(DateTime);
         }
-        public static bool isBool(object obj)
+        public static bool isBool<T>(T obj)
         {
-            bool returnValue;
-            return !IsNullOrEmpty(obj) && bool.TryParse(obj.ToString(), out returnValue);
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is object)
+            {
+                var result = false;
+                return bool.TryParse(obj.ToString(), out result);
+            }
+            return typeof(T) == typeof(DateTime);
         }
 
-        public static bool isNumberic(object obj)
+        public static bool isDouble<T>(T obj)
         {
-            double dtReturn;
-            return !IsNullOrEmpty(obj) && double.TryParse(obj.ToString(), out dtReturn);
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is object)
+            {
+                var result = 0d;
+                return double.TryParse(obj.ToString(), out result);
+            }
+            return typeof(T) == typeof(double);
+        }
+
+        public static bool isInt<T>(T obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is object)
+            {
+                var result = 0;
+                return int.TryParse(obj.ToString(), out result);
+            }
+            return typeof(T) == typeof(double);
         }
 
         /// <summary>
         /// Check Is Specify DataType
         /// </summary>
         /// <returns></returns>
-        public static bool IsTypeOf(object obj, BaseDataType dataType)
+        public static bool IsTypeOf<T>(T obj, BaseDataType dataType)
         {
             if (obj == null)
             {
                 return false;
             }
-            try
+            switch (dataType)
             {
-                string objVal = obj.ToString().Trim();
-                switch (dataType)
-                {
-                    #region Parse
-
-                    case BaseDataType.Int16:
-                        Int16.Parse(objVal);
-                        break;
-                    case BaseDataType.Int32:
-                        Int32.Parse(objVal);
-                        break;
-                    case BaseDataType.Int64:
-                        Int64.Parse(objVal);
-                        break;
-                    case BaseDataType.UInt16:
-                        UInt16.Parse(objVal);
-                        break;
-                    case BaseDataType.UInt32:
-                        UInt32.Parse(objVal);
-                        break;
-                    case BaseDataType.UInt64:
-                        UInt64.Parse(objVal);
-                        break;
-                    case BaseDataType.Float:
-                        float.Parse(objVal);
-                        break;
-                    case BaseDataType.Double:
-                        double.Parse(objVal);
-                        break;
-                    case BaseDataType.Decimal:
-                        decimal.Parse(objVal);
-                        break;
-                    case BaseDataType.Bool:
-                        bool.Parse(objVal);
-                        break;
-                    case BaseDataType.DateTime:
-                        DateTime.Parse(objVal);
-                        break;
-                    //case BaseDataType.String:
-                    //    break;
-                    case BaseDataType.Byte:
-                        byte.Parse(objVal);
-                        break;
-                    case BaseDataType.Char:
-                        char.Parse(objVal);
-                        break;
-                    //case BaseDataType.Guid:                        
-                    //    break;
-                    case BaseDataType.Single:
-                        Single.Parse(objVal);
-                        break;
-                    case BaseDataType.SByte:
-                        SByte.Parse(objVal);
-                        break;
-                    case BaseDataType.TimeSpan:
-                        TimeSpan.Parse(objVal);
-                        break;
-                    default:
-                        break;
-
-                        #endregion
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
+                case BaseDataType.Int16:
+                    return typeof(T) == typeof(short);
+                case BaseDataType.Int32:
+                    return typeof(T) == typeof(int);
+                case BaseDataType.Int64:
+                    return typeof(T) == typeof(long);
+                case BaseDataType.UInt16:
+                    return typeof(T) == typeof(ushort);
+                case BaseDataType.UInt32:
+                    return typeof(T) == typeof(uint);
+                case BaseDataType.UInt64:
+                    return typeof(T) == typeof(ulong);
+                case BaseDataType.Float:
+                    return typeof(T) == typeof(float);
+                case BaseDataType.Double:
+                    return typeof(T) == typeof(double);
+                case BaseDataType.Decimal:
+                    return typeof(T) == typeof(decimal);
+                case BaseDataType.Bool:
+                    return typeof(T) == typeof(bool);
+                case BaseDataType.DateTime:
+                    return typeof(T) == typeof(DateTime);
+                case BaseDataType.Byte:
+                    return typeof(T) == typeof(byte);
+                case BaseDataType.Char:
+                    return typeof(T) == typeof(char);
+                //case BaseDataType.Guid:                        
+                //    break;
+                case BaseDataType.Single:
+                    return typeof(T) == typeof(float);
+                case BaseDataType.SByte:
+                    return typeof(T) == typeof(sbyte);
+                case BaseDataType.TimeSpan:
+                    return typeof(T) == typeof(TimeSpan);
+                default:
+                    return false;
             }
         }
+
+        #endregion
 
         public static List<long> ConvertToLongBatch(List<string> idList)
         {
@@ -163,7 +172,6 @@ namespace Tools.zhong.UtilHelper
             }
             return list;
         }
-
 
         #endregion
 
@@ -475,7 +483,7 @@ namespace Tools.zhong.UtilHelper
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool IsNull(object obj)
+        public static bool IsNull(this object obj)
         {
             return obj == null;
         }
@@ -485,12 +493,12 @@ namespace Tools.zhong.UtilHelper
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool IsDbNull(object obj)
+        public static bool IsDbNull(this object obj)
         {
             return obj == DBNull.Value;
         }
 
-        public static bool IsNullOrDBNull(object obj)
+        public static bool IsNullOrDBNull(this object obj)
         {
             return IsNull(obj) || IsDbNull(obj);
         }
@@ -500,27 +508,27 @@ namespace Tools.zhong.UtilHelper
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool IsNullOrEmpty(object obj)
+        public static bool IsNullOrEmpty(this object obj)
         {
             return IsNull(obj) || obj.ToString().Trim().Length == 0;
         }
 
-        #region 判断集合或数组    
+        #region 判断集合或数组是否为空    
 
         /// <summary>
         /// 判断集合是否为空,适用于List,HashTable,HashSet,IDictionary
         /// 集合类型包括IList,ArrayList,Hashtable,HashSet,LinkedList,IDictionary
         /// </summary>
-        public static bool IsEmpty(ICollection ienum)
+        public static bool IsEmptyCollection(this object obj)
         {
-            return ienum == null || ienum.Count == 0;
+            return obj == null || (obj is ICollection && ((ICollection)obj).Count == 0);
         }
 
         /// <summary>
         /// 判断集合是否为空,如果不是集合也返回true
         /// 集合类型包括IList,ArrayList,Hashtable,HashSet,LinkedList,IDictionary
         /// </summary>
-        public static bool IsEmpty(Array obj)
+        public static bool IsEmptyArray(this object obj)
         {
             return obj == null || (obj is Array && ((Array)obj).Length == 0);
         }
@@ -528,11 +536,10 @@ namespace Tools.zhong.UtilHelper
 
         #endregion
 
-
         /// <summary>
         /// 转换日期格式为指定格式的字符
         /// </summary>
-        public static string FormatDateTime(object obj, string formatString)
+        public static string FormatDateTime(this object obj, string formatString)
         {
             DateTime dt;
             if (obj == null || !DateTime.TryParse(obj.ToString(), out dt))
@@ -545,7 +552,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        #endregion
+
         /// <summary>
         /// 把字符串批量转为int数组，其中有非数字字符串转换失败
         /// </summary>
@@ -560,7 +567,7 @@ namespace Tools.zhong.UtilHelper
                 return true;
             }
             string[] listVal = value.SplitNoEmpty(splictString);
-            if (IsEmpty(listVal))
+            if (listVal.IsEmptyCollection())
             {
                 intValues = new List<int>();
                 return true;
@@ -591,7 +598,7 @@ namespace Tools.zhong.UtilHelper
         /// <returns></returns>
         public static bool ConvertToIntBatch(List<string> strVals, out List<int> intValues)
         {
-            if (IsEmpty(strVals))
+            if (strVals.IsEmptyCollection())
             {
                 intValues = null;
                 return true;
@@ -638,6 +645,7 @@ namespace Tools.zhong.UtilHelper
             intValues = intList.ToArray();
             return fl;
         }
+
         /// <summary>
         /// 把字符串批量转为int数组，其中有非数字字符串转换失败
         /// </summary>
@@ -662,7 +670,7 @@ namespace Tools.zhong.UtilHelper
         /// </summary>
         public static object ChangeType(object value, Type type)
         {
-            if (value != null && value.ToString() == "" && type.Name != "String" )
+            if (value != null && value.ToString() == "" && type.Name != "String")
             {
                 value = null;
             }
@@ -687,7 +695,6 @@ namespace Tools.zhong.UtilHelper
             if (!(value is IConvertible)) return value;
             return Convert.ChangeType(value, type);
         }
-
 
         /// <summary>
         /// 对一个类增加一个属性，返回一个动态对象

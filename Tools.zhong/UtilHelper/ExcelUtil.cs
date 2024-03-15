@@ -204,11 +204,11 @@ namespace Tools.zhong.UtilHelper
                     int curColumn = 0;
                     foreach (PropertyInfo pi in properties)
                     {
-                        if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(pi.Name))
+                        if (!excludeFields.IsEmptyCollection() && excludeFields.Contains(pi.Name))
                         {
                             continue;
                         }
-                        if (!ObjectUtil.IsEmpty(includeFields) && !includeFields.Contains(pi.Name))
+                        if (!includeFields.IsEmptyCollection() && !includeFields.Contains(pi.Name))
                         {
                             continue;
                         }
@@ -254,12 +254,12 @@ namespace Tools.zhong.UtilHelper
             XSSFWorkbook workbook = new XSSFWorkbook();
             ISheet sheet = workbook.CreateSheet(sheetName);
 
-            if (ObjectUtil.IsEmpty(headerTexts))
+            if (headerTexts.IsEmptyCollection())
             {
                 headerTexts = GetHeaderText();
             }
 
-            if (!ObjectUtil.IsEmpty(columnWidths))
+            if (columnWidths.IsEmptyCollection())
             {
                 foreach (var item in columnWidths)
                 {
@@ -288,11 +288,11 @@ namespace Tools.zhong.UtilHelper
                 for (int pindex = 0; pindex < properties.Length; pindex++)
                 {
                     PropertyInfo pi = properties[pindex];
-                    if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(pi.Name))
+                    if (excludeFields.IsEmptyCollection() && excludeFields.Contains(pi.Name))
                     {
                         continue;
                     }
-                    if (!ObjectUtil.IsEmpty(includeFields) && !includeFields.Contains(pi.Name))
+                    if (includeFields.IsEmptyCollection() && !includeFields.Contains(pi.Name))
                     {
                         continue;
                     }
@@ -348,7 +348,7 @@ namespace Tools.zhong.UtilHelper
             string[] includeFields = null, string[] excludeFields = null)
         {
             ISheet sheet = workbook.CreateSheet(sheetName);
-            if (ObjectUtil.IsEmpty(headerTexts))
+            if (headerTexts.IsEmptyCollection())
             {
                 headerTexts = GetHeaderText();
             }
@@ -375,11 +375,11 @@ namespace Tools.zhong.UtilHelper
                 for (int pindex = 0; pindex < properties.Length; pindex++)
                 {
                     PropertyInfo pi = properties[pindex];
-                    if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(pi.Name))
+                    if (excludeFields.IsEmptyCollection() && excludeFields.Contains(pi.Name))
                     {
                         continue;
                     }
-                    if (!ObjectUtil.IsEmpty(includeFields) && !includeFields.Contains(pi.Name))
+                    if (includeFields.IsEmptyCollection() && !includeFields.Contains(pi.Name))
                     {
                         continue;
                     }
@@ -585,7 +585,7 @@ namespace Tools.zhong.UtilHelper
                     int index = 0;
                     for (int pindex = 0; pindex < exportData.Columns.Count; pindex++)
                     {
-                        if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(exportData.Columns[pindex].ColumnName))
+                        if (!excludeFields.IsEmptyCollection()  && excludeFields.Contains(exportData.Columns[pindex].ColumnName))
                         {
                             continue;
                         }
@@ -657,7 +657,7 @@ namespace Tools.zhong.UtilHelper
                     int index = 0;
                     for (int pindex = 0; pindex < exportData.Columns.Count; pindex++)
                     {
-                        if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(exportData.Columns[pindex].ColumnName))
+                        if (!excludeFields.IsEmptyCollection() && excludeFields.Contains(exportData.Columns[pindex].ColumnName))
                         {
                             continue;
                         }
@@ -712,7 +712,7 @@ namespace Tools.zhong.UtilHelper
             XSSFWorkbook workbook = new XSSFWorkbook();
             ISheet sheet = workbook.CreateSheet(sheetName);
 
-            if (ObjectUtil.IsEmpty(headTextList))
+            if (headTextList.IsEmptyCollection())
             {
                 return null;
             }
@@ -794,7 +794,7 @@ namespace Tools.zhong.UtilHelper
                             if (curColumn >= cellCount) break;
                             else continue;
                         }
-                        if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(pi.Name))
+                        if (!excludeFields.IsEmptyCollection() && excludeFields.Contains(pi.Name))
                         {
                             continue;
                         }
@@ -908,14 +908,14 @@ namespace Tools.zhong.UtilHelper
         public static string[] GetHeaderText(params string[] excludeFields)
         {
             var properties = typeof(T).GetProperties();
-            if (ObjectUtil.IsEmpty(properties))
+            if (properties.IsEmptyCollection())
             {
                 return null;
             }
             List<string> list = new List<string>();
             foreach (var item in properties)
             {
-                if (!ObjectUtil.IsEmpty(excludeFields) && excludeFields.Contains(item.Name, StringComparer.OrdinalIgnoreCase))
+                if (!excludeFields.IsEmptyCollection() && excludeFields.Contains(item.Name, StringComparer.OrdinalIgnoreCase))
                 {
                     continue;
                 }
