@@ -552,7 +552,7 @@ namespace Tools.zhong.UtilHelper
             if (dbType == DataBaseType.ORACLE)
             {
                 string sql = "select view_name table_name from user_views {0} order by view_name";
-                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where view_name like {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
+                sql = string.Format(sql, !string.IsNullOrWhiteSpace(tableFilter) ? $"where view_name {filterType} '{filterChar}{tableFilter}{filterChar}'" : "");
                 var dtData = OracleHelper.ExecuteDataTable(sql);
                 return dtData;
             }

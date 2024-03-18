@@ -277,6 +277,20 @@ namespace Tools.zhong
         private void btnCreateSelect_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+            if (string.IsNullOrWhiteSpace(txtTableName3.Text.Trim()))
+            {
+                MessageBox.Show("表名未填写！");
+                txtTableName3.Focus();
+                return;
+            }
+
+            txtOuput3.Text = CreateSelectSql();
+        }
+
+        private string CreateSelectSql()
+        {
             string inputText = txtInput3.Text.Trim();
             if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
@@ -285,14 +299,8 @@ namespace Tools.zhong
             string tableName = txtTableName3.Text.Trim();
             string key = txtKey3.Text.Trim();
             int rowsPerCount = int.Parse(txtPerColNum.Text.Trim());
-            if (string.IsNullOrWhiteSpace(tableName))
-            {
-                MessageBox.Show("表名未填写！");
-                txtTableName3.Focus();
-                return;
-            }
-            StringBuilder sbColumns = new StringBuilder();
 
+            StringBuilder sbColumns = new StringBuilder();
             string[] inputVals = inputText.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             inputVals = inputVals.AsEnumerable().Where(i => !string.IsNullOrWhiteSpace(i)).ToArray();
             for (int i = 0; i < inputVals.Length; i++)
@@ -314,12 +322,15 @@ namespace Tools.zhong
                 .Replace("{#COLUMNS}", sbColumns.ToString())
                 .Replace("{#LINE_SPLIT}", System.Environment.NewLine);
 
-            txtOuput3.Text = outText;
+            return outText;
         }
 
         private void btnCreateInsert_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+
             string inputText = txtInput3.Text.Trim();
             if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
@@ -369,6 +380,9 @@ namespace Tools.zhong
         private void btnCreateUpdate_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+
             string inputText = txtInput3.Text.Trim();
             if (inputText.IndexOf(",") != -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
@@ -440,6 +454,9 @@ namespace Tools.zhong
         private void btnCreateDelete_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+
             string tableName = txtTableName3.Text.Trim();
             string key = txtKey3.Text.Trim();
             int rowsPerCount = int.Parse(txtPerColNum.Text.Trim());
@@ -485,6 +502,9 @@ namespace Tools.zhong
         private void btnMerge_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+
             string inputText = txtInput3.Text.Trim();
             if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
@@ -609,6 +629,9 @@ namespace Tools.zhong
         private void btnReCreate_Click(object sender, EventArgs e)
         {
             txtOuput3.Text = "";
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+
             string inputText = txtInput3.Text.Trim();
             if (inputText.IndexOf(",") == -1 && inputText.IndexOf(System.Environment.NewLine) > 0)
             {
@@ -659,6 +682,9 @@ namespace Tools.zhong
         private void btnPage_Click(object sender, EventArgs e)
         {
             string sqlTemplate = string.Empty;
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
+
             var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
             if (dbType == DataBaseType.MySQL)
             {
@@ -809,6 +835,13 @@ namespace Tools.zhong
 
                 btnLoadFromDB.ForeColor = Color.Red;
                 btnLoadView.ForeColor = Color.Black;
+
+                txtOuput3.Visible = true;
+                dataGridViewQuery.Visible = false;
+                if (dtData == null || dtData.Rows.Count == 0)
+                {
+                    lblTableInfo.Text = $"不存在匹配表或视图";
+                }
             }
             catch (Exception ex)
             {
@@ -838,6 +871,13 @@ namespace Tools.zhong
                 }
                 btnLoadFromDB.ForeColor = Color.Black;
                 btnLoadView.ForeColor = Color.Red;
+
+                txtOuput3.Visible = true;
+                dataGridViewQuery.Visible = false;
+                if (dtData == null || dtData.Rows.Count == 0)
+                {
+                    lblTableInfo.Text = $"不存在匹配表或视图";
+                }
             }
             catch (Exception ex)
             {
@@ -865,8 +905,11 @@ namespace Tools.zhong
 
         private void txtTableName3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtOuput3.Visible = true;
+            dataGridViewQuery.Visible = false;
             if (txtTableName3.Items.Count == 0)
             {
+                lblTableInfo.Text = $"不存在匹配表或视图";
                 return;
             }
             try
@@ -1679,56 +1722,109 @@ namespace Tools.zhong
         {
             try
             {
-                string sql = txtInput3.Text.Trim();
-                DataTable dtData = new DataTable();
-                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
-                if (dbType == DataBaseType.ORACLE)
-                {
-                    dtData = OracleHelper.ExecuteDataTable(sql);
-                }
-                else if (dbType == DataBaseType.SQLSERVER)
-                {
-                    dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
-                }
-                else if (dbType == DataBaseType.MySQL)
-                {
-                    dtData = DBHepler.MySQLHelper.ExecuteDataTable(sql);
-                }
-                #region ob...
-                //var resultText = string.Empty;
-                //StringBuilder sb = new StringBuilder();
-                //if (dtData != null)
-                //{
-                //    foreach (DataRow dataRow in dtData.Rows)
-                //    {
-                //        var drData = dataRow[0];
-                //        string drVal = string.Empty;
-                //        if (drData is byte[])
-                //        {
-                //            drVal = System.Text.Encoding.Default.GetString(drData as byte[]);
-                //        }
-                //        else
-                //        {
-                //            drVal = drData?.ToString();
-                //        }
-                //        sb.AppendLine(drVal);
-                //    }
-                //}
-                //txtOuput3.Text = sb.ToString();
-                #endregion
-
+                string sql = CreateSelectSql();
                 saveFileDialog1.Filter = "Excel(*.xlsx)|*.xlsx";
+                saveFileDialog1.FileName = txtTableName3.Text;
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string filePath = saveFileDialog1.FileName;
+                    var dtData = new DataTable();
+                    var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                    if (dbType == DataBaseType.ORACLE)
+                    {
+                        dtData = OracleHelper.ExecuteDataTable(sql);
+                    }
+                    else if (dbType == DataBaseType.SQLSERVER)
+                    {
+                        dtData = DBHepler.SQLHelper.ExecuteDataTable(sql);
+                    }
+                    else if (dbType == DataBaseType.MySQL)
+                    {
+                        dtData = DBHepler.MySQLHelper.ExecuteDataTable(sql);
+                    }
                     var wookbook = ExcelUtil.ToExcel(dtData, System.IO.Path.GetFileName(filePath));
                     using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.CreateNew))
                     {
                         wookbook.Write(fs);
                     }
-                    MessageBox.Show("保存成功！");
+                    lblTableInfo.Text = $"导出成功,共{dtData.Rows.Count}条数据！";
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 导入表数据
+        /// </summary>
+        private void btnImportData_Click(object sender, EventArgs e)
+        {
+            int affectRows = 0;
+            try
+            {
+                string selectCmdText = CreateSelectSql();
+                DataTable dtData = new DataTable();
+                if (openImportExcelFile.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = openImportExcelFile.FileName;
+                    using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        dtData = ExcelUtil.ToDataTable(fs);
+                    }
+                    dtData.TableName = txtTableName3.Text;
+                    var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                    if (dbType == DataBaseType.ORACLE)
+                    {
+                        affectRows = OracleHelper.InsertDataTable(dtData, selectCmdText);
+                    }
+                    else if (dbType == DataBaseType.SQLSERVER)
+                    {
+                        affectRows = DBHepler.SQLHelper.InsertDataTable(dtData, selectCmdText);
+                    }
+                    else if (dbType == DataBaseType.MySQL)
+                    {
+                        affectRows = DBHepler.MySQLHelper.InsertDataTable(dtData, selectCmdText);
+                    }
+
+                    lblTableInfo.Text = $"导入成功，共{affectRows}条！";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 执行查询
+        /// </summary>
+        private void btnSqlQuery_Click(object sender, EventArgs e)
+        {
+            txtOuput3.Visible = false;
+            dataGridViewQuery.Visible = true;
+            try
+            {
+                string selectCmdText = txtInput3.Text.Trim();
+                DataTable dtData = new DataTable();
+                var dbType = (DataBaseType)Enum.Parse(typeof(DataBaseType), cbDBType.Text, true);
+                if (dbType == DataBaseType.ORACLE)
+                {
+                    dtData = OracleHelper.ExecuteDataTable(selectCmdText);
+                }
+                else if (dbType == DataBaseType.SQLSERVER)
+                {
+                    dtData = SQLHelper.ExecuteDataTable(selectCmdText);
+                }
+                else if (dbType == DataBaseType.MySQL)
+                {
+                    dtData = MySQLHelper.ExecuteDataTable(selectCmdText);
+                }
+
+                dataGridViewQuery.DataSource = dtData;
+                lblTableInfo.Text = $"查询执行成功，共{dtData.Rows.Count}条！";
             }
             catch (Exception ex)
             {
@@ -2271,5 +2367,6 @@ namespace Tools.zhong
             var rptCount = values.GroupBy(i => i).Count();
             lblSummary.Text = $"记录：{values.Length} | 重复项：{values.Length - rptCount}";
         }
+
     }
 }

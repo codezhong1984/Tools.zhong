@@ -112,6 +112,7 @@ namespace Tools.zhong
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnImportData = new System.Windows.Forms.Button();
             this.lblTableInfo = new System.Windows.Forms.Label();
             this.txtPerColNum = new System.Windows.Forms.TextBox();
             this.btnSqlFields = new System.Windows.Forms.Button();
@@ -186,6 +187,9 @@ namespace Tools.zhong
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.openImportExcelFile = new System.Windows.Forms.OpenFileDialog();
+            this.btnSqlQuery = new System.Windows.Forms.Button();
+            this.dataGridViewQuery = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -202,6 +206,7 @@ namespace Tools.zhong
             this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuery)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1065,6 +1070,8 @@ namespace Tools.zhong
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnSqlQuery);
+            this.tabPage3.Controls.Add(this.btnImportData);
             this.tabPage3.Controls.Add(this.lblTableInfo);
             this.tabPage3.Controls.Add(this.txtPerColNum);
             this.tabPage3.Controls.Add(this.btnSqlFields);
@@ -1100,14 +1107,30 @@ namespace Tools.zhong
             this.tabPage3.Controls.Add(this.txtOuput3);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.btnCreateInsert);
+            this.tabPage3.Controls.Add(this.dataGridViewQuery);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Size = new System.Drawing.Size(1076, 613);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "SQL辅助";
+            this.tabPage3.Text = "数据库辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnImportData
+            // 
+            this.btnImportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnImportData.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnImportData.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnImportData.Location = new System.Drawing.Point(567, 301);
+            this.btnImportData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnImportData.Name = "btnImportData";
+            this.btnImportData.Size = new System.Drawing.Size(111, 31);
+            this.btnImportData.TabIndex = 45;
+            this.btnImportData.Text = "导入数据";
+            this.toolTip1.SetToolTip(this.btnImportData, "Input SQL in top left inputTextBox!");
+            this.btnImportData.UseVisualStyleBackColor = true;
+            this.btnImportData.Click += new System.EventHandler(this.btnImportData_Click);
             // 
             // lblTableInfo
             // 
@@ -1210,9 +1233,9 @@ namespace Tools.zhong
             this.btnPage.Location = new System.Drawing.Point(567, 266);
             this.btnPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPage.Name = "btnPage";
-            this.btnPage.Size = new System.Drawing.Size(85, 31);
+            this.btnPage.Size = new System.Drawing.Size(111, 31);
             this.btnPage.TabIndex = 42;
-            this.btnPage.Text = "PAGE";
+            this.btnPage.Text = "分页";
             this.btnPage.UseVisualStyleBackColor = true;
             this.btnPage.Click += new System.EventHandler(this.btnPage_Click);
             // 
@@ -1226,7 +1249,7 @@ namespace Tools.zhong
             this.btnReCreate.Name = "btnReCreate";
             this.btnReCreate.Size = new System.Drawing.Size(111, 31);
             this.btnReCreate.TabIndex = 41;
-            this.btnReCreate.Text = "RECREATE";
+            this.btnReCreate.Text = "重建表";
             this.btnReCreate.UseVisualStyleBackColor = true;
             this.btnReCreate.Click += new System.EventHandler(this.btnReCreate_Click);
             // 
@@ -1384,7 +1407,7 @@ namespace Tools.zhong
             this.btnExportData.Name = "btnExportData";
             this.btnExportData.Size = new System.Drawing.Size(111, 31);
             this.btnExportData.TabIndex = 24;
-            this.btnExportData.Text = "EXPORT";
+            this.btnExportData.Text = "导出数据";
             this.toolTip1.SetToolTip(this.btnExportData, "Input SQL in top left inputTextBox!");
             this.btnExportData.UseVisualStyleBackColor = true;
             this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click);
@@ -1986,6 +2009,42 @@ namespace Tools.zhong
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Tool Tip";
             // 
+            // openImportExcelFile
+            // 
+            this.openImportExcelFile.FileName = "openFileDialog1";
+            this.openImportExcelFile.Filter = "Excel文件|*.xlsx";
+            // 
+            // btnSqlQuery
+            // 
+            this.btnSqlQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSqlQuery.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSqlQuery.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSqlQuery.Location = new System.Drawing.Point(682, 266);
+            this.btnSqlQuery.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSqlQuery.Name = "btnSqlQuery";
+            this.btnSqlQuery.Size = new System.Drawing.Size(111, 31);
+            this.btnSqlQuery.TabIndex = 46;
+            this.btnSqlQuery.Text = "执行查询";
+            this.btnSqlQuery.UseVisualStyleBackColor = true;
+            this.btnSqlQuery.Click += new System.EventHandler(this.btnSqlQuery_Click);
+            // 
+            // dataGridViewQuery
+            // 
+            this.dataGridViewQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewQuery.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridViewQuery.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridViewQuery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewQuery.ContextMenuStrip = this.cmsDataGridView;
+            this.dataGridViewQuery.Location = new System.Drawing.Point(0, 338);
+            this.dataGridViewQuery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridViewQuery.Name = "dataGridViewQuery";
+            this.dataGridViewQuery.RowHeadersWidth = 51;
+            this.dataGridViewQuery.RowTemplate.Height = 27;
+            this.dataGridViewQuery.Size = new System.Drawing.Size(1070, 245);
+            this.dataGridViewQuery.TabIndex = 47;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -2022,6 +2081,7 @@ namespace Tools.zhong
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuery)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2182,6 +2242,10 @@ namespace Tools.zhong
         private System.Windows.Forms.ToolStripMenuItem tsmTrimString;
         private System.Windows.Forms.ToolStripMenuItem tsmSqlinRollback;
         private System.Windows.Forms.ToolStripMenuItem tsmStringBuilder;
+        private System.Windows.Forms.Button btnImportData;
+        private System.Windows.Forms.OpenFileDialog openImportExcelFile;
+        private System.Windows.Forms.Button btnSqlQuery;
+        private System.Windows.Forms.DataGridView dataGridViewQuery;
     }
 }
 

@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Data.Common;
 
 namespace DBHepler
-{ 
+{
     /// <summary>
     /// TPV数据库操作层DAL调用
     /// </summary>
@@ -163,7 +163,7 @@ namespace DBHepler
                     adt.Fill(ds);
                     return ds;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return null;
                 }
@@ -497,6 +497,42 @@ namespace DBHepler
                     bulkCopy.WriteToServer(dtData);
                 }
             };
+        }
+
+        /// <summary>  
+        /// 添加DataTable的数据到表中
+        /// </summary>  
+        public static int InsertDataTable(DataTable dtData, string selectCmdText)
+        {
+            using (var connection = GetSqlConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand(selectCmdText, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        SqlDataAdapter myDataAdapter = new SqlDataAdapter();
+                        myDataAdapter.SelectCommand = new SqlCommand(selectCmdText, connection);
+                        SqlCommandBuilder cmdBuilder = new SqlCommandBuilder(myDataAdapter);
+                        cmdBuilder.ConflictOption = ConflictOption.OverwriteChanges;
+                        cmdBuilder.SetAllValues = true;
+                        foreach (DataRow dr in dtData.Rows)
+                        {
+                            if (dr.RowState == DataRowState.Unchanged)
+                                dr.SetModified();
+                        }
+                        int affectRows = myDataAdapter.Update(dtData);
+                        dtData.AcceptChanges();
+                        myDataAdapter.Dispose();
+                        return affectRows;
+                    }
+                    catch (System.Data.OracleClient.OracleException ex)
+                    {
+                        connection.Close();
+                        throw new Exception("数据导入异常：", ex);
+                    }
+                }
+            }
         }
     }
 }

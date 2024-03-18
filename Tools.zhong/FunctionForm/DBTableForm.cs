@@ -221,6 +221,8 @@ namespace Tools.zhong
 
             tbFilter.Text = FilterText;
             cbLikeType.Text = LikeType;
+
+            btnLoad_Click(null, null);
         }
 
         private void cbTableName_SelectedIndexChanged(object sender, EventArgs e)

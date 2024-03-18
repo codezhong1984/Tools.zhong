@@ -162,6 +162,48 @@ namespace Tools.zhong.UtilHelper
         }
 
         #endregion
+
+        /// <summary>
+        /// 导入excel到DataTable中，首行当做表头处理
+        /// </summary>
+        public static DataTable ToDataTable(System.IO.Stream stream)
+        {
+            DataTable dt = new DataTable();
+            using (stream)
+            {
+                //根据路径通过已存在的excel来创建HSSFWorkbook，即整个excel文档
+                XSSFWorkbook xssfworkbook = new XSSFWorkbook(stream);
+                //获取excel的第一个sheet
+                ISheet sheet = xssfworkbook.GetSheetAt(0);
+                //获取sheet的首行                
+                IRow headerRow = sheet.GetRow(sheet.FirstRowNum);
+                //一行最后一个方格的编号 即总的列数
+                int cellCount = headerRow.LastCellNum;
+                for (int i = 0; i < cellCount; i++)
+                {
+                    var cellValue = ExcelCellUtil.GetValueType(headerRow.GetCell(i) as XSSFCell, CellType.String);
+                    dt.Columns.Add(new DataColumn(cellValue == null ? i.ToString() : cellValue.ToString()));
+                }
+
+                //最后一列的标号  即总的行数
+                int rowCount = sheet.LastRowNum;
+
+                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++)
+                {
+                    IRow row = sheet.GetRow(i);
+                    DataRow dr = dt.NewRow();
+                    for (int cindex = 0; cindex < cellCount; cindex++)
+                    {
+                        var cellValue = ExcelCellUtil.GetValueType(row.GetCell(cindex) as XSSFCell, CellType.String);
+                        dr[cindex] = cellValue;
+                    }
+                    dt.Rows.Add(dr);
+                }
+                xssfworkbook = null;
+                sheet = null;
+            }
+            return dt;
+        }
     }
 
     #region Excel导入导出
@@ -504,48 +546,6 @@ namespace Tools.zhong.UtilHelper
         #endregion
 
         #region dataTable
-
-        /// <summary>
-        /// 导入excel到DataTable中，首行当做表头处理
-        /// </summary>
-        public static DataTable ToDataTable(System.IO.Stream stream)
-        {
-            DataTable dt = new DataTable();
-            using (stream)
-            {
-                //根据路径通过已存在的excel来创建HSSFWorkbook，即整个excel文档
-                XSSFWorkbook xssfworkbook = new XSSFWorkbook(stream);
-                //获取excel的第一个sheet
-                ISheet sheet = xssfworkbook.GetSheetAt(0);
-                //获取sheet的首行                
-                IRow headerRow = sheet.GetRow(sheet.FirstRowNum);
-                //一行最后一个方格的编号 即总的列数
-                int cellCount = headerRow.LastCellNum;
-                for (int i = 1; i <= cellCount; i++)
-                {
-                    var cellValue = ExcelCellUtil.GetValueType(headerRow.GetCell(i) as XSSFCell, CellType.String);
-                    dt.Columns.Add(new DataColumn(cellValue == null ? i.ToString() : cellValue.ToString()));
-                }
-
-                //最后一列的标号  即总的行数
-                int rowCount = sheet.LastRowNum;
-
-                for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++)
-                {
-                    IRow row = sheet.GetRow(i);
-                    DataRow dr = dt.NewRow();
-                    for (int cindex = 0; cindex < cellCount; cindex++)
-                    {
-                        var cellValue = ExcelCellUtil.GetValueType(row.GetCell(cindex) as XSSFCell, CellType.String);
-                        dr[cindex] = cellValue;
-                    }
-                    dt.Rows.Add(row);
-                }
-                xssfworkbook = null;
-                sheet = null;
-            }
-            return dt;
-        }
 
         /// <summary>
         /// 导出DataTable到excel中

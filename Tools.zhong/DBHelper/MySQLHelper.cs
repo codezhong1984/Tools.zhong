@@ -557,5 +557,42 @@ namespace DBHepler
             }
             return sb.ToString();
         }
+
+
+        /// <summary>  
+        /// 添加DataTable的数据到表中
+        /// </summary>  
+        public static int InsertDataTable(DataTable dtData, string selectCmdText)
+        {
+            using (var connection = GetMySqlConnection())
+            {
+                using (MySqlCommand cmd = new MySqlCommand(selectCmdText, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        MySqlDataAdapter myDataAdapter = new MySqlDataAdapter();
+                        myDataAdapter.SelectCommand = new MySqlCommand(selectCmdText, connection);
+                        MySqlCommandBuilder cmdBuilder = new MySqlCommandBuilder(myDataAdapter);
+                        cmdBuilder.ConflictOption = ConflictOption.OverwriteChanges;
+                        cmdBuilder.SetAllValues = true;
+                        foreach (DataRow dr in dtData.Rows)
+                        {
+                            if (dr.RowState == DataRowState.Unchanged)
+                                dr.SetModified();
+                        }
+                        int affectRows = myDataAdapter.Update(dtData);
+                        dtData.AcceptChanges();
+                        myDataAdapter.Dispose();
+                        return affectRows;
+                    }
+                    catch (System.Data.OracleClient.OracleException ex)
+                    {
+                        connection.Close();
+                        throw new Exception("数据导入异常：", ex);
+                    }
+                }
+            }
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace DBHepler
             DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
             builder.ConnectionString = connectionString;
             string databaseName = builder["Data Source"] as string;
-            databaseName = databaseName.Substring(databaseName.IndexOf("/")+1);
+            databaseName = databaseName.Substring(databaseName.IndexOf("/") + 1);
             return databaseName;
         }
 
@@ -98,6 +98,42 @@ namespace DBHepler
             return table;
         }
 
+        /// <summary>  
+        /// 添加DataTable的数据到表中
+        /// </summary>  
+        public static int InsertDataTable(DataTable dtData, string selectCmdText)
+        {
+            using (OracleConnection connection = GetOracleConnection())
+            {
+                using (OracleCommand cmd = new OracleCommand(selectCmdText, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        OracleDataAdapter myDataAdapter = new OracleDataAdapter();
+                        myDataAdapter.SelectCommand = new OracleCommand(selectCmdText, connection);
+                        OracleCommandBuilder cmdBuilder = new OracleCommandBuilder(myDataAdapter);
+                        cmdBuilder.ConflictOption = ConflictOption.OverwriteChanges;
+                        cmdBuilder.SetAllValues = true;
+                        foreach (DataRow dr in dtData.Rows)
+                        {
+                            if (dr.RowState == DataRowState.Unchanged)
+                                dr.SetModified();
+                        }
+                        int affectRows = myDataAdapter.Update(dtData);
+                        dtData.AcceptChanges();
+                        myDataAdapter.Dispose();
+                        return affectRows;
+                    }
+                    catch (System.Data.OracleClient.OracleException ex)
+                    {
+                        connection.Close();
+                        throw new Exception("数据导入异常：", ex);
+                    }
+                }
+            }
+        }
+
         public static DataTable ExecuteDataTablePaging(int pageIndex, int pageSize, bool retTotalCount, ref int totalCount, OracleTransaction trans, string cmdText, params OracleParameter[] commandParameters)
         {
             if (retTotalCount)
@@ -120,7 +156,7 @@ namespace DBHepler
         {
             return ExecuteScalar(null, cmdType, cmdText, commandParameters);
         }
-               
+
         ///    <summary>  
         ///    执行数据库事务查询操作,返回结果集中位于第一行第一列的Object类型的值  
         ///    </summary>  
@@ -152,7 +188,7 @@ namespace DBHepler
             }
             return result;
         }
-        
+
 
         /// <summary>  
         /// 执行数据库查询操作,返回受影响的行数  
@@ -479,7 +515,7 @@ namespace DBHepler
                 {
                     cmd.CommandText = cmdText;
                     cmd.Parameters.Clear();
-                    return  cmd.ExecuteScalar();
+                    return cmd.ExecuteScalar();
                 }
             }
         }
