@@ -921,6 +921,10 @@ namespace Tools.zhong
                 if (dbType == DataBaseType.ORACLE)
                 {
                     var colList = DbObjectHelper.GetColumnsForOracle(tableName);
+                    if (cbOrderByFieldName.Checked)
+                    {
+                        colList = colList?.OrderBy(i => i.FieldName)?.ToList();
+                    }
                     txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
                     txtKey3.Text = string.Join(",", DbObjectHelper.GetOracleTablePrimaryKey(tableName));
                     tableInfoModel = DbObjectHelper.GetOracleTableInfo(tableName);
@@ -928,6 +932,10 @@ namespace Tools.zhong
                 if (dbType == DataBaseType.SQLSERVER)
                 {
                     var colList = DbObjectHelper.GetColumnsForSqlServer(tableName, ViewFlag);
+                    if (cbOrderByFieldName.Checked)
+                    {
+                        colList = colList?.OrderBy(i => i.FieldName)?.ToList();
+                    }
                     txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
                     txtKey3.Text = string.Join(",", DbObjectHelper.GetSqlServerTablePrimaryKey(tableName));
                     tableInfoModel = DbObjectHelper.GetSqlServerTableInfo(tableName, ViewFlag);
@@ -936,6 +944,10 @@ namespace Tools.zhong
                 {
                     var dbName = DbObjectHelper.GetDataBaseName(dbType);
                     var colList = DbObjectHelper.GetColumnsForMySQL(dbName, tableName);
+                    if (cbOrderByFieldName.Checked)
+                    {
+                        colList = colList?.OrderBy(i => i.FieldName)?.ToList();
+                    }
                     txtInput3.Text = string.Join(",", colList.Select(i => i.FieldName));
                     txtKey3.Text = string.Join(",", DbObjectHelper.GetMySqlTablePrimaryKey(dbName, tableName));
                     tableInfoModel = DbObjectHelper.GetMySqlTableInfo(dbName, tableName);
@@ -1906,16 +1918,28 @@ namespace Tools.zhong
                         if (dbType == DataBaseType.ORACLE)
                         {
                             var list = DbObjectHelper.GetColumnsForOracle(tableName);
+                            if (cbOrderByFieldName.Checked)
+                            {
+                                list = list?.OrderBy(i => i.FieldName)?.ToList();
+                            }
                             lists.Add(list);
                         }
                         else if (dbType == DataBaseType.SQLSERVER)
                         {
                             var list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+                            if (cbOrderByFieldName.Checked)
+                            {
+                                list = list?.OrderBy(i => i.FieldName)?.ToList();
+                            }
                             lists.Add(list);
                         }
                         else if (dbType == DataBaseType.MySQL)
                         {
                             var list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
+                            if (cbOrderByFieldName.Checked)
+                            {
+                                list = list?.OrderBy(i => i.FieldName)?.ToList();
+                            }
                             lists.Add(list);
                         }
                     }
@@ -1956,16 +1980,28 @@ namespace Tools.zhong
                         if (dbType == DataBaseType.ORACLE)
                         {
                             var list = DbObjectHelper.GetColumnsForOracle(tableName);
+                            if (cbOrderByFieldName.Checked)
+                            {
+                                list = list?.OrderBy(i => i.FieldName)?.ToList();
+                            }
                             lists.Add(list);
                         }
                         else if (dbType == DataBaseType.SQLSERVER)
                         {
                             var list = DbObjectHelper.GetColumnsForSqlServer(tableName);
+                            if (cbOrderByFieldName.Checked)
+                            {
+                                list = list?.OrderBy(i => i.FieldName)?.ToList();
+                            }
                             lists.Add(list);
                         }
                         else if (dbType == DataBaseType.MySQL)
                         {
                             var list = DbObjectHelper.GetColumnsForMySQL(dataBaseName, tableName);
+                            if (cbOrderByFieldName.Checked)
+                            {
+                                list = list?.OrderBy(i => i.FieldName)?.ToList();
+                            }
                             lists.Add(list);
                         }
                     }
