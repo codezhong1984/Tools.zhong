@@ -112,6 +112,7 @@ namespace Tools.zhong
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbOrderByFieldName = new System.Windows.Forms.CheckBox();
             this.btnSqlQuery = new System.Windows.Forms.Button();
             this.btnImportData = new System.Windows.Forms.Button();
             this.lblTableInfo = new System.Windows.Forms.Label();
@@ -190,7 +191,6 @@ namespace Tools.zhong
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.openImportExcelFile = new System.Windows.Forms.OpenFileDialog();
-            this.cbOrderByFieldName = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -601,32 +601,34 @@ namespace Tools.zhong
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 856);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(293, 884);
             this.toolTip1.SetToolTip(this.contextMenuStrip1, "\r\n");
             // 
             // tsmReplaceLine
             // 
             this.tsmReplaceLine.Name = "tsmReplaceLine";
-            this.tsmReplaceLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmReplaceLine.Size = new System.Drawing.Size(292, 24);
             this.tsmReplaceLine.Text = "删除回车换行";
             this.tsmReplaceLine.Click += new System.EventHandler(this.tsmReplaceLine_Click);
             // 
             // tsmTrim
             // 
             this.tsmTrim.Name = "tsmTrim";
-            this.tsmTrim.Size = new System.Drawing.Size(233, 24);
+            this.tsmTrim.Size = new System.Drawing.Size(292, 24);
             this.tsmTrim.Text = "删除首尾空格";
             this.tsmTrim.Click += new System.EventHandler(this.tsmTrim_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmToOneDHLine
             // 
             this.tsmToOneDHLine.Name = "tsmToOneDHLine";
-            this.tsmToOneDHLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmToOneDHLine.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Oemcomma)));
+            this.tsmToOneDHLine.Size = new System.Drawing.Size(292, 24);
             this.tsmToOneDHLine.Text = "逗号合并";
             this.tsmToOneDHLine.ToolTipText = "分隔符替换为逗号合并，示例：aaa\\r\\nbbb->aaa,bbb";
             this.tsmToOneDHLine.Click += new System.EventHandler(this.tsmToOneDHLine_Click);
@@ -634,104 +636,108 @@ namespace Tools.zhong
             // tsmDh2Hh
             // 
             this.tsmDh2Hh.Name = "tsmDh2Hh";
-            this.tsmDh2Hh.Size = new System.Drawing.Size(233, 24);
+            this.tsmDh2Hh.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemcomma)));
+            this.tsmDh2Hh.Size = new System.Drawing.Size(292, 24);
             this.tsmDh2Hh.Text = "逗号>换行";
             this.tsmDh2Hh.Click += new System.EventHandler(this.tsmDh2Hh_Click);
             // 
             // tsmKg2Dh
             // 
             this.tsmKg2Dh.Name = "tsmKg2Dh";
-            this.tsmKg2Dh.Size = new System.Drawing.Size(233, 24);
+            this.tsmKg2Dh.Size = new System.Drawing.Size(292, 24);
             this.tsmKg2Dh.Text = "空格>逗号";
             this.tsmKg2Dh.Click += new System.EventHandler(this.tsmKg2Dh_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmCustomLine
             // 
             this.tsmCustomLine.Name = "tsmCustomLine";
-            this.tsmCustomLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmCustomLine.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.tsmCustomLine.Size = new System.Drawing.Size(292, 24);
             this.tsmCustomLine.Text = "定制化换行";
             this.tsmCustomLine.Click += new System.EventHandler(this.tsmCustomLine_Click);
             // 
             // tsmTrimRepeat
             // 
             this.tsmTrimRepeat.Name = "tsmTrimRepeat";
-            this.tsmTrimRepeat.Size = new System.Drawing.Size(233, 24);
+            this.tsmTrimRepeat.Size = new System.Drawing.Size(292, 24);
             this.tsmTrimRepeat.Text = "去除重复项";
             this.tsmTrimRepeat.Click += new System.EventHandler(this.tsmTrimRepeat_Click);
             // 
             // tsmSplitInsertString
             // 
             this.tsmSplitInsertString.Name = "tsmSplitInsertString";
-            this.tsmSplitInsertString.Size = new System.Drawing.Size(233, 24);
+            this.tsmSplitInsertString.Size = new System.Drawing.Size(292, 24);
             this.tsmSplitInsertString.Text = "添加字符串（指定分隔符）";
             this.tsmSplitInsertString.Click += new System.EventHandler(this.tsmSplitInsertString_Click);
             // 
             // tsmTrimString
             // 
             this.tsmTrimString.Name = "tsmTrimString";
-            this.tsmTrimString.Size = new System.Drawing.Size(233, 24);
+            this.tsmTrimString.Size = new System.Drawing.Size(292, 24);
             this.tsmTrimString.Text = "删除字符串（指定分隔符）";
             this.tsmTrimString.Click += new System.EventHandler(this.tsmSplitTrimString_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmNewLine2DyhIn
             // 
             this.tsmNewLine2DyhIn.Name = "tsmNewLine2DyhIn";
-            this.tsmNewLine2DyhIn.Size = new System.Drawing.Size(233, 24);
+            this.tsmNewLine2DyhIn.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.tsmNewLine2DyhIn.Size = new System.Drawing.Size(292, 24);
             this.tsmNewLine2DyhIn.Text = "SQLIN";
             this.tsmNewLine2DyhIn.Click += new System.EventHandler(this.tsmNewLine2DyhIn_Click);
             // 
             // tsmSqlinRollback
             // 
             this.tsmSqlinRollback.Name = "tsmSqlinRollback";
-            this.tsmSqlinRollback.Size = new System.Drawing.Size(233, 24);
+            this.tsmSqlinRollback.Size = new System.Drawing.Size(292, 24);
             this.tsmSqlinRollback.Text = "SQLIN恢复";
             this.tsmSqlinRollback.Click += new System.EventHandler(this.tsmSqlinRollback_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmiDtS
             // 
             this.tsmiDtS.Name = "tsmiDtS";
-            this.tsmiDtS.Size = new System.Drawing.Size(233, 24);
+            this.tsmiDtS.Size = new System.Drawing.Size(292, 24);
             this.tsmiDtS.Text = "单引号>双引号";
             this.tsmiDtS.Click += new System.EventHandler(this.tsmiDtS_Click);
             // 
             // tsmiStD
             // 
             this.tsmiStD.Name = "tsmiStD";
-            this.tsmiStD.Size = new System.Drawing.Size(233, 24);
+            this.tsmiStD.Size = new System.Drawing.Size(292, 24);
             this.tsmiStD.Text = "双引号>单引号";
             this.tsmiStD.Click += new System.EventHandler(this.tsmiStD_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmStringBuilder
             // 
             this.tsmStringBuilder.Name = "tsmStringBuilder";
-            this.tsmStringBuilder.Size = new System.Drawing.Size(233, 24);
+            this.tsmStringBuilder.Size = new System.Drawing.Size(292, 24);
             this.tsmStringBuilder.Text = "生成StringBuilder";
             this.tsmStringBuilder.Click += new System.EventHandler(this.tsmStringBuilder_Click);
             // 
             // tsmDyhzy
             // 
             this.tsmDyhzy.Name = "tsmDyhzy";
-            this.tsmDyhzy.Size = new System.Drawing.Size(233, 24);
+            this.tsmDyhzy.Size = new System.Drawing.Size(292, 24);
             this.tsmDyhzy.Text = "SQL转义(逗号）";
             this.tsmDyhzy.ToolTipText = "示例：Hello\" World, Zhang\'S > Hello\'\'\'\' World, Zhang\'\'S";
             this.tsmDyhzy.Click += new System.EventHandler(this.tsmDyhzy_Click);
@@ -739,7 +745,7 @@ namespace Tools.zhong
             // tsmSyhZy
             // 
             this.tsmSyhZy.Name = "tsmSyhZy";
-            this.tsmSyhZy.Size = new System.Drawing.Size(233, 24);
+            this.tsmSyhZy.Size = new System.Drawing.Size(292, 24);
             this.tsmSyhZy.Text = "代码转义(\\)";
             this.tsmSyhZy.ToolTipText = "示例：Hello\" World, Zhang\'S > Hello\'\'\'\' World, Zhang\'\'S";
             this.tsmSyhZy.Click += new System.EventHandler(this.tsmSyhZy_Click);
@@ -747,13 +753,13 @@ namespace Tools.zhong
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmAddDyh
             // 
             this.tsmAddDyh.AutoToolTip = true;
             this.tsmAddDyh.Name = "tsmAddDyh";
-            this.tsmAddDyh.Size = new System.Drawing.Size(233, 24);
+            this.tsmAddDyh.Size = new System.Drawing.Size(292, 24);
             this.tsmAddDyh.Text = "添加单引号";
             this.tsmAddDyh.ToolTipText = "按指定的分隔符分隔，每个子项添加单引号包括起来。如：a,b ->‘a’,‘b’";
             this.tsmAddDyh.Click += new System.EventHandler(this.tsmAddDyh_Click);
@@ -762,7 +768,7 @@ namespace Tools.zhong
             // 
             this.tsmAddSyh.AutoToolTip = true;
             this.tsmAddSyh.Name = "tsmAddSyh";
-            this.tsmAddSyh.Size = new System.Drawing.Size(233, 24);
+            this.tsmAddSyh.Size = new System.Drawing.Size(292, 24);
             this.tsmAddSyh.Text = "添加双引号";
             this.tsmAddSyh.ToolTipText = "按指定的分隔符分隔，每个子项添加双引号包括起来。如：a,b ->\"a\",\"b\"";
             this.tsmAddSyh.Click += new System.EventHandler(this.tsmAddSyh_Click);
@@ -770,79 +776,79 @@ namespace Tools.zhong
             // tsmDelDyh
             // 
             this.tsmDelDyh.Name = "tsmDelDyh";
-            this.tsmDelDyh.Size = new System.Drawing.Size(233, 24);
+            this.tsmDelDyh.Size = new System.Drawing.Size(292, 24);
             this.tsmDelDyh.Text = "删除单引号";
             this.tsmDelDyh.Click += new System.EventHandler(this.tsmDelDyh_Click);
             // 
             // tsmDelSyh
             // 
             this.tsmDelSyh.Name = "tsmDelSyh";
-            this.tsmDelSyh.Size = new System.Drawing.Size(233, 24);
+            this.tsmDelSyh.Size = new System.Drawing.Size(292, 24);
             this.tsmDelSyh.Text = "删除双引号";
             this.tsmDelSyh.Click += new System.EventHandler(this.tsmDelSyh_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmAddComma
             // 
             this.tsmAddComma.Name = "tsmAddComma";
-            this.tsmAddComma.Size = new System.Drawing.Size(233, 24);
+            this.tsmAddComma.Size = new System.Drawing.Size(292, 24);
             this.tsmAddComma.Text = "结尾添加逗号";
             this.tsmAddComma.Click += new System.EventHandler(this.tsmAddComma_Click);
             // 
             // tsmDelComma
             // 
             this.tsmDelComma.Name = "tsmDelComma";
-            this.tsmDelComma.Size = new System.Drawing.Size(233, 24);
+            this.tsmDelComma.Size = new System.Drawing.Size(292, 24);
             this.tsmDelComma.Text = "结尾去除逗号";
             this.tsmDelComma.Click += new System.EventHandler(this.tsmDelComma_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmBlankToUpper
             // 
             this.tsmBlankToUpper.Name = "tsmBlankToUpper";
-            this.tsmBlankToUpper.Size = new System.Drawing.Size(233, 24);
+            this.tsmBlankToUpper.Size = new System.Drawing.Size(292, 24);
             this.tsmBlankToUpper.Text = "单词中间空格换大写字母";
             this.tsmBlankToUpper.Click += new System.EventHandler(this.tsmBlankToUpper_Click);
             // 
             // tsmLineToUpper
             // 
             this.tsmLineToUpper.Name = "tsmLineToUpper";
-            this.tsmLineToUpper.Size = new System.Drawing.Size(233, 24);
+            this.tsmLineToUpper.Size = new System.Drawing.Size(292, 24);
             this.tsmLineToUpper.Text = "横线换大写字母";
             this.tsmLineToUpper.Click += new System.EventHandler(this.tsmLineToUpper_Click);
             // 
             // tsmUpperToLine
             // 
             this.tsmUpperToLine.Name = "tsmUpperToLine";
-            this.tsmUpperToLine.Size = new System.Drawing.Size(233, 24);
+            this.tsmUpperToLine.Size = new System.Drawing.Size(292, 24);
             this.tsmUpperToLine.Text = "大写字母换横线";
             this.tsmUpperToLine.Click += new System.EventHandler(this.tsmUpperToLine_Click);
             // 
             // tsmToCamel
             // 
             this.tsmToCamel.Name = "tsmToCamel";
-            this.tsmToCamel.Size = new System.Drawing.Size(233, 24);
+            this.tsmToCamel.Size = new System.Drawing.Size(292, 24);
             this.tsmToCamel.Text = "ToCamel";
             this.tsmToCamel.Click += new System.EventHandler(this.tsmToCamel_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmUndo
             // 
             this.tsmUndo.Name = "tsmUndo";
             this.tsmUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.tsmUndo.Size = new System.Drawing.Size(233, 24);
+            this.tsmUndo.Size = new System.Drawing.Size(292, 24);
             this.tsmUndo.Text = "撤销";
             this.tsmUndo.Click += new System.EventHandler(this.tsmUndo_Click);
             // 
@@ -850,27 +856,27 @@ namespace Tools.zhong
             // 
             this.tsmRedo.Name = "tsmRedo";
             this.tsmRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.tsmRedo.Size = new System.Drawing.Size(233, 24);
+            this.tsmRedo.Size = new System.Drawing.Size(292, 24);
             this.tsmRedo.Text = "重做";
             this.tsmRedo.Click += new System.EventHandler(this.tsmRedo_Click);
             // 
             // tsmClearHis
             // 
             this.tsmClearHis.Name = "tsmClearHis";
-            this.tsmClearHis.Size = new System.Drawing.Size(233, 24);
+            this.tsmClearHis.Size = new System.Drawing.Size(292, 24);
             this.tsmClearHis.Text = "清空历史记录";
             this.tsmClearHis.Click += new System.EventHandler(this.tsmClearHis_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(289, 6);
             // 
             // tsmFirstUpper
             // 
             this.tsmFirstUpper.Name = "tsmFirstUpper";
             this.tsmFirstUpper.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Up)));
-            this.tsmFirstUpper.Size = new System.Drawing.Size(233, 24);
+            this.tsmFirstUpper.Size = new System.Drawing.Size(292, 24);
             this.tsmFirstUpper.Text = "首字母大写";
             this.tsmFirstUpper.Click += new System.EventHandler(this.tsmFirstUpper_Click);
             // 
@@ -878,7 +884,7 @@ namespace Tools.zhong
             // 
             this.tsmToFirstLower.Name = "tsmToFirstLower";
             this.tsmToFirstLower.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Down)));
-            this.tsmToFirstLower.Size = new System.Drawing.Size(233, 24);
+            this.tsmToFirstLower.Size = new System.Drawing.Size(292, 24);
             this.tsmToFirstLower.Text = "首字母小写";
             this.tsmToFirstLower.Click += new System.EventHandler(this.tsmFirstLower_Click);
             // 
@@ -886,7 +892,7 @@ namespace Tools.zhong
             // 
             this.tsmToUpper.Name = "tsmToUpper";
             this.tsmToUpper.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
-            this.tsmToUpper.Size = new System.Drawing.Size(233, 24);
+            this.tsmToUpper.Size = new System.Drawing.Size(292, 24);
             this.tsmToUpper.Text = "全部大写";
             this.tsmToUpper.Click += new System.EventHandler(this.tsmToUpper_Click);
             // 
@@ -894,7 +900,7 @@ namespace Tools.zhong
             // 
             this.tsmToLower.Name = "tsmToLower";
             this.tsmToLower.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
-            this.tsmToLower.Size = new System.Drawing.Size(233, 24);
+            this.tsmToLower.Size = new System.Drawing.Size(292, 24);
             this.tsmToLower.Text = "全部小写";
             this.tsmToLower.Click += new System.EventHandler(this.tsmToLower_Click);
             // 
@@ -1118,6 +1124,18 @@ namespace Tools.zhong
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "数据库辅助";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cbOrderByFieldName
+            // 
+            this.cbOrderByFieldName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbOrderByFieldName.AutoSize = true;
+            this.cbOrderByFieldName.Location = new System.Drawing.Point(834, 307);
+            this.cbOrderByFieldName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbOrderByFieldName.Name = "cbOrderByFieldName";
+            this.cbOrderByFieldName.Size = new System.Drawing.Size(119, 19);
+            this.cbOrderByFieldName.TabIndex = 48;
+            this.cbOrderByFieldName.Text = "按字段名排序";
+            this.cbOrderByFieldName.UseVisualStyleBackColor = true;
             // 
             // btnSqlQuery
             // 
@@ -2046,18 +2064,6 @@ namespace Tools.zhong
             // 
             this.openImportExcelFile.FileName = "openFileDialog1";
             this.openImportExcelFile.Filter = "Excel文件|*.xlsx";
-            // 
-            // cbOrderByFieldName
-            // 
-            this.cbOrderByFieldName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbOrderByFieldName.AutoSize = true;
-            this.cbOrderByFieldName.Location = new System.Drawing.Point(834, 307);
-            this.cbOrderByFieldName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbOrderByFieldName.Name = "cbOrderByFieldName";
-            this.cbOrderByFieldName.Size = new System.Drawing.Size(119, 19);
-            this.cbOrderByFieldName.TabIndex = 48;
-            this.cbOrderByFieldName.Text = "按字段名排序";
-            this.cbOrderByFieldName.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
