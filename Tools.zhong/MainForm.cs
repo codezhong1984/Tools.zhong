@@ -46,6 +46,8 @@ namespace Tools.zhong
         //SQL脚本参数前辍
         private string SQL_PARAM_PREFIX = "@";
 
+        private const string _DOCX_TITLE_TOOLTIP = "请填写文档标题";
+
         private DataTable dt;
 
         private int _HistoryIndex = -1;
@@ -1844,6 +1846,7 @@ namespace Tools.zhong
             }
         }
 
+        [Obsolete]
         /// <summary>
         /// 生成数据字典（单表)
         /// </summary>
@@ -1877,7 +1880,8 @@ namespace Tools.zhong
                         data = DbObjectHelper.GetColumnsForMySQL(dataBaseName, txtTableName3.Text.Trim());
                     }
                     dataBaseName = txtDocxTitle.Text.Trim().Length > 0 ? txtDocxTitle.Text.Trim() : dataBaseName;
-                    DocxHelper.GenerateDocxByTable(filePath, dataBaseName, data, cbHideNumberCol.Checked);
+                    DocxHelper docxHelper = new DocxHelper(rbCnLang.Checked);
+                    docxHelper.GenerateDocxByTable(filePath, dataBaseName, data, cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -1943,8 +1947,9 @@ namespace Tools.zhong
                             lists.Add(list);
                         }
                     }
-
-                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists, cbHideNumberCol.Checked);
+                    DocxHelper docxHelper = new DocxHelper(rbCnLang.Checked);
+                    var docxTitle = txtDocxTitle.Text.Trim() == _DOCX_TITLE_TOOLTIP ? "" : txtDocxTitle.Text.Trim();
+                    docxHelper.GenerateDocxByTables(filePath, docxTitle, lists, cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -2006,7 +2011,9 @@ namespace Tools.zhong
                         }
                     }
 
-                    DocxHelper.GenerateDocxByTables(filePath, txtDocxTitle.Text.Trim(), lists, cbHideNumberCol.Checked);
+                    DocxHelper docxHelper = new DocxHelper(rbCnLang.Checked);
+                    var docxTitle = txtDocxTitle.Text.Trim() == _DOCX_TITLE_TOOLTIP ? "" : txtDocxTitle.Text.Trim();
+                    docxHelper.GenerateDocxByTables(filePath, docxTitle, lists, cbHideNumberCol.Checked);
                     MessageBox.Show("生成成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 saveFileDialog1.Filter = "All files(*.*)|*.*";
@@ -2404,5 +2411,34 @@ namespace Tools.zhong
             lblSummary.Text = $"记录：{values.Length} | 重复项：{values.Length - rptCount}";
         }
 
+        private void rbCnLang_CheckedChanged(object sender, EventArgs e)
+        {
+            this.rbEnLange.CheckedChanged -= new System.EventHandler(this.rbEnLange_CheckedChanged);
+            rbEnLange.Checked = !rbCnLang.Checked;
+            this.rbEnLange.CheckedChanged += new System.EventHandler(this.rbEnLange_CheckedChanged);
+        }
+
+        private void rbEnLange_CheckedChanged(object sender, EventArgs e)
+        {
+            this.rbCnLang.CheckedChanged -= new System.EventHandler(this.rbCnLang_CheckedChanged);
+            rbCnLang.Checked = !rbEnLange.Checked;
+            this.rbCnLang.CheckedChanged += new System.EventHandler(this.rbCnLang_CheckedChanged);
+        }
+
+        private void txtDocxTitle_Leave(object sender, EventArgs e)
+        {
+            if (txtDocxTitle.Text == "")
+            {
+                txtDocxTitle.Text = _DOCX_TITLE_TOOLTIP;
+            }
+        }
+
+        private void txtDocxTitle_Enter(object sender, EventArgs e)
+        {
+            if (txtDocxTitle.Text == _DOCX_TITLE_TOOLTIP)
+            {
+                txtDocxTitle.Clear();
+            }
+        }
     }
 }

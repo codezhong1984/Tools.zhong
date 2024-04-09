@@ -13,23 +13,40 @@ namespace Tools.zhong.UtilHelper
 {
     public class DocxHelper
     {
-        private static readonly string DATABASE_TITLE_SUFFIX = "数据库设计文档";
-        private static readonly string[] TABLE_FIELDS = new string[] { "字段名称", "字段描述",
-            "字段类型", "字段长度", "数据精度", "小数位数", "是否可空" };
-        private static readonly string[] TABLE_FIELDS_EXT = new string[] { "字段名称", "字段描述",
-            "字段类型", "字段长度", "是否可空" };
+        private bool isCNLanguage = true;
 
-        public static DocX CreateDocx(string fileName)
+        private string DATABASE_TITLE_SUFFIX;
+        private string[] TABLE_FIELDS;
+        private string[] TABLE_FIELDS_EXT;
+
+        public DocxHelper(bool IsCNLanguage)
+        {
+            isCNLanguage = IsCNLanguage;
+            if (isCNLanguage)
+            {
+                DATABASE_TITLE_SUFFIX = "数据库设计文档";
+                TABLE_FIELDS = new string[] { "字段名称", "字段描述", "字段类型", "字段长度", "数据精度", "小数位数", "是否可空" };
+                TABLE_FIELDS_EXT = new string[] { "字段名称", "字段描述", "字段类型", "字段长度", "是否可空" };
+            }
+            else
+            {
+                DATABASE_TITLE_SUFFIX = "Database Design Specification Document";
+                TABLE_FIELDS = new string[] { "Field Name", "Field Description", "Field Type", "Field Length", "Field Precision", "Decimal Bit", "Nullable" };
+                TABLE_FIELDS_EXT = new string[] { "Field Name", "Field Description", "Field Type", "Field Length", "Nullable" };
+            }
+        }
+
+        public DocX CreateDocx(string fileName)
         {
             return DocX.Create(fileName);
         }
 
-        public static DocX LoadDocx(string fileName)
+        public DocX LoadDocx(string fileName)
         {
             return DocX.Load(fileName);
         }
 
-        public static void GenerateDocxByTable(string fileName, string dbName, List<TableColumnModel> listData, bool hideNumberCol)
+        public void GenerateDocxByTable(string fileName, string dbName, List<TableColumnModel> listData, bool hideNumberCol)
         {
             try
             {
@@ -58,7 +75,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        public static void GenerateDocxByTables(string fileName, string docTitle, List<List<TableColumnModel>> lists, bool hideNumberCol)
+        public void GenerateDocxByTables(string fileName, string docTitle, List<List<TableColumnModel>> lists, bool hideNumberCol)
         {
             try
             {
@@ -75,7 +92,7 @@ namespace Tools.zhong.UtilHelper
                 {
                     using (var docx = CreateDocx(fileName))
                     {
-                        WriteDocxTitle(docx, docTitle);
+                        WriteDocxTitle(docx, docTitle == "" ? DATABASE_TITLE_SUFFIX : docTitle);
                         WriteDocxTables(docx, lists, hideNumberCol);
                         docx.Save();
                     }
@@ -87,7 +104,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        public static void WriteDocxTitle(DocX document, string title)
+        public void WriteDocxTitle(DocX document, string title)
         {
             var p = document.InsertParagraph();
             p.Append(title)
@@ -101,7 +118,7 @@ namespace Tools.zhong.UtilHelper
         }
 
         [Obsolete]
-        private static void WriteDocxSingleTable_BackUP(DocX docx, List<TableColumnModel> listData)
+        private void WriteDocxSingleTable_BackUP(DocX docx, List<TableColumnModel> listData)
         {
             // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
             if (listData == null || listData.Count == 0)
@@ -158,7 +175,7 @@ namespace Tools.zhong.UtilHelper
             }
         }
 
-        private static void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData, bool hideNumberCol)
+        private void WriteDocxSingleTable(DocX docx, List<TableColumnModel> listData, bool hideNumberCol)
         {
             // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
             if (listData == null || listData.Count == 0)
@@ -270,7 +287,7 @@ namespace Tools.zhong.UtilHelper
             //docx.InsertList(numberedList);
         }
 
-        private static void WriteDocxSingleTableExt(DocX docx, List<TableColumnModel> listData)
+        private void WriteDocxSingleTableExt(DocX docx, List<TableColumnModel> listData)
         {
             // var docxSample = LoadDocx(@"C:\Users\Administrator\Desktop\sample.docx");
             if (listData == null || listData.Count == 0)
@@ -357,7 +374,7 @@ namespace Tools.zhong.UtilHelper
         }
 
 
-        private static void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists, bool hideNumberCol)
+        private void WriteDocxTables(DocX document, List<List<TableColumnModel>> lists, bool hideNumberCol)
         {
             if (lists == null || lists.Count == 0)
             {
