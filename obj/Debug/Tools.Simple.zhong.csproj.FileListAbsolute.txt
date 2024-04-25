@@ -1,0 +1,16 @@
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.Simple.zhong.csproj.AssemblyReference.cache
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.FilesByTemplateForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.ImportForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.InsertStringForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.PerNewLineForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.ReplaceForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.TrimStringForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.zhong.MainForm.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.Simple.zhong.Properties.Resources.resources
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.Simple.zhong.csproj.GenerateResource.cache
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.Simple.zhong.csproj.CoreCompileInputs.cache
+E:\myProjects\Tools.Simple.zhong\bin\Debug\Tools.Simple.zhong.exe.config
+E:\myProjects\Tools.Simple.zhong\bin\Debug\Tools.Simple.zhong.exe
+E:\myProjects\Tools.Simple.zhong\bin\Debug\Tools.Simple.zhong.pdb
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.Simple.zhong.exe
+E:\myProjects\Tools.Simple.zhong\obj\Debug\Tools.Simple.zhong.pdb
